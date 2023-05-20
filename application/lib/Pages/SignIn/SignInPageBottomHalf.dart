@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:myapplication/Pages/SignIn/ForgotPasswordTextWidget.dart';
 import 'package:myapplication/Pages/GeneralWidgets/FullWidthTextButton.dart';
@@ -6,8 +7,15 @@ import 'package:myapplication/Pages/GeneralWidgets/SingleLineTextField.dart';
 class SignInPageBottomHalf extends StatelessWidget {
   SignInPageBottomHalf({super.key});
 
-  final usernameController = TextEditingController();
+  final idController = TextEditingController();
   final paswordController = TextEditingController();
+
+  signUserIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: idController.text,
+      password: paswordController.text,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +40,7 @@ class SignInPageBottomHalf extends StatelessWidget {
       ),
       child: Column(children: [
         SingleLineTextField(
-          controller: usernameController,
+          controller: idController,
           hintText: 'Username',
           obscureText: false,
           unfocusedBorderColor: Colors.white,
@@ -52,7 +60,8 @@ class SignInPageBottomHalf extends StatelessWidget {
         SizedBox(
           height: height * 0.05,
         ),
-        const FullWidthTextButton(
+        FullWidthTextButton(
+            function: signUserIn,
             description: 'Continue',
             buttonColor: Color.fromRGBO(66, 66, 66, 1),
             textColor: Colors.white)
