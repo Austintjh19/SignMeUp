@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-class SignUp extends StatelessWidget {
-  const SignUp({super.key});
+class SignUpTextWidget extends StatelessWidget {
+  const SignUpTextWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

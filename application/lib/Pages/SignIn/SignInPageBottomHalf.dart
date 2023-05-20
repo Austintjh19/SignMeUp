@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:myapplication/Pages/ForgotPasswordWidget.dart';
-import 'package:myapplication/Pages/FullWidthButton.dart';
-import 'package:myapplication/Pages/SignInTextFieldWidget.dart';
+import 'package:myapplication/Pages/SignIn/ForgotPasswordTextWidget.dart';
+import 'package:myapplication/Pages/GeneralWidgets/FullWidthTextButton.dart';
+import 'package:myapplication/Pages/GeneralWidgets/SingleLineTextField.dart';
 
-class SignIn extends StatelessWidget {
-  SignIn({super.key});
+class SignInPageBottomHalf extends StatelessWidget {
+  SignInPageBottomHalf({super.key});
 
   final usernameController = TextEditingController();
   final paswordController = TextEditingController();
@@ -31,7 +31,7 @@ class SignIn extends StatelessWidget {
             topLeft: Radius.circular(20), topRight: Radius.circular(20)),
       ),
       child: Column(children: [
-        SignInTextField(
+        SingleLineTextField(
           controller: usernameController,
           hintText: 'Username',
           obscureText: false,
@@ -41,18 +41,18 @@ class SignIn extends StatelessWidget {
         SizedBox(
           height: height * 0.025,
         ),
-        SignInTextField(
+        SingleLineTextField(
           controller: paswordController,
           hintText: 'Password',
           obscureText: true,
           unfocusedBorderColor: Colors.white,
           focusedBorderColor: Colors.grey,
         ),
-        const ForgotPassword(),
+        const ForgotPasswordTextWidget(),
         SizedBox(
           height: height * 0.05,
         ),
-        const FullWidthButton(
+        const FullWidthTextButton(
             description: 'Continue',
             buttonColor: Color.fromRGBO(66, 66, 66, 1),
             textColor: Colors.white)

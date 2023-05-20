@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ContinueWith extends StatelessWidget {
+class ContinueWithButton extends StatelessWidget {
   final String iconPath;
   final String description;
-  const ContinueWith(
+  const ContinueWithButton(
       {super.key, required this.iconPath, required this.description});
 
   @override

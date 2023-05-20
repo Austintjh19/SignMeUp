@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-class ForgotPassword extends StatelessWidget {
-  const ForgotPassword({super.key});
+class ForgotPasswordTextWidget extends StatelessWidget {
+  const ForgotPasswordTextWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'ContinueWithWidget.dart';
-import 'SignUpWidget.dart';
+import 'ContinueWithButton.dart';
+import 'SignUpTextWidget.dart';
 
 class SignInPageTopHalf extends StatelessWidget {
   const SignInPageTopHalf({super.key});
@@ -42,7 +42,7 @@ class SignInPageTopHalf extends StatelessWidget {
         ),
 
         // Continue With Google
-        const ContinueWith(
+        const ContinueWithButton(
             iconPath: '../lib/Images/Google_Logo.png',
             description: 'Continue With Google'),
 
@@ -51,7 +51,7 @@ class SignInPageTopHalf extends StatelessWidget {
         ),
 
         // Continue With Email
-        const ContinueWith(
+        const ContinueWithButton(
             iconPath: '../lib/Images/Email_Icon.png',
             description: 'Continue With Email'),
 
@@ -60,7 +60,7 @@ class SignInPageTopHalf extends StatelessWidget {
         ),
 
         // Sign Up
-        const SignUp(),
+        const SignUpTextWidget(),
       ]),
     );
   }

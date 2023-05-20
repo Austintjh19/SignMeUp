@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class SignInTextField extends StatelessWidget {
+class SingleLineTextField extends StatelessWidget {
   final controller;
   final String hintText;
   final bool obscureText;
   final Color unfocusedBorderColor;
   final Color focusedBorderColor;
-  const SignInTextField(
+  const SingleLineTextField(
       {super.key,
       required this.controller,
       required this.hintText,

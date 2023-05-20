@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class FullWidthButton extends StatelessWidget {
+class FullWidthTextButton extends StatelessWidget {
   final Color buttonColor;
   final Color textColor;
   final String description;
-  const FullWidthButton(
+  const FullWidthTextButton(
       {super.key,
       required this.description,
       required this.buttonColor,
