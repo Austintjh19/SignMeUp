@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:myapplication/Pages/ContinueWithWidget.dart';
+import 'package:myapplication/Pages/SignInWidget.dart';
+import 'package:myapplication/Pages/SignUpWidget.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
@@ -11,12 +13,12 @@ class SignInPage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-        backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-            child: Center(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Center(
           child: Column(children: [
             SizedBox(
-              height: height * 0.10,
+              height: height * 0.075,
             ),
 
             // Welcome
@@ -42,7 +44,7 @@ class SignInPage extends StatelessWidget {
             ),
 
             SizedBox(
-              height: height * 0.08,
+              height: height * 0.075,
             ),
 
             // Continue With Google
@@ -58,7 +60,24 @@ class SignInPage extends StatelessWidget {
             ContinueWith(
                 iconPath: '../lib/Images/Email_Icon.png',
                 description: 'Continue With Email'),
+
+            SizedBox(
+              height: height * 0.025,
+            ),
+
+            // Sign Up
+            SignUp(),
+
+            SizedBox(
+              height: height * 0.025,
+            ),
+
+            Expanded(
+              child: SignIn(),
+            ),
           ]),
-        )));
+        ),
+      ),
+    );
   }
 }
