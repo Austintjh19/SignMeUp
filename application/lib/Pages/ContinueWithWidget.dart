@@ -8,8 +8,6 @@ class ContinueWith extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-
     return ElevatedButton.icon(
       onPressed: () {},
       icon: Image.asset(
@@ -26,7 +24,7 @@ class ContinueWith extends StatelessWidget {
       ),
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 75),
-        minimumSize: Size(width * 0.75, 30),
+        minimumSize: const Size.fromHeight(30),
         shadowColor: Colors.black,
         elevation: 20,
         backgroundColor: Colors.white,
