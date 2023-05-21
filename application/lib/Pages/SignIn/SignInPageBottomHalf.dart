@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:myapplication/Pages/SignIn/ForgotPasswordTextWidget.dart';
 import 'package:myapplication/Pages/GeneralWidgets/FullWidthTextButton.dart';
 import 'package:myapplication/Pages/GeneralWidgets/SingleLineTextField.dart';
+import 'package:myapplication/Pages/SignIn/SignInAction.dart';
 
-class SignInPageBottomHalf extends StatelessWidget {
+class SignInPageBottomHalf extends StatefulWidget {
   SignInPageBottomHalf({super.key});
 
-  final idController = TextEditingController();
-  final paswordController = TextEditingController();
+  @override
+  State<SignInPageBottomHalf> createState() => _SignInPageBottomHalfState();
+}
 
-  signUserIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: idController.text,
-      password: paswordController.text,
-    );
-  }
+class _SignInPageBottomHalfState extends State<SignInPageBottomHalf> {
+  // Text Editing Controller
+  final idController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,32 +39,44 @@ class SignInPageBottomHalf extends StatelessWidget {
             topLeft: Radius.circular(20), topRight: Radius.circular(20)),
       ),
       child: Column(children: [
+        // Enter Username/ Email Text Field
         SingleLineTextField(
           controller: idController,
-          hintText: 'Username',
+          hintText: 'Username/ Email',
           obscureText: false,
           unfocusedBorderColor: Colors.white,
           focusedBorderColor: Colors.grey,
         ),
+
         SizedBox(
           height: height * 0.025,
         ),
+
+        // Enter Password Text Field
         SingleLineTextField(
-          controller: paswordController,
+          controller: passwordController,
           hintText: 'Password',
           obscureText: true,
           unfocusedBorderColor: Colors.white,
           focusedBorderColor: Colors.grey,
         ),
+
+        // Forgot Password Button
         const ForgotPasswordTextWidget(),
+
         SizedBox(
           height: height * 0.05,
         ),
+
+        // Sign In Button
         FullWidthTextButton(
-            function: signUserIn,
+            function: () {
+              SignInAction(idController.text, passwordController.text, context)
+                  .signUserIn();
+            },
             description: 'Continue',
             buttonColor: Color.fromRGBO(66, 66, 66, 1),
-            textColor: Colors.white)
+            textColor: Colors.white),
       ]),
     );
   }
