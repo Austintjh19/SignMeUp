@@ -42,7 +42,7 @@ class _SignInPageBottomHalfState extends State<SignInPageBottomHalf> {
         // Enter Username/ Email Text Field
         SingleLineTextField(
           controller: idController,
-          hintText: 'Username/ Email',
+          labelText: 'Username/ Email',
           obscureText: false,
           unfocusedBorderColor: Colors.white,
           focusedBorderColor: Colors.grey,
@@ -55,7 +55,7 @@ class _SignInPageBottomHalfState extends State<SignInPageBottomHalf> {
         // Enter Password Text Field
         SingleLineTextField(
           controller: passwordController,
-          hintText: 'Password',
+          labelText: 'Password',
           obscureText: true,
           unfocusedBorderColor: Colors.white,
           focusedBorderColor: Colors.grey,

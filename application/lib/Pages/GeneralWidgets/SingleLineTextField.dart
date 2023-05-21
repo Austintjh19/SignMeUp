@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class SingleLineTextField extends StatelessWidget {
   final controller;
-  final String hintText;
+  final String labelText;
   final bool obscureText;
   final Color unfocusedBorderColor;
   final Color focusedBorderColor;
   const SingleLineTextField(
       {super.key,
       required this.controller,
-      required this.hintText,
+      required this.labelText,
       required this.obscureText,
       required this.unfocusedBorderColor,
       required this.focusedBorderColor});
@@ -26,7 +26,7 @@ class SingleLineTextField extends StatelessWidget {
               borderSide: BorderSide(color: unfocusedBorderColor)),
           focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: focusedBorderColor)),
-          hintText: hintText,
+          labelText: labelText,
           hintStyle: TextStyle(
             fontFamily: 'Raleway',
             fontSize: 16,
