@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
+import '../SignUp/SignUpPage.dart';
+
 class SignUpTextWidget extends StatelessWidget {
   const SignUpTextWidget({super.key});
 
@@ -20,7 +22,10 @@ class SignUpTextWidget extends StatelessWidget {
           maxLines: 1,
         ),
         TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => SignUpPage()));
+            },
             child: Text(
               'Sign Up !',
               style: TextStyle(
