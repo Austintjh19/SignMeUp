@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:myapplication/Pages/GeneralWidgets/DateTextField.dart';
 import 'package:myapplication/Pages/GeneralWidgets/FullWidthTextButton.dart';
 import 'package:myapplication/Pages/GeneralWidgets/SingleLineTextFielldWithBorder.dart';
+import 'package:myapplication/Pages/SignIn/SignInPage.dart';
+import 'package:myapplication/Pages/SignUp/CreateNewUserAction.dart';
 
 import '../GeneralWidgets/SingleLineTextField.dart';
 
@@ -61,7 +63,16 @@ class _EnterUserDetailsState extends State<EnterUserDetails> {
             focusedBorderColor: Color.fromRGBO(162, 178, 252, 1)),
         const SizedBox(height: 25),
         FullWidthTextButton(
-            function: () {},
+            function: () {
+              CreateNewUserAction(
+                      emailController.text.trim(),
+                      newPasswordController.text.trim(),
+                      confirmPasswordController.text.trim(),
+                      context,
+                      nameController.text.trim(),
+                      usernameController.text.trim())
+                  .createNewUser();
+            },
             description: 'Continue',
             buttonColor: Color.fromRGBO(128, 150, 255, 1),
             textColor: Colors.white),
