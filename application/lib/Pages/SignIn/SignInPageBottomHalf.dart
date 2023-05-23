@@ -14,7 +14,7 @@ class SignInPageBottomHalf extends StatefulWidget {
 
 class _SignInPageBottomHalfState extends State<SignInPageBottomHalf> {
   // Text Editing Controller
-  final idController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
@@ -41,7 +41,7 @@ class _SignInPageBottomHalfState extends State<SignInPageBottomHalf> {
       child: Column(children: [
         // Enter Username/ Email Text Field
         SingleLineTextField(
-          controller: idController,
+          controller: emailController,
           labelText: 'Username/ Email',
           obscureText: false,
           unfocusedBorderColor: Colors.white,
@@ -71,7 +71,8 @@ class _SignInPageBottomHalfState extends State<SignInPageBottomHalf> {
         // Sign In Button
         FullWidthTextButton(
             function: () {
-              SignInAction(idController.text, passwordController.text, context)
+              SignInAction(emailController.text.trim(),
+                      passwordController.text.trim(), context)
                   .signUserIn();
             },
             description: 'Continue',

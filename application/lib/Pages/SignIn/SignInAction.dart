@@ -3,12 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignInAction {
-  final String identification;
+  final String email;
   final String password;
   final BuildContext context;
 
   const SignInAction(
-    this.identification,
+    this.email,
     this.password,
     this.context,
   );
@@ -25,7 +25,7 @@ class SignInAction {
 
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: identification,
+        email: email,
         password: password,
       );
 
