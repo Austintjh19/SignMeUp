@@ -15,11 +15,22 @@ class CreateNewUserAction {
   CreateNewUserAction(this.email, this.password, this.confirmPassword,
       this.context, this.name, this.username);
 
-  void registerEmailAndPassword() async {
+  Future<bool> registerEmailAndPassword() async {
     if (passwordConfirmed()) {
-      FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
+      if (password.length >= 8) {
+        FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password);
+        Navigator.pop(context);
+        return true;
+      } else {
+        Navigator.pop(context);
+        invalidPasswordLenNotification();
+      }
+    } else {
+      Navigator.pop(context);
+      unmatchingPasswordNoticication();
     }
+    return false;
   }
 
   bool passwordConfirmed() {
@@ -35,11 +46,68 @@ class CreateNewUserAction {
   }
 
   void createNewUser() async {
-    registerEmailAndPassword();
-    registerDetails();
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+
+    if (await registerEmailAndPassword()) {
+      registerDetails();
+      autoSignIn();
+    }
   }
 
-  void autoSignIn() {
-    SignInAction(email, password, context).signUserIn();
+  void autoSignIn() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    Navigator.pop(context);
+  }
+
+  void unmatchingPasswordNoticication() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const AlertDialog(
+            title: Text(
+              'Password do not match please reenter.',
+              style: TextStyle(
+                  fontFamily: 'Raleway',
+                  fontSize: 16,
+                  color: Color.fromRGBO(42, 42, 42, 1)),
+              textAlign: TextAlign.center,
+            ),
+          );
+        });
+  }
+
+  void invalidPasswordLenNotification() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const AlertDialog(
+            title: Text(
+              'Invalid Password Length, must be more than 8 letters.',
+              style: TextStyle(
+                  fontFamily: 'Raleway',
+                  fontSize: 16,
+                  color: Color.fromRGBO(42, 42, 42, 1)),
+              textAlign: TextAlign.center,
+            ),
+          );
+        });
   }
 }
