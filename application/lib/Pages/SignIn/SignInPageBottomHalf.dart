@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:myapplication/Pages/SignIn/ForgotPasswordTextWidget.dart';
-import 'package:myapplication/Pages/GeneralWidgets/FullWidthTextButton.dart';
-import 'package:myapplication/Pages/GeneralWidgets/SingleLineTextField.dart';
-import 'package:myapplication/Pages/SignIn/SignInAction.dart';
+import 'package:myapplication/Pages/SignIn/ForgotPasswordText.dart';
+import 'package:myapplication/Pages/GeneralWidgets/FWTextButton.dart';
+import 'package:myapplication/Pages/GeneralWidgets/NBSingleLineTextField.dart';
+import 'package:myapplication/User/SignInAction.dart';
+import 'package:myapplication/User/AppUser.dart';
 
 class SignInPageBottomHalf extends StatefulWidget {
   SignInPageBottomHalf({super.key});
@@ -40,7 +41,7 @@ class _SignInPageBottomHalfState extends State<SignInPageBottomHalf> {
       ),
       child: Column(children: [
         // Enter Username/ Email Text Field
-        SingleLineTextField(
+        NBSingleLineTextField(
           controller: emailController,
           labelText: 'Username/ Email',
           obscureText: false,
@@ -53,7 +54,7 @@ class _SignInPageBottomHalfState extends State<SignInPageBottomHalf> {
         ),
 
         // Enter Password Text Field
-        SingleLineTextField(
+        NBSingleLineTextField(
           controller: passwordController,
           labelText: 'Password',
           obscureText: true,
@@ -62,16 +63,16 @@ class _SignInPageBottomHalfState extends State<SignInPageBottomHalf> {
         ),
 
         // Forgot Password Button
-        const ForgotPasswordTextWidget(),
+        const ForgotPasswordText(),
 
         SizedBox(
           height: height * 0.05,
         ),
 
         // Sign In Button
-        FullWidthTextButton(
+        FWTextButton(
             function: () {
-              SignInAction(emailController.text.trim(),
+              AppUser.signIn(emailController.text.trim(),
                       passwordController.text.trim(), context)
                   .signUserIn();
             },
