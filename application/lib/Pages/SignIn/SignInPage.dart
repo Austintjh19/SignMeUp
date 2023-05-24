@@ -19,6 +19,12 @@ class _SignInPageState extends State<SignInPage> {
         //  To change to CustomScrollView
         child: Column(children: [
           SignInPageTopHalf(),
+          // SizedBox.expand(
+          //   child: FittedBox(
+          //     fit: BoxFit.fill,
+          //     child: SignInPageBottomHalf(),
+          //   ),
+          // ),
           Expanded(
             child: SignInPageBottomHalf(),
           ),
