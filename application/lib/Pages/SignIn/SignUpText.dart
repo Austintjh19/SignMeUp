@@ -3,16 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-import '../SignUp/SignUpPage.dart';
+import '../SignUp/SignUpPage1.dart';
 
-class SignUpTextWidget extends StatefulWidget {
-  const SignUpTextWidget({super.key});
+class SignUpText extends StatefulWidget {
+  const SignUpText({super.key});
 
   @override
-  State<SignUpTextWidget> createState() => _SignUpTextWidgetState();
+  State<SignUpText> createState() => _SignUpTextState();
 }
 
-class _SignUpTextWidgetState extends State<SignUpTextWidget> {
+class _SignUpTextState extends State<SignUpText> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +29,7 @@ class _SignUpTextWidgetState extends State<SignUpTextWidget> {
         TextButton(
             onPressed: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => SignUpPage()));
+                  .push(MaterialPageRoute(builder: (context) => SignUpPage1()));
             },
             child: Text(
               'Sign Up !',

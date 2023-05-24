@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ReturnButton extends StatelessWidget {
+class BackArrowButton extends StatelessWidget {
   final BuildContext context;
 
-  const ReturnButton({
+  const BackArrowButton({
     super.key,
     required this.context,
   });

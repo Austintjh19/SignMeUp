@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
 
-class SingleLineTextFieldWithBorder extends StatelessWidget {
+class BTextForm extends StatelessWidget {
   final controller;
   final String labelText;
-  final bool obscureText;
+  final String hintText;
+  final int numLines;
   final Color unfocusedBorderColor;
   final Color focusedBorderColor;
-  const SingleLineTextFieldWithBorder(
+  const BTextForm(
       {super.key,
       required this.controller,
       required this.labelText,
-      required this.obscureText,
       required this.unfocusedBorderColor,
-      required this.focusedBorderColor});
+      required this.focusedBorderColor,
+      required this.numLines,
+      required this.hintText});
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       textAlign: TextAlign.left,
       controller: controller,
-      obscureText: obscureText,
+      minLines: numLines,
+      maxLines: numLines,
       decoration: InputDecoration(
         labelText: labelText,
+        hintText: hintText,
         labelStyle: TextStyle(
           color: unfocusedBorderColor,
         ),

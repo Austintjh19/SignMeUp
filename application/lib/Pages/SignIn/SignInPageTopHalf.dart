@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'ContinueWithButton.dart';
-import 'SignUpTextWidget.dart';
+import 'SignUpText.dart';
 
 class SignInPageTopHalf extends StatefulWidget {
   const SignInPageTopHalf({super.key});
@@ -65,7 +65,7 @@ class _SignInPageTopHalfState extends State<SignInPageTopHalf> {
         ),
 
         // Sign Up
-        const SignUpTextWidget(),
+        const SignUpText(),
       ]),
     );
   }

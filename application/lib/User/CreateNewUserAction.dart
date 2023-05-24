@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:myapplication/Pages/Authentication/Authentication.dart';
 import 'package:myapplication/Pages/Home/HomePage.dart';
-import 'package:myapplication/Pages/SignIn/SignInAction.dart';
+import 'package:myapplication/User/SignInAction.dart';
 
 // Figure out Future and Async Dart
 class CreateNewUserAction {
@@ -22,15 +22,12 @@ class CreateNewUserAction {
       if (password.length >= 8) {
         FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
-        Navigator.pop(context);
         return true;
       } else {
-        Navigator.pop(context);
         invalidPasswordLenNotification();
       }
     } else {
-      Navigator.pop(context);
-      unmatchingPasswordNoticication();
+      invalidPasswordSimilarityNoticication();
     }
     return false;
   }
@@ -39,30 +36,25 @@ class CreateNewUserAction {
     return password == confirmPassword;
   }
 
-  void registerDetails() {
-    FirebaseFirestore.instance.collection('UsersSignUpInfo').add({
+  bool createNewUser() {
+    final json = {
       'Name': name,
       'Username': username,
       'Email': email,
-    });
-  }
-
-  void createNewUser() {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        });
+      'Date Of Birth': '',
+      'Description': '',
+      'Interest': '',
+    };
 
     if (registerEmailAndPassword()) {
-      registerDetails();
-      // succefulSignUp();
+      FirebaseFirestore.instance.collection('UsersSignUpInfo').add(json);
+      return true;
     }
+
+    return false;
   }
 
-  void unmatchingPasswordNoticication() {
+  void invalidPasswordSimilarityNoticication() {
     showDialog(
         context: context,
         builder: (context) {
@@ -95,17 +87,4 @@ class CreateNewUserAction {
           );
         });
   }
-
-  // void succefulSignUp() async {
-  //   showDialog(
-  //       context: context,
-  //       builder: (context) {
-  //         return const Center(
-  //           child: CircularProgressIndicator(),
-  //         );
-  //       });
-  //   Navigator.of(context).pushReplacement(
-  //       MaterialPageRoute(builder: (context) => Authentication()));
-  //   Navigator.pop(context);
-  // }
 }

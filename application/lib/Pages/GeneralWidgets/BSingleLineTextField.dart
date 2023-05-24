@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class SingleLineTextField extends StatelessWidget {
+class BSingleLineTextField extends StatelessWidget {
   final controller;
   final String labelText;
   final bool obscureText;
   final Color unfocusedBorderColor;
   final Color focusedBorderColor;
-  const SingleLineTextField(
+  const BSingleLineTextField(
       {super.key,
       required this.controller,
       required this.labelText,
@@ -16,22 +16,22 @@ class SingleLineTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-
     return TextField(
+      textAlign: TextAlign.left,
       controller: controller,
       obscureText: obscureText,
       decoration: InputDecoration(
-          enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: unfocusedBorderColor)),
-          focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: focusedBorderColor)),
-          labelText: labelText,
-          hintStyle: TextStyle(
-            fontFamily: 'Raleway',
-            fontSize: 16,
-            color: unfocusedBorderColor,
-          )),
+        labelText: labelText,
+        labelStyle: TextStyle(
+          color: unfocusedBorderColor,
+        ),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: unfocusedBorderColor)),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: focusedBorderColor)),
+      ),
     );
   }
 }
