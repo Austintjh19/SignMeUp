@@ -1,16 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:myapplication/Pages/Authentication/Authentication.dart';
-import 'package:myapplication/Pages/GeneralWidgets/DateTextField.dart';
 import 'package:myapplication/Pages/GeneralWidgets/FWTextButton.dart';
 import 'package:myapplication/Pages/GeneralWidgets/BSingleLineTextField.dart';
-import 'package:myapplication/Pages/Home/HomePage.dart';
 import 'package:myapplication/Pages/SignUp/SignUpPage2.dart';
-import 'package:myapplication/User/SignInAction.dart';
-import 'package:myapplication/Pages/SignIn/SignInPage.dart';
-import 'package:myapplication/User/CreateNewUserAction.dart';
-
-import '../GeneralWidgets/NBSingleLineTextField.dart';
+import '../../Verfication/Verification.dart';
 
 class EnterUserDetails1 extends StatefulWidget {
   const EnterUserDetails1({super.key});
@@ -24,7 +16,6 @@ class _EnterUserDetails1State extends State<EnterUserDetails1> {
   Widget build(BuildContext context) {
     final nameController = TextEditingController();
     final usernameController = TextEditingController();
-    var dobController = TextEditingController();
     final emailController = TextEditingController();
     final newPasswordController = TextEditingController();
     final confirmPasswordController = TextEditingController();
@@ -68,16 +59,21 @@ class _EnterUserDetails1State extends State<EnterUserDetails1> {
         const SizedBox(height: 25),
         FWTextButton(
             function: () {
-              if (CreateNewUserAction(
-                      emailController.text.trim(),
-                      newPasswordController.text.trim(),
-                      confirmPasswordController.text.trim(),
-                      context,
-                      nameController.text.trim(),
-                      usernameController.text.trim())
-                  .createNewUser()) {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => SignUpPage2()));
+              if (Verification(context).equivalentPassword(
+                  newPasswordController.text.trim(),
+                  confirmPasswordController.text.trim())) {
+                if (Verification(context).appropriatePasswordLength(
+                    newPasswordController.text.trim())) {
+                  Map<String, dynamic> map = {
+                    'Name': nameController.text.trim(),
+                    'Username': usernameController.text.trim(),
+                    'Email': emailController.text.trim(),
+                    'Password': newPasswordController.text.trim(),
+                    'Description': '',
+                  };
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => SignUpPage2(map: map)));
+                }
               }
             },
             description: 'Continue',

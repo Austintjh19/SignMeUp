@@ -6,7 +6,9 @@ import 'package:myapplication/Pages/SignUp/EnterUserDetails1.dart';
 import 'EnterUserDetails2.dart';
 
 class SignUpPage2 extends StatefulWidget {
-  const SignUpPage2({super.key});
+  final Map<String, dynamic> map;
+
+  const SignUpPage2({super.key, required this.map});
 
   @override
   State<SignUpPage2> createState() => _SignUpPage2State();
@@ -58,7 +60,7 @@ class _SignUpPage2State extends State<SignUpPage2> {
                 width: width,
                 padding: EdgeInsets.all(50),
                 alignment: Alignment.topCenter,
-                child: EnterUserDetails2(),
+                child: EnterUserDetails2(map: widget.map),
               )
             ],
           ),

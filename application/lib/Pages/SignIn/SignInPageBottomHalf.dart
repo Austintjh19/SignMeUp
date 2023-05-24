@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:myapplication/Pages/SignIn/ForgotPasswordText.dart';
 import 'package:myapplication/Pages/GeneralWidgets/FWTextButton.dart';
 import 'package:myapplication/Pages/GeneralWidgets/NBSingleLineTextField.dart';
-import 'package:myapplication/User/SignInAction.dart';
 import 'package:myapplication/User/AppUser.dart';
 
 class SignInPageBottomHalf extends StatefulWidget {
