@@ -16,6 +16,7 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(onPressed: signUserOut, icon: const Icon(Icons.logout))
         ],
+        title: Text('Welcome'),
       ),
       body: const Center(child: Text('Home Page')),
     );

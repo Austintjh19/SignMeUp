@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:myapplication/Pages/Authentication/Authentication.dart';
+import 'package:myapplication/Pages/Home/HomePage.dart';
 import 'package:myapplication/Pages/SignIn/SignInAction.dart';
 
 // Figure out Future and Async Dart
@@ -15,7 +17,7 @@ class CreateNewUserAction {
   CreateNewUserAction(this.email, this.password, this.confirmPassword,
       this.context, this.name, this.username);
 
-  Future<bool> registerEmailAndPassword() async {
+  bool registerEmailAndPassword() {
     if (passwordConfirmed()) {
       if (password.length >= 8) {
         FirebaseAuth.instance
@@ -37,15 +39,15 @@ class CreateNewUserAction {
     return password == confirmPassword;
   }
 
-  void registerDetails() async {
-    await FirebaseFirestore.instance.collection('UsersSignUpInfo').add({
+  void registerDetails() {
+    FirebaseFirestore.instance.collection('UsersSignUpInfo').add({
       'Name': name,
       'Username': username,
       'Email': email,
     });
   }
 
-  void createNewUser() async {
+  void createNewUser() {
     showDialog(
         context: context,
         builder: (context) {
@@ -54,27 +56,10 @@ class CreateNewUserAction {
           );
         });
 
-    if (await registerEmailAndPassword()) {
+    if (registerEmailAndPassword()) {
       registerDetails();
-      autoSignIn();
+      // succefulSignUp();
     }
-  }
-
-  void autoSignIn() async {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        });
-
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-
-    Navigator.pop(context);
   }
 
   void unmatchingPasswordNoticication() {
@@ -110,4 +95,17 @@ class CreateNewUserAction {
           );
         });
   }
+
+  // void succefulSignUp() async {
+  //   showDialog(
+  //       context: context,
+  //       builder: (context) {
+  //         return const Center(
+  //           child: CircularProgressIndicator(),
+  //         );
+  //       });
+  //   Navigator.of(context).pushReplacement(
+  //       MaterialPageRoute(builder: (context) => Authentication()));
+  //   Navigator.pop(context);
+  // }
 }

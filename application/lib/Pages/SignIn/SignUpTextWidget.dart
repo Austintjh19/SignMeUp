@@ -5,9 +5,14 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 import '../SignUp/SignUpPage.dart';
 
-class SignUpTextWidget extends StatelessWidget {
+class SignUpTextWidget extends StatefulWidget {
   const SignUpTextWidget({super.key});
 
+  @override
+  State<SignUpTextWidget> createState() => _SignUpTextWidgetState();
+}
+
+class _SignUpTextWidgetState extends State<SignUpTextWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:myapplication/Pages/GeneralWidgets/ReturnButton.dart';
 import 'package:myapplication/Pages/SignUp/EnterUserDetails.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;

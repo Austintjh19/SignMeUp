@@ -4,9 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'ContinueWithButton.dart';
 import 'SignUpTextWidget.dart';
 
-class SignInPageTopHalf extends StatelessWidget {
+class SignInPageTopHalf extends StatefulWidget {
   const SignInPageTopHalf({super.key});
 
+  @override
+  State<SignInPageTopHalf> createState() => _SignInPageTopHalfState();
+}
+
+class _SignInPageTopHalfState extends State<SignInPageTopHalf> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
