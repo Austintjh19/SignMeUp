@@ -16,20 +16,39 @@ class _SignInPageState extends State<SignInPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        //  To change to CustomScrollView
-        child: Column(children: [
-          SignInPageTopHalf(),
-          // SizedBox.expand(
-          //   child: FittedBox(
-          //     fit: BoxFit.fill,
-          //     child: SignInPageBottomHalf(),
-          //   ),
-          // ),
-          Expanded(
-            child: SignInPageBottomHalf(),
-          ),
-        ]),
+        child: CustomScrollView(
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: true,
+              child: Column(
+                children: [
+                  SignInPageTopHalf(),
+                  Expanded(child: SignInPageBottomHalf()),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
+
+    // return Scaffold(
+    //   backgroundColor: Colors.white,
+    //   body: SafeArea(
+    //     //  To change to CustomScrollView
+    //     child: Column(children: [
+    //       SignInPageTopHalf(),
+    //       // SizedBox.expand(
+    //       //   child: FittedBox(
+    //       //     fit: BoxFit.fill,
+    //       //     child: SignInPageBottomHalf(),
+    //       //   ),
+    //       // ),
+    //       Expanded(
+    //         child: SignInPageBottomHalf(),
+    //       ),
+    //     ]),
+    //   ),
+    // );
   }
 }
