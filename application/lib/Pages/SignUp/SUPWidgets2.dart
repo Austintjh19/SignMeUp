@@ -5,15 +5,15 @@ import 'package:myapplication/Pages/GeneralWidgets/FWTextButton.dart';
 import 'package:myapplication/User/ProfileImage.dart';
 import '../../User/AppUser.dart';
 
-class EnterUserDetails2 extends StatefulWidget {
+class SUPWidgets2 extends StatefulWidget {
   final Map<String, dynamic> map;
-  const EnterUserDetails2({super.key, required this.map});
+  const SUPWidgets2({super.key, required this.map});
 
   @override
-  State<EnterUserDetails2> createState() => _EnterUserDetails2State();
+  State<SUPWidgets2> createState() => _SUPWidgets2State();
 }
 
-class _EnterUserDetails2State extends State<EnterUserDetails2> {
+class _SUPWidgets2State extends State<SUPWidgets2> {
   @override
   Widget build(BuildContext context) {
     final descriptionController = TextEditingController();

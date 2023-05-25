@@ -4,14 +4,14 @@ import 'package:myapplication/Pages/GeneralWidgets/FWTextButton.dart';
 import 'package:myapplication/Pages/GeneralWidgets/NBSingleLineTextField.dart';
 import 'package:myapplication/User/AppUser.dart';
 
-class SignInPageBottomHalf extends StatefulWidget {
-  SignInPageBottomHalf({super.key});
+class SIPBottomWidgets extends StatefulWidget {
+  SIPBottomWidgets({super.key});
 
   @override
-  State<SignInPageBottomHalf> createState() => _SignInPageBottomHalfState();
+  State<SIPBottomWidgets> createState() => _SIPBottomWidgetsState();
 }
 
-class _SignInPageBottomHalfState extends State<SignInPageBottomHalf> {
+class _SIPBottomWidgetsState extends State<SIPBottomWidgets> {
   // Text Editing Controller
   final emailController = TextEditingController();
   final passwordController = TextEditingController();

@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:myapplication/Pages/GeneralWidgets/BackArrowButton.dart';
-import 'package:myapplication/Pages/SignUp/EnterUserDetails1.dart';
+import 'package:myapplication/Pages/SignUp/SUPWidgets1.dart';
 
 class SignUpPage1 extends StatefulWidget {
   const SignUpPage1({super.key});
@@ -65,7 +65,7 @@ class _SignUpPage1State extends State<SignUpPage1> {
                 width: width,
                 padding: EdgeInsets.all(50),
                 alignment: Alignment.topCenter,
-                child: EnterUserDetails1(),
+                child: SUPWidgets1(),
               )
             ],
           ),

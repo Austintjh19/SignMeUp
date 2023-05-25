@@ -4,14 +4,14 @@ import 'package:myapplication/Pages/GeneralWidgets/BSingleLineTextField.dart';
 import 'package:myapplication/Pages/SignUp/SignUpPage2.dart';
 import '../../Verfication/Verification.dart';
 
-class EnterUserDetails1 extends StatefulWidget {
-  const EnterUserDetails1({super.key});
+class SUPWidgets1 extends StatefulWidget {
+  const SUPWidgets1({super.key});
 
   @override
-  State<EnterUserDetails1> createState() => _EnterUserDetails1State();
+  State<SUPWidgets1> createState() => _SUPWidgets1State();
 }
 
-class _EnterUserDetails1State extends State<EnterUserDetails1> {
+class _SUPWidgets1State extends State<SUPWidgets1> {
   @override
   Widget build(BuildContext context) {
     final nameController = TextEditingController();

@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 import 'package:flutter/material.dart';
-import 'package:myapplication/Pages/SignIn/SignInPageBottomHalf.dart';
-import 'package:myapplication/Pages/SignIn/SignInPageTopHalf.dart';
+import 'package:myapplication/Pages/SignIn/SIPBottomWidgets.dart';
+import 'package:myapplication/Pages/SignIn/SIPTopWidgets.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -22,8 +22,8 @@ class _SignInPageState extends State<SignInPage> {
               hasScrollBody: true,
               child: Column(
                 children: [
-                  SignInPageTopHalf(),
-                  Expanded(child: SignInPageBottomHalf()),
+                  SIPTopWidgets(),
+                  Expanded(child: SIPBottomWidgets()),
                 ],
               ),
             ),

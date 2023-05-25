@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import '../GeneralWidgets/BSingleLineTextField.dart';
 import '../GeneralWidgets/FWTextButton.dart';
 
-class EnterEmail extends StatefulWidget {
-  const EnterEmail({super.key});
+class FPPWidget extends StatefulWidget {
+  const FPPWidget({super.key});
 
   @override
-  State<EnterEmail> createState() => _EnterEmail();
+  State<FPPWidget> createState() => _EnterEmail();
 }
 
-class _EnterEmail extends State<EnterEmail> {
+class _EnterEmail extends State<FPPWidget> {
   final _emailController = TextEditingController();
 
   void dispose() {
@@ -92,7 +92,10 @@ class _EnterEmail extends State<EnterEmail> {
             focusedBorderColor: Color.fromRGBO(162, 178, 252, 1)),
         const SizedBox(height: 25),
         FWTextButton(
-            function: resetPassword,
+            function: () {
+              resetPassword();
+              dispose();
+            },
             description: 'Reset Password',
             buttonColor: Color.fromRGBO(128, 150, 255, 1),
             textColor: Colors.white),

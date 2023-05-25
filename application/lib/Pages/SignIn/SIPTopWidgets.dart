@@ -6,14 +6,14 @@ import 'package:myapplication/User/AppUser.dart';
 import 'ContinueWithButton.dart';
 import 'SignUpText.dart';
 
-class SignInPageTopHalf extends StatefulWidget {
-  const SignInPageTopHalf({super.key});
+class SIPTopWidgets extends StatefulWidget {
+  const SIPTopWidgets({super.key});
 
   @override
-  State<SignInPageTopHalf> createState() => _SignInPageTopHalfState();
+  State<SIPTopWidgets> createState() => _SIPTopWidgetsState();
 }
 
-class _SignInPageTopHalfState extends State<SignInPageTopHalf> {
+class _SIPTopWidgetsState extends State<SIPTopWidgets> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;

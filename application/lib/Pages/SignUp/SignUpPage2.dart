@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:myapplication/Pages/GeneralWidgets/BackArrowButton.dart';
-import 'package:myapplication/Pages/SignUp/EnterUserDetails1.dart';
+import 'package:myapplication/Pages/SignUp/SUPWidgets1.dart';
 
-import 'EnterUserDetails2.dart';
+import 'SUPWidgets2.dart';
 
 class SignUpPage2 extends StatefulWidget {
   final Map<String, dynamic> map;
@@ -60,7 +60,7 @@ class _SignUpPage2State extends State<SignUpPage2> {
                 width: width,
                 padding: EdgeInsets.all(50),
                 alignment: Alignment.topCenter,
-                child: EnterUserDetails2(map: widget.map),
+                child: SUPWidgets2(map: widget.map),
               )
             ],
           ),
