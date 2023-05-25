@@ -42,6 +42,7 @@ dependencies:
   cloud_firestore: ^4.0.1
   firebase_storage: ^11.2.1
   image_picker: ^0.8.7+5
+  google_sign_in: ^6.1.2
 
 dev_dependencies:
   flutter_test:
