@@ -1,4 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import '../GeneralWidgets/BSingleLineTextField.dart';
@@ -13,6 +15,60 @@ class EnterEmail extends StatefulWidget {
 
 class _EnterEmail extends State<EnterEmail> {
   final _emailController = TextEditingController();
+
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
+
+  Future resetPassword() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+
+    try {
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: _emailController.text.trim());
+
+      // ignore: use_build_context_synchronously
+      Navigator.pop(context);
+      // ignore: use_build_context_synchronously
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const AlertDialog(
+              title: Text(
+                'Password reset link sent. Check registered email for notification. If not present, check spam folder.',
+                style: TextStyle(
+                    fontFamily: 'Raleway',
+                    fontSize: 16,
+                    color: Color.fromRGBO(42, 42, 42, 1)),
+                textAlign: TextAlign.center,
+              ),
+            );
+          });
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text(
+                e.message.toString(),
+                style: const TextStyle(
+                    fontFamily: 'Raleway',
+                    fontSize: 16,
+                    color: Color.fromRGBO(42, 42, 42, 1)),
+                textAlign: TextAlign.center,
+              ),
+            );
+          });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +87,12 @@ class _EnterEmail extends State<EnterEmail> {
         BSingleLineTextField(
             controller: _emailController,
             labelText: 'Enter Email',
-            obscureText: true,
+            obscureText: false,
             unfocusedBorderColor: Colors.grey,
             focusedBorderColor: Color.fromRGBO(162, 178, 252, 1)),
         const SizedBox(height: 25),
         FWTextButton(
-            function: () {},
+            function: resetPassword,
             description: 'Reset Password',
             buttonColor: Color.fromRGBO(128, 150, 255, 1),
             textColor: Colors.white),
