@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 
+import '../../Services/GoogleSignInAndUp.dart';
+
 class ContinueWithButton extends StatelessWidget {
   final String iconPath;
   final String description;
+  final Function function;
   const ContinueWithButton(
-      {super.key, required this.iconPath, required this.description});
+      {super.key,
+      required this.iconPath,
+      required this.description,
+      required this.function});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      onPressed: () {},
+      onPressed: () {
+        function();
+      },
       icon: Image.asset(
         iconPath,
         height: 30,

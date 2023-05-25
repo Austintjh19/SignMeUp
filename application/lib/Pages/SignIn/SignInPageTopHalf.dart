@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:myapplication/Services/GoogleSignInAndUp.dart';
+import 'package:myapplication/User/AppUser.dart';
 
 import 'ContinueWithButton.dart';
 import 'SignUpText.dart';
@@ -47,7 +49,10 @@ class _SignInPageTopHalfState extends State<SignInPageTopHalf> {
         ),
 
         // Continue With Google
-        const ContinueWithButton(
+        ContinueWithButton(
+            function: () {
+              GoogleSignInAndUp().signInWithGoogle();
+            },
             iconPath: '../lib/Images/Google_Logo.png',
             description: 'Continue With Google'),
 
@@ -56,7 +61,8 @@ class _SignInPageTopHalfState extends State<SignInPageTopHalf> {
         ),
 
         // Continue With Email
-        const ContinueWithButton(
+        ContinueWithButton(
+            function: () {},
             iconPath: '../lib/Images/Email_Icon.png',
             description: 'Continue With Email'),
 
