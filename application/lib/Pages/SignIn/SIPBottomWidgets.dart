@@ -25,7 +25,7 @@ class _SIPBottomWidgetsState extends State<SIPBottomWidgets> {
 
     return Container(
       width: width,
-      height: height,
+      height: height * 0.45,
       padding: EdgeInsets.all(50),
       alignment: Alignment.topCenter,
       decoration: const BoxDecoration(
