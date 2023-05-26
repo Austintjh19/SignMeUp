@@ -27,9 +27,9 @@ class ContinueWithButton extends StatelessWidget {
       label: AutoSizeText(
         description,
         style: const TextStyle(
-            fontFamily: 'Raleway',
-            fontSize: 16,
-            color: Color.fromRGBO(42, 42, 42, 1)),
+            fontFamily: 'Raleway', color: Color.fromRGBO(42, 42, 42, 1)),
+        minFontSize: 10,
+        maxFontSize: 16,
       ),
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 75),

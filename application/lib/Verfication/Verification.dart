@@ -6,9 +6,10 @@ class Verification {
   Verification(this._context);
 
   bool equivalentPassword(String password1, String password2) {
-    if (password1 == password2) {
-      return true;
-    }
+    return password1 == password2;
+  }
+
+  void unequivalentPasswordNotification() {
     showDialog(
         context: _context,
         builder: (context) {
@@ -23,13 +24,16 @@ class Verification {
             ),
           );
         });
-    return false;
   }
 
   bool appropriatePasswordLength(String password) {
     if (password.length >= 8) {
       return true;
     }
+    return false;
+  }
+
+  void inapproproatePasswordLenghtNotification() {
     showDialog(
         context: _context,
         builder: (context) {
@@ -44,6 +48,5 @@ class Verification {
             ),
           );
         });
-    return false;
   }
 }

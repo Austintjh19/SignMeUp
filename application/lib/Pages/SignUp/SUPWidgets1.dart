@@ -73,7 +73,12 @@ class _SUPWidgets1State extends State<SUPWidgets1> {
                   };
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => SignUpPage2(map: map)));
+                } else {
+                  Verification(context)
+                      .inapproproatePasswordLenghtNotification();
                 }
+              } else {
+                Verification(context).unequivalentPasswordNotification();
               }
             },
             description: 'Continue',
