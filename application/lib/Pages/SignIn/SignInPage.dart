@@ -16,18 +16,11 @@ class _SignInPageState extends State<SignInPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverFillRemaining(
-              hasScrollBody: true,
-              child: Column(
-                children: [
-                  SIPTopWidgets(),
-                  Expanded(child: SIPBottomWidgets()),
-                ],
-              ),
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(children: [
+            SIPTopWidgets(),
+            SIPBottomWidgets(),
+          ]),
         ),
       ),
     );

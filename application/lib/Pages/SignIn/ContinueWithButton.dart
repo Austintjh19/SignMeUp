@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../Services/GoogleSignInAndUp.dart';
@@ -23,7 +24,7 @@ class ContinueWithButton extends StatelessWidget {
         height: 30,
         width: 30,
       ),
-      label: Text(
+      label: AutoSizeText(
         description,
         style: const TextStyle(
             fontFamily: 'Raleway',
