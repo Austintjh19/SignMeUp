@@ -15,20 +15,22 @@ class ContinueWithButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
     return ElevatedButton.icon(
       onPressed: () {
         function();
       },
       icon: Image.asset(
         iconPath,
-        height: 30,
-        width: 30,
+        height: width * 0.05,
+        width: width * 0.05,
       ),
       label: AutoSizeText(
         description,
         style: const TextStyle(
             fontFamily: 'Raleway', color: Color.fromRGBO(42, 42, 42, 1)),
-        minFontSize: 10,
+        minFontSize: 8,
         maxFontSize: 16,
       ),
       style: ElevatedButton.styleFrom(

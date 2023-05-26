@@ -59,11 +59,9 @@ class _SUPWidgets1State extends State<SUPWidgets1> {
         const SizedBox(height: 25),
         FWTextButton(
             function: () {
-              if (Verification(context).equivalentPassword(
-                  newPasswordController.text.trim(),
-                  confirmPasswordController.text.trim())) {
-                if (Verification(context).appropriatePasswordLength(
-                    newPasswordController.text.trim())) {
+              if (newPasswordController.text.trim() ==
+                  confirmPasswordController.text.trim()) {
+                if (newPasswordController.text.trim().length >= 8) {
                   Map<String, dynamic> map = {
                     'Name': nameController.text.trim(),
                     'Username': usernameController.text.trim(),
