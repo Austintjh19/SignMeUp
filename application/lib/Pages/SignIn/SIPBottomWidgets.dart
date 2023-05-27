@@ -25,7 +25,7 @@ class _SIPBottomWidgetsState extends State<SIPBottomWidgets> {
 
     return Container(
       width: width,
-      height: height,
+      height: height * 0.5,
       padding: const EdgeInsets.all(50),
       alignment: Alignment.topCenter,
       decoration: const BoxDecoration(
@@ -33,7 +33,7 @@ class _SIPBottomWidgetsState extends State<SIPBottomWidgets> {
           begin: Alignment.bottomRight,
           end: Alignment.topLeft,
           colors: [
-            Color.fromRGBO(70, 103, 252, 1),
+            Color.fromRGBO(119, 143, 253, 1),
             Color.fromRGBO(252, 236, 175, 1)
           ],
         ),

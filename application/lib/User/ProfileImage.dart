@@ -13,42 +13,42 @@ class ProfileImage extends StatefulWidget {
 }
 
 class _ProfileImageState extends State<ProfileImage> {
-  String imageUrl = '';
-
-  // void selectProfileImage() async {
-  //   final image = await ImagePicker().pickImage(
-  //     source: ImageSource.gallery,
-  //     maxHeight: 512,
-  //     maxWidth: 512,
-  //     imageQuality: 90,
-  //   );
-
-  //   Reference ref = FirebaseStorage.instance.ref().child("profilepic.jpg");
-
-  //   await ref.putFile(File(image!.path));
-
-  //   ref.getDownloadURL().then((value) async {
-  //     setState(() {
-  //       profilePicLink = value;
-  //     });
-  //   });
-  // }
+  String imageUrl = " ";
 
   void selectProfileImage() async {
-    String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
-    ImagePicker imagePicker = ImagePicker();
-    XFile? file = await imagePicker.pickImage(source: ImageSource.gallery);
-    if (file == null) return;
-    Reference referenceRoot = FirebaseStorage.instance.ref();
-    Reference referenceDirImages = referenceRoot.child('ProfilePictures');
-    Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
-    try {
-      await referenceImageToUpload.putFile(File(file.path));
-      imageUrl = await referenceImageToUpload.getDownloadURL();
-    } catch (error) {
-      // Error Handling here
-    }
+    final image = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+      maxHeight: 512,
+      maxWidth: 512,
+      imageQuality: 90,
+    );
+
+    Reference ref = FirebaseStorage.instance.ref().child("profilepic.jpg");
+
+    await ref.putFile(File(image!.path));
+
+    ref.getDownloadURL().then((value) async {
+      setState(() {
+        imageUrl = value;
+      });
+    });
   }
+
+  // void selectProfileImage() async {
+  //   String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   ImagePicker imagePicker = ImagePicker();
+  //   XFile? file = await imagePicker.pickImage(source: ImageSource.gallery);
+  //   if (file == null) return;
+  //   Reference referenceRoot = FirebaseStorage.instance.ref();
+  //   Reference referenceDirImages = referenceRoot.child('ProfilePictures');
+  //   Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
+  //   try {
+  //     await referenceImageToUpload.putFile(File(file.path));
+  //     imageUrl = await referenceImageToUpload.getDownloadURL();
+  //   } catch (error) {
+  //     // Error Handling here
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -57,16 +57,25 @@ class _ProfileImageState extends State<ProfileImage> {
       onTap: selectProfileImage,
       child: CircleAvatar(
         radius: width * 0.25,
-        child: const SizedBox.expand(
+        child: SizedBox.expand(
           child: FittedBox(
             fit: BoxFit.fill,
-            child: Icon(
-              Icons.person_2_rounded,
-              color: Colors.white,
-            ),
+            child: imageUrl == " "
+                ? const Icon(
+                    Icons.person_2_rounded,
+                    color: Colors.white,
+                  )
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.network(imageUrl),
+                  ),
           ),
         ),
       ),
     );
   }
 }
+
+
+// Icons.person_2_rounded,
+//               color: Colors.white,

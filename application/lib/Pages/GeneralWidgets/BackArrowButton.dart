@@ -16,12 +16,11 @@ class BackArrowButton extends StatelessWidget {
       },
       child: Container(
         height: 30,
-        width: 30,
         padding: const EdgeInsets.all(0),
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: ExactAssetImage('../lib/Images/Return_Icon.png'),
-                fit: BoxFit.fill)),
+        child: const Icon(
+          Icons.arrow_back,
+          size: 30,
+        ),
       ),
     );
   }
