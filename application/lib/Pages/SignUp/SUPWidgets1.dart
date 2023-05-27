@@ -27,35 +27,35 @@ class _SUPWidgets1State extends State<SUPWidgets1> {
             labelText: 'Enter Your Name',
             obscureText: false,
             unfocusedBorderColor: Colors.grey,
-            focusedBorderColor: Color.fromRGBO(162, 178, 252, 1)),
+            focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1)),
         const SizedBox(height: 25),
         BSingleLineTextField(
             controller: usernameController,
             labelText: 'Enter Username',
             obscureText: false,
             unfocusedBorderColor: Colors.grey,
-            focusedBorderColor: Color.fromRGBO(162, 178, 252, 1)),
+            focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1)),
         const SizedBox(height: 25),
         BSingleLineTextField(
             controller: emailController,
             labelText: 'Enter Email',
             obscureText: false,
             unfocusedBorderColor: Colors.grey,
-            focusedBorderColor: Color.fromRGBO(162, 178, 252, 1)),
+            focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1)),
         const SizedBox(height: 25),
         BSingleLineTextField(
             controller: newPasswordController,
             labelText: 'Enter Password',
             obscureText: true,
             unfocusedBorderColor: Colors.grey,
-            focusedBorderColor: Color.fromRGBO(162, 178, 252, 1)),
+            focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1)),
         const SizedBox(height: 25),
         BSingleLineTextField(
             controller: confirmPasswordController,
             labelText: 'Confirm Password',
             obscureText: true,
             unfocusedBorderColor: Colors.grey,
-            focusedBorderColor: Color.fromRGBO(162, 178, 252, 1)),
+            focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1)),
         const SizedBox(height: 25),
         FWTextButton(
             function: () {
@@ -80,7 +80,7 @@ class _SUPWidgets1State extends State<SUPWidgets1> {
               }
             },
             description: 'Continue',
-            buttonColor: Color.fromRGBO(128, 150, 255, 1),
+            buttonColor: const Color.fromRGBO(128, 150, 255, 1),
             textColor: Colors.white),
       ],
     );

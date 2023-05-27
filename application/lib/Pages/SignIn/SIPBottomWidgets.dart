@@ -5,7 +5,7 @@ import 'package:myapplication/Pages/GeneralWidgets/NBSingleLineTextField.dart';
 import 'package:myapplication/User/AppUser.dart';
 
 class SIPBottomWidgets extends StatefulWidget {
-  SIPBottomWidgets({super.key});
+  const SIPBottomWidgets({super.key});
 
   @override
   State<SIPBottomWidgets> createState() => _SIPBottomWidgetsState();
@@ -26,7 +26,7 @@ class _SIPBottomWidgetsState extends State<SIPBottomWidgets> {
     return Container(
       width: width,
       height: height,
-      padding: EdgeInsets.all(50),
+      padding: const EdgeInsets.all(50),
       alignment: Alignment.topCenter,
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -78,7 +78,7 @@ class _SIPBottomWidgetsState extends State<SIPBottomWidgets> {
                   .signUserIn();
             },
             description: 'Continue',
-            buttonColor: Color.fromRGBO(66, 66, 66, 1),
+            buttonColor: const Color.fromRGBO(66, 66, 66, 1),
             textColor: Colors.white),
       ]),
     );

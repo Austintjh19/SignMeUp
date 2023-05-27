@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:myapplication/Pages/GeneralWidgets/BackArrowButton.dart';
-import 'package:myapplication/Pages/SignUp/SUPWidgets1.dart';
 
 import 'SUPWidgets2.dart';
 
@@ -58,7 +57,7 @@ class _SignUpPage2State extends State<SignUpPage2> {
 
               Container(
                 width: width,
-                padding: EdgeInsets.all(50),
+                padding: const EdgeInsets.all(50),
                 alignment: Alignment.topCenter,
                 child: SUPWidgets2(map: widget.map),
               )

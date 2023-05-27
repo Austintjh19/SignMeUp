@@ -1,9 +1,6 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:myapplication/Pages/GeneralWidgets/FWTextButton.dart';
-import 'package:myapplication/Pages/GeneralWidgets/BSingleLineTextField.dart';
-import 'package:myapplication/Pages/SignUp/SignUpPage2.dart';
-import '../../Verfication/Verification.dart';
 
 class OTPWidgets extends StatefulWidget {
   const OTPWidgets({super.key});
@@ -77,7 +74,7 @@ class _OTPWidgets extends State<OTPWidgets> {
         FWTextButton(
             function: () {},
             description: 'Send',
-            buttonColor: Color.fromRGBO(128, 150, 255, 1),
+            buttonColor: const Color.fromRGBO(128, 150, 255, 1),
             textColor: Colors.white),
       ],
     );

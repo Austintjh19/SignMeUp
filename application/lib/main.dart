@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:myapplication/Pages/Authentication/Authentication.dart';
-import 'package:myapplication/Pages/SignIn/SignInPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 

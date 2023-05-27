@@ -19,7 +19,7 @@ class FWTextButton extends StatelessWidget {
         function();
       },
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 75),
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 75),
         minimumSize: const Size.fromHeight(30),
         shadowColor: Colors.black,
         elevation: 20,

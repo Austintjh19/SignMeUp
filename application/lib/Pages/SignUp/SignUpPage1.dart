@@ -63,9 +63,9 @@ class _SignUpPage1State extends State<SignUpPage1> {
 
               Container(
                 width: width,
-                padding: EdgeInsets.all(50),
+                padding: const EdgeInsets.all(50),
                 alignment: Alignment.topCenter,
-                child: SUPWidgets1(),
+                child: const SUPWidgets1(),
               )
             ],
           ),

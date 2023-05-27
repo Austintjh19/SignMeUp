@@ -19,12 +19,12 @@ class _AuthenticationState extends State<Authentication> {
         builder: (context, snapshot) {
           // Logged In
           if (snapshot.hasData) {
-            return HomePage();
+            return const HomePage();
           }
 
           // Not Loffet in
           else {
-            return SignInPage();
+            return const SignInPage();
           }
         },
       ),

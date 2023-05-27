@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:myapplication/Services/GoogleSignInAndUp.dart';
-import 'package:myapplication/User/AppUser.dart';
 
 import 'ContinueWithButton.dart';
 import 'SignUpText.dart';
@@ -19,7 +18,7 @@ class _SIPTopWidgetsState extends State<SIPTopWidgets> {
     double height = MediaQuery.of(context).size.height;
 
     return Container(
-      padding: EdgeInsets.all(50),
+      padding: const EdgeInsets.all(50),
       alignment: Alignment.topCenter,
       child: Column(children: [
         // Welcome

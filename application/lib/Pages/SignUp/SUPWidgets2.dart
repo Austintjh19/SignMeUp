@@ -20,7 +20,7 @@ class _SUPWidgets2State extends State<SUPWidgets2> {
 
     return Column(
       children: [
-        ProfileImage(),
+        const ProfileImage(),
         const SizedBox(height: 25),
         BTextForm(
             controller: descriptionController,
@@ -28,7 +28,7 @@ class _SUPWidgets2State extends State<SUPWidgets2> {
             hintText:
                 'Let people know more about you. Enter a short desciption of yourself.',
             unfocusedBorderColor: Colors.grey,
-            focusedBorderColor: Color.fromRGBO(162, 178, 252, 1),
+            focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1),
             numLines: 5),
         const SizedBox(height: 25),
         FWTextButton(
@@ -37,11 +37,11 @@ class _SUPWidgets2State extends State<SUPWidgets2> {
                   .update('Description', (value) => descriptionController.text);
               if (AppUser.signUp(context).createNewUser(widget.map)) {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => Authentication()));
+                    MaterialPageRoute(builder: (context) => const Authentication()));
               }
             },
             description: 'Create Account',
-            buttonColor: Color.fromRGBO(128, 150, 255, 1),
+            buttonColor: const Color.fromRGBO(128, 150, 255, 1),
             textColor: Colors.white),
       ],
     );

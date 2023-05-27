@@ -60,7 +60,7 @@ class OTPVerification {
   Future<bool> verifyOTP(String otp) async {
     var credentials = await _auth.signInWithCredential(
         PhoneAuthProvider.credential(
-            verificationId: this.verificationId, smsCode: otp));
+            verificationId: verificationId, smsCode: otp));
     return credentials.user != null ? true : false;
   }
 }

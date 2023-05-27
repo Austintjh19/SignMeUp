@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,7 +15,7 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(onPressed: signUserOut, icon: const Icon(Icons.logout))
         ],
-        title: Text('Welcome'),
+        title: const Text('Welcome'),
       ),
       body: const Center(child: Text('Home Page')),
     );

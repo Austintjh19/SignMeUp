@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import '../GeneralWidgets/BSingleLineTextField.dart';
@@ -16,6 +15,7 @@ class FPPWidget extends StatefulWidget {
 class _EnterEmail extends State<FPPWidget> {
   final _emailController = TextEditingController();
 
+  @override
   void dispose() {
     _emailController.dispose();
     super.dispose();
@@ -89,7 +89,7 @@ class _EnterEmail extends State<FPPWidget> {
             labelText: 'Enter Email',
             obscureText: false,
             unfocusedBorderColor: Colors.grey,
-            focusedBorderColor: Color.fromRGBO(162, 178, 252, 1)),
+            focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1)),
         const SizedBox(height: 25),
         FWTextButton(
             function: () {
@@ -97,7 +97,7 @@ class _EnterEmail extends State<FPPWidget> {
               dispose();
             },
             description: 'Reset Password',
-            buttonColor: Color.fromRGBO(128, 150, 255, 1),
+            buttonColor: const Color.fromRGBO(128, 150, 255, 1),
             textColor: Colors.white),
       ],
     );

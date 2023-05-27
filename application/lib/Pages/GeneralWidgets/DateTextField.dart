@@ -8,7 +8,7 @@ class DateTextField extends StatefulWidget {
   final Color focusedBorderColor;
   final Function function;
 
-  DateTextField(
+  const DateTextField(
       {super.key,
       required this.controller,
       required this.labelText,
