@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:myapplication/Pages/ForgotPassword/ForgotPasswordPage.dart';
-
+import 'package:myapplication/Pages/OTP/OTPPage.dart';
 
 class ForgotPasswordText extends StatelessWidget {
   const ForgotPasswordText({super.key});
