@@ -62,8 +62,8 @@ class _SIPTopWidgetsState extends State<SIPTopWidgets> {
         // Continue With Email
         ContinueWithButton(
             function: () {},
-            iconPath: '../lib/Images/Email_Icon.png',
-            description: 'Continue With Email'),
+            iconPath: '../lib/Images/Facebook_Icon.png',
+            description: 'Continue With Facebook'),
 
         SizedBox(
           height: height * 0.025,
