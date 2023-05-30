@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:myapplication/src/constants/image_strings.dart';
 import 'package:myapplication/src/common_widgets/ProfileImage.dart';
+import 'package:myapplication/src/features/authentication/controllers/SignUpController.dart';
+import 'package:myapplication/src/features/authentication/models/UserModel.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_up/widgets/SignUpForm1.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_up/widgets/SignUpForm2.dart';
 import 'package:myapplication/src/common_widgets/FWTextButton.dart';
@@ -21,12 +23,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final nameController = TextEditingController();
-    final usernameController = TextEditingController();
-    final emailController = TextEditingController();
-    final newPasswordController = TextEditingController();
-    final confirmPasswordController = TextEditingController();
-    final descriptionController = TextEditingController();
+    final controller = Get.put(SignUpController());
+    final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -102,15 +100,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       // Sign Up Form 1 / Sign Up Form 2
                       onForm1
                           ? SignUpForm1(
-                              nameController: nameController,
-                              emailController: emailController,
-                              usernameController: usernameController,
-                              newPasswordController: newPasswordController,
-                              confirmPasswordController:
-                                  confirmPasswordController,
+                              formKey: _formKey,
                             )
                           : SignUpForm2(
-                              descriptionController: descriptionController,
+                              formKey: _formKey,
                             ),
 
                       const SizedBox(height: 40),
@@ -118,9 +111,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       // Continue/ Create Account Button
                       FWTextButton(
                           function: () {
+                            final user = UserModel(
+                                username:
+                                    controller.usernameController.text.trim(),
+                                name: controller.nameController.text.trim(),
+                                email: controller.emailController.text.trim(),
+                                password: controller.newPasswordController.text
+                                    .trim(),
+                                description: controller
+                                    .descriptionController.text
+                                    .trim());
                             onForm1
                                 ? setState(() => onForm1 = false)
-                                : Get.to(const HomePage());
+                                : // Perform input handling
+                                {
+                                    if (_formKey.currentState!.validate())
+                                      {
+                                        SignUpController.instance
+                                            .registerUser(user)
+                                      }
+                                  };
                           },
                           description: onForm1 ? 'Continue' : 'Create Account',
                           buttonColor: const Color.fromRGBO(128, 150, 255, 1),
@@ -134,11 +144,3 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ));
   }
 }
-
-                          // Map<String, dynamic> map = {
-                          //   'Name': nameController.text.trim(),
-                          //   'Username': usernameController.text.trim(),
-                          //   'Email': emailController.text.trim(),
-                          //   'Password': newPasswordController.text.trim(),
-                          //   'Description': '',
-                          // };
