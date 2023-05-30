@@ -85,11 +85,13 @@ class _EnterEmail extends State<FPPWidget> {
         ),
         const SizedBox(height: 25),
         BSingleLineTextField(
-            controller: _emailController,
-            labelText: 'Enter Email',
-            obscureText: false,
-            unfocusedBorderColor: Colors.grey,
-            focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1)),
+          controller: _emailController,
+          labelText: 'Enter Email',
+          obscureText: false,
+          unfocusedBorderColor: Colors.grey,
+          focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1),
+          icon: Icon(Icons.key),
+        ),
         const SizedBox(height: 25),
         FWTextButton(
             function: () {

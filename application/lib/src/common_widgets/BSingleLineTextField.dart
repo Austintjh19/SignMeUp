@@ -6,13 +6,15 @@ class BSingleLineTextField extends StatelessWidget {
   final bool obscureText;
   final Color unfocusedBorderColor;
   final Color focusedBorderColor;
+  final Icon icon;
   const BSingleLineTextField(
       {super.key,
       required this.controller,
       required this.labelText,
       required this.obscureText,
       required this.unfocusedBorderColor,
-      required this.focusedBorderColor});
+      required this.focusedBorderColor,
+      required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +23,19 @@ class BSingleLineTextField extends StatelessWidget {
       controller: controller,
       obscureText: obscureText,
       decoration: InputDecoration(
-        labelText: labelText,
-        labelStyle: TextStyle(
-          color: unfocusedBorderColor,
-        ),
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: unfocusedBorderColor)),
-        focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: focusedBorderColor)),
-      ),
+          labelText: labelText,
+          labelStyle: TextStyle(
+            color: unfocusedBorderColor,
+            fontFamily: 'Raleway',
+            fontSize: 14,
+          ),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: unfocusedBorderColor)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: focusedBorderColor)),
+          prefixIcon: icon),
     );
   }
 }

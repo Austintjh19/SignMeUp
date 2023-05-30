@@ -27,61 +27,40 @@ class _SUPWidgets1State extends State<SUPWidgets1> {
             labelText: 'Enter Your Name',
             obscureText: false,
             unfocusedBorderColor: Colors.grey,
-            focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1)),
+            focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1),
+            icon: const Icon(Icons.person_outline_rounded)),
         const SizedBox(height: 25),
         BSingleLineTextField(
             controller: usernameController,
             labelText: 'Enter Username',
             obscureText: false,
             unfocusedBorderColor: Colors.grey,
-            focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1)),
+            focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1),
+            icon: const Icon(Icons.person_outline_rounded)),
         const SizedBox(height: 25),
         BSingleLineTextField(
             controller: emailController,
             labelText: 'Enter Email',
             obscureText: false,
             unfocusedBorderColor: Colors.grey,
-            focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1)),
+            focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1),
+            icon: const Icon(Icons.email_outlined)),
         const SizedBox(height: 25),
         BSingleLineTextField(
             controller: newPasswordController,
             labelText: 'Enter Password',
             obscureText: true,
             unfocusedBorderColor: Colors.grey,
-            focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1)),
+            focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1),
+            icon: const Icon(Icons.fingerprint)),
         const SizedBox(height: 25),
         BSingleLineTextField(
             controller: confirmPasswordController,
             labelText: 'Confirm Password',
             obscureText: true,
             unfocusedBorderColor: Colors.grey,
-            focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1)),
-        const SizedBox(height: 25),
-        FWTextButton(
-            function: () {
-              if (newPasswordController.text.trim() ==
-                  confirmPasswordController.text.trim()) {
-                if (newPasswordController.text.trim().length >= 8) {
-                  Map<String, dynamic> map = {
-                    'Name': nameController.text.trim(),
-                    'Username': usernameController.text.trim(),
-                    'Email': emailController.text.trim(),
-                    'Password': newPasswordController.text.trim(),
-                    'Description': '',
-                  };
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => SignUpPage2(map: map)));
-                } else {
-                  Verification(context)
-                      .inapproproatePasswordLenghtNotification();
-                }
-              } else {
-                Verification(context).unequivalentPasswordNotification();
-              }
-            },
-            description: 'Continue',
-            buttonColor: const Color.fromRGBO(128, 150, 255, 1),
-            textColor: Colors.white),
+            focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1),
+            icon: const Icon(Icons.fingerprint)),
       ],
     );
   }

@@ -58,14 +58,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 // Header 1
                 Container(
-                  padding: const EdgeInsets.all(50),
+                  padding: const EdgeInsets.fromLTRB(50, 0, 50, 50),
                   child: Column(
                     children: [
                       AutoSizeText(
                         onForm1 ? 'Hello There.' : 'Almost Done',
                         style: const TextStyle(
                             fontFamily: 'Raleway',
-                            fontSize: 50,
+                            fontSize: 40,
                             fontWeight: FontWeight.bold,
                             color: Color.fromRGBO(42, 42, 42, 1)),
                         maxLines: 1,
@@ -79,12 +79,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             : 'Just add a Profile Image & Description about you.',
                         style: const TextStyle(
                             fontFamily: 'Raleway',
-                            fontSize: 16,
+                            fontSize: 14,
                             color: Color.fromRGBO(157, 157, 157, 1)),
                         maxLines: 1,
                       ),
 
-                      const SizedBox(height: 25),
+                      const SizedBox(height: 50),
 
                       // Sign Up Screen Image / Profile Image
                       onForm1
@@ -96,6 +96,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       fit: BoxFit.fitHeight)),
                             )
                           : const ProfileImage(),
+
+                      const SizedBox(height: 50),
 
                       // Sign Up Form 1 / Sign Up Form 2
                       onForm1
@@ -111,14 +113,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               descriptionController: descriptionController,
                             ),
 
-                      // Continuer/ Create Account Button
+                      const SizedBox(height: 40),
+
+                      // Continue/ Create Account Button
                       FWTextButton(
                           function: () {
                             onForm1
                                 ? setState(() => onForm1 = false)
                                 : Get.to(const HomePage());
                           },
-                          description: onForm1 ? 'Continue' : 'Creater Account',
+                          description: onForm1 ? 'Continue' : 'Create Account',
                           buttonColor: const Color.fromRGBO(128, 150, 255, 1),
                           textColor: Colors.white),
                     ],
