@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapplication/Pages/SignUp/SignUpPage1.dart';
 import 'package:myapplication/src/constants/text_strings.dart';
+import 'package:myapplication/src/features/authentication/screens/sign_up/SignUpScreen.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({super.key});
@@ -20,7 +21,7 @@ class SignUp extends StatelessWidget {
         maxLines: 1,
       ),
       TextButton(
-          onPressed: () => Get.to(const SignUpPage1()),
+          onPressed: () => Get.to(const SignUpScreen()),
           child: const Text(
             loginPageText6,
             style: TextStyle(

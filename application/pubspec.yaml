@@ -82,6 +82,7 @@ flutter:
   assets:
     - lib/Images/
     - assets/images/Login/
+    assets/images/Sign_Up/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

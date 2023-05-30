@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myapplication/Pages/Authentication/Authentication.dart';
 import 'package:myapplication/src/common_widgets/BTextForm.dart';
 import 'package:myapplication/src/common_widgets/FWTextButton.dart';
-import 'package:myapplication/User/ProfileImage.dart';
+import 'package:myapplication/src/common_widgets/ProfileImage.dart';
 import '../../User/AppUser.dart';
 
 class SUPWidgets2 extends StatefulWidget {
