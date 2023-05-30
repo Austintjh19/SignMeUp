@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myapplication/Pages/GeneralWidgets/FWTextButton.dart';
-import 'package:myapplication/Pages/GeneralWidgets/BSingleLineTextField.dart';
+import 'package:myapplication/src/common_widgets/FWTextButton.dart';
+import 'package:myapplication/src/common_widgets/BSingleLineTextField.dart';
 import 'package:myapplication/Pages/SignUp/SignUpPage2.dart';
 import '../../Verfication/Verification.dart';
 

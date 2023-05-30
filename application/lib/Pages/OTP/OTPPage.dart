@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:myapplication/Pages/OTP/OTPWidgets.dart';
 
-import '../GeneralWidgets/BackArrowButton.dart';
+import '../../src/common_widgets/BackArrowButton.dart';
 
 class OTPPage extends StatefulWidget {
   const OTPPage({super.key});
@@ -63,7 +63,8 @@ class _OTPPage extends State<OTPPage> {
 
             // Phone Number Text Input
             Container(
-                padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 50),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 25, horizontal: 50),
                 alignment: Alignment.topCenter,
                 child: const OTPWidgets()),
           ]),

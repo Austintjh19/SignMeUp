@@ -2,8 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../GeneralWidgets/BSingleLineTextField.dart';
-import '../GeneralWidgets/FWTextButton.dart';
+import '../../src/common_widgets/BSingleLineTextField.dart';
+import '../../src/common_widgets/FWTextButton.dart';
 
 class FPPWidget extends StatefulWidget {
   const FPPWidget({super.key});

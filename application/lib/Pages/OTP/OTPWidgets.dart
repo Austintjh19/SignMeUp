@@ -1,6 +1,6 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:myapplication/Pages/GeneralWidgets/FWTextButton.dart';
+import 'package:myapplication/src/common_widgets/FWTextButton.dart';
 
 class OTPWidgets extends StatefulWidget {
   const OTPWidgets({super.key});

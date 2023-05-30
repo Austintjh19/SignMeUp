@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:myapplication/Pages/GeneralWidgets/BackArrowButton.dart';
+import 'package:myapplication/src/common_widgets/BackArrowButton.dart';
 
 import 'SUPWidgets2.dart';
 

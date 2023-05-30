@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myapplication/Pages/SignUp/SignUpPage1.dart';
 import 'package:myapplication/src/constants/text_strings.dart';
 
 class SignUp extends StatelessWidget {
@@ -18,7 +20,7 @@ class SignUp extends StatelessWidget {
         maxLines: 1,
       ),
       TextButton(
-          onPressed: () {},
+          onPressed: () => Get.to(const SignUpPage1()),
           child: const Text(
             loginPageText6,
             style: TextStyle(

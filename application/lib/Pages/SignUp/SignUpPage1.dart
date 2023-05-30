@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:myapplication/Pages/GeneralWidgets/BackArrowButton.dart';
+import 'package:myapplication/src/common_widgets/BackArrowButton.dart';
 import 'package:myapplication/Pages/SignUp/SUPWidgets1.dart';
 
 class SignUpPage1 extends StatefulWidget {

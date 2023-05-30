@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapplication/Pages/SignIn/ForgotPasswordText.dart';
-import 'package:myapplication/Pages/GeneralWidgets/FWTextButton.dart';
-import 'package:myapplication/Pages/GeneralWidgets/NBSingleLineTextField.dart';
+import 'package:myapplication/src/common_widgets/FWTextButton.dart';
+import 'package:myapplication/src/common_widgets/NBSingleLineTextField.dart';
 import 'package:myapplication/User/AppUser.dart';
 
 class SIPBottomWidgets extends StatefulWidget {

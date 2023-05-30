@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 import 'package:flutter/material.dart';
-import '../GeneralWidgets/BackArrowButton.dart';
+import '../../src/common_widgets/BackArrowButton.dart';
 import 'FPPWidget.dart';
 
 class ForgotPasswordPage extends StatefulWidget {

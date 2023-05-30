@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapplication/Pages/Authentication/Authentication.dart';
-import 'package:myapplication/Pages/GeneralWidgets/BTextForm.dart';
-import 'package:myapplication/Pages/GeneralWidgets/FWTextButton.dart';
+import 'package:myapplication/src/common_widgets/BTextForm.dart';
+import 'package:myapplication/src/common_widgets/FWTextButton.dart';
 import 'package:myapplication/User/ProfileImage.dart';
 import '../../User/AppUser.dart';
 
@@ -36,8 +36,8 @@ class _SUPWidgets2State extends State<SUPWidgets2> {
               widget.map
                   .update('Description', (value) => descriptionController.text);
               if (AppUser.signUp(context).createNewUser(widget.map)) {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const Authentication()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const Authentication()));
               }
             },
             description: 'Create Account',
