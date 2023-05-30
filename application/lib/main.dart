@@ -3,6 +3,7 @@ import 'package:myapplication/Pages/Authentication/Authentication.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
+// flutter build apk --build-name=1.0 --build-number=1
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
