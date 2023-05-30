@@ -1,2 +1,5 @@
 /// App Images
-const String tempImage = "assets/images/Sign_Up_Temp_Image.png";
+
+/// Log In Scree
+const String googleLogo = "assets/images/Log_In/google.png";
+const String facebookLogo = "assets/images/Log_In/facebook.png";
