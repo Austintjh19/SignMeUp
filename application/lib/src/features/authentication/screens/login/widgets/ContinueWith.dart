@@ -17,9 +17,7 @@ class ContinueWith extends StatelessWidget {
       children: [
         // Continue with Google
         ElevatedButton.icon(
-          onPressed: () {
-            GoogleSignInAndUp().signInWithGoogle();
-          },
+          onPressed: () {},
           icon: Image.asset(
             googleLogo,
             height: 30,
@@ -43,7 +41,7 @@ class ContinueWith extends StatelessWidget {
         ),
 
         SizedBox(
-          height: height * 0.075,
+          height: height * 0.025,
         ),
 
         // Continue with Facebook
