@@ -12,7 +12,7 @@ class UserRepository extends GetxController {
 
   final _db = FirebaseFirestore.instance;
 
-  createUser(UserModel user) async {
+  Future<void> storeUserDetails(UserModel user) async {
     await _db
         .collection('UsersSignUpInfo')
         .add(user.toJson())

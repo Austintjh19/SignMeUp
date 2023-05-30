@@ -20,6 +20,6 @@ class SignUpController extends GetxController {
   Future<void> registerUser(UserModel user) async {
     await AuthenticationRepository.instance.createUserViaEmailAndPassword(
         user.toJson()["Email"], user.toJson()["Password"]);
-    await userRepository.createUser(user);
+    await userRepository.storeUserDetails(user);
   }
 }

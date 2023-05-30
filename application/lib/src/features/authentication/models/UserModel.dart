@@ -24,11 +24,3 @@ class UserModel {
     };
   }
 }
-
-                          // Map<String, dynamic> map = {
-                          //   'Name': nameController.text.trim(),
-                          //   'Username': usernameController.text.trim(),
-                          //   'Email': emailController.text.trim(),
-                          //   'Password': newPasswordController.text.trim(),
-                          //   'Description': '',
-                          // };
