@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:myapplication/Pages/ForgotPassword/ForgotPasswordPage.dart';
+import 'package:myapplication/src/features/authentication/screens/forgot_password/ForgotPasswordPage.dart';
 import 'package:myapplication/Pages/OTP/OTPPage.dart';
 
 class ForgotPasswordText extends StatelessWidget {
