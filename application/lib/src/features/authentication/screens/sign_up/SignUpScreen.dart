@@ -7,7 +7,7 @@ import 'package:myapplication/src/features/authentication/models/UserModel.dart'
 import 'package:myapplication/src/features/authentication/screens/sign_up/widgets/SignUpForm1.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_up/widgets/SignUpForm2.dart';
 import 'package:myapplication/src/common_widgets/FWTextButton.dart';
-import 'package:myapplication/src/features/home/HomePage.dart';
+import 'package:myapplication/src/features/dashboard/home/HomeScreen.dart';
 
 import 'package:get/get.dart';
 

@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapplication/Pages/SignUp/SignUpPage1.dart';
 import 'package:myapplication/src/constants/text_strings.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_up/SignUpScreen.dart';
 

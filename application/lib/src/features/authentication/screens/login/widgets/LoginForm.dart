@@ -18,29 +18,32 @@ class LoginForm extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     final controller = Get.put(SignInController());
 
-    return Column(
-      children: [
-        NBSingleLineTextField(
-          controller: controller.emailController,
-          labelText: 'Email',
-          obscureText: false,
-          unfocusedBorderColor: Colors.white,
-          focusedBorderColor: Colors.grey,
-        ),
+    return Form(
+      key: formKey,
+      child: Column(
+        children: [
+          NBSingleLineTextField(
+            controller: controller.emailController,
+            labelText: 'Email',
+            obscureText: false,
+            unfocusedBorderColor: Colors.white,
+            focusedBorderColor: Colors.grey,
+          ),
 
-        SizedBox(
-          height: height * 0.025,
-        ),
+          SizedBox(
+            height: height * 0.025,
+          ),
 
-        // Enter Password Text Field
-        NBSingleLineTextField(
-          controller: controller.passwordController,
-          labelText: 'Password',
-          obscureText: true,
-          unfocusedBorderColor: Colors.white,
-          focusedBorderColor: Colors.grey,
-        ),
-      ],
+          // Enter Password Text Field
+          NBSingleLineTextField(
+            controller: controller.passwordController,
+            labelText: 'Password',
+            obscureText: true,
+            unfocusedBorderColor: Colors.white,
+            focusedBorderColor: Colors.grey,
+          ),
+        ],
+      ),
     );
   }
 }

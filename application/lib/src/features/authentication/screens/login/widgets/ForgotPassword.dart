@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myapplication/src/features/authentication/screens/forgot_password/ForgotPasswordScreen.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({super.key});
@@ -9,7 +11,7 @@ class ForgotPassword extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         TextButton(
-            onPressed: () {},
+            onPressed: () => Get.to(const ForgotPasswordScreen()),
             child: const Text(
               'Forgot Password ?',
               style: TextStyle(

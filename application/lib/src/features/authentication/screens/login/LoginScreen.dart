@@ -3,9 +3,11 @@ import 'package:myapplication/src/constants/colors.dart';
 import 'package:myapplication/src/features/authentication/screens/login/widgets/ContinueWith.dart';
 import 'package:myapplication/src/features/authentication/screens/login/widgets/ForgotPassword.dart';
 import 'package:myapplication/src/features/authentication/screens/login/widgets/Header.dart';
-import 'package:myapplication/src/features/authentication/screens/login/widgets/Login.dart';
 import 'package:myapplication/src/features/authentication/screens/login/widgets/LoginForm.dart';
 import 'package:myapplication/src/features/authentication/screens/login/widgets/SignUp.dart';
+
+import '../../../../common_widgets/FWTextButton.dart';
+import '../../controllers/SignInController.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -23,6 +25,7 @@ class LoginScreen extends StatelessWidget {
           child: Column(children: [
             // Login Page Top Half
             Container(
+              height: height * 0.50,
               padding: const EdgeInsets.all(50),
               alignment: Alignment.topCenter,
               child: Column(
@@ -52,7 +55,7 @@ class LoginScreen extends StatelessWidget {
               bottom: 0,
               child: Container(
                   width: width,
-                  height: height * 0.5,
+                  height: height * 0.50,
                   padding: const EdgeInsets.all(50),
                   alignment: Alignment.topCenter,
                   decoration: const BoxDecoration(
@@ -75,8 +78,18 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(
                         height: height * 0.05,
                       ),
+
                       //Login
-                      Login(),
+                      FWTextButton(
+                          function: () {
+                            if (_formKey.currentState!.validate()) {
+                              SignInController.instance
+                                  .signInUserViaEmailAndPassword();
+                            }
+                          },
+                          description: 'Sign In',
+                          buttonColor: const Color.fromRGBO(66, 66, 66, 1),
+                          textColor: Colors.white)
                     ],
                   )),
             )
@@ -86,9 +99,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
-// if (_formKey.currentState!.validate())
-//                                       {
-//                                         SignUpController.instance
-//                                             .registerUser(user)
-//                                       }

@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:myapplication/src/constants/colors.dart';
 import 'package:myapplication/src/constants/image_strings.dart';
 import 'package:myapplication/src/constants/text_strings.dart';
-
-import '../../../../../../Services/GoogleSignInAndUp.dart';
+import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
 
 class ContinueWith extends StatelessWidget {
   const ContinueWith({super.key});
@@ -17,7 +16,9 @@ class ContinueWith extends StatelessWidget {
       children: [
         // Continue with Google
         ElevatedButton.icon(
-          onPressed: () {},
+          onPressed: () {
+            AuthenticationRepository.instance.signInWithGoogle();
+          },
           icon: Image.asset(
             googleLogo,
             height: 30,

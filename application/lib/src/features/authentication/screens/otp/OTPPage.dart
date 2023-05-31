@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:myapplication/Pages/OTP/OTPWidgets.dart';
+import 'package:myapplication/src/features/authentication/screens/otp/OTPWidgets.dart';
 
-import '../../src/common_widgets/BackArrowButton.dart';
+import '../../../../common_widgets/BackArrowButton.dart';
 
 class OTPPage extends StatefulWidget {
   const OTPPage({super.key});
