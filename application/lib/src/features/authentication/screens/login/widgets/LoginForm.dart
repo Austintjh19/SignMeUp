@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../../../../common_widgets/NBSingleLineTextField.dart';
+import '../../../controllers/SignInController.dart';
 
 class LoginForm extends StatelessWidget {
-  LoginForm({super.key});
+  final GlobalKey formKey;
+
+  LoginForm({super.key, required this.formKey});
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -11,11 +16,12 @@ class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    final controller = Get.put(SignInController());
 
     return Column(
       children: [
         NBSingleLineTextField(
-          controller: emailController,
+          controller: controller.emailController,
           labelText: 'Email',
           obscureText: false,
           unfocusedBorderColor: Colors.white,
@@ -28,7 +34,7 @@ class LoginForm extends StatelessWidget {
 
         // Enter Password Text Field
         NBSingleLineTextField(
-          controller: passwordController,
+          controller: controller.passwordController,
           labelText: 'Password',
           obscureText: true,
           unfocusedBorderColor: Colors.white,

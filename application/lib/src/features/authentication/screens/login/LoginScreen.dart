@@ -14,6 +14,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -63,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       // Login Form
-                      LoginForm(),
+                      LoginForm(formKey: _formKey),
 
                       const SizedBox(
                         height: 20,
@@ -85,3 +86,9 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
+// if (_formKey.currentState!.validate())
+//                                       {
+//                                         SignUpController.instance
+//                                             .registerUser(user)
+//                                       }

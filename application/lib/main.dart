@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapplication/Pages/Authentication/Authentication.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:myapplication/src/features/authentication/screens/login/LoginScreen.dart';
 import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
@@ -21,8 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const GetMaterialApp(
-      defaultTransition: Transition.cupertinoDialog,
-      transitionDuration: Duration(milliseconds: 500),
+      defaultTransition: Transition.noTransition,
       debugShowCheckedModeBanner: false,
       home: LoginScreen(),
     );

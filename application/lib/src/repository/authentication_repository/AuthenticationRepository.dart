@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapplication/src/features/authentication/screens/login/LoginScreen.dart';
 import 'package:myapplication/src/features/home/HomePage.dart';
@@ -33,6 +34,10 @@ class AuthenticationRepository extends GetxController {
           : Get.offAll(() => const LoginScreen());
     } on FirebaseAuthException catch (e) {
       final ex = SignUpExceptions.code(e.code);
+      Get.snackbar("Error", e.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent.withOpacity(0.1),
+          colorText: Colors.red);
       throw ex;
     } catch (_) {
       const ex = SignUpExceptions();
@@ -44,7 +49,12 @@ class AuthenticationRepository extends GetxController {
       String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-    } on FirebaseAuthException catch (e) {}
+    } on FirebaseAuthException catch (e) {
+      Get.snackbar("Error", e.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent.withOpacity(0.1),
+          colorText: Colors.red);
+    }
   }
 
   Future<void> signOutUser() async {
