@@ -1,10 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:myapplication/src/features/authentication/controllers/ForgotPasswordController.dart';
-import '../../../../common_widgets/BackArrowButton.dart';
 import '../../../../common_widgets/FWTextButton.dart';
 import 'widgets/ForgotPasswordForm.dart';
 

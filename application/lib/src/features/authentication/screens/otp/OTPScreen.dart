@@ -1,15 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapplication/src/constants/text_strings.dart';
 import 'package:myapplication/src/features/authentication/controllers/OTPController.dart';
 
 import '../../../../common_widgets/FWTextButton.dart';
 import '../../../../constants/colors.dart';
-import '../sign_in/SignInScreen.dart';
 
 class OTPScreen extends StatelessWidget {
   const OTPScreen({super.key});

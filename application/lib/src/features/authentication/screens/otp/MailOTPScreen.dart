@@ -9,7 +9,6 @@ import 'package:myapplication/src/features/authentication/screens/otp/OTPScreen.
 import '../../../../common_widgets/BSingleLineTextField.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/text_strings.dart';
-import '../../controllers/SignUpController.dart';
 import '../sign_in/SignInScreen.dart';
 
 class MailOTPScreen extends StatelessWidget {

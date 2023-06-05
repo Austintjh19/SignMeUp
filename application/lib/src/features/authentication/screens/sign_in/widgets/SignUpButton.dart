@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:myapplication/src/constants/text_strings.dart';
 import 'package:myapplication/src/features/authentication/screens/otp/MailOTPScreen.dart';
 import 'package:myapplication/src/features/authentication/screens/otp/PhoneOTPScreen.dart';
-import 'package:myapplication/src/features/authentication/screens/sign_up/SignUpScreen.dart';
 
 import '../../../../../constants/colors.dart';
 
