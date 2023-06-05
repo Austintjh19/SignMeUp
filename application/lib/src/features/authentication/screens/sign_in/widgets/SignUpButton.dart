@@ -2,8 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapplication/src/constants/text_strings.dart';
-import 'package:myapplication/src/features/authentication/screens/otp/OTPMailScreen.dart';
-import 'package:myapplication/src/features/authentication/screens/otp/OTPPhoneScreen.dart';
+import 'package:myapplication/src/features/authentication/screens/otp/MailOTPScreen.dart';
+import 'package:myapplication/src/features/authentication/screens/otp/PhoneOTPScreen.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_up/SignUpScreen.dart';
 
 import '../../../../../constants/colors.dart';
@@ -61,7 +61,7 @@ class SignUpButton extends StatelessWidget {
 
                       // Email Button
                       GestureDetector(
-                        onTap: () => Get.to(const OTPMailScreen()),
+                        onTap: () => Get.to(const MailOTPScreen()),
                         child: Container(
                           padding: const EdgeInsets.all(20),
                           decoration: BoxDecoration(
@@ -108,7 +108,7 @@ class SignUpButton extends StatelessWidget {
 
                       // Phone Button
                       GestureDetector(
-                        onTap: () => Get.to(const OTPPhoneScreen()),
+                        onTap: () => Get.to(const PhoneOTPScreen()),
                         child: Container(
                           padding: const EdgeInsets.all(20),
                           decoration: BoxDecoration(

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:myapplication/src/common_widgets/FWTextButton.dart';
 import 'package:myapplication/src/constants/image_strings.dart';
 import 'package:myapplication/src/features/authentication/controllers/OTPController.dart';
-import 'package:myapplication/src/features/authentication/screens/otp/widgets/OTPPhoneForm.dart';
+import 'package:myapplication/src/features/authentication/screens/otp/widgets/PhoneOTPForm.dart';
 
 import '../../../../common_widgets/BSingleLineTextField.dart';
 import '../../../../constants/colors.dart';
@@ -13,8 +13,8 @@ import '../../controllers/SignUpController.dart';
 import '../sign_in/SignInScreen.dart';
 import 'OTPScreen.dart';
 
-class OTPPhoneScreen extends StatelessWidget {
-  const OTPPhoneScreen({super.key});
+class PhoneOTPScreen extends StatelessWidget {
+  const PhoneOTPScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,7 @@ class OTPPhoneScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20.0),
 
-                  const OTPPhoneForm(),
+                  const PhoneOTPForm(),
                 ]),
           )
         ]),

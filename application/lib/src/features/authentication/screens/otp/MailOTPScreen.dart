@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapplication/src/common_widgets/FWTextButton.dart';
 import 'package:myapplication/src/constants/image_strings.dart';
+import 'package:myapplication/src/features/authentication/controllers/OTPController.dart';
 import 'package:myapplication/src/features/authentication/screens/otp/OTPScreen.dart';
 
 import '../../../../common_widgets/BSingleLineTextField.dart';
@@ -11,13 +12,13 @@ import '../../../../constants/text_strings.dart';
 import '../../controllers/SignUpController.dart';
 import '../sign_in/SignInScreen.dart';
 
-class OTPMailScreen extends StatelessWidget {
-  const OTPMailScreen({super.key});
+class MailOTPScreen extends StatelessWidget {
+  const MailOTPScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     /// Change controller
-    final controller = Get.put(SignUpController());
+    final controller = Get.put(OTPController());
     double width = MediaQuery.of(context).size.width;
 
     return SafeArea(

@@ -7,14 +7,14 @@ import '../../../../../common_widgets/FWTextButton.dart';
 import '../../../controllers/OTPController.dart';
 import '../OTPScreen.dart';
 
-class OTPPhoneForm extends StatefulWidget {
-  const OTPPhoneForm({super.key});
+class PhoneOTPForm extends StatefulWidget {
+  const PhoneOTPForm({super.key});
 
   @override
-  State<OTPPhoneForm> createState() => _OTPWidgets();
+  State<PhoneOTPForm> createState() => _OTPWidgets();
 }
 
-class _OTPWidgets extends State<OTPPhoneForm> {
+class _OTPWidgets extends State<PhoneOTPForm> {
   final controller = Get.put(OTPController());
   Country country = CountryParser.parseCountryCode('SG');
 
