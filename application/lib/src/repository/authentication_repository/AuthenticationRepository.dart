@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:myapplication/src/features/authentication/screens/login/LoginScreen.dart';
+import 'package:myapplication/src/features/authentication/screens/sign_in/SignInScreen.dart';
 import 'package:myapplication/src/features/dashboard/home/HomeScreen.dart';
 import 'package:myapplication/src/repository/authentication_repository/exceptions/SignUpExceptions.dart';
 
@@ -21,7 +21,7 @@ class AuthenticationRepository extends GetxController {
 
   _setInitialScreen(User? user) {
     user == null
-        ? Get.offAll(() => const LoginScreen())
+        ? Get.offAll(() => const SignInScreen())
         : Get.offAll(() => const HomeScreen());
   }
 
@@ -32,7 +32,7 @@ class AuthenticationRepository extends GetxController {
           email: email, password: password);
       firebaseUser.value != null
           ? Get.offAll(() => const HomeScreen())
-          : Get.offAll(() => const LoginScreen());
+          : Get.offAll(() => const SignInScreen());
     } on FirebaseAuthException catch (e) {
       final ex = SignUpExceptions.code(e.code);
       Get.snackbar("Error", e.toString(),

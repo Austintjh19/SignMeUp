@@ -5,10 +5,10 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../../../../common_widgets/NBSingleLineTextField.dart';
 import '../../../controllers/SignInController.dart';
 
-class LoginForm extends StatelessWidget {
+class SignInForm extends StatelessWidget {
   final GlobalKey formKey;
 
-  LoginForm({super.key, required this.formKey});
+  SignInForm({super.key, required this.formKey});
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:myapplication/src/constants/colors.dart';
-import 'package:myapplication/src/features/authentication/screens/login/widgets/ContinueWith.dart';
-import 'package:myapplication/src/features/authentication/screens/login/widgets/ForgotPassword.dart';
-import 'package:myapplication/src/features/authentication/screens/login/widgets/Header.dart';
-import 'package:myapplication/src/features/authentication/screens/login/widgets/LoginForm.dart';
-import 'package:myapplication/src/features/authentication/screens/login/widgets/SignUp.dart';
+import 'package:myapplication/src/features/authentication/screens/sign_in/widgets/ContinueWith.dart';
+import 'package:myapplication/src/features/authentication/screens/sign_in/widgets/ForgotPassword.dart';
+import 'package:myapplication/src/features/authentication/screens/sign_in/widgets/Header.dart';
+import 'package:myapplication/src/features/authentication/screens/sign_in/widgets/SignInForm.dart';
+import 'package:myapplication/src/features/authentication/screens/sign_in/widgets/SignUp.dart';
 
 import '../../../../common_widgets/FWTextButton.dart';
 import '../../controllers/SignInController.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignInScreen extends StatelessWidget {
+  const SignInScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       // Login Form
-                      LoginForm(formKey: _formKey),
+                      SignInForm(formKey: _formKey),
 
                       const SizedBox(
                         height: 20,

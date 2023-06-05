@@ -16,8 +16,6 @@ class NBSingleLineTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-
     return TextField(
       controller: controller,
       obscureText: obscureText,

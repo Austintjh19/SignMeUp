@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:myapplication/src/features/authentication/screens/login/LoginScreen.dart';
+import 'package:myapplication/src/features/authentication/screens/sign_in/SignInScreen.dart';
 import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
 import 'firebase_options.dart';
 
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return const GetMaterialApp(
       defaultTransition: Transition.noTransition,
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: SignInScreen(),
     );
   }
 }
