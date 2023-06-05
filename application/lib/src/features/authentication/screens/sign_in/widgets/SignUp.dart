@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:myapplication/src/constants/text_strings.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_up/SignUpScreen.dart';
 
+import '../../../../../constants/colors.dart';
+
 class SignUp extends StatelessWidget {
   const SignUp({super.key});
 
@@ -20,7 +22,137 @@ class SignUp extends StatelessWidget {
         maxLines: 1,
       ),
       TextButton(
-          onPressed: () => Get.to(const SignUpScreen()),
+          onPressed: () {
+            showModalBottomSheet(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              context: context,
+              builder: (context) => Container(
+                padding: const EdgeInsets.all(30),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Select
+                      const AutoSizeText(
+                        selectOTPTittle,
+                        style: TextStyle(
+                            fontFamily: 'Raleway',
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: heading1Color),
+                        maxLines: 1,
+                      ),
+
+                      const SizedBox(height: 10),
+
+                      // Select OTP Description
+                      const AutoSizeText(
+                        selectOTPTSUbTittle,
+                        style: TextStyle(
+                            fontFamily: 'Raleway',
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: heading1Color),
+                        maxLines: 1,
+                      ),
+
+                      const SizedBox(height: 30),
+
+                      // Email Button
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          padding: const EdgeInsets.all(30),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: Colors.grey.shade200),
+                          child: const Row(children: [
+                            // Email Icon
+                            Icon(Icons.mail_outline_rounded, size: 60.0),
+
+                            SizedBox(width: 10),
+
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Email
+                                AutoSizeText(
+                                  'Email',
+                                  style: TextStyle(
+                                      fontFamily: 'Raleway',
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: heading1Color),
+                                  maxLines: 1,
+                                ),
+
+                                SizedBox(height: 3),
+
+                                // Select Email
+                                AutoSizeText(
+                                  selectOTPTEmail,
+                                  style: TextStyle(
+                                      fontFamily: 'Raleway',
+                                      fontSize: 16,
+                                      color: heading1Color),
+                                  maxLines: 1,
+                                ),
+                              ],
+                            ),
+                          ]),
+                        ),
+                      ),
+
+                      const SizedBox(height: 30),
+
+                      // Phone Button
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          padding: const EdgeInsets.all(30),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: Colors.grey.shade200),
+                          child: const Row(children: [
+                            // Email Icon
+                            Icon(Icons.mobile_friendly_rounded, size: 60.0),
+
+                            SizedBox(width: 10),
+
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Email
+                                AutoSizeText(
+                                  'Phone',
+                                  style: TextStyle(
+                                      fontFamily: 'Raleway',
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: heading1Color),
+                                  maxLines: 1,
+                                ),
+
+                                SizedBox(height: 3),
+
+                                // Select Email
+                                AutoSizeText(
+                                  selectOTPThone,
+                                  style: TextStyle(
+                                      fontFamily: 'Raleway',
+                                      fontSize: 16,
+                                      color: heading1Color),
+                                  maxLines: 1,
+                                ),
+                              ],
+                            ),
+                          ]),
+                        ),
+                      ),
+                    ]),
+              ),
+            );
+          },
           child: const Text(
             loginPageText6,
             style: TextStyle(
@@ -32,3 +164,5 @@ class SignUp extends StatelessWidget {
     ]);
   }
 }
+
+//() => Get.to(const SignUpScreen())
