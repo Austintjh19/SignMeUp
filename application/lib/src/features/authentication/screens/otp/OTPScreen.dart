@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapplication/src/constants/text_strings.dart';
+import 'package:myapplication/src/features/authentication/controllers/OTPController.dart';
 
 import '../../../../common_widgets/FWTextButton.dart';
 import '../../../../constants/colors.dart';
@@ -15,6 +16,7 @@ class OTPScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var otp;
     return Scaffold(
       body: Column(
         children: [
@@ -88,7 +90,11 @@ class OTPScreen extends StatelessWidget {
                   fillColor: Colors.black.withOpacity(0.1),
                   filled: true,
                   keyboardType: TextInputType.number,
-                  onSubmit: (code) {},
+                  onSubmit: (code) {
+                    otp = code;
+
+                    OTPController.instance.verifyOTP(otp);
+                  },
                 ),
 
                 const SizedBox(
@@ -99,7 +105,9 @@ class OTPScreen extends StatelessWidget {
                   description: 'Enter',
                   buttonColor: const Color.fromRGBO(128, 150, 255, 1),
                   textColor: Colors.white,
-                  function: () {},
+                  function: () {
+                    OTPController.instance.verifyOTP(otp);
+                  },
                 ),
               ],
             ),

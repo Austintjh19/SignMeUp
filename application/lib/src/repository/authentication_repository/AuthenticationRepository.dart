@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,6 +13,7 @@ class AuthenticationRepository extends GetxController {
 
   final _auth = FirebaseAuth.instance;
   late final Rx<User?> firebaseUser;
+  var verificationID = ''.obs;
 
   @override
   void onReady() {
@@ -23,6 +26,41 @@ class AuthenticationRepository extends GetxController {
     user == null
         ? Get.offAll(() => const SignInScreen())
         : Get.offAll(() => const HomeScreen());
+  }
+
+  Future<void> phoneAuthentication(String phoneNo) async {
+    await _auth.verifyPhoneNumber(
+      phoneNumber: phoneNo,
+      verificationCompleted: (credential) async {
+        await _auth.signInWithCredential(credential);
+      },
+      codeSent: (verificationId, resendToken) {
+        verificationID.value = verificationID as String;
+      },
+      codeAutoRetrievalTimeout: ((verificationId) {
+        verificationID.value = verificationID as String;
+      }),
+      verificationFailed: (e) {
+        if (e.code == 'invalid-phone-number') {
+          Get.snackbar("Error", "Invalid phone number provided.",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.redAccent.withOpacity(0.1),
+              colorText: Colors.red);
+        } else {
+          Get.snackbar("Error", "Please wait a moment and try again.",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.redAccent.withOpacity(0.1),
+              colorText: Colors.red);
+        }
+      },
+    );
+  }
+
+  Future<bool> verifyOTP(String otp) async {
+    var credentials = await _auth.signInWithCredential(
+        PhoneAuthProvider.credential(
+            verificationId: verificationID.value, smsCode: otp));
+    return credentials.user != null ? true : false;
   }
 
   Future<void> createUserViaEmailAndPassword(
