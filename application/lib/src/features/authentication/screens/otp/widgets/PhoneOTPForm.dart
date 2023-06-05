@@ -69,7 +69,7 @@ class _OTPWidgets extends State<PhoneOTPForm> {
                     "${country.flagEmoji} +${country.phoneCode}",
                     style: const TextStyle(
                         fontFamily: 'Raleway',
-                        fontSize: 15,
+                        fontSize: 18,
                         color: Color.fromRGBO(42, 42, 42, 1),
                         fontWeight: FontWeight.w500),
                   ),
