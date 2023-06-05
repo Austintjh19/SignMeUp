@@ -45,7 +45,7 @@ class AuthenticationRepository extends GetxController {
               backgroundColor: Colors.redAccent.withOpacity(0.1),
               colorText: Colors.red);
         } else {
-          Get.snackbar("Error", "Please wait a moment and try again.",
+          Get.snackbar("Error", e.toString(),
               snackPosition: SnackPosition.BOTTOM,
               backgroundColor: Colors.redAccent.withOpacity(0.1),
               colorText: Colors.red);

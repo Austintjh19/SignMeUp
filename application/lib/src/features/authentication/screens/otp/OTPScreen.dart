@@ -16,7 +16,8 @@ class OTPScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var otp;
     return Scaffold(
-      body: Column(
+        body: SafeArea(
+      child: Column(
         children: [
           Container(
             padding: const EdgeInsetsDirectional.symmetric(
@@ -90,8 +91,6 @@ class OTPScreen extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   onSubmit: (code) {
                     otp = code;
-
-                    OTPController.instance.verifyOTP(otp);
                   },
                 ),
 
@@ -112,6 +111,6 @@ class OTPScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ));
   }
 }

@@ -25,8 +25,10 @@ class SignUpButton extends StatelessWidget {
       TextButton(
           onPressed: () {
             showModalBottomSheet(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20))),
               context: context,
               builder: (context) => Container(
                 padding: const EdgeInsets.all(50),
