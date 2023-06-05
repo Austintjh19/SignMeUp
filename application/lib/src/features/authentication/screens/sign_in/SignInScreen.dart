@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:myapplication/src/constants/colors.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_in/widgets/ContinueWith.dart';
-import 'package:myapplication/src/features/authentication/screens/sign_in/widgets/ForgotPassword.dart';
+import 'package:myapplication/src/features/authentication/screens/sign_in/widgets/ForgotPasswordButton.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_in/widgets/Header.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_in/widgets/SignInForm.dart';
-import 'package:myapplication/src/features/authentication/screens/sign_in/widgets/SignUp.dart';
+import 'package:myapplication/src/features/authentication/screens/sign_in/widgets/SignUpButton.dart';
 
 import '../../../../common_widgets/FWTextButton.dart';
 import '../../controllers/SignInController.dart';
@@ -45,7 +45,7 @@ class SignInScreen extends StatelessWidget {
                   ),
 
                   //Sign Up Text Widget
-                  const SignUp()
+                  const SignUpButton()
                 ],
               ),
             ),
@@ -73,7 +73,7 @@ class SignInScreen extends StatelessWidget {
                         height: 20,
                       ),
                       //Fogot Password
-                      const ForgotPassword(),
+                      const ForgotPasswordButton(),
 
                       SizedBox(
                         height: height * 0.05,

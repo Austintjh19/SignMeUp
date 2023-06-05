@@ -24,4 +24,4 @@ const String enterEmail = "Enter your Email to receive OTP";
 
 const String tOTPtittle = "CO\nDE";
 const String tOTPSubTittle = "Verification";
-const String tOTPMessage = "Enter verification code sent at ";
+const String tOTPMessage = "Enter verification code sent at";

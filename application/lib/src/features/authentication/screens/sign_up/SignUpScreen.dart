@@ -4,6 +4,7 @@ import 'package:myapplication/src/constants/image_strings.dart';
 import 'package:myapplication/src/common_widgets/ProfileImage.dart';
 import 'package:myapplication/src/features/authentication/controllers/SignUpController.dart';
 import 'package:myapplication/src/features/authentication/models/UserModel.dart';
+import 'package:myapplication/src/features/authentication/screens/sign_in/SignInScreen.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_up/widgets/SignUpForm1.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_up/widgets/SignUpForm2.dart';
 import 'package:myapplication/src/common_widgets/FWTextButton.dart';
@@ -40,7 +41,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: GestureDetector(
                     onTap: () {
                       onForm1
-                          ? Navigator.pop(context)
+                          ? () => Get.to(const SignInScreen())
                           : setState(() => onForm1 = true);
                     },
                     child: Container(
