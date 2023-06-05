@@ -25,7 +25,6 @@ class SignInScreen extends StatelessWidget {
           child: Column(children: [
             // Login Page Top Half
             Container(
-              height: height * 0.50,
               padding: const EdgeInsets.all(50),
               alignment: Alignment.topCenter,
               child: Column(
