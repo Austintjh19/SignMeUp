@@ -50,7 +50,8 @@ class SignInScreen extends StatelessWidget {
             ),
 
             // Login Page Bottom Half
-            Container(
+            SingleChildScrollView(
+              child: Container(
                 width: width,
                 height: height * 0.50,
                 padding: const EdgeInsets.all(50),
@@ -88,7 +89,9 @@ class SignInScreen extends StatelessWidget {
                         buttonColor: const Color.fromRGBO(66, 66, 66, 1),
                         textColor: Colors.white)
                   ],
-                )),
+                ),
+              ),
+            ),
           ]),
         ),
       ),

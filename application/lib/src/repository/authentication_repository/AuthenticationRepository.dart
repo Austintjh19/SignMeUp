@@ -21,9 +21,7 @@ class AuthenticationRepository extends GetxController {
   }
 
   _setInitialScreen(User? user) {
-    user == null
-        ? Get.offAll(() => const SignInScreen())
-        : Get.offAll(() => const HomeScreen());
+    user == null ? Get.to(const SignInScreen()) : Get.to(const HomeScreen());
   }
 
   Future<void> phoneAuthentication(String phoneNo) async {
