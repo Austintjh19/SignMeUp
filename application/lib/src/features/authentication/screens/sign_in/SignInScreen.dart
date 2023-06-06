@@ -64,26 +64,6 @@ class SignInScreen extends StatelessWidget {
                 children: [
                   // Login Form
                   SignInForm(),
-
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  //Fogot Password
-                  const ForgotPasswordButton(),
-
-                  SizedBox(
-                    height: height * 0.05,
-                  ),
-
-                  //Login
-                  FWTextButton(
-                      function: () {
-                        SignInController.instance
-                            .signInUserViaEmailAndPassword();
-                      },
-                      description: 'Sign In',
-                      buttonColor: const Color.fromRGBO(66, 66, 66, 1),
-                      textColor: Colors.white)
                 ],
               ),
             ),
