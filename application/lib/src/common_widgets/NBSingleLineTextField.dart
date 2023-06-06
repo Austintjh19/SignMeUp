@@ -19,6 +19,7 @@ class NBSingleLineTextField extends StatelessWidget {
     return TextField(
       controller: controller,
       obscureText: obscureText,
+      keyboardType: TextInputType.text,
       decoration: InputDecoration(
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: unfocusedBorderColor)),

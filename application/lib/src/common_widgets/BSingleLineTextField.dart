@@ -22,6 +22,7 @@ class BSingleLineTextField extends StatelessWidget {
       textAlign: TextAlign.left,
       controller: controller,
       obscureText: obscureText,
+      keyboardType: TextInputType.text,
       decoration: InputDecoration(
           labelText: labelText,
           labelStyle: TextStyle(

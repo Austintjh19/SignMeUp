@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       defaultTransition: Transition.noTransition,
       debugShowCheckedModeBanner: false,
       home: SignInScreen(),
+      initialRoute: '/',
     );
   }
 

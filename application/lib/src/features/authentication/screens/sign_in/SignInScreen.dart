@@ -50,46 +50,44 @@ class SignInScreen extends StatelessWidget {
             ),
 
             // Login Page Bottom Half
-            SingleChildScrollView(
-              child: Container(
-                width: width,
-                height: height * 0.50,
-                padding: const EdgeInsets.all(50),
-                alignment: Alignment.topCenter,
-                decoration: const BoxDecoration(
-                  gradient: widgetColor1,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20)),
-                ),
-                child: Column(
-                  children: [
-                    // Login Form
-                    SignInForm(formKey: _formKey),
+            Container(
+              width: width,
+              height: height * 0.75,
+              padding: const EdgeInsets.all(50),
+              alignment: Alignment.topCenter,
+              decoration: const BoxDecoration(
+                gradient: widgetColor1,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20)),
+              ),
+              child: Column(
+                children: [
+                  // Login Form
+                  SignInForm(formKey: _formKey),
 
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    //Fogot Password
-                    const ForgotPasswordButton(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  //Fogot Password
+                  const ForgotPasswordButton(),
 
-                    SizedBox(
-                      height: height * 0.05,
-                    ),
+                  SizedBox(
+                    height: height * 0.05,
+                  ),
 
-                    //Login
-                    FWTextButton(
-                        function: () {
-                          if (_formKey.currentState!.validate()) {
-                            SignInController.instance
-                                .signInUserViaEmailAndPassword();
-                          }
-                        },
-                        description: 'Sign In',
-                        buttonColor: const Color.fromRGBO(66, 66, 66, 1),
-                        textColor: Colors.white)
-                  ],
-                ),
+                  //Login
+                  FWTextButton(
+                      function: () {
+                        if (_formKey.currentState!.validate()) {
+                          SignInController.instance
+                              .signInUserViaEmailAndPassword();
+                        }
+                      },
+                      description: 'Sign In',
+                      buttonColor: const Color.fromRGBO(66, 66, 66, 1),
+                      textColor: Colors.white)
+                ],
               ),
             ),
           ]),
