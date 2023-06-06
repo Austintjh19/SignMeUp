@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:myapplication/src/constants/image_strings.dart';
 import 'package:myapplication/src/features/authentication/controllers/ForgotPasswordController.dart';
 import '../../../../common_widgets/FWTextButton.dart';
 import 'widgets/ForgotPasswordForm.dart';
@@ -37,12 +38,23 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ),
               ),
             ),
+
+            // Body
             Container(
                 width: width,
                 padding: EdgeInsets.all(50),
                 alignment: Alignment.topCenter,
                 child: Column(
                   children: [
+                    // ForgotPassword Image
+                    Image.asset(
+                      forgotPasswordImage,
+                      width: width * 0.75,
+                    ),
+
+                    const SizedBox(height: 20.0),
+
+                    // Header
                     const AutoSizeText(
                       'Enter Registered Email to Reset Password.',
                       style: TextStyle(
@@ -51,9 +63,15 @@ class ForgotPasswordScreen extends StatelessWidget {
                           color: Color.fromRGBO(157, 157, 157, 1)),
                       maxLines: 1,
                     ),
+
                     const SizedBox(height: 25),
+
+                    // ForgotPassword Form
                     ForgotPasswordForm(formKey: _formKey),
+
                     const SizedBox(height: 25),
+
+                    // Send Button
                     FWTextButton(
                         function: () {
                           if (_formKey.currentState!.validate()) {

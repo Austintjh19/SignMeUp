@@ -1,3 +1,5 @@
+import 'package:email_auth/email_auth.dart';
+import 'package:email_otp/email_otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +14,9 @@ class AuthenticationRepository extends GetxController {
   final _auth = FirebaseAuth.instance;
   late final Rx<User?> firebaseUser;
   var verificationID = ''.obs;
+  bool verifyViaEmailOTP = true;
+
+  EmailOTP myEmailAuth = EmailOTP();
 
   @override
   void onReady() {
@@ -54,11 +59,48 @@ class AuthenticationRepository extends GetxController {
     );
   }
 
+  Future<void> emailAuthentication(String email) async {
+    myEmailAuth.setConfig(
+        appEmail: "SignMeUp@gmail.com",
+        appName: "Email OTP",
+        userEmail: email,
+        otpLength: 6,
+        otpType: OTPType.digitsOnly);
+    bool res = await myEmailAuth.sendOTP();
+    if (res) {
+      print("sent");
+    } else {
+      print("not sent");
+    }
+  }
+
   Future<bool> verifyOTP(String otp) async {
-    var credentials = await _auth.signInWithCredential(
-        PhoneAuthProvider.credential(
-            verificationId: this.verificationID.value, smsCode: otp));
-    return credentials.user != null ? true : false;
+    if (verifyViaEmailOTP == true) {
+      try {
+        bool res = await myEmailAuth.verifyOTP(otp: otp);
+        return res;
+      } catch (e) {
+        Get.snackbar("Error", e.toString(),
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.redAccent.withOpacity(0.1),
+            colorText: Colors.red);
+      }
+    } else {
+      try {
+        var credentials = await _auth.signInWithCredential(
+            PhoneAuthProvider.credential(
+                verificationId: this.verificationID.value, smsCode: otp));
+        return credentials.user != null ? true : false;
+      } on FirebaseAuthException catch (e) {
+        final ex = SignUpExceptions.code(e.code);
+        Get.snackbar("Error", e.toString(),
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.redAccent.withOpacity(0.1),
+            colorText: Colors.red);
+        throw ex;
+      }
+    }
+    return false;
   }
 
   Future<void> createUserViaEmailAndPassword(

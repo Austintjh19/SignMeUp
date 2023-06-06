@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../../../../common_widgets/FWTextButton.dart';
+import '../../../../../repository/authentication_repository/AuthenticationRepository.dart';
 import '../../../controllers/OTPController.dart';
 import '../OTPScreen.dart';
 
@@ -83,6 +84,7 @@ class _OTPWidgets extends State<PhoneOTPForm> {
             textColor: Colors.white,
             function: () {
               controller.phoneCode = "+${country.phoneCode}";
+              AuthenticationRepository.instance.verifyViaEmailOTP = false;
               OTPController.instance.phoneNumAuthentication();
               Get.to(() => const OTPScreen());
             },

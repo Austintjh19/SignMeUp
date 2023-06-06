@@ -39,7 +39,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: GestureDetector(
                     onTap: () {
                       onForm1
-                          ? () => Get.to(const SignInScreen())
+                          ? Get.to(const SignInScreen())
                           : setState(() => onForm1 = true);
                     },
                     child: Container(
