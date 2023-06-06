@@ -14,14 +14,13 @@ class ForgotPasswordForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
-        key: formKey,
         child: BSingleLineTextField(
-          controller: controller.emailController,
-          labelText: 'Enter Email',
-          obscureText: false,
-          unfocusedBorderColor: Colors.grey,
-          focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1),
-          icon: const Icon(Icons.key),
-        ));
+      controller: controller.emailController,
+      labelText: 'Enter Email',
+      obscureText: false,
+      unfocusedBorderColor: Colors.grey,
+      focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1),
+      icon: const Icon(Icons.key),
+    ));
   }
 }

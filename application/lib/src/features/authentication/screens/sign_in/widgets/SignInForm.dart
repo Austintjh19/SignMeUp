@@ -6,9 +6,7 @@ import '../../../../../common_widgets/NBSingleLineTextField.dart';
 import '../../../controllers/SignInController.dart';
 
 class SignInForm extends StatelessWidget {
-  final GlobalKey formKey;
-
-  SignInForm({super.key, required this.formKey});
+  SignInForm({super.key});
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -20,7 +18,6 @@ class SignInForm extends StatelessWidget {
 
     return SingleChildScrollView(
       child: Form(
-        key: formKey,
         child: Column(
           children: [
             NBSingleLineTextField(

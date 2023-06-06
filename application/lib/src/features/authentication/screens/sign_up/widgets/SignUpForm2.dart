@@ -5,15 +5,13 @@ import 'package:myapplication/src/common_widgets/BTextForm.dart';
 import '../../../controllers/SignUpController.dart';
 
 class SignUpForm2 extends StatelessWidget {
-  final GlobalKey formKey;
-  const SignUpForm2({super.key, required this.formKey});
+  const SignUpForm2({super.key});
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignUpController());
 
     return Form(
-        key: formKey,
         child: BTextForm(
             controller: controller.descriptionController,
             labelText: 'Description',

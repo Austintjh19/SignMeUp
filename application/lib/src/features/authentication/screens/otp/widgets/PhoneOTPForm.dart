@@ -20,11 +20,9 @@ class _OTPWidgets extends State<PhoneOTPForm> {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     double height = MediaQuery.of(context).size.height;
 
     return Form(
-      key: _formKey,
       child: Column(
         children: [
           // Phone Number Text Field
@@ -84,11 +82,9 @@ class _OTPWidgets extends State<PhoneOTPForm> {
             buttonColor: const Color.fromRGBO(128, 150, 255, 1),
             textColor: Colors.white,
             function: () {
-              if (_formKey.currentState!.validate()) {
-                controller.phoneCode = "+${country.phoneCode}";
-                OTPController.instance.phoneNumAuthentication();
-                Get.to(() => const OTPScreen());
-              }
+              controller.phoneCode = "+${country.phoneCode}";
+              OTPController.instance.phoneNumAuthentication();
+              Get.to(() => const OTPScreen());
             },
           ),
         ],

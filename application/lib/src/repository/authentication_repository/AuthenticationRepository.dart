@@ -33,7 +33,7 @@ class AuthenticationRepository extends GetxController {
         await _auth.signInWithCredential(credential);
       },
       codeSent: (verificationId, resendToken) {
-        verificationID.value = verificationID as String;
+        this.verificationID.value = verificationID as String;
       },
       codeAutoRetrievalTimeout: ((verificationId) {
         verificationID.value = verificationID as String;
@@ -57,7 +57,7 @@ class AuthenticationRepository extends GetxController {
   Future<bool> verifyOTP(String otp) async {
     var credentials = await _auth.signInWithCredential(
         PhoneAuthProvider.credential(
-            verificationId: verificationID.value, smsCode: otp));
+            verificationId: this.verificationID.value, smsCode: otp));
     return credentials.user != null ? true : false;
   }
 

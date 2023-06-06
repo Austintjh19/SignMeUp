@@ -5,16 +5,13 @@ import 'package:myapplication/src/common_widgets/BSingleLineTextField.dart';
 import '../../../controllers/SignUpController.dart';
 
 class SignUpForm1 extends StatelessWidget {
-  final GlobalKey formKey;
-
-  const SignUpForm1({super.key, required this.formKey});
+  const SignUpForm1({super.key});
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignUpController());
 
     return Form(
-      key: formKey,
       child: Column(children: [
         BSingleLineTextField(
             controller: controller.nameController,

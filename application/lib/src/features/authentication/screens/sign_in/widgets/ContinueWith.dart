@@ -27,11 +27,12 @@ class ContinueWith extends StatelessWidget {
           label: const AutoSizeText(
             loginPageText3,
             style: TextStyle(fontFamily: 'Raleway', color: bodyColor1),
-            minFontSize: 8,
+            minFontSize: 10,
             maxFontSize: 16,
+            maxLines: 1,
           ),
           style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 75),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 0),
             minimumSize: const Size.fromHeight(30),
             shadowColor: Colors.black,
             elevation: 20,
@@ -56,11 +57,12 @@ class ContinueWith extends StatelessWidget {
           label: const AutoSizeText(
             loginPageText4,
             style: TextStyle(fontFamily: 'Raleway', color: bodyColor1),
-            minFontSize: 8,
+            minFontSize: 10,
             maxFontSize: 16,
+            maxLines: 1,
           ),
           style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 75),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 0),
             minimumSize: const Size.fromHeight(30),
             shadowColor: Colors.black,
             elevation: 20,

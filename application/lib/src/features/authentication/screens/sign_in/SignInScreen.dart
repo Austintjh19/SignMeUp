@@ -16,7 +16,6 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -52,7 +51,7 @@ class SignInScreen extends StatelessWidget {
             // Login Page Bottom Half
             Container(
               width: width,
-              height: height * 0.75,
+              height: height * 0.55,
               padding: const EdgeInsets.all(50),
               alignment: Alignment.topCenter,
               decoration: const BoxDecoration(
@@ -64,7 +63,7 @@ class SignInScreen extends StatelessWidget {
               child: Column(
                 children: [
                   // Login Form
-                  SignInForm(formKey: _formKey),
+                  SignInForm(),
 
                   const SizedBox(
                     height: 20,
@@ -79,10 +78,8 @@ class SignInScreen extends StatelessWidget {
                   //Login
                   FWTextButton(
                       function: () {
-                        if (_formKey.currentState!.validate()) {
-                          SignInController.instance
-                              .signInUserViaEmailAndPassword();
-                        }
+                        SignInController.instance
+                            .signInUserViaEmailAndPassword();
                       },
                       description: 'Sign In',
                       buttonColor: const Color.fromRGBO(66, 66, 66, 1),

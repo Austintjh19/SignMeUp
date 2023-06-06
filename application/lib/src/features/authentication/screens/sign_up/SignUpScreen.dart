@@ -24,7 +24,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignUpController());
-    final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -98,13 +97,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       const SizedBox(height: 50),
 
                       // Sign Up Form 1 / Sign Up Form 2
-                      onForm1
-                          ? SignUpForm1(
-                              formKey: _formKey,
-                            )
-                          : SignUpForm2(
-                              formKey: _formKey,
-                            ),
+                      onForm1 ? SignUpForm1() : SignUpForm2(),
 
                       const SizedBox(height: 40),
 
@@ -124,13 +117,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             onForm1
                                 ? setState(() => onForm1 = false)
                                 : // Perform input handling
-                                {
-                                    if (_formKey.currentState!.validate())
-                                      {
-                                        SignUpController.instance
-                                            .registerUser(user)
-                                      }
-                                  };
+                                {SignUpController.instance.registerUser(user)};
                           },
                           description: onForm1 ? 'Continue' : 'Create Account',
                           buttonColor: const Color.fromRGBO(128, 150, 255, 1),
