@@ -8,9 +8,14 @@ import '../../../../../common_widgets/NBSingleLineTextField.dart';
 import '../../../controllers/SignInController.dart';
 import 'ForgotPasswordButton.dart';
 
-class SignInForm extends StatelessWidget {
+class SignInForm extends StatefulWidget {
   SignInForm({super.key});
 
+  @override
+  State<SignInForm> createState() => _SignInFormState();
+}
+
+class _SignInFormState extends State<SignInForm> {
   final _formKey = GlobalKey<FormState>();
 
   @override

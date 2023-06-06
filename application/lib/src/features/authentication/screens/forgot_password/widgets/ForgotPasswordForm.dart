@@ -2,25 +2,64 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../common_widgets/BSingleLineTextField.dart';
+import '../../../../../common_widgets/FWTextButton.dart';
 import '../../../controllers/ForgotPasswordController.dart';
+import '../../../controllers/ValidationController.dart';
 
-class ForgotPasswordForm extends StatelessWidget {
-  final GlobalKey formKey;
+class ForgotPasswordForm extends StatefulWidget {
+  ForgotPasswordForm({super.key});
 
-  ForgotPasswordForm({super.key, required this.formKey});
+  @override
+  State<ForgotPasswordForm> createState() => _ForgotPasswordFormState();
+}
 
+class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
   final controller = Get.put(ForgotPasswordController());
+
+  final _formKey = GlobalKey<FormState>();
+
+  final validationController = Get.put(ValidationController());
 
   @override
   Widget build(BuildContext context) {
     return Form(
-        child: BSingleLineTextField(
-      controller: controller.emailController,
-      labelText: 'Enter Email',
-      obscureText: false,
-      unfocusedBorderColor: Colors.grey,
-      focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1),
-      icon: const Icon(Icons.key),
-    ));
+      key: _formKey,
+      child: Column(children: [
+        // Enter Email
+        TextFormField(
+          textAlign: TextAlign.left,
+          controller: controller.emailController,
+          decoration: InputDecoration(
+              labelText: 'Enter Email',
+              labelStyle: const TextStyle(
+                color: Colors.grey,
+                fontFamily: 'Raleway',
+                fontSize: 14,
+              ),
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(color: Colors.grey)),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                      color: Color.fromRGBO(162, 178, 252, 1))),
+              prefixIcon: const Icon(Icons.key)),
+          validator: validationController.validateEmail,
+        ),
+
+        const SizedBox(height: 25),
+
+        // Send Button
+        FWTextButton(
+            function: () {
+              if (_formKey.currentState!.validate()) {
+                ForgotPasswordController.instance.resetPasswordviaEmail();
+              }
+            },
+            description: 'Send',
+            buttonColor: const Color.fromRGBO(128, 150, 255, 1),
+            textColor: Colors.white),
+      ]),
+    );
   }
 }

@@ -12,7 +12,6 @@ class ForgotPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -67,21 +66,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     const SizedBox(height: 25),
 
                     // ForgotPassword Form
-                    ForgotPasswordForm(formKey: _formKey),
-
-                    const SizedBox(height: 25),
-
-                    // Send Button
-                    FWTextButton(
-                        function: () {
-                          if (_formKey.currentState!.validate()) {
-                            ForgotPasswordController.instance
-                                .resetPasswordviaEmail();
-                          }
-                        },
-                        description: 'Send',
-                        buttonColor: const Color.fromRGBO(128, 150, 255, 1),
-                        textColor: Colors.white),
+                    ForgotPasswordForm(),
                   ],
                 )),
           ]),
