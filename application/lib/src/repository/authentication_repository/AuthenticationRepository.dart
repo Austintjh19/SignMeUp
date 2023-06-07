@@ -93,6 +93,7 @@ class AuthenticationRepository extends GetxController {
         return credentials.user != null ? true : false;
       } on FirebaseAuthException catch (e) {
         final ex = SignUpExceptions.code(e.code);
+        print(e.toString());
         Get.snackbar("Error", e.toString(),
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.redAccent.withOpacity(0.1),
