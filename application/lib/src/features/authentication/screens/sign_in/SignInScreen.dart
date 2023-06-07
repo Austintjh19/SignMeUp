@@ -51,7 +51,7 @@ class SignInScreen extends StatelessWidget {
             // Login Page Bottom Half
             Container(
               width: width,
-              height: height * 0.55,
+              height: 500,
               padding: const EdgeInsets.all(50),
               alignment: Alignment.topCenter,
               decoration: const BoxDecoration(
