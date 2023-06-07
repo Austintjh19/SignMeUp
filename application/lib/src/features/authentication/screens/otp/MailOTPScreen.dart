@@ -87,31 +87,6 @@ class MailOTPScreen extends StatelessWidget {
 
                       // Mail OTP Form
                       const MailOTPForm(),
-
-                      // Form(
-                      //   child: Column(children: [
-                      //     BSingleLineTextField(
-                      //         controller: controller.emailController,
-                      //         labelText: 'Enter Email',
-                      //         obscureText: false,
-                      //         unfocusedBorderColor: Colors.grey,
-                      //         focusedBorderColor:
-                      //             const Color.fromRGBO(162, 178, 252, 1),
-                      //         icon: const Icon(Icons.email_outlined)),
-                      //     const SizedBox(height: 20.0),
-                      //     FWTextButton(
-                      //       description: 'Next',
-                      //       buttonColor: const Color.fromRGBO(128, 150, 255, 1),
-                      //       textColor: Colors.white,
-                      //       function: () {
-                      //         AuthenticationRepository
-                      //             .instance.verifyViaEmailOTP = true;
-                      //         OTPController.instance.emailAuthentication();
-                      //         Get.to(() => const OTPScreen());
-                      //       },
-                      //     ),
-                      //   ]),
-                      // ),
                     ]),
               ),
             ],

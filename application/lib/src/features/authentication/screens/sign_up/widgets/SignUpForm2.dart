@@ -4,9 +4,14 @@ import 'package:myapplication/src/common_widgets/BTextForm.dart';
 
 import '../../../controllers/SignUpController.dart';
 
-class SignUpForm2 extends StatelessWidget {
+class SignUpForm2 extends StatefulWidget {
   const SignUpForm2({super.key});
 
+  @override
+  State<SignUpForm2> createState() => _SignUpForm2State();
+}
+
+class _SignUpForm2State extends State<SignUpForm2> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignUpController());

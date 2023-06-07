@@ -47,7 +47,9 @@ class _MailOTPFormState extends State<MailOTPForm> {
           validator: validationController.validateEmail,
         ),
 
-        // Next Butto
+        const SizedBox(height: 20.0),
+
+        // Next Button
         FWTextButton(
           description: 'Next',
           buttonColor: const Color.fromRGBO(128, 150, 255, 1),

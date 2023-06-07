@@ -62,7 +62,7 @@ class _SignInFormState extends State<SignInForm> {
                     fontFamily: 'Raleway',
                     fontSize: 16,
                   )),
-              validator: validationController.validatePassword,
+              validator: validationController.validateSignInPassword,
             ),
 
             const SizedBox(

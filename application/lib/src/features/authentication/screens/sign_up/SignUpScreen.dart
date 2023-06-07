@@ -11,6 +11,8 @@ import 'package:myapplication/src/common_widgets/FWTextButton.dart';
 
 import 'package:get/get.dart';
 
+import '../../controllers/ValidationController.dart';
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
@@ -24,6 +26,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignUpController());
+    final _formKey1 = GlobalKey<FormState>();
+    final _formKey2 = GlobalKey<FormState>();
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -97,7 +101,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       const SizedBox(height: 50),
 
                       // Sign Up Form 1 / Sign Up Form 2
-                      onForm1 ? SignUpForm1() : SignUpForm2(),
+                      onForm1
+                          ? SignUpForm1(
+                              signUpFormKey: _formKey1,
+                            )
+                          : SignUpForm2(),
 
                       const SizedBox(height: 40),
 
@@ -114,10 +122,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 description: controller
                                     .descriptionController.text
                                     .trim());
-                            onForm1
-                                ? setState(() => onForm1 = false)
-                                : // Perform input handling
-                                {SignUpController.instance.registerUser(user)};
+                            if (onForm1) {
+                              if (_formKey1.currentState!.validate()) {
+                                setState(() => onForm1 = false);
+                              }
+                            } else {
+                              if (_formKey1.currentState!.validate()) {
+                                SignUpController.instance.registerUser(user);
+                              }
+                            }
                           },
                           description: onForm1 ? 'Continue' : 'Create Account',
                           buttonColor: const Color.fromRGBO(128, 150, 255, 1),
