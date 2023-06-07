@@ -6,6 +6,7 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../../../../common_widgets/FWTextButton.dart';
 import '../../../../../repository/authentication_repository/AuthenticationRepository.dart';
 import '../../../controllers/OTPController.dart';
+import '../../../controllers/ValidationController.dart';
 import '../OTPScreen.dart';
 
 class PhoneOTPForm extends StatefulWidget {
@@ -16,7 +17,9 @@ class PhoneOTPForm extends StatefulWidget {
 }
 
 class _OTPWidgets extends State<PhoneOTPForm> {
+  final _formKey = GlobalKey<FormState>();
   final controller = Get.put(OTPController());
+  final validationController = Get.put(ValidationController());
   Country country = CountryParser.parseCountryCode('SG');
 
   @override
@@ -24,10 +27,11 @@ class _OTPWidgets extends State<PhoneOTPForm> {
     double height = MediaQuery.of(context).size.height;
 
     return Form(
+      key: _formKey,
       child: Column(
         children: [
           // Phone Number Text Field
-          TextField(
+          TextFormField(
             style: const TextStyle(
               color: Color.fromRGBO(42, 42, 42, 1),
               fontFamily: 'Raleway',
@@ -75,6 +79,7 @@ class _OTPWidgets extends State<PhoneOTPForm> {
                 ),
               ),
             ),
+            validator: validationController.validatePhoneNum,
           ),
 
           const SizedBox(height: 20.0),
@@ -83,10 +88,12 @@ class _OTPWidgets extends State<PhoneOTPForm> {
             buttonColor: const Color.fromRGBO(128, 150, 255, 1),
             textColor: Colors.white,
             function: () {
-              controller.phoneCode = "+${country.phoneCode}";
-              AuthenticationRepository.instance.verifyViaEmailOTP = false;
-              OTPController.instance.phoneNumAuthentication();
-              Get.to(() => const OTPScreen());
+              if (_formKey.currentState!.validate()) {
+                controller.phoneCode = "+${country.phoneCode}";
+                AuthenticationRepository.instance.verifyViaEmailOTP = false;
+                OTPController.instance.phoneNumAuthentication();
+                Get.to(() => const OTPScreen());
+              }
             },
           ),
         ],

@@ -27,12 +27,20 @@ class ValidationController extends GetxController {
     RegExp regex = RegExp(r'^.{8,}$');
     if (value!.isEmpty) {
       return 'Please enter Password';
-    } else {
-      if (!regex.hasMatch(value)) {
-        return 'Invalid Password Entered';
-      } else {
-        return null;
-      }
     }
+    return value!.isNotEmpty && !regex.hasMatch(value)
+        ? 'Invalid Password Entered'
+        : null;
+  }
+
+  String? validatePhoneNum(String? value) {
+    const patttern = r'^[0-9]*$';
+    RegExp regex = RegExp(patttern);
+    if (value!.isEmpty) {
+      return 'Please enter Phone Number';
+    }
+    return value!.isNotEmpty && !regex.hasMatch(value)
+        ? 'Invalid Phone Number Entered'
+        : null;
   }
 }
