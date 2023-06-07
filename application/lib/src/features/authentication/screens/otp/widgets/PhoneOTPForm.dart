@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../../../../../common_widgets/CircularProgress.dart';
 import '../../../../../common_widgets/FWTextButton.dart';
 import '../../../../../repository/authentication_repository/AuthenticationRepository.dart';
 import '../../../controllers/OTPController.dart';
@@ -92,7 +93,7 @@ class _OTPWidgets extends State<PhoneOTPForm> {
                 controller.phoneCode = "+${country.phoneCode}";
                 AuthenticationRepository.instance.verifyViaEmailOTP = false;
                 OTPController.instance.phoneNumAuthentication();
-                Get.to(() => const OTPScreen());
+                CircularProgress.popCircularProgressIndicator();
               }
             },
           ),

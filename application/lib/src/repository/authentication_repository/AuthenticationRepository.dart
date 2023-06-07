@@ -8,6 +8,8 @@ import 'package:myapplication/src/features/authentication/screens/sign_in/SignIn
 import 'package:myapplication/src/features/dashboard/home/HomeScreen.dart';
 import 'package:myapplication/src/repository/authentication_repository/exceptions/SignUpExceptions.dart';
 
+import '../../common_widgets/CircularProgress.dart';
+
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
 
@@ -32,6 +34,8 @@ class AuthenticationRepository extends GetxController {
   }
 
   Future<void> phoneAuthentication(String phoneNo) async {
+    CircularProgress.getCircularProgressIndicator();
+
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneNo,
       verificationCompleted: (credential) async {
@@ -60,6 +64,8 @@ class AuthenticationRepository extends GetxController {
   }
 
   Future<void> emailAuthentication(String email) async {
+    CircularProgress.getCircularProgressIndicator();
+
     myEmailAuth.setConfig(
         appEmail: "SignMeUp@gmail.com",
         appName: "Email OTP",
@@ -75,6 +81,8 @@ class AuthenticationRepository extends GetxController {
   }
 
   Future<bool> verifyOTP(String otp) async {
+    CircularProgress.getCircularProgressIndicator();
+
     if (verifyViaEmailOTP == true) {
       try {
         bool res = await myEmailAuth.verifyOTP(otp: otp);
@@ -106,6 +114,8 @@ class AuthenticationRepository extends GetxController {
 
   Future<void> createUserViaEmailAndPassword(
       String email, String password) async {
+    CircularProgress.getCircularProgressIndicator();
+
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -127,6 +137,7 @@ class AuthenticationRepository extends GetxController {
 
   Future<void> signInUserViaEmailAndPassword(
       String email, String password) async {
+    CircularProgress.getCircularProgressIndicator();
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
@@ -138,6 +149,8 @@ class AuthenticationRepository extends GetxController {
   }
 
   Future<void> resetPasswordViaEmail(String email) async {
+    CircularProgress.getCircularProgressIndicator();
+
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
       Get.snackbar("Success",
@@ -154,6 +167,8 @@ class AuthenticationRepository extends GetxController {
   }
 
   Future<UserCredential?> signInWithGoogle() async {
+    CircularProgress.getCircularProgressIndicator();
+
     try {
       final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
       final GoogleSignInAuthentication gAuth = await gUser!.authentication;

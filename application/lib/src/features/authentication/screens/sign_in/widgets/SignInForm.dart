@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:myapplication/src/common_widgets/CircularProgress.dart';
 import 'package:myapplication/src/features/authentication/controllers/ValidationController.dart';
 
 import '../../../../../common_widgets/FWTextButton.dart';
-import '../../../../../common_widgets/NBSingleLineTextField.dart';
 import '../../../controllers/SignInController.dart';
 import 'ForgotPasswordButton.dart';
 
@@ -77,9 +77,10 @@ class _SignInFormState extends State<SignInForm> {
 
             //Sign In
             FWTextButton(
-                function: () {
+                function: () async {
                   if (_formKey.currentState!.validate()) {
-                    SignInController.instance.signInUserViaEmailAndPassword();
+                    await SignInController.instance
+                        .signInUserViaEmailAndPassword();
                   }
                 },
                 description: 'Sign In',

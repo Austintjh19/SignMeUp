@@ -127,9 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 setState(() => onForm1 = false);
                               }
                             } else {
-                              if (_formKey1.currentState!.validate()) {
-                                SignUpController.instance.registerUser(user);
-                              }
+                              SignUpController.instance.registerUser(user);
                             }
                           },
                           description: onForm1 ? 'Continue' : 'Create Account',
