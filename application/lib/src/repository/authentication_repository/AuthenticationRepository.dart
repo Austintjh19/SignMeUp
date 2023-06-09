@@ -48,6 +48,7 @@ class AuthenticationRepository extends GetxController {
         verificationID.value = verificationID as String;
       }),
       verificationFailed: (e) {
+        CircularProgress.popCircularProgressIndicator();
         if (e.code == 'invalid-phone-number') {
           Get.snackbar("Error", "Invalid phone number provided.",
               snackPosition: SnackPosition.BOTTOM,
@@ -76,6 +77,7 @@ class AuthenticationRepository extends GetxController {
     if (res) {
       print("sent");
     } else {
+      CircularProgress.popCircularProgressIndicator();
       print("not sent");
     }
   }
@@ -88,6 +90,7 @@ class AuthenticationRepository extends GetxController {
         bool res = await myEmailAuth.verifyOTP(otp: otp);
         return res;
       } catch (e) {
+        CircularProgress.popCircularProgressIndicator();
         Get.snackbar("Error", e.toString(),
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.redAccent.withOpacity(0.1),
@@ -100,6 +103,7 @@ class AuthenticationRepository extends GetxController {
                 verificationId: this.verificationID.value, smsCode: otp));
         return credentials.user != null ? true : false;
       } on FirebaseAuthException catch (e) {
+        CircularProgress.popCircularProgressIndicator();
         final ex = SignUpExceptions.code(e.code);
         print(e.toString());
         Get.snackbar("Error", e.toString(),
@@ -123,6 +127,7 @@ class AuthenticationRepository extends GetxController {
           ? Get.offAll(() => const HomeScreen())
           : Get.offAll(() => const SignInScreen());
     } on FirebaseAuthException catch (e) {
+      CircularProgress.popCircularProgressIndicator();
       final ex = SignUpExceptions.code(e.code);
       Get.snackbar("Error", e.toString(),
           snackPosition: SnackPosition.BOTTOM,
@@ -130,6 +135,7 @@ class AuthenticationRepository extends GetxController {
           colorText: Colors.red);
       throw ex;
     } catch (_) {
+      CircularProgress.popCircularProgressIndicator();
       const ex = SignUpExceptions();
       throw ex;
     }
@@ -141,6 +147,7 @@ class AuthenticationRepository extends GetxController {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
+      CircularProgress.popCircularProgressIndicator();
       Get.snackbar("Error", e.toString(),
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent.withOpacity(0.1),
@@ -159,6 +166,7 @@ class AuthenticationRepository extends GetxController {
           backgroundColor: Colors.green.withOpacity(0.1),
           colorText: Colors.green);
     } on FirebaseAuthException catch (e) {
+      CircularProgress.popCircularProgressIndicator();
       Get.snackbar("Error", e.toString(),
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent.withOpacity(0.1),
@@ -176,6 +184,7 @@ class AuthenticationRepository extends GetxController {
           accessToken: gAuth.accessToken, idToken: gAuth.idToken);
       return await FirebaseAuth.instance.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
+      CircularProgress.popCircularProgressIndicator();
       Get.snackbar("Error", e.toString(),
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent.withOpacity(0.1),
