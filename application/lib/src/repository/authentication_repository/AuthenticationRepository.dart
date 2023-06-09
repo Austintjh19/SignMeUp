@@ -34,8 +34,6 @@ class AuthenticationRepository extends GetxController {
   }
 
   Future<void> phoneAuthentication(String phoneNo) async {
-    CircularProgress.getCircularProgressIndicator();
-
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneNo,
       verificationCompleted: (credential) async {
@@ -48,7 +46,6 @@ class AuthenticationRepository extends GetxController {
         verificationID.value = verificationID as String;
       }),
       verificationFailed: (e) {
-        CircularProgress.popCircularProgressIndicator();
         if (e.code == 'invalid-phone-number') {
           Get.snackbar("Error", "Invalid phone number provided.",
               snackPosition: SnackPosition.BOTTOM,
@@ -65,8 +62,6 @@ class AuthenticationRepository extends GetxController {
   }
 
   Future<void> emailAuthentication(String email) async {
-    CircularProgress.getCircularProgressIndicator();
-
     myEmailAuth.setConfig(
         appEmail: "SignMeUp@gmail.com",
         appName: "Email OTP",
@@ -77,20 +72,16 @@ class AuthenticationRepository extends GetxController {
     if (res) {
       print("sent");
     } else {
-      CircularProgress.popCircularProgressIndicator();
       print("not sent");
     }
   }
 
   Future<bool> verifyOTP(String otp) async {
-    CircularProgress.getCircularProgressIndicator();
-
     if (verifyViaEmailOTP == true) {
       try {
         bool res = await myEmailAuth.verifyOTP(otp: otp);
         return res;
       } catch (e) {
-        CircularProgress.popCircularProgressIndicator();
         Get.snackbar("Error", e.toString(),
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.redAccent.withOpacity(0.1),
@@ -103,7 +94,6 @@ class AuthenticationRepository extends GetxController {
                 verificationId: this.verificationID.value, smsCode: otp));
         return credentials.user != null ? true : false;
       } on FirebaseAuthException catch (e) {
-        CircularProgress.popCircularProgressIndicator();
         final ex = SignUpExceptions.code(e.code);
         print(e.toString());
         Get.snackbar("Error", e.toString(),
@@ -123,11 +113,11 @@ class AuthenticationRepository extends GetxController {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+      CircularProgress.popCircularProgressIndicator();
       firebaseUser.value != null
           ? Get.offAll(() => const HomeScreen())
           : Get.offAll(() => const SignInScreen());
     } on FirebaseAuthException catch (e) {
-      CircularProgress.popCircularProgressIndicator();
       final ex = SignUpExceptions.code(e.code);
       Get.snackbar("Error", e.toString(),
           snackPosition: SnackPosition.BOTTOM,

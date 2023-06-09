@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:myapplication/src/constants/image_strings.dart';
-import 'package:myapplication/src/common_widgets/ProfileImage.dart';
+import 'package:myapplication/src/features/authentication/screens/sign_up/widgets/ProfileImage.dart';
 import 'package:myapplication/src/features/authentication/controllers/SignUpController.dart';
 import 'package:myapplication/src/features/authentication/models/UserModel.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_in/SignInScreen.dart';
@@ -85,7 +85,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         maxLines: 1,
                       ),
 
-                      const SizedBox(height: 50),
+                      const SizedBox(height: 25),
 
                       // Sign Up Screen Image / Profile Image
                       onForm1
@@ -98,7 +98,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             )
                           : const ProfileImage(),
 
-                      const SizedBox(height: 50),
+                      const SizedBox(height: 25),
 
                       // Sign Up Form 1 / Sign Up Form 2
                       onForm1
@@ -107,7 +107,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             )
                           : SignUpForm2(),
 
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 25),
 
                       // Continue/ Create Account Button
                       FWTextButton(
@@ -119,6 +119,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 email: controller.emailController.text.trim(),
                                 password: controller.newPasswordController.text
                                     .trim(),
+                                profileImage: controller.profilePicController,
                                 description: controller
                                     .descriptionController.text
                                     .trim());

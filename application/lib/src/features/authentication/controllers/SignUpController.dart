@@ -13,6 +13,7 @@ class SignUpController extends GetxController {
   final emailController = TextEditingController();
   final newPasswordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  String profilePicController = "";
   final descriptionController = TextEditingController();
 
   final userRepository = Get.put(UserRepository());

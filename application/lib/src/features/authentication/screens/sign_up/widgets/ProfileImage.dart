@@ -1,7 +1,10 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../../controllers/SignUpController.dart';
 
 class ProfileImage extends StatefulWidget {
   const ProfileImage({
@@ -14,16 +17,20 @@ class ProfileImage extends StatefulWidget {
 
 class _ProfileImageState extends State<ProfileImage> {
   String imageUrl = " ";
+  final controller = Get.put(SignUpController());
 
   void selectProfileImage() async {
     final image = await ImagePicker().pickImage(
       source: ImageSource.gallery,
-      maxHeight: 512,
-      maxWidth: 512,
-      imageQuality: 90,
+      maxHeight: 600,
+      maxWidth: 600,
+      imageQuality: 100,
     );
 
-    Reference ref = FirebaseStorage.instance.ref().child("profilepic.jpg");
+    final String identifier = DateTime.now().toIso8601String();
+
+    Reference ref =
+        FirebaseStorage.instance.ref().child("/ProfilePictures/$identifier");
 
     await ref.putFile(File(image!.path));
 
@@ -32,6 +39,8 @@ class _ProfileImageState extends State<ProfileImage> {
         imageUrl = value;
       });
     });
+
+    controller.profilePicController = ref.fullPath;
   }
 
   // void selectProfileImage() async {
@@ -52,22 +61,26 @@ class _ProfileImageState extends State<ProfileImage> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: selectProfileImage,
       child: CircleAvatar(
-        radius: width * 0.25,
+        radius: 150,
+        backgroundColor: const Color.fromRGBO(128, 150, 255, 1),
         child: SizedBox.expand(
           child: FittedBox(
-            fit: BoxFit.fill,
             child: imageUrl == " "
                 ? const Icon(
                     Icons.person_2_rounded,
                     color: Colors.white,
+                    size: 4,
                   )
                 : ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.network(imageUrl),
+                    borderRadius: BorderRadius.circular(150),
+                    child: Image.network(
+                      imageUrl,
+                      height: 300,
+                      width: 300,
+                    ),
                   ),
           ),
         ),
