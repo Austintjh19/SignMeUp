@@ -31,6 +31,37 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(elevation: 0, backgroundColor: Colors.white, actions: [
+        Row(
+          children: [
+            // Profile Image
+            Container(
+              width: 50,
+              decoration: const BoxDecoration(
+                  shape: BoxShape.circle, color: Colors.grey),
+            ),
+
+            // Text
+            const Text(
+              'Welcome Back',
+              style: TextStyle(color: Colors.black),
+            ),
+
+            // Settings
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                shape: const CircleBorder(),
+                backgroundColor: Colors.white,
+              ),
+              child: const Icon(
+                Icons.settings_outlined,
+                color: Colors.black,
+              ),
+            )
+          ],
+        )
+      ]),
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.shifting,
@@ -45,7 +76,7 @@ class _DashboardState extends State<Dashboard> {
             BottomNavigationBarItem(
                 label: 'Home', icon: Icon(Icons.home_filled)),
             BottomNavigationBarItem(
-                label: 'Search', icon: Icon(Icons.search_off_outlined)),
+                label: 'Search', icon: Icon(Icons.search_outlined)),
             BottomNavigationBarItem(
                 label: 'Message', icon: Icon(Icons.message_outlined)),
             BottomNavigationBarItem(

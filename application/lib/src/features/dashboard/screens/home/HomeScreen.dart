@@ -12,12 +12,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(onPressed: signUserOut, icon: const Icon(Icons.logout))
-        ],
-        title: const Text('Welcome'),
-      ),
+      backgroundColor: Colors.white,
+      // appBar: AppBar(
+      //   actions: [
+      //     IconButton(onPressed: signUserOut, icon: const Icon(Icons.logout))
+      //   ],
+      //   title: const Text('Welcome'),
+      // ),
       body: const Center(child: Text('Home Page')),
     );
   }
