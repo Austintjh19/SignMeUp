@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CircularProgress {
-  static CircularProgress get instance => Get.find();
+class CircularProgressWidget {
+  static CircularProgressWidget get instance => Get.find();
 
   static getCircularProgressIndicator() {
     showDialog(

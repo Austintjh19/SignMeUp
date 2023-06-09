@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class BTextForm extends StatelessWidget {
+class BorderedTextForm extends StatelessWidget {
   final controller;
   final String labelText;
   final String hintText;
   final int numLines;
   final Color unfocusedBorderColor;
   final Color focusedBorderColor;
-  const BTextForm(
+  const BorderedTextForm(
       {super.key,
       required this.controller,
       required this.labelText,

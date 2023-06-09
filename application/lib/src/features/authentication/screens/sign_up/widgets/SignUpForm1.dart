@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapplication/src/common_widgets/BSingleLineTextField.dart';
 
 import '../../../controllers/SignUpController.dart';
 import '../../../controllers/ValidationController.dart';

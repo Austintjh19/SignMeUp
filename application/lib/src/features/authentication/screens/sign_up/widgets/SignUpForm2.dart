@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapplication/src/common_widgets/BTextForm.dart';
+import 'package:myapplication/src/common_widgets/BorderedTextForm.dart';
 
 import '../../../controllers/SignUpController.dart';
 
@@ -17,7 +17,7 @@ class _SignUpForm2State extends State<SignUpForm2> {
     final controller = Get.put(SignUpController());
 
     return Form(
-        child: BTextForm(
+        child: BorderedTextForm(
             controller: controller.descriptionController,
             labelText: 'Description',
             hintText:

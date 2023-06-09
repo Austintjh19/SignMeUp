@@ -7,7 +7,7 @@ import 'package:myapplication/src/features/authentication/models/UserModel.dart'
 import 'package:myapplication/src/features/authentication/screens/sign_in/SignInScreen.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_up/widgets/SignUpForm1.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_up/widgets/SignUpForm2.dart';
-import 'package:myapplication/src/common_widgets/FWTextButton.dart';
+import 'package:myapplication/src/common_widgets/FullWidthTextButton.dart';
 
 import 'package:get/get.dart';
 
@@ -110,7 +110,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       const SizedBox(height: 25),
 
                       // Continue/ Create Account Button
-                      FWTextButton(
+                      FullWidthTextButton(
                           function: () {
                             final user = UserModel(
                                 username:

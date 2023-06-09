@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-import '../../../../../common_widgets/CircularProgress.dart';
-import '../../../../../common_widgets/FWTextButton.dart';
+import '../../../../../common_widgets/CircularProgressWidget.dart';
+import '../../../../../common_widgets/FullWidthTextButton.dart';
 import '../../../../../repository/authentication_repository/AuthenticationRepository.dart';
 import '../../../controllers/OTPController.dart';
 import '../../../controllers/ValidationController.dart';
@@ -84,7 +84,7 @@ class _OTPWidgets extends State<PhoneOTPForm> {
           ),
 
           const SizedBox(height: 20.0),
-          FWTextButton(
+          FullWidthTextButton(
             description: 'Next',
             buttonColor: const Color.fromRGBO(128, 150, 255, 1),
             textColor: Colors.white,

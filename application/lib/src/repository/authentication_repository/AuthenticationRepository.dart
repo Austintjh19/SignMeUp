@@ -9,7 +9,7 @@ import 'package:myapplication/src/features/dashboard/Dashboard.dart';
 import 'package:myapplication/src/features/dashboard/screens/home/HomeScreen.dart';
 import 'package:myapplication/src/repository/authentication_repository/exceptions/SignUpExceptions.dart';
 
-import '../../common_widgets/CircularProgress.dart';
+import '../../common_widgets/CircularProgressWidget.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -109,12 +109,12 @@ class AuthenticationRepository extends GetxController {
 
   Future<void> createUserViaEmailAndPassword(
       String email, String password) async {
-    CircularProgress.getCircularProgressIndicator();
+    CircularProgressWidget.getCircularProgressIndicator();
 
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      CircularProgress.popCircularProgressIndicator();
+      CircularProgressWidget.popCircularProgressIndicator();
       firebaseUser.value != null
           ? Get.offAll(() => const HomeScreen())
           : Get.offAll(() => const SignInScreen());
@@ -126,7 +126,7 @@ class AuthenticationRepository extends GetxController {
           colorText: Colors.red);
       throw ex;
     } catch (_) {
-      CircularProgress.popCircularProgressIndicator();
+      CircularProgressWidget.popCircularProgressIndicator();
       const ex = SignUpExceptions();
       throw ex;
     }
@@ -134,11 +134,11 @@ class AuthenticationRepository extends GetxController {
 
   Future<void> signInUserViaEmailAndPassword(
       String email, String password) async {
-    CircularProgress.getCircularProgressIndicator();
+    CircularProgressWidget.getCircularProgressIndicator();
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
-      CircularProgress.popCircularProgressIndicator();
+      CircularProgressWidget.popCircularProgressIndicator();
       Get.snackbar("Error", e.toString(),
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent.withOpacity(0.1),
@@ -147,7 +147,7 @@ class AuthenticationRepository extends GetxController {
   }
 
   Future<void> resetPasswordViaEmail(String email) async {
-    CircularProgress.getCircularProgressIndicator();
+    CircularProgressWidget.getCircularProgressIndicator();
 
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
@@ -157,7 +157,7 @@ class AuthenticationRepository extends GetxController {
           backgroundColor: Colors.green.withOpacity(0.1),
           colorText: Colors.green);
     } on FirebaseAuthException catch (e) {
-      CircularProgress.popCircularProgressIndicator();
+      CircularProgressWidget.popCircularProgressIndicator();
       Get.snackbar("Error", e.toString(),
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent.withOpacity(0.1),
@@ -166,7 +166,7 @@ class AuthenticationRepository extends GetxController {
   }
 
   Future<UserCredential?> signInWithGoogle() async {
-    CircularProgress.getCircularProgressIndicator();
+    CircularProgressWidget.getCircularProgressIndicator();
 
     try {
       final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
@@ -175,7 +175,7 @@ class AuthenticationRepository extends GetxController {
           accessToken: gAuth.accessToken, idToken: gAuth.idToken);
       return await FirebaseAuth.instance.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
-      CircularProgress.popCircularProgressIndicator();
+      CircularProgressWidget.popCircularProgressIndicator();
       Get.snackbar("Error", e.toString(),
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent.withOpacity(0.1),

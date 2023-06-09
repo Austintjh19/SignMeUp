@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../common_widgets/BSingleLineTextField.dart';
-import '../../../../../common_widgets/FWTextButton.dart';
+import '../../../../../common_widgets/FullWidthTextButton.dart';
 import '../../../../../repository/authentication_repository/AuthenticationRepository.dart';
 import '../../../controllers/OTPController.dart';
 import '../../../controllers/ValidationController.dart';
@@ -50,7 +49,7 @@ class _MailOTPFormState extends State<MailOTPForm> {
         const SizedBox(height: 20.0),
 
         // Next Button
-        FWTextButton(
+        FullWidthTextButton(
           description: 'Next',
           buttonColor: const Color.fromRGBO(128, 150, 255, 1),
           textColor: Colors.white,

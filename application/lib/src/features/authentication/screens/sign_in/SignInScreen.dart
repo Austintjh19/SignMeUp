@@ -6,7 +6,7 @@ import 'package:myapplication/src/features/authentication/screens/sign_in/widget
 import 'package:myapplication/src/features/authentication/screens/sign_in/widgets/SignInForm.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_in/widgets/SignUpButton.dart';
 
-import '../../../../common_widgets/FWTextButton.dart';
+import '../../../../common_widgets/FullWidthTextButton.dart';
 import '../../controllers/SignInController.dart';
 
 class SignInScreen extends StatelessWidget {

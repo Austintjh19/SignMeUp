@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:myapplication/src/constants/text_strings.dart';
 import 'package:myapplication/src/features/authentication/controllers/OTPController.dart';
 
-import '../../../../common_widgets/FWTextButton.dart';
+import '../../../../common_widgets/FullWidthTextButton.dart';
 import '../../../../constants/colors.dart';
 
 class OTPScreen extends StatelessWidget {
@@ -99,7 +99,7 @@ class OTPScreen extends StatelessWidget {
                     height: 25,
                   ),
 
-                  FWTextButton(
+                  FullWidthTextButton(
                     description: 'Enter',
                     buttonColor: const Color.fromRGBO(128, 150, 255, 1),
                     textColor: Colors.white,

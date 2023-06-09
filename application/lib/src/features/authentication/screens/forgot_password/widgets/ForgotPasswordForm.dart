@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../common_widgets/BSingleLineTextField.dart';
-import '../../../../../common_widgets/FWTextButton.dart';
+import '../../../../../common_widgets/FullWidthTextButton.dart';
 import '../../../controllers/ForgotPasswordController.dart';
 import '../../../controllers/ValidationController.dart';
 
@@ -50,7 +49,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
         const SizedBox(height: 25),
 
         // Send Button
-        FWTextButton(
+        FullWidthTextButton(
             function: () {
               if (_formKey.currentState!.validate()) {
                 ForgotPasswordController.instance.resetPasswordviaEmail();
