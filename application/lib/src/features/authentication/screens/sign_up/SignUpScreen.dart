@@ -85,7 +85,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         maxLines: 1,
                       ),
 
-                      const SizedBox(height: 25),
+                      const SizedBox(height: 30),
 
                       // Sign Up Screen Image / Profile Image
                       onForm1
@@ -98,7 +98,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             )
                           : const ProfileImage(),
 
-                      const SizedBox(height: 25),
+                      const SizedBox(height: 30),
 
                       // Sign Up Form 1 / Sign Up Form 2
                       onForm1

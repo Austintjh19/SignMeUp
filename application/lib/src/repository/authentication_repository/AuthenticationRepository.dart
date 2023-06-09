@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_in/SignInScreen.dart';
-import 'package:myapplication/src/features/dashboard/home/HomeScreen.dart';
+import 'package:myapplication/src/features/dashboard/Dashboard.dart';
+import 'package:myapplication/src/features/dashboard/screens/home/HomeScreen.dart';
 import 'package:myapplication/src/repository/authentication_repository/exceptions/SignUpExceptions.dart';
 
 import '../../common_widgets/CircularProgress.dart';
@@ -30,7 +31,7 @@ class AuthenticationRepository extends GetxController {
   _setInitialScreen(User? user) {
     user == null
         ? Get.offAll(const SignInScreen())
-        : Get.offAll(const HomeScreen());
+        : Get.offAll(const Dashboard());
   }
 
   Future<void> phoneAuthentication(String phoneNo) async {

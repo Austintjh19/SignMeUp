@@ -65,26 +65,32 @@ class _ProfileImageState extends State<ProfileImage> {
     return GestureDetector(
       onTap: selectProfileImage,
       child: CircleAvatar(
-        radius: 150,
+        radius: 125,
         backgroundColor: const Color.fromRGBO(128, 150, 255, 1),
         child: Stack(
           children: [
             SizedBox.expand(
               child: FittedBox(
                 child: imageUrl == " "
-                    ? const Icon(
-                        Icons.person_2_rounded,
-                        color: Colors.white,
-                        size: 4,
-                      )
+                    ? Container(
+                        padding: const EdgeInsets.all(20),
+                        child: const Icon(
+                          Icons.person,
+                          color: Colors.white,
+                          size: 200,
+                        ))
                     : ClipRRect(
                         borderRadius: BorderRadius.circular(150),
                         child: Image.network(
                           imageUrl,
-                          height: 300,
-                          width: 300,
                         ),
                       ),
+                // Container(
+                //         width: 125,
+                //         decoration: BoxDecoration(
+                //             shape: BoxShape.circle,
+                //             image: DecorationImage(
+                //                 image: NetworkImage(imageUrl))))
               ),
             ),
             Positioned(
