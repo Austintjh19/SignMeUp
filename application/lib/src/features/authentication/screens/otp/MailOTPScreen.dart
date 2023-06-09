@@ -1,14 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapplication/src/common_widgets/FWTextButton.dart';
+import 'package:myapplication/src/common_widgets/FullWidthTextButton.dart';
 import 'package:myapplication/src/constants/image_strings.dart';
 import 'package:myapplication/src/features/authentication/controllers/OTPController.dart';
 import 'package:myapplication/src/features/authentication/screens/otp/OTPScreen.dart';
 import 'package:myapplication/src/features/authentication/screens/otp/widgets/MailOTPForm.dart';
 import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
 
-import '../../../../common_widgets/BSingleLineTextField.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/text_strings.dart';
 import '../sign_in/SignInScreen.dart';

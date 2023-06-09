@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:myapplication/src/common_widgets/CircularProgress.dart';
+import 'package:myapplication/src/common_widgets/CircularProgressWidget.dart';
 import 'package:myapplication/src/features/authentication/controllers/ValidationController.dart';
 
-import '../../../../../common_widgets/FWTextButton.dart';
+import '../../../../../common_widgets/FullWidthTextButton.dart';
 import '../../../controllers/SignInController.dart';
 import 'ForgotPasswordButton.dart';
 
@@ -76,7 +76,7 @@ class _SignInFormState extends State<SignInForm> {
             ),
 
             //Sign In
-            FWTextButton(
+            FullWidthTextButton(
                 function: () async {
                   if (_formKey.currentState!.validate()) {
                     await SignInController.instance
