@@ -1,9 +1,7 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
-import '../../../../../common_widgets/CircularProgressWidget.dart';
 import '../../../../../common_widgets/FullWidthTextButton.dart';
 import '../../../../../repository/authentication_repository/AuthenticationRepository.dart';
 import '../../../controllers/OTPController.dart';

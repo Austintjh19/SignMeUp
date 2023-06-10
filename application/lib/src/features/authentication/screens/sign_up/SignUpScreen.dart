@@ -3,15 +3,12 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:myapplication/src/constants/image_strings.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_up/widgets/ProfileImage.dart';
 import 'package:myapplication/src/features/authentication/controllers/SignUpController.dart';
-import 'package:myapplication/src/features/authentication/models/UserModel.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_in/SignInScreen.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_up/widgets/SignUpForm1.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_up/widgets/SignUpForm2.dart';
 import 'package:myapplication/src/common_widgets/FullWidthTextButton.dart';
 
 import 'package:get/get.dart';
-
-import '../../controllers/ValidationController.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

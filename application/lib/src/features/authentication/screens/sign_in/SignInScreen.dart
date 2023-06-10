@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:myapplication/src/constants/colors.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_in/widgets/ContinueWith.dart';
-import 'package:myapplication/src/features/authentication/screens/sign_in/widgets/ForgotPasswordButton.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_in/widgets/Header.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_in/widgets/SignInForm.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_in/widgets/SignUpButton.dart';
-
-import '../../../../common_widgets/FullWidthTextButton.dart';
-import '../../controllers/SignInController.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});

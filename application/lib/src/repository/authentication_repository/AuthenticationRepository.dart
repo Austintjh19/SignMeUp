@@ -166,7 +166,6 @@ class AuthenticationRepository extends GetxController {
 
   Future<UserCredential?> signInWithGoogle() async {
     CircularProgressWidget.getCircularProgressIndicator();
-
     try {
       final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
       final GoogleSignInAuthentication gAuth = await gUser!.authentication;

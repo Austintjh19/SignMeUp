@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:myapplication/src/common_widgets/CircularProgressWidget.dart';
 import 'package:myapplication/src/features/authentication/controllers/ValidationController.dart';
 
 import '../../../../../common_widgets/FullWidthTextButton.dart';
