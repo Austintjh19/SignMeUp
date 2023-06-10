@@ -8,6 +8,7 @@ import '../../features/authentication/models/UserModel.dart';
 class UserRepository extends GetxController {
   static UserRepository get instance => Get.find();
 
+  final _auth = FirebaseAuth.instance;
   final _db = FirebaseFirestore.instance;
 
   Future<void> storeUserDetails(UserModel user, UserCredential cred) async {
@@ -33,5 +34,16 @@ class UserRepository extends GetxController {
           backgroundColor: Colors.redAccent.withOpacity(0.1),
           colorText: Colors.red);
     }
+  }
+
+  Future<UserModel> getUserData(String uid) async {
+    // late final Rx<User?> firebaseUser;
+    // firebaseUser = Rx<User?>(_auth.currentUser);
+    final snapshot = await _db
+        .collection('UsersSignUpInfo')
+        .where("UID", isEqualTo: uid)
+        .get();
+    final userData = snapshot.docs.map((e) => UserModel.fromSnapShot(e)).single;
+    return userData;
   }
 }
