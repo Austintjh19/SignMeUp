@@ -93,6 +93,7 @@ class _OTPWidgets extends State<PhoneOTPForm> {
                 controller.phoneCode = "+${country.phoneCode}";
                 AuthenticationRepository.instance.verifyViaEmailOTP = false;
                 OTPController.instance.phoneNumAuthentication();
+                Get.to(() => const OTPScreen());
               }
             },
           ),

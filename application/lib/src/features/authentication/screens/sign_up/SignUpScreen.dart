@@ -112,23 +112,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       // Continue/ Create Account Button
                       FullWidthTextButton(
                           function: () {
-                            final user = UserModel(
-                                username:
-                                    controller.usernameController.text.trim(),
-                                name: controller.nameController.text.trim(),
-                                email: controller.emailController.text.trim(),
-                                password: controller.newPasswordController.text
-                                    .trim(),
-                                profileImage: controller.profilePicController,
-                                description: controller
-                                    .descriptionController.text
-                                    .trim());
                             if (onForm1) {
                               if (_formKey1.currentState!.validate()) {
                                 setState(() => onForm1 = false);
                               }
                             } else {
-                              SignUpController.instance.registerUser(user);
+                              SignUpController.instance.registerUser();
                             }
                           },
                           description: onForm1 ? 'Continue' : 'Create Account',

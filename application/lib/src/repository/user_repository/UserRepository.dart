@@ -12,23 +12,33 @@ class UserRepository extends GetxController {
 
   Future<void> storeUserDetails(UserModel user, UserCredential cred) async {
     // await _db
+    //       .collection('UsersSignUpInfo')
+    //       .doc(cred.user!.uid)
+    //       .set(user.toJson())
+    // await _db
     //     .collection('UsersSignUpInfo')
     //     .add(user.toJson())
-    user.toJson().addAll({'UID': cred.user!.uid.toString()});
-    await _db
-        .collection('UsersSignUpInfo')
-        .doc(cred.user!.uid)
-        .set(user.toJson())
-        .whenComplete(() => Get.snackbar(
-            "Success", "Your account has been registered",
+    try {
+      await _db
+          .collection('UsersSignUpInfo')
+          .doc(cred.user!.uid)
+          .set(user.toJson())
+          .whenComplete(() => Get.snackbar(
+              "Success", "Your account has been registered",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.green.withOpacity(0.1),
+              colorText: Colors.green))
+          .catchError((error, StackTrace) {
+        Get.snackbar("Error", "An error has occured. Please retry.",
             snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.green.withOpacity(0.1),
-            colorText: Colors.green))
-        .catchError((error, StackTrace) {
-      Get.snackbar("Error", "An error has occured. Please retry.",
+            backgroundColor: Colors.redAccent.withOpacity(0.1),
+            colorText: Colors.red);
+      });
+    } catch (e) {
+      Get.snackbar("Error", e.toString(),
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent.withOpacity(0.1),
           colorText: Colors.red);
-    });
+    }
   }
 }

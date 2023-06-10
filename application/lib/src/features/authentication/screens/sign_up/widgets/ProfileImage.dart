@@ -41,8 +41,8 @@ class _ProfileImageState extends State<ProfileImage> {
       });
     });
 
-    controller.profilePicController = ref.getDownloadURL().toString();
-    // controller.profilePicController = ref.fullPath;
+    // controller.profilePicController = await ref.getDownloadURL().toString();
+    controller.profilePicController = ref.fullPath;
   }
 
   // void selectProfileImage() async {
