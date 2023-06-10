@@ -105,7 +105,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ? SignUpForm1(
                               signUpFormKey: _formKey1,
                             )
-                          : SignUpForm2(),
+                          : const SignUpForm2(),
 
                       const SizedBox(height: 25),
 
