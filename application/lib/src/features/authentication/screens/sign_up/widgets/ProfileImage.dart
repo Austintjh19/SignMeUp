@@ -1,9 +1,11 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:myapplication/src/constants/image_strings.dart';
 
 import '../../../controllers/SignUpController.dart';
 
@@ -61,61 +63,87 @@ class _ProfileImageState extends State<ProfileImage> {
   //   }
   // }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return GestureDetector(
+  //     onTap: selectProfileImage,
+  //     child: CircleAvatar(
+  //       radius: 125,
+  //       backgroundColor: const Color.fromRGBO(128, 150, 255, 1),
+  //       child: Stack(
+  //         children: [
+  //           SizedBox.expand(
+  //             child: FittedBox(
+  //               child: imageUrl == " "
+  //                   ? Container(
+  //                       padding: const EdgeInsets.all(20),
+  //                       child: const Icon(
+  //                         Icons.person,
+  //                         color: Colors.white,
+  //                         size: 200,
+  //                       ))
+  //                   : ClipRRect(
+  //                       borderRadius: BorderRadius.circular(150),
+  //                       child: Image.network(
+  //                         imageUrl,
+  //                       ),
+  //                     ),
+  //             ),
+  //           ),
+  //           Positioned(
+  //             bottom: 0,
+  //             right: 0,
+  //             child: Container(
+  //               width: 35,
+  //               height: 35,
+  //               decoration: BoxDecoration(
+  //                   borderRadius: BorderRadius.circular(100),
+  //                   color: Colors.grey),
+  //               child: const Icon(
+  //                 LineAwesomeIcons.alternate_pencil,
+  //                 color: Colors.white,
+  //                 size: 20,
+  //               ),
+  //             ),
+  //           )
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: selectProfileImage,
-      child: CircleAvatar(
-        radius: 125,
-        backgroundColor: const Color.fromRGBO(128, 150, 255, 1),
-        child: Stack(
-          children: [
-            SizedBox.expand(
-              child: FittedBox(
-                child: imageUrl == " "
-                    ? Container(
-                        padding: const EdgeInsets.all(20),
-                        child: const Icon(
-                          Icons.person,
-                          color: Colors.white,
-                          size: 200,
-                        ))
-                    : ClipRRect(
-                        borderRadius: BorderRadius.circular(150),
-                        child: Image.network(
-                          imageUrl,
-                        ),
-                      ),
-                // Container(
-                //         width: 125,
-                //         decoration: BoxDecoration(
-                //             shape: BoxShape.circle,
-                //             image: DecorationImage(
-                //                 image: NetworkImage(imageUrl))))
+      child: Stack(children: [
+        imageUrl != " "
+            ? CircleAvatar(radius: 125, backgroundImage: NetworkImage(imageUrl))
+            : const CircleAvatar(
+                radius: 125,
+                backgroundImage: ExactAssetImage(defaultProfileImage),
               ),
+        Positioned(
+          bottom: 0,
+          right: 0,
+          child: Container(
+            width: 35,
+            height: 35,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100), color: Colors.grey),
+            child: const Icon(
+              LineAwesomeIcons.alternate_pencil,
+              color: Colors.white,
+              size: 20,
             ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: Container(
-                width: 35,
-                height: 35,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: Colors.grey),
-                child: const Icon(
-                  LineAwesomeIcons.alternate_pencil,
-                  color: Colors.white,
-                  size: 20,
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
+          ),
+        )
+      ]),
     );
   }
 }
+
+class Xfile {}
 
 
 // Icons.person_2_rounded,
