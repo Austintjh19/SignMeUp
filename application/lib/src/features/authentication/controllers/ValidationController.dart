@@ -18,19 +18,16 @@ class ValidationController extends GetxController {
     if (value!.isEmpty) {
       return 'Please enter Email';
     }
-    return value!.isNotEmpty && !regex.hasMatch(value)
+    return value.isNotEmpty && !regex.hasMatch(value)
         ? 'Invalid Email Entered'
         : null;
   }
 
   String? validateSignInPassword(String? value) {
-    RegExp regex = RegExp(r'^.{8,}$');
     if (value!.isEmpty) {
       return 'Password is required';
     }
-    return value!.isNotEmpty && !regex.hasMatch(value)
-        ? 'Invalid Password Entered'
-        : null;
+    return null;
   }
 
   String? validateSignUpPassword(String? value) {
@@ -53,7 +50,7 @@ class ValidationController extends GetxController {
     if (value!.isEmpty) {
       return 'Please enter Phone Number';
     }
-    return value!.isNotEmpty && !regex.hasMatch(value)
+    return value.isNotEmpty && !regex.hasMatch(value)
         ? 'Invalid Phone Number Entered'
         : null;
   }
@@ -64,7 +61,7 @@ class ValidationController extends GetxController {
     if (value!.isEmpty) {
       return 'Please enter Your Name';
     }
-    return value!.isNotEmpty && !regex.hasMatch(value)
+    return value.isNotEmpty && !regex.hasMatch(value)
         ? 'Invalid Name Entered'
         : null;
   }
@@ -75,7 +72,7 @@ class ValidationController extends GetxController {
     if (value!.isEmpty) {
       return 'Please enter a Username';
     }
-    return value!.isNotEmpty && !regex.hasMatch(value)
+    return value.isNotEmpty && !regex.hasMatch(value)
         ? 'Invalid Username Entered'
         : null;
   }
