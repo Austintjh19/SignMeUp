@@ -63,55 +63,6 @@ class _ProfileImageState extends State<ProfileImage> {
   //   }
   // }
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return GestureDetector(
-  //     onTap: selectProfileImage,
-  //     child: CircleAvatar(
-  //       radius: 125,
-  //       backgroundColor: const Color.fromRGBO(128, 150, 255, 1),
-  //       child: Stack(
-  //         children: [
-  //           SizedBox.expand(
-  //             child: FittedBox(
-  //               child: imageUrl == " "
-  //                   ? Container(
-  //                       padding: const EdgeInsets.all(20),
-  //                       child: const Icon(
-  //                         Icons.person,
-  //                         color: Colors.white,
-  //                         size: 200,
-  //                       ))
-  //                   : ClipRRect(
-  //                       borderRadius: BorderRadius.circular(150),
-  //                       child: Image.network(
-  //                         imageUrl,
-  //                       ),
-  //                     ),
-  //             ),
-  //           ),
-  //           Positioned(
-  //             bottom: 0,
-  //             right: 0,
-  //             child: Container(
-  //               width: 35,
-  //               height: 35,
-  //               decoration: BoxDecoration(
-  //                   borderRadius: BorderRadius.circular(100),
-  //                   color: Colors.grey),
-  //               child: const Icon(
-  //                 LineAwesomeIcons.alternate_pencil,
-  //                 color: Colors.white,
-  //                 size: 20,
-  //               ),
-  //             ),
-  //           )
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -142,9 +93,3 @@ class _ProfileImageState extends State<ProfileImage> {
     );
   }
 }
-
-class Xfile {}
-
-
-// Icons.person_2_rounded,
-//               color: Colors.white,

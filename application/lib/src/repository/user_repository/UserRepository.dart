@@ -11,13 +11,6 @@ class UserRepository extends GetxController {
   final _db = FirebaseFirestore.instance;
 
   Future<void> storeUserDetails(UserModel user, UserCredential cred) async {
-    // await _db
-    //       .collection('UsersSignUpInfo')
-    //       .doc(cred.user!.uid)
-    //       .set(user.toJson())
-    // await _db
-    //     .collection('UsersSignUpInfo')
-    //     .add(user.toJson())
     try {
       await _db
           .collection('UsersSignUpInfo')
