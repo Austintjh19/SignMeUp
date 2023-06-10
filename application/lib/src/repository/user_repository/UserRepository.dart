@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,10 +10,15 @@ class UserRepository extends GetxController {
 
   final _db = FirebaseFirestore.instance;
 
-  Future<void> storeUserDetails(UserModel user) async {
+  Future<void> storeUserDetails(UserModel user, UserCredential cred) async {
+    // await _db
+    //     .collection('UsersSignUpInfo')
+    //     .add(user.toJson())
+    user.toJson().addAll({'UID': cred.user!.uid.toString()});
     await _db
         .collection('UsersSignUpInfo')
-        .add(user.toJson())
+        .doc(cred.user!.uid)
+        .set(user.toJson())
         .whenComplete(() => Get.snackbar(
             "Success", "Your account has been registered",
             snackPosition: SnackPosition.BOTTOM,

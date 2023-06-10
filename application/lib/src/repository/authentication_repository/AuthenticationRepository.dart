@@ -107,17 +107,18 @@ class AuthenticationRepository extends GetxController {
     return false;
   }
 
-  Future<void> createUserViaEmailAndPassword(
+  Future<UserCredential> createUserViaEmailAndPassword(
       String email, String password) async {
     CircularProgressWidget.getCircularProgressIndicator();
 
     try {
-      await _auth.createUserWithEmailAndPassword(
+      UserCredential credential = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       CircularProgressWidget.popCircularProgressIndicator();
       firebaseUser.value != null
-          ? Get.offAll(() => const HomeScreen())
+          ? Get.offAll(() => const Dashboard())
           : Get.offAll(() => const SignInScreen());
+      return credential;
     } on FirebaseAuthException catch (e) {
       final ex = SignUpExceptions.code(e.code);
       Get.snackbar("Error", e.toString(),

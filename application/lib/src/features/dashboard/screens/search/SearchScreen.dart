@@ -11,13 +11,6 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          actions: [
-            IconButton(onPressed: signUserOut, icon: const Icon(Icons.logout))
-          ],
-          title: const Text('Search'),
-        ),
-        body: const Center(child: Text('Search Page')));
+    return Scaffold(body: const Center(child: Text('Search Page')));
   }
 }
