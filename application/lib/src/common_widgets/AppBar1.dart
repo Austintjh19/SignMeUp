@@ -5,6 +5,7 @@ import 'package:myapplication/src/features/dashboard/controllers/ProfileControll
 import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
 
 import '../constants/colors.dart';
+import '../constants/image_strings.dart';
 
 class AppBar1 extends StatelessWidget {
   const AppBar1({super.key});
@@ -25,16 +26,41 @@ class AppBar1 extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       // Profile Image
-                      Container(
-                        margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        width: 70,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey,
-                        ),
-                      ),
+                      FutureBuilder(
+                          future: controller.getProfileImage(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              if (snapshot.hasData) {
+                                String imageUrl = snapshot.data as String;
+                                return imageUrl != ""
+                                    ? CircleAvatar(
+                                        radius: 35,
+                                        backgroundImage: NetworkImage(imageUrl))
+                                    : const CircleAvatar(
+                                        radius: 35,
+                                        backgroundImage: ExactAssetImage(
+                                            defaultProfileImage),
+                                      );
+                              }
+                            }
+                            return const CircleAvatar(
+                              radius: 35,
+                              backgroundImage:
+                                  ExactAssetImage(defaultProfileImage),
+                            );
+                          }),
 
-                      const SizedBox(width: 5),
+                      // Container(
+                      //   margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                      //   width: 70,
+                      //   decoration: const BoxDecoration(
+                      //     shape: BoxShape.circle,
+                      //     color: Colors.grey,
+                      //   ),
+                      // ),
+
+                      const SizedBox(width: 10),
 
                       // Welcome Back
                       Column(
@@ -77,12 +103,9 @@ class AppBar1 extends StatelessWidget {
                   ),
                 ),
               );
-            } else {
-              return const Text("Error");
             }
-          } else {
-            return const Text("Error");
           }
+          return const LinearProgressIndicator();
         });
   }
 }

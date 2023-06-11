@@ -20,6 +20,7 @@ class ProfileImage extends StatefulWidget {
 class _ProfileImageState extends State<ProfileImage> {
   String imageUrl = " ";
   final controller = Get.put(SignUpController());
+  final String identifier = DateTime.now().toIso8601String();
 
   void selectProfileImage() async {
     final image = await ImagePicker().pickImage(
@@ -28,8 +29,6 @@ class _ProfileImageState extends State<ProfileImage> {
       maxWidth: 600,
       imageQuality: 100,
     );
-
-    final String identifier = DateTime.now().toIso8601String();
 
     Reference ref =
         FirebaseStorage.instance.ref().child("/ProfilePictures/$identifier");

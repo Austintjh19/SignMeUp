@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -45,5 +46,12 @@ class UserRepository extends GetxController {
         .get();
     final userData = snapshot.docs.map((e) => UserModel.fromSnapShot(e)).single;
     return userData;
+  }
+
+  Future<String> getProfileImage(String uid) async {
+    UserModel userData = await getUserData(uid);
+    Reference ref = FirebaseStorage.instance.ref().child(userData.profileImage);
+    final imageURL = await ref.getDownloadURL();
+    return imageURL;
   }
 }

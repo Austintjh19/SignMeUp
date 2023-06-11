@@ -20,4 +20,16 @@ class ProfileController extends GetxController {
           colorText: Colors.red);
     }
   }
+
+  getProfileImage() {
+    final uid = _authRepository.firebaseUser.value?.uid;
+    if (uid != null) {
+      return _userRepository.getProfileImage(uid);
+    } else {
+      Get.snackbar("Error", "Unable to retrive User Profile Image",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent.withOpacity(0.1),
+          colorText: Colors.red);
+    }
+  }
 }
