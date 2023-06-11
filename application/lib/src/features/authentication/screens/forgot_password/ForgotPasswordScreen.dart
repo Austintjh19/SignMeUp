@@ -13,29 +13,19 @@ class ForgotPasswordScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back_outlined,
+                color: Colors.black, size: 25)),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(children: [
-            // Return Button
-            Container(
-              padding: const EdgeInsetsDirectional.symmetric(
-                  horizontal: 25, vertical: 25),
-              alignment: Alignment.centerLeft,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  height: 30,
-                  padding: const EdgeInsets.all(0),
-                  child: const Icon(
-                    Icons.arrow_back,
-                    size: 30,
-                  ),
-                ),
-              ),
-            ),
-
             // Body
             Container(
                 width: width,

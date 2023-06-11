@@ -27,32 +27,44 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final _formKey2 = GlobalKey<FormState>();
 
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          leading: IconButton(
+              onPressed: () {
+                onForm1
+                    ? Get.to(const SignInScreen())
+                    : setState(() => onForm1 = true);
+              },
+              icon: const Icon(Icons.arrow_back_outlined,
+                  color: Colors.black, size: 25)),
+        ),
         backgroundColor: Colors.white,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // Return Button
-                Container(
-                  padding: const EdgeInsetsDirectional.symmetric(
-                      horizontal: 25, vertical: 25),
-                  alignment: Alignment.centerLeft,
-                  child: GestureDetector(
-                    onTap: () {
-                      onForm1
-                          ? Get.to(const SignInScreen())
-                          : setState(() => onForm1 = true);
-                    },
-                    child: Container(
-                      height: 30,
-                      padding: const EdgeInsets.all(0),
-                      child: const Icon(
-                        Icons.arrow_back,
-                        size: 30,
-                      ),
-                    ),
-                  ),
-                ),
+                // // Return Button
+                // Container(
+                //   padding: const EdgeInsetsDirectional.symmetric(
+                //       horizontal: 25, vertical: 25),
+                //   alignment: Alignment.centerLeft,
+                //   child: GestureDetector(
+                //     onTap: () {
+                //       onForm1
+                //           ? Get.to(const SignInScreen())
+                //           : setState(() => onForm1 = true);
+                //     },
+                //     child: Container(
+                //       height: 30,
+                //       padding: const EdgeInsets.all(0),
+                //       child: const Icon(
+                //         Icons.arrow_back,
+                //         size: 30,
+                //       ),
+                //     ),
+                //   ),
+                // ),
 
                 // Header 1
                 Container(

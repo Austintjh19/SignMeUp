@@ -6,7 +6,6 @@ import 'package:myapplication/src/features/authentication/screens/otp/widgets/Ma
 
 import '../../../../constants/colors.dart';
 import '../../../../constants/text_strings.dart';
-import '../sign_in/SignInScreen.dart';
 
 class MailOTPScreen extends StatelessWidget {
   const MailOTPScreen({super.key});
@@ -17,30 +16,21 @@ class MailOTPScreen extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back_outlined,
+                color: Colors.black, size: 25)),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Return Button
-              Container(
-                padding: const EdgeInsetsDirectional.symmetric(
-                    horizontal: 25, vertical: 25),
-                alignment: Alignment.centerLeft,
-                child: GestureDetector(
-                  onTap: () {
-                    Get.to(const SignInScreen());
-                  },
-                  child: Container(
-                    height: 30,
-                    padding: const EdgeInsets.all(0),
-                    child: const Icon(
-                      Icons.arrow_back,
-                      size: 30,
-                    ),
-                  ),
-                ),
-              ),
-
               Container(
                 padding: const EdgeInsets.all(50),
                 child: Column(
