@@ -25,6 +25,8 @@ class AppBar1 extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      const SizedBox(width: 5),
+
                       // Profile Image
                       FutureBuilder(
                           future: controller.getProfileImage(),
@@ -51,16 +53,7 @@ class AppBar1 extends StatelessWidget {
                             );
                           }),
 
-                      // Container(
-                      //   margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      //   width: 70,
-                      //   decoration: const BoxDecoration(
-                      //     shape: BoxShape.circle,
-                      //     color: Colors.grey,
-                      //   ),
-                      // ),
-
-                      const SizedBox(width: 10),
+                      const SizedBox(width: 15),
 
                       // Welcome Back
                       Column(
