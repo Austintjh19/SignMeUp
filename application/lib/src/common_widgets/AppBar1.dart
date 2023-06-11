@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:myapplication/src/features/authentication/models/UserModel.dart';
 import 'package:myapplication/src/features/dashboard/controllers/ProfileController.dart';
+import 'package:myapplication/src/features/dashboard/screens/settings/SettingsScreen.dart';
 import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
 
 import '../constants/colors.dart';
@@ -67,12 +69,14 @@ class AppBar1 extends StatelessWidget {
                                   fontWeight: FontWeight.normal,
                                   color: Color.fromRGBO(112, 112, 112, 1))),
                           const SizedBox(height: 2.5),
-                          Text(userData.name,
-                              style: const TextStyle(
-                                  fontFamily: 'Raleway',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: heading1Color)),
+                          Text(
+                            userData.name,
+                            style: const TextStyle(
+                                fontFamily: 'Raleway',
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: heading1Color),
+                          ),
                         ],
                       ),
 
@@ -81,14 +85,14 @@ class AppBar1 extends StatelessWidget {
                       // Settings
                       ElevatedButton(
                         onPressed: () {
-                          AuthenticationRepository.instance.signOutUser();
+                          Get.to(() => const SettingsScreen());
                         },
                         style: ElevatedButton.styleFrom(
                           shape: const CircleBorder(),
                           backgroundColor: Colors.white,
                         ),
                         child: const Icon(
-                          Icons.settings_outlined,
+                          LineAwesomeIcons.cog,
                           color: Colors.black,
                         ),
                       )
