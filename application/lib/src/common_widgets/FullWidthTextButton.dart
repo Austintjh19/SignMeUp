@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapplication/src/constants/colors.dart';
 
 class FullWidthTextButton extends StatelessWidget {
   final Color buttonColor;
@@ -21,7 +22,7 @@ class FullWidthTextButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 0),
         minimumSize: const Size.fromHeight(30),
-        shadowColor: Colors.black,
+        shadowColor: primaryColor700,
         elevation: 20,
         backgroundColor: buttonColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
