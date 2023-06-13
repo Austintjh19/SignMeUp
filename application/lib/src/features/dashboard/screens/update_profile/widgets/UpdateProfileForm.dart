@@ -1,6 +1,13 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:myapplication/src/features/dashboard/Dashboard.dart';
 
+import '../../../../../constants/image_strings.dart';
 import '../../../../authentication/models/UserModel.dart';
 import '../../../controllers/ProfileController.dart';
 import '../../../controllers/UpdateProfileController.dart';
@@ -13,12 +20,37 @@ class UpdatProfileForm extends StatefulWidget {
 }
 
 class _UpdatProfileFormState extends State<UpdatProfileForm> {
+  final profileController = Get.put(ProfileController());
+  final updateProfileController = Get.put(UpdateProfileController());
+  final String identifier = DateTime.now().toIso8601String();
   bool formEnabled = false;
+  String newImageUrl = "";
+
+  void updateProfileImage(String uid) async {
+    final image = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+      maxHeight: 600,
+      maxWidth: 600,
+      imageQuality: 100,
+    );
+
+    Reference ref =
+        FirebaseStorage.instance.ref().child("/ProfilePictures/$identifier");
+
+    await ref.putFile(File(image!.path));
+
+    ref.getDownloadURL().then((value) async {
+      setState(() {
+        newImageUrl = value;
+      });
+    });
+
+    updateProfileController.profilePicController.text = ref.fullPath;
+    updateProfileController.updateProfileImage(uid);
+  }
 
   @override
   Widget build(BuildContext context) {
-    final profileController = Get.put(ProfileController());
-    final updateProfileController = Get.put(UpdateProfileController());
     return SingleChildScrollView(
       child: FutureBuilder(
           future: profileController.getUserData(),
@@ -33,6 +65,65 @@ class _UpdatProfileFormState extends State<UpdatProfileForm> {
                   padding: const EdgeInsets.all(30),
                   child: Column(
                     children: [
+                      // Profile Image
+                      Stack(
+                        children: [
+                          FutureBuilder(
+                              future: profileController.getProfileImage(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  if (snapshot.hasData) {
+                                    String imageUrl = snapshot.data as String;
+                                    return newImageUrl == ""
+                                        ? imageUrl != ""
+                                            ? CircleAvatar(
+                                                radius: 90,
+                                                backgroundImage:
+                                                    NetworkImage(imageUrl))
+                                            : const CircleAvatar(
+                                                radius: 90,
+                                                backgroundImage:
+                                                    ExactAssetImage(
+                                                        defaultProfileImage),
+                                              )
+                                        : CircleAvatar(
+                                            radius: 90,
+                                            backgroundImage:
+                                                NetworkImage(newImageUrl));
+                                  }
+                                }
+                                return const CircleAvatar(
+                                  radius: 90,
+                                  backgroundImage:
+                                      ExactAssetImage(defaultProfileImage),
+                                );
+                              }),
+                          Positioned(
+                            top: 0,
+                            right: 0,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color:
+                                      const Color.fromRGBO(119, 143, 253, 1)),
+                              child: IconButton(
+                                icon: const Icon(
+                                  Icons.camera_alt_outlined,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                                onPressed: () {
+                                  updateProfileImage(userData.uid);
+                                },
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+
+                      const SizedBox(height: 20),
+
                       // Edit/ Save Button
                       Container(
                         alignment: Alignment.centerRight,
@@ -68,8 +159,16 @@ class _UpdatProfileFormState extends State<UpdatProfileForm> {
                                   size: 15,
                                   color: Color.fromRGBO(119, 143, 253, 1),
                                 ),
-                          onPressed: () {
-                            setState(() => formEnabled = true);
+                          onPressed: () async {
+                            if (formEnabled == false) {
+                              setState(() {
+                                formEnabled = true;
+                              });
+                            } else {
+                              await updateProfileController
+                                  .updateProfile(userData.uid);
+                              Get.offAll(const Dashboard());
+                            }
                           },
                         ),
                       ),

@@ -54,4 +54,25 @@ class UserRepository extends GetxController {
     final imageURL = await ref.getDownloadURL();
     return imageURL;
   }
+
+  Future<void> updateProfile(
+      String uid, String name, String username, String description) async {
+    await _db.collection('UsersSignUpInfo').doc(uid).update(
+        {'Name': name, 'Username': username, 'Description': description});
+    Get.snackbar("Success", "User Profile updated.",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green.withOpacity(0.1),
+        colorText: Colors.green);
+  }
+
+  Future<void> updateProfileImage(String uid, String profileImage) async {
+    await _db
+        .collection('UsersSignUpInfo')
+        .doc(uid)
+        .update({'Profile Image': profileImage});
+    Get.snackbar("Success", "User Profile Image updated.",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green.withOpacity(0.1),
+        colorText: Colors.green);
+  }
 }

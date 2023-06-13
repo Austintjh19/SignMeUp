@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:myapplication/src/features/dashboard/screens/settings/SettingsScreen.dart';
 import 'package:myapplication/src/features/dashboard/screens/update_profile/widgets/UpdateProfileForm.dart';
 
 import '../../../../constants/colors.dart';
@@ -15,7 +18,7 @@ class UpdateProfileScreen extends StatelessWidget {
           elevation: 0,
           leading: IconButton(
               onPressed: () {
-                Navigator.pop(context);
+                Get.to(() => const SettingsScreen());
               },
               icon: const Icon(Icons.arrow_back_outlined,
                   color: Colors.black, size: 25)),

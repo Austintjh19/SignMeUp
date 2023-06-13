@@ -4,6 +4,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:myapplication/src/common_widgets/FullWidthTextButton.dart';
 import 'package:myapplication/src/constants/colors.dart';
 import 'package:myapplication/src/features/authentication/models/UserModel.dart';
+import 'package:myapplication/src/features/dashboard/Dashboard.dart';
 import 'package:myapplication/src/features/dashboard/screens/update_profile/UpdateProfileScreen.dart';
 
 import '../../../../constants/image_strings.dart';
@@ -24,7 +25,7 @@ class SettingsScreen extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              Get.offAll(const Dashboard());
             },
             icon: const Icon(Icons.arrow_back_outlined,
                 color: Colors.black, size: 25)),
