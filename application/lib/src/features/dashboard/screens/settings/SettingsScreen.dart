@@ -68,7 +68,7 @@ class SettingsScreen extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // Name & Email
+            // Username & Email
             FutureBuilder(
                 future: controller.getUserData(),
                 builder: (context, snapshot) {
@@ -79,7 +79,7 @@ class SettingsScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              userData.name,
+                              userData.username,
                               style: const TextStyle(
                                   fontFamily: 'Raleway',
                                   fontSize: 20,
@@ -117,7 +117,7 @@ class SettingsScreen extends StatelessWidget {
 
             const SizedBox(height: 25),
 
-            // Advanced Settings
+            // Change Email
             ListTile(
               onTap: () {},
               leading: Container(
@@ -128,12 +128,50 @@ class SettingsScreen extends StatelessWidget {
                     color: const Color.fromRGBO(119, 143, 253, 1)
                         .withOpacity(0.1)),
                 child: const Icon(
-                  LineAwesomeIcons.cog,
+                  Icons.email_outlined,
                   color: Color.fromRGBO(119, 143, 253, 1),
                 ),
               ),
               title: const Text(
-                'Advanced Settings',
+                'Change Email',
+                style: TextStyle(
+                    fontFamily: 'Raleway',
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal,
+                    color: heading1Color),
+              ),
+              trailing: Container(
+                width: 30,
+                height: 30,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: const Color.fromARGB(255, 124, 124, 124)
+                        .withOpacity(0.1)),
+                child: const Icon(
+                  LineAwesomeIcons.angle_right,
+                  size: 18,
+                  color: Color.fromARGB(255, 124, 124, 124),
+                ),
+              ),
+            ),
+
+            // Change Password
+            ListTile(
+              onTap: () {},
+              leading: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: const Color.fromRGBO(119, 143, 253, 1)
+                        .withOpacity(0.1)),
+                child: const Icon(
+                  Icons.lock_outline,
+                  color: Color.fromRGBO(119, 143, 253, 1),
+                ),
+              ),
+              title: const Text(
+                'Change Password',
                 style: TextStyle(
                     fontFamily: 'Raleway',
                     fontSize: 16,

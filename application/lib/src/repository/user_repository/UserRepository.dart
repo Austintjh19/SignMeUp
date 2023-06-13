@@ -9,7 +9,6 @@ import '../../features/authentication/models/UserModel.dart';
 class UserRepository extends GetxController {
   static UserRepository get instance => Get.find();
 
-  final _auth = FirebaseAuth.instance;
   final _db = FirebaseFirestore.instance;
 
   Future<void> storeUserDetails(UserModel user, UserCredential cred) async {

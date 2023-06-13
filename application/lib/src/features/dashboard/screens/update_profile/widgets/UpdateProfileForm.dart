@@ -4,7 +4,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:myapplication/src/features/dashboard/Dashboard.dart';
 
 import '../../../../../constants/image_strings.dart';
