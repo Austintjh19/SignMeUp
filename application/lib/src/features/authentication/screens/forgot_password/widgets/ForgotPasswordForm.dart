@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../../common_widgets/FullWidthTextButton.dart';
 import '../../../controllers/ForgotPasswordController.dart';
-import '../../../controllers/ValidationController.dart';
+import '../../../../../controllers/ValidationController.dart';
 
 class ForgotPasswordForm extends StatefulWidget {
   ForgotPasswordForm({super.key});

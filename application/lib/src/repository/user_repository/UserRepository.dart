@@ -49,9 +49,13 @@ class UserRepository extends GetxController {
 
   Future<String> getProfileImage(String uid) async {
     UserModel userData = await getUserData(uid);
-    Reference ref = FirebaseStorage.instance.ref().child(userData.profileImage);
-    final imageURL = await ref.getDownloadURL();
-    return imageURL;
+    if (userData.profileImage != "") {
+      Reference ref =
+          FirebaseStorage.instance.ref().child(userData.profileImage);
+      final imageURL = await ref.getDownloadURL();
+      return imageURL;
+    }
+    return "";
   }
 
   Future<void> updateProfile(

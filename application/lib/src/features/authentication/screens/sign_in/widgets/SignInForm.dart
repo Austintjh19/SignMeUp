@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapplication/src/features/authentication/controllers/ValidationController.dart';
+import 'package:myapplication/src/controllers/ValidationController.dart';
 
 import '../../../../../common_widgets/FullWidthTextButton.dart';
 import '../../../controllers/SignInController.dart';

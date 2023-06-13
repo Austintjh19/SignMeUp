@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../../../../common_widgets/FullWidthTextButton.dart';
 import '../../../../../repository/authentication_repository/AuthenticationRepository.dart';
 import '../../../controllers/OTPController.dart';
-import '../../../controllers/ValidationController.dart';
+import '../../../../../controllers/ValidationController.dart';
 import '../OTPScreen.dart';
 
 class PhoneOTPForm extends StatefulWidget {

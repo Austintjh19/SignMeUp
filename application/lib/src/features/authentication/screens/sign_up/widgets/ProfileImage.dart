@@ -18,7 +18,7 @@ class ProfileImage extends StatefulWidget {
 }
 
 class _ProfileImageState extends State<ProfileImage> {
-  String imageUrl = " ";
+  String imageUrl = "";
   final controller = Get.put(SignUpController());
   final String identifier = DateTime.now().toIso8601String();
 
@@ -41,8 +41,7 @@ class _ProfileImageState extends State<ProfileImage> {
       });
     });
 
-    // controller.profilePicController = await ref.getDownloadURL().toString();
-    controller.profilePicController = ref.fullPath;
+    controller.profilePicController.text = ref.fullPath;
   }
 
   // void selectProfileImage() async {
@@ -66,7 +65,7 @@ class _ProfileImageState extends State<ProfileImage> {
     return GestureDetector(
       onTap: selectProfileImage,
       child: Stack(children: [
-        imageUrl != " "
+        imageUrl != ""
             ? CircleAvatar(radius: 125, backgroundImage: NetworkImage(imageUrl))
             : const CircleAvatar(
                 radius: 125,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/SignUpController.dart';
-import '../../../controllers/ValidationController.dart';
+import '../../../../../controllers/ValidationController.dart';
 
 class SignUpForm1 extends StatefulWidget {
   final GlobalKey signUpFormKey;
