@@ -9,13 +9,13 @@ import '../models/UserModel.dart';
 class SignUpController extends GetxController {
   static SignUpController get instance => Get.find();
 
-  final nameController = TextEditingController();
-  final usernameController = TextEditingController();
-  final emailController = TextEditingController();
-  final newPasswordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
-  final profilePicController = TextEditingController(text: "");
-  final descriptionController = TextEditingController();
+  final name = TextEditingController();
+  final username = TextEditingController();
+  final email = TextEditingController();
+  final newPassword = TextEditingController();
+  final confirmPassword = TextEditingController();
+  final profilePic = TextEditingController(text: "");
+  final description = TextEditingController();
 
   final userRepository = Get.put(UserRepository());
 
@@ -23,17 +23,17 @@ class SignUpController extends GetxController {
     final controller = Get.put(SignUpController());
 
     UserCredential cred = await AuthenticationRepository.instance
-        .createUserViaEmailAndPassword(controller.emailController.text.trim(),
-            controller.newPasswordController.text.trim());
+        .createUserViaEmailAndPassword(
+            controller.email.text.trim(), controller.newPassword.text.trim());
 
     final user = UserModel(
         uid: cred.user!.uid,
-        username: controller.usernameController.text.trim(),
-        name: controller.nameController.text.trim(),
-        email: controller.emailController.text.trim(),
-        password: controller.newPasswordController.text.trim(),
-        profileImage: controller.profilePicController.text.trim(),
-        description: controller.descriptionController.text.trim());
+        username: controller.username.text.trim(),
+        name: controller.name.text.trim(),
+        email: controller.email.text.trim(),
+        password: controller.newPassword.text.trim(),
+        profileImage: controller.profilePic.text.trim(),
+        description: controller.description.text.trim());
 
     await userRepository.storeUserDetails(user, cred);
   }

@@ -27,7 +27,7 @@ class _MailOTPFormState extends State<MailOTPForm> {
         // Enter Email
         TextFormField(
           textAlign: TextAlign.left,
-          controller: controller.emailController,
+          controller: controller.email,
           decoration: InputDecoration(
               labelText: 'Enter Email',
               labelStyle: const TextStyle(

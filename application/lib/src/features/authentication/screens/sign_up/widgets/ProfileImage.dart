@@ -41,7 +41,7 @@ class _ProfileImageState extends State<ProfileImage> {
       });
     });
 
-    controller.profilePicController.text = ref.fullPath;
+    controller.profilePic.text = ref.fullPath;
   }
 
   // void selectProfileImage() async {

@@ -5,12 +5,12 @@ import 'package:myapplication/src/repository/authentication_repository/Authentic
 class ForgotPasswordController extends GetxController {
   static ForgotPasswordController get instance => Get.find();
 
-  final emailController = TextEditingController();
+  final email = TextEditingController();
 
   final authenticationRepository = Get.put(AuthenticationRepository());
 
   Future<void> resetPasswordviaEmail() async {
     await AuthenticationRepository.instance
-        .resetPasswordViaEmail(emailController.text.trim());
+        .resetPasswordViaEmail(email.text.trim());
   }
 }

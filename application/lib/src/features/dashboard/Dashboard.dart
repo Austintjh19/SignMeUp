@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapplication/src/common_widgets/AppBar1.dart';
+import 'package:myapplication/src/common_widgets/DashboardAppBar.dart';
 
 import 'package:myapplication/src/features/dashboard/screens/home/HomeScreen.dart';
 import 'package:myapplication/src/features/dashboard/screens/search/SearchScreen.dart';
@@ -34,7 +34,7 @@ class _DashboardState extends State<Dashboard> {
         toolbarHeight: 100,
         elevation: 0,
         backgroundColor: Colors.white,
-        flexibleSpace: AppBar1(),
+        flexibleSpace: DashboardAppBar(),
       ),
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(

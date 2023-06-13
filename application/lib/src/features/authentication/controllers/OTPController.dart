@@ -6,20 +6,19 @@ import 'package:myapplication/src/repository/authentication_repository/Authentic
 class OTPController extends GetxController {
   static OTPController get instance => Get.find();
 
-  final emailController = TextEditingController()..text = '';
-  final phoneNumController = TextEditingController();
+  final email = TextEditingController()..text = '';
+  final phoneNum = TextEditingController();
   String phoneCode = '+65';
 
   final userRepository = Get.put(AuthenticationRepository());
 
   void phoneNumAuthentication() {
     AuthenticationRepository.instance
-        .phoneAuthentication(phoneCode + phoneNumController.text.trim());
+        .phoneAuthentication(phoneCode + phoneNum.text.trim());
   }
 
   void emailAuthentication() {
-    AuthenticationRepository.instance
-        .emailAuthentication(emailController.text.trim());
+    AuthenticationRepository.instance.emailAuthentication(email.text.trim());
   }
 
   void verifyOTP(String otp) async {

@@ -38,7 +38,7 @@ class _OTPWidgets extends State<PhoneOTPForm> {
             ),
             keyboardType: TextInputType.phone,
             textAlign: TextAlign.left,
-            controller: controller.phoneNumController,
+            controller: controller.phoneNum,
             decoration: InputDecoration(
               labelText: 'Enter Phone Number',
               labelStyle: const TextStyle(

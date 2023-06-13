@@ -9,8 +9,8 @@ import 'package:myapplication/src/repository/authentication_repository/Authentic
 import '../constants/colors.dart';
 import '../constants/image_strings.dart';
 
-class AppBar1 extends StatelessWidget {
-  const AppBar1({super.key});
+class DashboardAppBar extends StatelessWidget {
+  const DashboardAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {

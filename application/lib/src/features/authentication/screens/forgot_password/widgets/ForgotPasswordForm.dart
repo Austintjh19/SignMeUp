@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myapplication/src/common_widgets/StandardIconTextForm.dart';
+import 'package:myapplication/src/constants/colors.dart';
 
 import '../../../../../common_widgets/FullWidthTextButton.dart';
 import '../../../controllers/ForgotPasswordController.dart';
 import '../../../../../controllers/ValidationController.dart';
 
 class ForgotPasswordForm extends StatefulWidget {
-  ForgotPasswordForm({super.key});
+  const ForgotPasswordForm({super.key});
 
   @override
   State<ForgotPasswordForm> createState() => _ForgotPasswordFormState();
@@ -25,26 +27,11 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
       key: _formKey,
       child: Column(children: [
         // Enter Email
-        TextFormField(
-          textAlign: TextAlign.left,
-          controller: controller.emailController,
-          decoration: InputDecoration(
-              labelText: 'Enter Email',
-              labelStyle: const TextStyle(
-                color: Colors.grey,
-                fontFamily: 'Raleway',
-                fontSize: 14,
-              ),
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.grey)),
-              focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                      color: Color.fromRGBO(162, 178, 252, 1))),
-              prefixIcon: const Icon(Icons.key)),
-          validator: validationController.validateEmail,
-        ),
+        StandardIconTextForm(
+            controller: controller.email,
+            labelText: 'Enter Email',
+            icon: const Icon(Icons.key),
+            validator: validationController.validateEmail),
 
         const SizedBox(height: 25),
 
@@ -56,8 +43,8 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
               }
             },
             description: 'Send',
-            buttonColor: const Color.fromRGBO(128, 150, 255, 1),
-            textColor: Colors.white),
+            buttonColor: primaryColor300,
+            textColor: textColor100),
       ]),
     );
   }

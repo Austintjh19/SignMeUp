@@ -25,7 +25,7 @@ class _SignUpForm1State extends State<SignUpForm1> {
         // Enter Name
         TextFormField(
           textAlign: TextAlign.left,
-          controller: controller.nameController,
+          controller: controller.name,
           decoration: InputDecoration(
               labelText: 'Enter Your Name',
               labelStyle: const TextStyle(
@@ -49,7 +49,7 @@ class _SignUpForm1State extends State<SignUpForm1> {
         // Enter Username
         TextFormField(
           textAlign: TextAlign.left,
-          controller: controller.usernameController,
+          controller: controller.username,
           decoration: InputDecoration(
               labelText: 'Enter Username',
               labelStyle: const TextStyle(
@@ -73,7 +73,7 @@ class _SignUpForm1State extends State<SignUpForm1> {
         // Enter Email
         TextFormField(
           textAlign: TextAlign.left,
-          controller: controller.emailController,
+          controller: controller.email,
           decoration: InputDecoration(
               labelText: 'Enter Email',
               labelStyle: const TextStyle(
@@ -98,7 +98,7 @@ class _SignUpForm1State extends State<SignUpForm1> {
         TextFormField(
           obscureText: true,
           textAlign: TextAlign.left,
-          controller: controller.newPasswordController,
+          controller: controller.newPassword,
           decoration: InputDecoration(
               labelText: 'Enter Password',
               labelStyle: const TextStyle(
@@ -123,7 +123,7 @@ class _SignUpForm1State extends State<SignUpForm1> {
         TextFormField(
           obscureText: true,
           textAlign: TextAlign.left,
-          controller: controller.confirmPasswordController,
+          controller: controller.confirmPassword,
           decoration: InputDecoration(
               labelText: 'Confirm Password',
               labelStyle: const TextStyle(
@@ -140,8 +140,8 @@ class _SignUpForm1State extends State<SignUpForm1> {
                       color: Color.fromRGBO(162, 178, 252, 1))),
               prefixIcon: const Icon(Icons.fingerprint)),
           validator: (value) {
-            if (controller.newPasswordController.text.trim() !=
-                controller.confirmPasswordController.text.trim()) {
+            if (controller.newPassword.text.trim() !=
+                controller.confirmPassword.text.trim()) {
               return "Passwords do not match";
             } else {
               return null;

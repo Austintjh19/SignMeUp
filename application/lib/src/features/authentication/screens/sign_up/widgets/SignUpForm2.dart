@@ -18,7 +18,7 @@ class _SignUpForm2State extends State<SignUpForm2> {
 
     return Form(
         child: BorderedTextForm(
-            controller: controller.descriptionController,
+            controller: controller.description,
             labelText: 'Description',
             hintText:
                 'Let people know more about you. Enter a short desciption of yourself.',

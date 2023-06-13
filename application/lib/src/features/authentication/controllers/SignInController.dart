@@ -5,13 +5,13 @@ import 'package:myapplication/src/repository/authentication_repository/Authentic
 class SignInController extends GetxController {
   static SignInController get instance => Get.find();
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final email = TextEditingController();
+  final password = TextEditingController();
 
   final userRepository = Get.put(AuthenticationRepository());
 
   Future<void> signInUserViaEmailAndPassword() async {
-    await AuthenticationRepository.instance.signInUserViaEmailAndPassword(
-        emailController.text.trim(), passwordController.text.trim());
+    await AuthenticationRepository.instance
+        .signInUserViaEmailAndPassword(email.text.trim(), password.text.trim());
   }
 }

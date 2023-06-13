@@ -29,7 +29,7 @@ class _SignInFormState extends State<SignInForm> {
           children: [
             // Email
             TextFormField(
-              controller: controller.emailController,
+              controller: controller.email,
               decoration: const InputDecoration(
                   enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white)),
@@ -48,7 +48,7 @@ class _SignInFormState extends State<SignInForm> {
             ),
 
             TextFormField(
-              controller: controller.passwordController,
+              controller: controller.password,
               obscureText: true,
               decoration: const InputDecoration(
                   enabledBorder: UnderlineInputBorder(
