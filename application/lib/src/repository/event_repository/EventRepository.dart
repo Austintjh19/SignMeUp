@@ -47,4 +47,5 @@ class EventRepository extends GetxController {
     });
     return registeredEventsCollection;
   }
+  //   QuerySnapshot querySnapshot=await _collectionReference.doc(id).collection('reviews').orderBy('date', descending: true).get();
 }
