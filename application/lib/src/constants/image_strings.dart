@@ -20,3 +20,7 @@ const String forgotPasswordImage =
 const String createEventImage = 'assets/images/CreateEvent/createEvent.png';
 const String defaultEventImage =
     'assets/images/CreateEvent/defaultEventImage.png';
+
+// Home Screen
+const String exploreNow = 'assets/images/Home/exploreNow1.png';
+const String createEvent = 'assets/images/Home/createEvent.png';

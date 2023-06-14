@@ -39,6 +39,22 @@ const container1Color = LinearGradient(
     begin: Alignment.bottomRight,
     end: Alignment.topLeft,
     colors: [
-      Color.fromRGBO(119, 143, 253, 1),
+      Color.fromRGBO(138, 158, 248, 1),
       Color.fromRGBO(252, 236, 175, 1)
+    ]);
+
+const container2Color = LinearGradient(
+    begin: Alignment.bottomRight,
+    end: Alignment.topLeft,
+    colors: [
+      Color.fromRGBO(239, 51, 177, 0.8),
+      Color.fromRGBO(246, 230, 188, 0.8)
+    ]);
+
+const container3Color = LinearGradient(
+    begin: Alignment.bottomRight,
+    end: Alignment.topLeft,
+    colors: [
+      Color.fromRGBO(201, 115, 255, 0.8),
+      Color.fromRGBO(174, 186, 248, 0.8)
     ]);

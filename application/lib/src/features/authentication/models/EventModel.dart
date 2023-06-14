@@ -1,7 +1,9 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class EventModel {
-  final String? id;
+  final String id;
   final String eventImage;
   final String eventName;
   final String eventLocation;
@@ -9,10 +11,10 @@ class EventModel {
   final String eventTime;
   final String partcipantsLimit;
   final String eventDescription;
-  final Set participants;
+  final List participants;
 
   EventModel(
-      {this.id,
+      {required this.id,
       required this.eventImage,
       required this.eventName,
       required this.eventLocation,
@@ -24,6 +26,7 @@ class EventModel {
 
   toJson() {
     return {
+      'ID': id,
       'Event Image': eventImage,
       'Event Name': eventName,
       'Event Location': eventLocation,
@@ -39,6 +42,7 @@ class EventModel {
       DocumentSnapshot<Map<String, dynamic>> document) {
     final eventData = document.data()!;
     return EventModel(
+        id: eventData["ID"],
         eventImage: eventData['Event Image'],
         eventName: eventData['Event Name'],
         eventLocation: eventData['Event Location'],

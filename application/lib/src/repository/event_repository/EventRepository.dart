@@ -8,11 +8,12 @@ class EventRepository extends GetxController {
 
   final _db = FirebaseFirestore.instance;
 
-  Future<void> createEvent(EventModel event) async {
+  Future<String?> createEvent(EventModel event, String eventID) async {
     try {
       await _db
           .collection('EventsInfo')
-          .add(event.toJson())
+          .doc(eventID)
+          .set(event.toJson())
           .whenComplete(() => Get.snackbar(
               "Success", "Event Succefully Created",
               snackPosition: SnackPosition.BOTTOM,
@@ -24,6 +25,7 @@ class EventRepository extends GetxController {
             backgroundColor: Colors.redAccent.withOpacity(0.1),
             colorText: Colors.red);
       });
+      return event.id;
     } catch (e) {
       Get.snackbar("Error", e.toString(),
           snackPosition: SnackPosition.BOTTOM,

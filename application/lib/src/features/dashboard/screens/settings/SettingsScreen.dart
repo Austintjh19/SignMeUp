@@ -25,7 +25,9 @@ class SettingsScreen extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
             onPressed: () {
-              Get.offAll(const Dashboard());
+              Get.offAll(Dashboard(
+                initialPageIndex: -1,
+              ));
             },
             icon: const Icon(Icons.arrow_back_outlined,
                 color: Colors.black, size: 25)),

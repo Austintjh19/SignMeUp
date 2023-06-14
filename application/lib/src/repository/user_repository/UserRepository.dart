@@ -37,8 +37,6 @@ class UserRepository extends GetxController {
   }
 
   Future<UserModel> getUserData(String uid) async {
-    // late final Rx<User?> firebaseUser;
-    // firebaseUser = Rx<User?>(_auth.currentUser);
     final snapshot = await _db
         .collection('UsersSignUpInfo')
         .where("UID", isEqualTo: uid)
@@ -77,5 +75,11 @@ class UserRepository extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.green.withOpacity(0.1),
         colorText: Colors.green);
+  }
+
+  Future<void> addRegisteredEvent(String uid, String eventID) async {
+    await _db.collection('UsersSignUpInfo').doc(uid).update({
+      "Registered Events": FieldValue.arrayUnion([eventID])
+    });
   }
 }

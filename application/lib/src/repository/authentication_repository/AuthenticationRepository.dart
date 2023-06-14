@@ -29,7 +29,9 @@ class AuthenticationRepository extends GetxController {
   _setInitialScreen(User? user) {
     user == null
         ? Get.offAll(const SignInScreen())
-        : Get.offAll(const Dashboard());
+        : Get.offAll(Dashboard(
+            initialPageIndex: -1,
+          ));
   }
 
   Future<void> phoneAuthentication(String phoneNo) async {
@@ -114,7 +116,9 @@ class AuthenticationRepository extends GetxController {
           email: email, password: password);
       CircularProgressWidget.popCircularProgressIndicator();
       firebaseUser.value != null
-          ? Get.offAll(() => const Dashboard())
+          ? Get.offAll(() => Dashboard(
+                initialPageIndex: -1,
+              ))
           : Get.offAll(() => const SignInScreen());
       return credential;
     } on FirebaseAuthException catch (e) {
