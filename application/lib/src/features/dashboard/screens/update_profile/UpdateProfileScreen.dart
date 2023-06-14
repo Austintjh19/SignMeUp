@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:myapplication/src/features/dashboard/screens/settings/SettingsScreen.dart';
 import 'package:myapplication/src/features/dashboard/screens/update_profile/widgets/UpdateProfileForm.dart';
 

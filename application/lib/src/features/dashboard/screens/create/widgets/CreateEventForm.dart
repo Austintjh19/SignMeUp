@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:myapplication/src/constants/colors.dart';
 import 'package:myapplication/src/constants/image_strings.dart';
+import 'package:myapplication/src/features/dashboard/Dashboard.dart';
 import 'package:myapplication/src/features/dashboard/controllers/CreateEventController.dart';
 import 'package:intl/intl.dart';
 
@@ -13,7 +14,7 @@ import '../../../../../controllers/ValidationController.dart';
 import '../../../controllers/ProfileController.dart';
 
 class CreateEventForm extends StatefulWidget {
-  CreateEventForm({super.key});
+  const CreateEventForm({super.key});
 
   @override
   State<CreateEventForm> createState() => _CreateEventFormState();
@@ -47,13 +48,11 @@ class _CreateEventFormState extends State<CreateEventForm> {
     });
 
     createEventController.eventImage.text = ref.fullPath;
-    // updateProfileController.updateProfileImage(uid);
   }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Column(
       children: [
         // Event Image
@@ -275,7 +274,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
                 const SizedBox(height: 10),
                 TextFormField(
                   keyboardType: TextInputType.number,
-                  controller: createEventController.maxParticipants,
+                  controller: createEventController.participantsLimit,
                   style: const TextStyle(
                       color: textColor500, fontFamily: 'Raleway', fontSize: 12),
                   textAlign: TextAlign.left,
@@ -326,7 +325,10 @@ class _CreateEventFormState extends State<CreateEventForm> {
 
                 // Create Event Button
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    createEventController.createEvent();
+                    Get.offAll(const Dashboard());
+                  },
                   style: ElevatedButton.styleFrom(
                     padding:
                         const EdgeInsets.symmetric(vertical: 20, horizontal: 0),

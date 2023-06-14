@@ -1,30 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myapplication/src/features/authentication/models/EventModel.dart';
 
 class EventRepository extends GetxController {
   static EventRepository get instance => Get.find();
 
   final _db = FirebaseFirestore.instance;
 
-  // void selectProfileImage() async {
-  //   final image = await ImagePicker().pickImage(
-  //     source: ImageSource.gallery,
-  //     maxHeight: 600,
-  //     maxWidth: 600,
-  //     imageQuality: 100,
-  //   );
-
-  //   Reference ref =
-  //       FirebaseStorage.instance.ref().child("/ProfilePictures/$identifier");
-
-  //   await ref.putFile(File(image!.path));
-
-  //   ref.getDownloadURL().then((value) async {
-  //     setState(() {
-  //       imageUrl = value;
-  //     });
-  //   });
-
-  //   controller.profilePic.text = ref.fullPath;
-  // }
+  Future<void> createEvent(EventModel event) async {
+    try {
+      await _db
+          .collection('EventsInfo')
+          .add(event.toJson())
+          .whenComplete(() => Get.snackbar(
+              "Success", "Event Succefully Created",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.green.withOpacity(0.1),
+              colorText: Colors.green))
+          .catchError((error, StackTrace) {
+        Get.snackbar("Error", "An error has occured. Please retry.",
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.redAccent.withOpacity(0.1),
+            colorText: Colors.red);
+      });
+    } catch (e) {
+      Get.snackbar("Error", e.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent.withOpacity(0.1),
+          colorText: Colors.red);
+    }
+  }
 }

@@ -39,7 +39,7 @@ class AuthenticationRepository extends GetxController {
         await _auth.signInWithCredential(credential);
       },
       codeSent: (verificationId, resendToken) {
-        this.verificationID.value = verificationID as String;
+        verificationID.value = verificationID as String;
       },
       codeAutoRetrievalTimeout: ((verificationId) {
         verificationID.value = verificationID as String;
@@ -178,6 +178,7 @@ class AuthenticationRepository extends GetxController {
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent.withOpacity(0.1),
           colorText: Colors.red);
+      rethrow;
     }
   }
 

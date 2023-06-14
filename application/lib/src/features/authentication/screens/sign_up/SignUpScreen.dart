@@ -22,9 +22,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SignUpController());
-    final _formKey1 = GlobalKey<FormState>();
-    final _formKey2 = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
 
     return Scaffold(
         appBar: AppBar(
@@ -112,7 +110,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       // Sign Up Form 1 / Sign Up Form 2
                       onForm1
                           ? SignUpForm1(
-                              signUpFormKey: _formKey1,
+                              signUpFormKey: formKey,
                             )
                           : const SignUpForm2(),
 
@@ -122,7 +120,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       FullWidthTextButton(
                           function: () {
                             if (onForm1) {
-                              if (_formKey1.currentState!.validate()) {
+                              if (formKey.currentState!.validate()) {
                                 setState(() => onForm1 = false);
                               }
                             } else {
