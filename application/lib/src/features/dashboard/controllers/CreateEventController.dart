@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapplication/src/features/authentication/models/EventModel.dart';
+import 'package:myapplication/src/models/EventModel.dart';
 import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
 import 'package:myapplication/src/repository/event_repository/EventRepository.dart';
 import 'package:myapplication/src/repository/user_repository/UserRepository.dart';

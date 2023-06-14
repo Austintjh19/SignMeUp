@@ -2,11 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapplication/src/constants/colors.dart';
-import 'package:myapplication/src/features/dashboard/Dashboard.dart';
-import 'package:myapplication/src/features/dashboard/screens/create/CreateEventMainScreen.dart';
-import 'package:myapplication/src/features/dashboard/screens/search/SearchScreen.dart';
-
-import '../../../../constants/image_strings.dart';
+import 'package:myapplication/src/features/dashboard/controllers/DisplayEventsController.dart';
+import 'package:myapplication/src/features/dashboard/screens/home/widgets/ExploreAndCreateWidget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -17,133 +14,57 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
+    final displayEventsController = Get.put(DisplayEventsController());
+
     return Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(20),
             // Explore and Create Button
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: Column(
               children: [
-                // Explore
-                GestureDetector(
-                  onTap: () {
-                    Get.offAll(Dashboard(
-                      initialPageIndex: 1,
-                    ));
-                  },
-                  child: Material(
-                    elevation: 5,
-                    borderRadius: BorderRadius.circular(10),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Container(
-                          height: 225,
-                          width: width * 0.42,
-                          decoration: BoxDecoration(
-                              gradient: container2Color,
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
-                        const Positioned(
-                          left: 10,
-                          bottom: 15,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Explore Now",
-                                style: TextStyle(
-                                    fontFamily: 'Raleway',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: textColor100),
-                              ),
-                              SizedBox(height: 5),
-                              Text(
-                                "See what's new.",
-                                style: TextStyle(
-                                    fontFamily: 'Raleway',
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.normal,
-                                    color: textColor100),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                            top: 20,
-                            child: Container(
-                              height: 125,
-                              width: width * 0.3,
-                              child: Image.asset(exploreNow),
-                            ))
-                      ],
-                    ),
+                // Explore and Create Widget
+                const ExploreAndCreateWidget(),
+
+                const SizedBox(height: 30),
+                // Your Upcoming Events
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Your Upcoming Events ...",
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                        color: textColor400,
+                        fontFamily: 'Raleway',
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
+                const Divider(),
 
-                const Spacer(),
+                const SizedBox(height: 30),
 
-                // Create
-                GestureDetector(
-                  onTap: () {
-                    Get.offAll(Dashboard(
-                      initialPageIndex: 3,
-                    ));
-                  },
-                  child: Material(
-                    elevation: 5,
-                    borderRadius: BorderRadius.circular(10),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Container(
-                          height: 225,
-                          width: width * 0.42,
-                          decoration: BoxDecoration(
-                              gradient: container3Color,
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
-                        const Positioned(
-                          left: 10,
-                          bottom: 15,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Create Event",
-                                style: TextStyle(
-                                    fontFamily: 'Raleway',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: textColor100),
-                              ),
-                              SizedBox(height: 5),
-                              Text(
-                                "Meet new people.",
-                                style: TextStyle(
-                                    fontFamily: 'Raleway',
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.normal,
-                                    color: textColor100),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                            top: 25,
-                            child: Container(
-                              height: 125,
-                              width: width * 0.3,
-                              child: Image.asset(createEvent),
-                            ))
-                      ],
-                    ),
-                  ),
-                ),
+                FutureBuilder(
+                    future: displayEventsController.getUserRegisteredEvents(),
+                    builder: ((context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (c, index) {
+                                return Container(
+                                  width: 100,
+                                  height: 100,
+                                  child: Text(
+                                      "Event Name: ${snapshot.data![index].eventName}"),
+                                );
+                              });
+                        }
+                      }
+                      return Text("Sup");
+                    }))
               ],
             ),
           ),

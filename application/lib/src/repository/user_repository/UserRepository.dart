@@ -4,7 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../features/authentication/models/UserModel.dart';
+import '../../models/UserModel.dart';
 
 class UserRepository extends GetxController {
   static UserRepository get instance => Get.find();
@@ -81,5 +81,14 @@ class UserRepository extends GetxController {
     await _db.collection('UsersSignUpInfo').doc(uid).update({
       "Registered Events": FieldValue.arrayUnion([eventID])
     });
+  }
+
+  Future<List> getRegisteredEvents(String uid) async {
+    final snapshot = await _db
+        .collection('UsersSignUpInfo')
+        .where("UID", isEqualTo: uid)
+        .get();
+    final userData = snapshot.docs.map((e) => UserModel.fromSnapShot(e)).single;
+    return userData.registeredEvents;
   }
 }

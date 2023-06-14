@@ -9,7 +9,7 @@ import 'package:myapplication/src/features/dashboard/screens/update_profile/widg
 
 import '../../../../../constants/image_strings.dart';
 import '../../../../../controllers/ValidationController.dart';
-import '../../../../authentication/models/UserModel.dart';
+import '../../../../../models/UserModel.dart';
 import '../../../controllers/ProfileController.dart';
 import '../../../controllers/UpdateProfileController.dart';
 

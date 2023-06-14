@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapplication/src/features/authentication/models/EventModel.dart';
+import 'package:myapplication/src/models/EventModel.dart';
 
 class EventRepository extends GetxController {
   static EventRepository get instance => Get.find();
@@ -32,5 +32,19 @@ class EventRepository extends GetxController {
           backgroundColor: Colors.redAccent.withOpacity(0.1),
           colorText: Colors.red);
     }
+  }
+
+  Future<List<EventModel>> getUserRegisteredEvents(
+      List registeredEvents) async {
+    QuerySnapshot querySnapshot = await await _db
+        .collection('EventsInfo')
+        .where("ID", whereIn: registeredEvents)
+        .get();
+    List<EventModel> registeredEventsCollection = [];
+    querySnapshot.docs.forEach((element) {
+      registeredEventsCollection.add(EventModel.fromSnapShot(
+          element as DocumentSnapshot<Map<String, dynamic>>));
+    });
+    return registeredEventsCollection;
   }
 }

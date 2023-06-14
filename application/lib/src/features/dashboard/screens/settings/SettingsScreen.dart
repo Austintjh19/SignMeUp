@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:myapplication/src/common_widgets/FullWidthTextButton.dart';
 import 'package:myapplication/src/constants/colors.dart';
-import 'package:myapplication/src/features/authentication/models/UserModel.dart';
+import 'package:myapplication/src/models/UserModel.dart';
 import 'package:myapplication/src/features/dashboard/Dashboard.dart';
 import 'package:myapplication/src/features/dashboard/screens/update_profile/UpdateProfileScreen.dart';
 

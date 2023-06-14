@@ -8,8 +8,9 @@ class UserModel {
   final String profileImage;
   final String description;
   final String uid;
+  final List registeredEvents;
 
-  UserModel(
+  UserModel(this.registeredEvents,
       {required this.uid,
       required this.username,
       required this.name,
@@ -33,7 +34,7 @@ class UserModel {
   factory UserModel.fromSnapShot(
       DocumentSnapshot<Map<String, dynamic>> document) {
     final userData = document.data()!;
-    return UserModel(
+    return UserModel(userData["Registered Events"],
         uid: userData["UID"],
         username: userData["Username"],
         name: userData["Name"],

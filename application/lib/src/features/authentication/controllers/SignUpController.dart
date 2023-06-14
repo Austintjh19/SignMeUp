@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
 import 'package:myapplication/src/repository/user_repository/UserRepository.dart';
 
-import '../models/UserModel.dart';
+import '../../../models/UserModel.dart';
 
 class SignUpController extends GetxController {
   static SignUpController get instance => Get.find();
@@ -26,7 +26,7 @@ class SignUpController extends GetxController {
         .createUserViaEmailAndPassword(
             controller.email.text.trim(), controller.newPassword.text.trim());
 
-    final user = UserModel(
+    final user = UserModel([],
         uid: cred.user!.uid,
         username: controller.username.text.trim(),
         name: controller.name.text.trim(),
