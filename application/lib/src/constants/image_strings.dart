@@ -12,6 +12,11 @@ const String defaultProfileImage =
 /// OTP Screen
 const String otpImage = 'assets/images/OTP/otp.png';
 
-/// ForgotPasswordScreen
+/// Forgot Password Screen
 const String forgotPasswordImage =
     'assets/images/ForgotPassword/forgotPassword.jpg';
+
+// Create Event Screen
+const String createEventImage = 'assets/images/CreateEvent/createEvent.png';
+const String defaultEventImage =
+    'assets/images/CreateEvent/defaultEventImage.png';

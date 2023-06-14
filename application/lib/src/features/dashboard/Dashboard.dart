@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapplication/src/common_widgets/DashboardAppBar.dart';
+import 'package:myapplication/src/features/dashboard/screens/create/CreateEventMainScreen.dart';
 
 import 'package:myapplication/src/features/dashboard/screens/home/HomeScreen.dart';
 import 'package:myapplication/src/features/dashboard/screens/search/SearchScreen.dart';
@@ -13,10 +14,10 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   List screens = [
+    const HomeScreen(),
+    const SearchScreen(),
     HomeScreen(),
-    SearchScreen(),
-    HomeScreen(),
-    HomeScreen(),
+    const CreateEventMainScreen(),
   ];
 
   int currentIndex = 0;
