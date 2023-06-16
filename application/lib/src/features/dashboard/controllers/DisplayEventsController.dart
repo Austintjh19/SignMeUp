@@ -12,11 +12,18 @@ class DisplayEventsController extends GetxController {
   final _userRepository = Get.put(UserRepository());
   final _eventRepository = Get.put(EventRepository());
 
-  Future<List<EventModel>> getUserRegisteredEvents() async {
+  Future<List<EventModel>?> getUserRegisteredEvents() async {
     final uid = _authRepository.firebaseUser.value?.uid;
-    List registedEvents = await _userRepository.getRegisteredEvents(uid!);
-    List<EventModel> registeredEventsCollection =
-        await _eventRepository.getUserRegisteredEvents(registedEvents);
-    return registeredEventsCollection;
+    List? registedEvents = await _userRepository.getRegisteredEvents(uid!);
+    if (registedEvents != null) {
+      List<EventModel> registeredEventsCollection =
+          await _eventRepository.getUserRegisteredEvents(registedEvents!);
+      return registeredEventsCollection;
+    }
+    return null;
+  }
+
+  getEventImage(String imagePath) {
+    return _eventRepository.getEventImage(imagePath);
   }
 }

@@ -8,7 +8,7 @@ class UserModel {
   final String profileImage;
   final String description;
   final String uid;
-  final List registeredEvents;
+  final List? registeredEvents;
 
   UserModel(this.registeredEvents,
       {required this.uid,

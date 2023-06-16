@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapplication/src/models/EventModel.dart';
@@ -48,4 +49,13 @@ class EventRepository extends GetxController {
     return registeredEventsCollection;
   }
   //   QuerySnapshot querySnapshot=await _collectionReference.doc(id).collection('reviews').orderBy('date', descending: true).get();
+
+  Future<String> getEventImage(String imagePath) async {
+    if (imagePath != "") {
+      Reference ref = FirebaseStorage.instance.ref().child(imagePath);
+      final imageURL = await ref.getDownloadURL();
+      return imageURL;
+    }
+    return "";
+  }
 }

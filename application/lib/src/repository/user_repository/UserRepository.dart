@@ -83,7 +83,7 @@ class UserRepository extends GetxController {
     });
   }
 
-  Future<List> getRegisteredEvents(String uid) async {
+  Future<List?> getRegisteredEvents(String uid) async {
     final snapshot = await _db
         .collection('UsersSignUpInfo')
         .where("UID", isEqualTo: uid)

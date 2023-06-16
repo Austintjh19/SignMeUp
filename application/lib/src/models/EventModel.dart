@@ -9,7 +9,7 @@ class EventModel {
   final String eventLocation;
   final String eventDate;
   final String eventTime;
-  final String partcipantsLimit;
+  final String participantsLimit;
   final String eventDescription;
   final List participants;
 
@@ -20,7 +20,7 @@ class EventModel {
       required this.eventLocation,
       required this.eventDate,
       required this.eventTime,
-      required this.partcipantsLimit,
+      required this.participantsLimit,
       required this.eventDescription,
       required this.participants});
 
@@ -32,7 +32,7 @@ class EventModel {
       'Event Location': eventLocation,
       'Event Date': eventDate,
       'Event Time': eventTime,
-      'Participants Limit': partcipantsLimit,
+      'Participants Limit': participantsLimit,
       'Event Description': eventDescription,
       'Participants': participants,
     };
@@ -48,7 +48,7 @@ class EventModel {
         eventLocation: eventData['Event Location'],
         eventDate: eventData['Event Date'],
         eventTime: eventData['Event Time'],
-        partcipantsLimit: eventData['Participants Limit'],
+        participantsLimit: eventData['Participants Limit'],
         eventDescription: eventData['Event Description'],
         participants: eventData['Participants']);
   }

@@ -32,7 +32,7 @@ class CreateEventController extends GetxController {
         eventLocation: eventLocation.text.trim(),
         eventDate: eventDate.text.trim(),
         eventTime: eventTime.text.trim(),
-        partcipantsLimit: participantsLimit.text.trim(),
+        participantsLimit: participantsLimit.text.trim(),
         eventDescription: eventDescription.text.trim(),
         participants: [uid]);
     await _eventRepository.createEvent(eventData, eventId);
