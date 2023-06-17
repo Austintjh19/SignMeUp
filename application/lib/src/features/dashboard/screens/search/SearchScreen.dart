@@ -60,12 +60,15 @@ class SearchScreen extends StatelessWidget {
                             ),
                           ),
                           hintText: 'Search ... ',
-                          suffixIcon: const Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                            child: Icon(
-                              Icons.menu_outlined,
-                              color: primaryColor600,
-                              size: 20,
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                            child: IconButton(
+                              icon: const Icon(
+                                Icons.menu_outlined,
+                                color: primaryColor600,
+                                size: 20,
+                              ),
+                              onPressed: () {},
                             ),
                           ),
                           focusColor: primaryColor600)),

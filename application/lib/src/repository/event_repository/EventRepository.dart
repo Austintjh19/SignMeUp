@@ -60,6 +60,8 @@ class EventRepository extends GetxController {
     return eventsCollection;
   }
 
+  Future<void> searchEvent(String query) async {}
+
   Future<String> getEventImage(String imagePath) async {
     if (imagePath != "") {
       Reference ref = FirebaseStorage.instance.ref().child(imagePath);
