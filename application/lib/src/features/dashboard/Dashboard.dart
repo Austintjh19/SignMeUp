@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapplication/src/common_widgets/DashboardAppBar.dart';
+import 'package:myapplication/src/constants/colors.dart';
 import 'package:myapplication/src/features/dashboard/screens/create/CreateEventMainScreen.dart';
 
 import 'package:myapplication/src/features/dashboard/screens/home/HomeScreen.dart';
@@ -40,7 +41,8 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
-        elevation: 0,
+        elevation: 5,
+        shadowColor: primaryColor500.withOpacity(0.1),
         backgroundColor: Colors.white,
         flexibleSpace: DashboardAppBar(),
       ),
