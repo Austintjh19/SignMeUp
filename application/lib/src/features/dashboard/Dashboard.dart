@@ -5,6 +5,7 @@ import 'package:myapplication/src/constants/colors.dart';
 import 'package:myapplication/src/features/dashboard/screens/create/CreateEventMainScreen.dart';
 
 import 'package:myapplication/src/features/dashboard/screens/home/HomeScreen.dart';
+import 'package:myapplication/src/features/dashboard/screens/message/MessagingScreen.dart';
 import 'package:myapplication/src/features/dashboard/screens/search/SearchScreen.dart';
 
 class Dashboard extends StatefulWidget {
@@ -22,7 +23,7 @@ class _DashboardState extends State<Dashboard> {
   List screens = [
     const HomeScreen(),
     const SearchScreen(),
-    HomeScreen(),
+    const MessagingScreen(),
     const CreateEventMainScreen(),
   ];
 
@@ -44,7 +45,7 @@ class _DashboardState extends State<Dashboard> {
         elevation: 5,
         shadowColor: primaryColor500.withOpacity(0.1),
         backgroundColor: Colors.white,
-        flexibleSpace: DashboardAppBar(),
+        flexibleSpace: const DashboardAppBar(),
       ),
       body: screens[currentPageIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -56,7 +57,7 @@ class _DashboardState extends State<Dashboard> {
           },
           currentIndex: currentPageIndex,
           selectedItemColor: const Color.fromRGBO(58, 117, 253, 1),
-          unselectedItemColor: Color.fromARGB(172, 143, 138, 138),
+          unselectedItemColor: const Color.fromARGB(172, 143, 138, 138),
           showUnselectedLabels: false,
           showSelectedLabels: false,
           elevation: 25,

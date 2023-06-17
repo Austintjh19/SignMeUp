@@ -26,4 +26,8 @@ class DisplayEventsController extends GetxController {
   getEventImage(String imagePath) {
     return _eventRepository.getEventImage(imagePath);
   }
+
+  Future<List<EventModel>?> getAllEvents() async {
+    return await _eventRepository.getAllEvents();
+  }
 }

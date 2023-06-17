@@ -30,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
-          // physics: const ScrollPhysics(),
           child: Column(
             children: [
               Container(
