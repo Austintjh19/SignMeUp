@@ -60,7 +60,26 @@ class EventRepository extends GetxController {
     return eventsCollection;
   }
 
-  Future<void> searchEvent(String query) async {}
+  Future<List<EventModel>> searchEvent(String query) async {
+    List<EventModel> eventsCollection = [];
+    QuerySnapshot nameQuerySnapshot = await _db
+        .collection('EventsInfo')
+        .where('Event Name', isEqualTo: query)
+        .get();
+    nameQuerySnapshot.docs.forEach((element) {
+      eventsCollection.add(EventModel.fromSnapShot(
+          element as DocumentSnapshot<Map<String, dynamic>>));
+    });
+    QuerySnapshot locationQuerySnapshot = await _db
+        .collection('EventsInfo')
+        .where('Event Location', arrayContains: query)
+        .get();
+    locationQuerySnapshot.docs.forEach((element) {
+      eventsCollection.add(EventModel.fromSnapShot(
+          element as DocumentSnapshot<Map<String, dynamic>>));
+    });
+    return eventsCollection;
+  }
 
   Future<String> getEventImage(String imagePath) async {
     if (imagePath != "") {

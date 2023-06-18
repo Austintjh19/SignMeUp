@@ -6,7 +6,7 @@ import 'package:myapplication/src/features/dashboard/screens/create/CreateEventM
 
 import 'package:myapplication/src/features/dashboard/screens/home/HomeScreen.dart';
 import 'package:myapplication/src/features/dashboard/screens/message/MessagingScreen.dart';
-import 'package:myapplication/src/features/dashboard/screens/search/SearchScreen.dart';
+import 'package:myapplication/src/features/dashboard/screens/search/ExploreScreen.dart';
 
 class Dashboard extends StatefulWidget {
   int initialPageIndex;
@@ -22,7 +22,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   List screens = [
     const HomeScreen(),
-    const SearchScreen(),
+    const ExploreScreen(),
     const MessagingScreen(),
     const CreateEventMainScreen(),
   ];
