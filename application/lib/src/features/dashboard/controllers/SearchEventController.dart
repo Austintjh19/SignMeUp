@@ -21,6 +21,6 @@ class SearchEventController extends GetxController {
     if (stringQuery.text == '') {
       return displayEventsController.getAllEvents();
     }
-    return _eventRepository.searchEvent(stringQuery.text);
+    return _eventRepository.searchEvent(stringQuery.text.trim());
   }
 }
