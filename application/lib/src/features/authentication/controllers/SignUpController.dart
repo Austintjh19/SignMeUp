@@ -20,20 +20,18 @@ class SignUpController extends GetxController {
   final userRepository = Get.put(UserRepository());
 
   Future<void> registerUser() async {
-    final controller = Get.put(SignUpController());
-
     UserCredential cred = await AuthenticationRepository.instance
         .createUserViaEmailAndPassword(
-            controller.email.text.trim(), controller.newPassword.text.trim());
+            email.text.trim(), newPassword.text.trim());
 
     final user = UserModel([],
         uid: cred.user!.uid,
-        username: controller.username.text.trim(),
-        name: controller.name.text.trim(),
-        email: controller.email.text.trim(),
-        password: controller.newPassword.text.trim(),
-        profileImage: controller.profilePic.text.trim(),
-        description: controller.description.text.trim());
+        username: username.text.trim(),
+        name: name.text.trim(),
+        email: email.text.trim(),
+        password: newPassword.text.trim(),
+        profileImage: profilePic.text.trim(),
+        description: description.text.trim());
 
     await userRepository.storeUserDetails(user, cred);
   }

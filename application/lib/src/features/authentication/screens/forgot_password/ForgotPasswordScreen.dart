@@ -13,16 +13,16 @@ class ForgotPasswordScreen extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: primaryColor100,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: primaryColor100,
         elevation: 0,
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
             icon: const Icon(Icons.arrow_back_outlined,
-                color: Colors.black, size: 25)),
+                color: primaryColor700, size: 25)),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

@@ -7,10 +7,9 @@ class ForgotPasswordController extends GetxController {
 
   final email = TextEditingController();
 
-  final authenticationRepository = Get.put(AuthenticationRepository());
+  final _authenticationRepository = Get.put(AuthenticationRepository());
 
   Future<void> resetPasswordviaEmail() async {
-    await AuthenticationRepository.instance
-        .resetPasswordViaEmail(email.text.trim());
+    await _authenticationRepository.resetPasswordViaEmail(email.text.trim());
   }
 }

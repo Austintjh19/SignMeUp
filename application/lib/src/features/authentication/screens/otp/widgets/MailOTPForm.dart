@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myapplication/src/constants/colors.dart';
 
 import '../../../../../common_widgets/FullWidthTextButton.dart';
 import '../../../../../repository/authentication_repository/AuthenticationRepository.dart';
@@ -31,17 +32,16 @@ class _MailOTPFormState extends State<MailOTPForm> {
           decoration: InputDecoration(
               labelText: 'Enter Email',
               labelStyle: const TextStyle(
-                color: Colors.grey,
+                color: textColor500,
                 fontFamily: 'Raleway',
                 fontSize: 16,
               ),
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.grey)),
+                  borderSide: const BorderSide(color: textColor500)),
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                      color: Color.fromRGBO(162, 178, 252, 1))),
+                  borderSide: const BorderSide(color: primaryColor200)),
               prefixIcon: const Icon(Icons.key)),
           validator: validationController.validateEmail,
         ),
@@ -51,8 +51,8 @@ class _MailOTPFormState extends State<MailOTPForm> {
         // Next Button
         FullWidthTextButton(
           description: 'Next',
-          buttonColor: const Color.fromRGBO(128, 150, 255, 1),
-          textColor: Colors.white,
+          buttonColor: primaryColor300,
+          textColor: textColor100,
           function: () {
             if (_formKey.currentState!.validate()) {
               AuthenticationRepository.instance.verifyViaEmailOTP = true;

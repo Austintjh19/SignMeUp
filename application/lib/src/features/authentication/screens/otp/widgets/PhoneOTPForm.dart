@@ -1,6 +1,7 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myapplication/src/constants/colors.dart';
 
 import '../../../../../common_widgets/FullWidthTextButton.dart';
 import '../../../../../repository/authentication_repository/AuthenticationRepository.dart';
@@ -32,7 +33,7 @@ class _OTPWidgets extends State<PhoneOTPForm> {
           // Phone Number Text Field
           TextFormField(
             style: const TextStyle(
-              color: Color.fromRGBO(42, 42, 42, 1),
+              color: textColor600,
               fontFamily: 'Raleway',
               fontSize: 18,
             ),
