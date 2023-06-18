@@ -26,7 +26,7 @@ class GeneralEventController extends GetxController {
     List? registedEvents = await _userRepository.getRegisteredEvents(uid!);
     if (registedEvents != null) {
       List<EventModel> registeredEventsCollection =
-          await _eventRepository.getUserRegisteredEvents(registedEvents!);
+          await _eventRepository.getUserRegisteredEvents(registedEvents);
       return registeredEventsCollection;
     }
     return null;
