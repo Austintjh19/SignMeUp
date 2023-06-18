@@ -1,14 +1,12 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapplication/src/common_widgets/FullWidthTextButton.dart';
 import 'package:myapplication/src/constants/colors.dart';
-import 'package:myapplication/src/constants/image_strings.dart';
-import 'package:myapplication/src/features/dashboard/controllers/DisplayEventsController.dart';
+import 'package:myapplication/src/features/dashboard/controllers/GeneralEventController.dart';
+import 'package:myapplication/src/features/dashboard/screens/home/widgets/DefaultEventWidget.dart';
 import 'package:myapplication/src/features/dashboard/screens/home/widgets/ExploreAndCreateWidget.dart';
-import 'package:myapplication/src/features/dashboard/screens/home/widgets/NoUpcomingEventsWidget.dart';
-import 'package:myapplication/src/features/dashboard/screens/home/widgets/UpcomingEventsWidget.dart';
+import 'package:myapplication/src/common_widgets/HorizontalScrollEventsWidget.dart';
+import 'package:myapplication/src/common_widgets/HorizontalScrollEventsWidget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final displayEventsController = Get.put(DisplayEventsController());
+    final eventController = Get.put(GeneralEventController());
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -60,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               //  Your Upcoming Events
               FutureBuilder(
-                  future: displayEventsController.getUserRegisteredEvents(),
+                  future: eventController.getUserRegisteredEvents(),
                   builder: ((context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       if (snapshot.data != null) {
@@ -76,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   scrollDirection: Axis.horizontal,
                                   itemCount: snapshot.data!.length,
                                   itemBuilder: (c, index) {
-                                    return UpcomingEventsWidget(
+                                    return HorizontalScrollEventsWidget(
                                         eventImage:
                                             snapshot.data![index].eventImage,
                                         eventName:
@@ -98,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                       }
                       // No Signed Up Events
-                      return const NoUpcomingEventsWidget();
+                      return const DefaultNoEventWidget();
                     }
                     // Loading Events
                     return const CircularProgressIndicator();
