@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         "Your Upcoming Events ...",
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                            color: textColor400,
+                            color: textColor500,
                             fontFamily: 'Raleway',
                             fontSize: 14,
                             fontWeight: FontWeight.bold),

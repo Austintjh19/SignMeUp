@@ -119,14 +119,14 @@ class _CreateEventFormState extends State<CreateEventForm> {
                   style: TextStyle(
                       fontFamily: 'Raleway',
                       fontWeight: FontWeight.bold,
-                      color: textColor500,
+                      color: textColor600,
                       fontSize: 12),
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
                   controller: createEventController.eventName,
                   style: const TextStyle(
-                      color: textColor500, fontFamily: 'Raleway', fontSize: 12),
+                      color: textColor600, fontFamily: 'Raleway', fontSize: 12),
                   textAlign: TextAlign.left,
                   decoration: InputDecoration(
                     hintText: 'Enter Event Name',
@@ -148,14 +148,14 @@ class _CreateEventFormState extends State<CreateEventForm> {
                   style: TextStyle(
                       fontFamily: 'Raleway',
                       fontWeight: FontWeight.bold,
-                      color: textColor500,
+                      color: textColor600,
                       fontSize: 12),
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
                   controller: createEventController.eventLocation,
                   style: const TextStyle(
-                      color: textColor500, fontFamily: 'Raleway', fontSize: 12),
+                      color: textColor600, fontFamily: 'Raleway', fontSize: 12),
                   textAlign: TextAlign.left,
                   decoration: InputDecoration(
                       hintText: 'Enter Event Location',
@@ -177,7 +177,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
                   style: TextStyle(
                       fontFamily: 'Raleway',
                       fontWeight: FontWeight.bold,
-                      color: textColor500,
+                      color: textColor600,
                       fontSize: 12),
                 ),
                 const SizedBox(height: 10),
@@ -185,7 +185,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
                   readOnly: true,
                   controller: createEventController.eventDate,
                   style: const TextStyle(
-                      color: textColor500, fontFamily: 'Raleway', fontSize: 12),
+                      color: textColor600, fontFamily: 'Raleway', fontSize: 12),
                   textAlign: TextAlign.left,
                   decoration: InputDecoration(
                       hintText: 'Select Event Date',
@@ -225,7 +225,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
                   style: TextStyle(
                       fontFamily: 'Raleway',
                       fontWeight: FontWeight.bold,
-                      color: textColor500,
+                      color: textColor600,
                       fontSize: 12),
                 ),
                 const SizedBox(height: 10),
@@ -233,7 +233,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
                   readOnly: true,
                   controller: createEventController.eventTime,
                   style: const TextStyle(
-                      color: textColor500, fontFamily: 'Raleway', fontSize: 12),
+                      color: textColor600, fontFamily: 'Raleway', fontSize: 12),
                   textAlign: TextAlign.left,
                   decoration: InputDecoration(
                       hintText: 'Select Event Time',
@@ -268,7 +268,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
                   style: TextStyle(
                       fontFamily: 'Raleway',
                       fontWeight: FontWeight.bold,
-                      color: textColor500,
+                      color: textColor600,
                       fontSize: 12),
                 ),
                 const SizedBox(height: 10),
@@ -276,7 +276,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
                   keyboardType: TextInputType.number,
                   controller: createEventController.participantsLimit,
                   style: const TextStyle(
-                      color: textColor500, fontFamily: 'Raleway', fontSize: 12),
+                      color: textColor600, fontFamily: 'Raleway', fontSize: 12),
                   textAlign: TextAlign.left,
                   decoration: InputDecoration(
                       hintText: 'Enter Participants Limit',
@@ -298,7 +298,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
                   style: TextStyle(
                       fontFamily: 'Raleway',
                       fontWeight: FontWeight.bold,
-                      color: textColor500,
+                      color: textColor600,
                       fontSize: 12),
                 ),
                 const SizedBox(height: 10),
@@ -308,7 +308,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
                   maxLines: 5,
                   controller: createEventController.eventDescription,
                   style: const TextStyle(
-                      color: textColor500, fontFamily: 'Raleway', fontSize: 12),
+                      color: textColor600, fontFamily: 'Raleway', fontSize: 12),
                   textAlign: TextAlign.left,
                   decoration: InputDecoration(
                     hintText: 'Enter Event Description',

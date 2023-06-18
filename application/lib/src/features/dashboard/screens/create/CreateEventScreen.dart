@@ -25,7 +25,7 @@ class CreateEventScreen extends StatelessWidget {
             style: TextStyle(
                 fontFamily: 'Raleway',
                 fontWeight: FontWeight.bold,
-                color: textColor500),
+                color: textColor600),
           ),
         ),
         body: SingleChildScrollView(

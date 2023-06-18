@@ -90,7 +90,7 @@ class SearchEventsWidget extends StatelessWidget {
                     fontFamily: 'Raleway',
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
-                    color: textColor500),
+                    color: textColor600),
               ),
               const SizedBox(height: 5),
               Row(
@@ -106,7 +106,7 @@ class SearchEventsWidget extends StatelessWidget {
                         fontFamily: 'Raleway',
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
-                        color: textColor500),
+                        color: textColor600),
                   ),
 
                   const Spacer(),
@@ -117,7 +117,7 @@ class SearchEventsWidget extends StatelessWidget {
                         fontFamily: 'Raleway',
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
-                        color: textColor500),
+                        color: textColor600),
                   ),
                 ],
               )

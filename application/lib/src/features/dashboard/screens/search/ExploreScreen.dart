@@ -48,7 +48,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         fontFamily: 'Raleway',
                         fontWeight: FontWeight.normal,
                         fontSize: 15,
-                        color: textColor500),
+                        color: textColor600),
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
                         focusedBorder: OutlineInputBorder(

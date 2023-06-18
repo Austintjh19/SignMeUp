@@ -4,7 +4,6 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:myapplication/src/models/UserModel.dart';
 import 'package:myapplication/src/features/dashboard/controllers/ProfileController.dart';
 import 'package:myapplication/src/features/dashboard/screens/settings/SettingsScreen.dart';
-import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
 
 import '../constants/colors.dart';
 import '../constants/image_strings.dart';
@@ -67,7 +66,7 @@ class DashboardAppBar extends StatelessWidget {
                                   fontFamily: 'Raleway',
                                   fontSize: 13,
                                   fontWeight: FontWeight.normal,
-                                  color: Color.fromRGBO(112, 112, 112, 1))),
+                                  color: textColor400)),
                           const SizedBox(height: 2.5),
                           Text(
                             userData.name,
@@ -75,7 +74,7 @@ class DashboardAppBar extends StatelessWidget {
                                 fontFamily: 'Raleway',
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: heading1Color),
+                                color: textColor600),
                           ),
                         ],
                       ),

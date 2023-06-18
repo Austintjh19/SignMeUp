@@ -22,7 +22,7 @@ class StandardIconTextForm extends StatelessWidget {
       decoration: InputDecoration(
           labelText: labelText,
           labelStyle: const TextStyle(
-            color: textColor400,
+            color: textColor500,
             fontFamily: 'Raleway',
             fontSize: 14,
           ),

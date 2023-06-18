@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapplication/src/common_widgets/BorderedTextForm.dart';
+import 'package:myapplication/src/constants/colors.dart';
 
 import '../../../controllers/SignUpController.dart';
 
@@ -17,13 +17,25 @@ class _SignUpForm2State extends State<SignUpForm2> {
     final controller = Get.put(SignUpController());
 
     return Form(
-        child: BorderedTextForm(
-            controller: controller.description,
-            labelText: 'Description',
-            hintText:
-                'Let people know more about you. Enter a short desciption of yourself.',
-            unfocusedBorderColor: Colors.grey,
-            focusedBorderColor: const Color.fromRGBO(162, 178, 252, 1),
-            numLines: 5));
+        child: TextFormField(
+      textAlign: TextAlign.left,
+      controller: controller.description,
+      minLines: 5,
+      maxLines: 5,
+      decoration: InputDecoration(
+        labelText: 'Description',
+        hintText:
+            'Let people know more about you. Enter a short desciption of yourself.',
+        labelStyle: const TextStyle(
+          color: textColor500,
+        ),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: primaryColor500)),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: primaryColor200)),
+      ),
+    ));
   }
 }
