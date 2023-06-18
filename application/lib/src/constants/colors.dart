@@ -3,8 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 /// Text
-const textColor500 = Color.fromRGBO(42, 42, 42, 1);
-const textColor400 = Color.fromRGBO(128, 128, 128, 1); // grey
+const textColor600 = Color.fromRGBO(42, 42, 42, 1);
+const textColor500 = Color.fromRGBO(128, 128, 128, 1); // grey
+const textColor400 = Color.fromRGBO(122, 122, 122, 1);
 const textColor300 = Color.fromRGBO(157, 157, 157, 1);
 const textColor200 = Color.fromRGBO(162, 178, 252, 1);
 const textColor100 = Color.fromRGBO(255, 255, 255, 1);
