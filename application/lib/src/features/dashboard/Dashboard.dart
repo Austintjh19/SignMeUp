@@ -6,8 +6,9 @@ import 'package:myapplication/src/features/dashboard/screens/create/CreateEventM
 
 import 'package:myapplication/src/features/dashboard/screens/home/HomeScreen.dart';
 import 'package:myapplication/src/features/dashboard/screens/message/MessagingScreen.dart';
-import 'package:myapplication/src/features/dashboard/screens/search/ExploreScreen.dart';
+import 'package:myapplication/src/features/dashboard/screens/search/SearchScreen.dart';
 
+// ignore: must_be_immutable
 class Dashboard extends StatefulWidget {
   int initialPageIndex;
   Dashboard({super.key, required this.initialPageIndex});
@@ -22,7 +23,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   List screens = [
     const HomeScreen(),
-    const ExploreScreen(),
+    const SearchScreen(),
     const MessagingScreen(),
     const CreateEventMainScreen(),
   ];
@@ -31,6 +32,7 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   void initState() {
+    super.initState();
     if (widget.initialPageIndex != -1) {
       currentPageIndex = widget.initialPageIndex;
       widget.initialPageIndex = -1;

@@ -6,7 +6,6 @@ import 'package:myapplication/src/features/dashboard/controllers/GeneralEventCon
 import 'package:myapplication/src/features/dashboard/screens/home/widgets/DefaultEventWidget.dart';
 import 'package:myapplication/src/features/dashboard/screens/home/widgets/ExploreAndCreateWidget.dart';
 import 'package:myapplication/src/common_widgets/HorizontalScrollEventsWidget.dart';
-import 'package:myapplication/src/common_widgets/HorizontalScrollEventsWidget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
