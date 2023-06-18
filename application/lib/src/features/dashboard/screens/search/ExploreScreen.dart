@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapplication/src/constants/colors.dart';
-import 'package:myapplication/src/features/dashboard/controllers/SearchEventController.dart';
-import 'package:myapplication/src/features/dashboard/screens/search/widgets/EventsSearchBar.dart';
+import 'package:myapplication/src/features/dashboard/controllers/GeneralEventController.dart';
 import 'package:myapplication/src/features/dashboard/screens/search/widgets/SearchEventsWidget.dart';
-
-import '../../../../models/EventModel.dart';
-import '../../controllers/DisplayEventsController.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({super.key});
@@ -16,8 +12,7 @@ class ExploreScreen extends StatefulWidget {
 }
 
 class _ExploreScreenState extends State<ExploreScreen> {
-  final searchEventController = Get.put(SearchEventController());
-  final displayEventsController = Get.put(DisplayEventsController());
+  final eventController = Get.put(GeneralEventController());
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +33,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   elevation: 10,
                   borderRadius: BorderRadius.circular(30),
                   child: TextFormField(
-                    controller: searchEventController.stringQuery,
+                    controller: eventController.stringQuery,
                     onChanged: (query) {
-                      searchEventController.searchEvents();
+                      eventController.searchEvents();
                       setState(() {});
                     },
                     maxLines: 1,
@@ -89,7 +84,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
                 // All Events
                 FutureBuilder(
-                    future: searchEventController.searchEvents(),
+                    future: eventController.searchEvents(),
                     builder: ((context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         if (snapshot.data != null) {

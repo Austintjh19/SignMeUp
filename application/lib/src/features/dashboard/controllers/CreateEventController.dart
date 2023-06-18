@@ -10,7 +10,6 @@ class CreateEventController extends GetxController {
 
   final _authRepository = Get.put(AuthenticationRepository());
   final _userRepository = Get.put(UserRepository());
-
   final _eventRepository = Get.put(EventRepository());
 
   final eventName = TextEditingController();

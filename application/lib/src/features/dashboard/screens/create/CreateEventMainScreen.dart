@@ -26,7 +26,7 @@ class CreateEventMainScreen extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: primaryColor500.withOpacity(0.05),
-            image: DecorationImage(
+            image: const DecorationImage(
                 image: AssetImage(backgroundImage), fit: BoxFit.cover),
           ),
           child: Column(

@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapplication/src/features/dashboard/screens/search/SearchScreen.dart';
+import 'package:myapplication/src/features/dashboard/controllers/GeneralEventController.dart';
 
 import '../../../../../constants/colors.dart';
-import '../../../controllers/SearchEventController.dart';
 
 class EventsSearchBar extends StatelessWidget {
   const EventsSearchBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final searchEventController = Get.put(SearchEventController());
+    final eventController = Get.put(GeneralEventController());
 
     return Material(
       elevation: 10,
       borderRadius: BorderRadius.circular(30),
       child: TextFormField(
-        controller: searchEventController.stringQuery,
+        controller: eventController.stringQuery,
         onChanged: (query) {
-          searchEventController.searchEvents();
+          eventController.searchEvents();
         },
         maxLines: 1,
         style: const TextStyle(

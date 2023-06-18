@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myapplication/src/features/dashboard/controllers/GeneralEventController.dart';
 
 import '../../../../../constants/colors.dart';
 import '../../../../../constants/image_strings.dart';
-import '../../../controllers/DisplayEventsController.dart';
 
 class SearchEventsWidget extends StatelessWidget {
   final String eventImage;
@@ -26,7 +26,7 @@ class SearchEventsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final displayEventsController = Get.put(DisplayEventsController());
+    final eventController = Get.put(GeneralEventController());
 
     double width = MediaQuery.of(context).size.width;
     return Column(
@@ -46,7 +46,7 @@ class SearchEventsWidget extends StatelessWidget {
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               // Activity Image
               FutureBuilder(
-                  future: displayEventsController.getEventImage(eventImage),
+                  future: eventController.getEventImage(eventImage),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       if (snapshot.hasData) {
