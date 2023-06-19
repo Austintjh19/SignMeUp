@@ -75,21 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   itemCount: snapshot.data!.length,
                                   itemBuilder: (c, index) {
                                     return HorizontalScrollEventsWidget(
-                                        eventImage:
-                                            snapshot.data![index].eventImage,
-                                        eventName: snapshot
-                                            .data![index].eventName.last,
-                                        eventLoncation: snapshot
-                                            .data![index].eventLocation.last,
-                                        eventDate:
-                                            snapshot.data![index].eventDate,
-                                        eventTime:
-                                            snapshot.data![index].eventTime,
-                                        numParticipant: snapshot
-                                            .data![index].participants.length
-                                            .toString(),
-                                        participantsLimits: snapshot
-                                            .data![index].participantsLimit);
+                                        event: snapshot.data![index]);
                                   }),
                             ),
                           ),
