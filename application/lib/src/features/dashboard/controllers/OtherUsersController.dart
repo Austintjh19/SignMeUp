@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapplication/src/repository/user_repository/UserRepository.dart';
 
-import '../../../models/UserModel.dart';
-
 class OtherUsersController extends GetxController {
   static OtherUsersController get instance => Get.find();
 
