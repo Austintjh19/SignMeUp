@@ -31,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Container(
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                decoration: const BoxDecoration(color: primaryColor100),
                 // Explore and Create Button
                 child: const Column(
                   children: [
@@ -64,10 +65,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       if (snapshot.data != null && snapshot.data!.isNotEmpty) {
                         return SizedBox(
                           width: width,
-                          height: 300,
+                          height: 320,
                           child: Scrollbar(
                             child: Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
                               child: ListView.builder(
                                   // physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,

@@ -28,9 +28,11 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Column(
               children: [
                 // Events Search Bar
-                Material(
-                  elevation: 10,
-                  borderRadius: BorderRadius.circular(30),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: defaultBoxShadow,
+                      color: primaryColor100),
                   child: TextFormField(
                     controller: eventController.stringQuery,
                     onChanged: (query) {

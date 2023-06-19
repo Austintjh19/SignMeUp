@@ -10,7 +10,7 @@ import 'package:myapplication/src/features/dashboard/screens/update_profile/widg
 import '../../../../../constants/image_strings.dart';
 import '../../../../../controllers/ValidationController.dart';
 import '../../../../../models/UserModel.dart';
-import '../../../controllers/ProfileController.dart';
+import '../../../controllers/CurrentUserController.dart';
 import '../../../controllers/UpdateProfileController.dart';
 
 class UpdatProfileForm extends StatefulWidget {
@@ -21,7 +21,7 @@ class UpdatProfileForm extends StatefulWidget {
 }
 
 class _UpdatProfileFormState extends State<UpdatProfileForm> {
-  final profileController = Get.put(ProfileController());
+  final profileController = Get.put(CurrentUserController());
   final updateProfileController = Get.put(UpdateProfileController());
   final validationController = Get.put(ValidationController());
   final String identifier = DateTime.now().toIso8601String();

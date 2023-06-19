@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
 import 'package:myapplication/src/repository/user_repository/UserRepository.dart';
 
-class ProfileController extends GetxController {
-  static ProfileController get instance => Get.find();
+import '../../../models/UserModel.dart';
 
-  final _authRepository = Get.put(AuthenticationRepository());
+class OtherUsersController extends GetxController {
+  static OtherUsersController get instance => Get.find();
+
   final _userRepository = Get.put(UserRepository());
 
-  getUserData() {
-    final uid = _authRepository.firebaseUser.value?.uid;
+  getUserData(String uid) {
     if (uid != null) {
       return _userRepository.getUserData(uid);
     } else {
@@ -18,11 +17,11 @@ class ProfileController extends GetxController {
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent.withOpacity(0.1),
           colorText: Colors.red);
+      return null;
     }
   }
 
-  getProfileImage() {
-    final uid = _authRepository.firebaseUser.value?.uid;
+  getUserProfileImage(String uid) {
     if (uid != null) {
       return _userRepository.getProfileImage(uid);
     } else {

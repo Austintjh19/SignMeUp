@@ -9,14 +9,14 @@ import 'package:myapplication/src/features/dashboard/screens/update_profile/Upda
 
 import '../../../../constants/image_strings.dart';
 import '../../../../repository/authentication_repository/AuthenticationRepository.dart';
-import '../../controllers/ProfileController.dart';
+import '../../controllers/CurrentUserController.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ProfileController());
+    final controller = Get.put(CurrentUserController());
 
     return Scaffold(
       backgroundColor: Colors.white,

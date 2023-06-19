@@ -24,6 +24,16 @@ const primaryColor500 = Color.fromRGBO(128, 128, 128, 1); // grey
 const primaryColor600 = Color.fromRGBO(42, 42, 42, 1);
 const primaryColor700 = Color.fromRGBO(0, 0, 0, 1);
 
+// Box Shadow
+List<BoxShadow> defaultBoxShadow = [
+  BoxShadow(
+    color: Colors.grey.withOpacity(0.3),
+    spreadRadius: 3,
+    blurRadius: 7,
+    offset: const Offset(0, 3),
+  ),
+];
+
 /// Widgets
 const unfocusedBorderColor = Color.fromRGBO(255, 255, 255, 1);
 const focusedBorderColor = Color.fromRGBO(122, 122, 122, 1);
