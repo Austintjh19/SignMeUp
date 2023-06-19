@@ -25,7 +25,7 @@ class FullWidthTextButton extends StatelessWidget {
         shadowColor: primaryColor700,
         elevation: 20,
         backgroundColor: buttonColor,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
       ),
       child: Text(
         description,

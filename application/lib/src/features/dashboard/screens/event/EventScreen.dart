@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myapplication/src/common_widgets/FullWidthTextButton.dart';
 import 'package:myapplication/src/constants/colors.dart';
 import 'package:myapplication/src/features/dashboard/controllers/OtherUsersController.dart';
 import 'package:myapplication/src/features/dashboard/screens/event/widgets/DetailsWidget.dart';
+import 'package:myapplication/src/features/dashboard/screens/event/widgets/ParticipantsWidget.dart';
 
 import '../../../../constants/image_strings.dart';
 import '../../../../models/EventModel.dart';
@@ -229,7 +231,32 @@ class _EventScreenState extends State<EventScreen> {
                   // Body of Event Screen
                   onDetailsPage
                       ? DetailsWidget(event: widget.event)
-                      : Container(),
+                      : ParticipantsWidget(event: widget.event),
+
+                  const SizedBox(height: 30),
+
+                  // Sign Up / UnSign Up
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20, horizontal: 0),
+                      minimumSize: const Size.fromHeight(30),
+                      shadowColor: primaryColor700,
+                      elevation: 20,
+                      backgroundColor: primaryColor600,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(100)),
+                    ),
+                    child: const Text(
+                      'Sign Up',
+                      style: TextStyle(
+                          fontFamily: 'Raleway',
+                          fontSize: 16,
+                          color: textColor100),
+                    ),
+                  ),
+                  const SizedBox(height: 30),
                 ],
               ),
             ),
