@@ -5,6 +5,8 @@ import 'package:myapplication/src/repository/authentication_repository/Authentic
 import 'package:myapplication/src/repository/event_repository/EventRepository.dart';
 import 'package:myapplication/src/repository/user_repository/UserRepository.dart';
 
+import '../../../models/UserModel.dart';
+
 class GeneralEventController extends GetxController {
   static GeneralEventController get instance => Get.find();
 
@@ -21,16 +23,7 @@ class GeneralEventController extends GetxController {
     return _eventRepository.searchEvent(stringQuery.text.trim());
   }
 
-  Future<List<EventModel>?> getUserRegisteredEvents() async {
-    final uid = _authRepository.firebaseUser.value?.uid;
-    List? registedEvents = await _userRepository.getRegisteredEvents(uid!);
-    if (registedEvents != null) {
-      List<EventModel> registeredEventsCollection =
-          await _eventRepository.getUserRegisteredEvents(registedEvents);
-      return registeredEventsCollection;
-    }
-    return null;
-  }
+  Future<List<UserModel>?> getEventParticipants() async {}
 
   getEventImage(String imagePath) {
     return _eventRepository.getEventImage(imagePath);

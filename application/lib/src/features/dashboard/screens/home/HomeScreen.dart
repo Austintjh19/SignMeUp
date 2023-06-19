@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapplication/src/constants/colors.dart';
+import 'package:myapplication/src/features/dashboard/controllers/CurrentUserController.dart';
 import 'package:myapplication/src/features/dashboard/controllers/GeneralEventController.dart';
 import 'package:myapplication/src/features/dashboard/screens/home/widgets/DefaultEventWidget.dart';
 import 'package:myapplication/src/features/dashboard/screens/home/widgets/ExploreAndCreateWidget.dart';
@@ -22,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final eventController = Get.put(GeneralEventController());
+    final currentUserController = Get.put(CurrentUserController());
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -59,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               //  Your Upcoming Events
               FutureBuilder(
-                  future: eventController.getUserRegisteredEvents(),
+                  future: currentUserController.getUserRegisteredEvents(),
                   builder: ((context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       if (snapshot.data != null && snapshot.data!.isNotEmpty) {

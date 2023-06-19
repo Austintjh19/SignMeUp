@@ -3,11 +3,15 @@ import 'package:get/get.dart';
 import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
 import 'package:myapplication/src/repository/user_repository/UserRepository.dart';
 
+import '../../../models/EventModel.dart';
+import '../../../repository/event_repository/EventRepository.dart';
+
 class CurrentUserController extends GetxController {
   static CurrentUserController get instance => Get.find();
 
   final _authRepository = Get.put(AuthenticationRepository());
   final _userRepository = Get.put(UserRepository());
+  final _eventRepository = Get.put(EventRepository());
 
   getUserData() {
     final uid = _authRepository.firebaseUser.value?.uid;
@@ -31,5 +35,16 @@ class CurrentUserController extends GetxController {
           backgroundColor: Colors.redAccent.withOpacity(0.1),
           colorText: Colors.red);
     }
+  }
+
+  Future<List<EventModel>?> getUserRegisteredEvents() async {
+    final uid = _authRepository.firebaseUser.value?.uid;
+    List? registedEvents = await _userRepository.getRegisteredEvents(uid!);
+    if (registedEvents != null) {
+      List<EventModel> registeredEventsCollection =
+          await _eventRepository.getUserRegisteredEvents(registedEvents);
+      return registeredEventsCollection;
+    }
+    return null;
   }
 }
