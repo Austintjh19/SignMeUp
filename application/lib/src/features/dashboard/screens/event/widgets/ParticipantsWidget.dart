@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myapplication/src/constants/colors.dart';
+import 'package:myapplication/src/features/dashboard/screens/event/widgets/OtherParticipantWidget.dart';
 
 import '../../../../../models/EventModel.dart';
 
@@ -81,6 +83,14 @@ class ParticipantsWidget extends StatelessWidget {
               color: primaryColor100,
               borderRadius: BorderRadius.circular(20),
               boxShadow: defaultBoxShadow),
+          child: ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              itemCount: event.participants.length,
+              itemBuilder: (context, index) {
+                return OtherParticipantWidget(uid: event.participants[index]);
+              }),
         )
       ],
     );

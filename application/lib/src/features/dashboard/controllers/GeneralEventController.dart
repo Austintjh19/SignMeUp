@@ -23,8 +23,6 @@ class GeneralEventController extends GetxController {
     return _eventRepository.searchEvent(stringQuery.text.trim());
   }
 
-  Future<List<UserModel>?> getEventParticipants() async {}
-
   getEventImage(String imagePath) {
     return _eventRepository.getEventImage(imagePath);
   }
