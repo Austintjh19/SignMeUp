@@ -79,7 +79,7 @@ class HorizontalScrollEventsWidget extends StatelessWidget {
 
               // Event Name And Location
               Text(
-                "${event.eventName.last} @ ${event.eventLocation.last}",
+                '${event.eventName.last} @ ${event.eventLocation.last}',
                 textAlign: TextAlign.start,
                 style: const TextStyle(
                     fontFamily: 'Raleway',
@@ -90,7 +90,7 @@ class HorizontalScrollEventsWidget extends StatelessWidget {
               const SizedBox(height: 5),
               Row(
                 children: [
-                  //
+                  // Participants
                   const Icon(Icons.person_2_outlined, size: 16),
                   const SizedBox(width: 5),
 
