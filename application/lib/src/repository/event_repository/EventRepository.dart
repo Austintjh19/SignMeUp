@@ -37,11 +37,15 @@ class EventRepository extends GetxController {
 
   Future<List<EventModel>> getUserRegisteredEvents(
       List registeredEvents) async {
+    List<EventModel> registeredEventsCollection = [];
+    if (registeredEvents.isEmpty) {
+      return registeredEventsCollection;
+    }
     QuerySnapshot querySnapshot = await _db
         .collection('EventsInfo')
         .where("ID", whereIn: registeredEvents)
         .get();
-    List<EventModel> registeredEventsCollection = [];
+
     querySnapshot.docs.forEach((element) {
       registeredEventsCollection.add(EventModel.fromSnapShot(
           element as DocumentSnapshot<Map<String, dynamic>>));
@@ -64,7 +68,7 @@ class EventRepository extends GetxController {
     List<EventModel> eventsCollection = [];
     QuerySnapshot nameQuerySnapshot = await _db
         .collection('EventsInfo')
-        .where('Event Name', isEqualTo: query)
+        .where('Event Name', arrayContains: query)
         .get();
     nameQuerySnapshot.docs.forEach((element) {
       eventsCollection.add(EventModel.fromSnapShot(

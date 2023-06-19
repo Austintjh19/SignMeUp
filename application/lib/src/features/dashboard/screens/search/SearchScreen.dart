@@ -23,7 +23,7 @@ class _SearchScreenState extends State<SearchScreen> {
         child: Container(
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
           child: Container(
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
             child: Column(
               children: [
@@ -81,7 +81,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
                 const SizedBox(height: 20),
 
-                // All Events
+                // Event List
                 FutureBuilder(
                     future: eventController.searchEvents(),
                     builder: ((context, snapshot) {
@@ -96,9 +96,10 @@ class _SearchScreenState extends State<SearchScreen> {
                                 return VerticalScrollEventsWidget(
                                     eventImage:
                                         snapshot.data![index].eventImage,
-                                    eventName: snapshot.data![index].eventName,
-                                    eventLoncation:
-                                        snapshot.data![index].eventLocation,
+                                    eventName:
+                                        snapshot.data![index].eventName.last,
+                                    eventLoncation: snapshot
+                                        .data![index].eventLocation.last,
                                     eventDate: snapshot.data![index].eventDate,
                                     eventTime: snapshot.data![index].eventTime,
                                     numParticipant: snapshot
@@ -108,7 +109,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                         .data![index].participantsLimit);
                               });
                         }
-                        // No Signed Up Events
+                        // No Matching Events
                         return Container();
                       }
                       // Loading Events

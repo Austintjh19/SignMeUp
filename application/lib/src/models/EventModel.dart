@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class EventModel {
   final String id;
   final String eventImage;
-  final String eventName;
-  final String eventLocation;
+  final List eventName;
+  final List eventLocation;
   final String eventDate;
   final String eventTime;
+  final DateTime eventDateTime;
   final String participantsLimit;
   final String eventDescription;
   final List participants;
@@ -18,6 +20,7 @@ class EventModel {
       required this.eventLocation,
       required this.eventDate,
       required this.eventTime,
+      required this.eventDateTime,
       required this.participantsLimit,
       required this.eventDescription,
       required this.participants});
@@ -30,6 +33,7 @@ class EventModel {
       'Event Location': eventLocation,
       'Event Date': eventDate,
       'Event Time': eventTime,
+      'EventDateTime': eventDateTime,
       'Participants Limit': participantsLimit,
       'Event Description': eventDescription,
       'Participants': participants,
@@ -46,8 +50,24 @@ class EventModel {
         eventLocation: eventData['Event Location'],
         eventDate: eventData['Event Date'],
         eventTime: eventData['Event Time'],
+        eventDateTime: DateFormat("EEEE, MMM d, yyyy HH:mm")
+            .parse('${eventData['Event Date']} ${eventData['Event Time']}'),
         participantsLimit: eventData['Participants Limit'],
         eventDescription: eventData['Event Description'],
         participants: eventData['Participants']);
   }
 }
+
+
+// var lst = ["element1" , "element2" , "element3"];
+// lst.last // -> element3
+
+// setSearchParameters(String name) {
+        // List<String> searchOptions = [];
+        // String temp = "";
+        // for (int i = 0; i < name.length; i++) {
+        //   temp = temp + name[i];
+        //   searchOptions.add(temp);
+        // }
+        // return searchOptions;
+//   }

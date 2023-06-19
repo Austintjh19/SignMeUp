@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:myapplication/src/models/EventModel.dart';
 import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
 import 'package:myapplication/src/repository/event_repository/EventRepository.dart';
@@ -14,7 +15,7 @@ class CreateEventController extends GetxController {
 
   final eventName = TextEditingController();
   final eventDescription = TextEditingController();
-  final eventDate = TextEditingController();
+  var eventDate = TextEditingController();
   final eventTime = TextEditingController();
   final eventLocation = TextEditingController();
   final participantsLimit = TextEditingController();
@@ -27,14 +28,33 @@ class CreateEventController extends GetxController {
     final eventData = EventModel(
         id: eventId,
         eventImage: eventImage.text.trim(),
-        eventName: eventName.text.trim(),
-        eventLocation: eventLocation.text.trim(),
+        eventName: setSearchParameters(eventName.text.trim()),
+        eventLocation: setSearchParameters(eventLocation.text.trim()),
         eventDate: eventDate.text.trim(),
         eventTime: eventTime.text.trim(),
+        eventDateTime:
+            getEventDateTime(eventDate.text.trim(), eventTime.text.trim()),
         participantsLimit: participantsLimit.text.trim(),
         eventDescription: eventDescription.text.trim(),
         participants: [uid]);
     await _eventRepository.createEvent(eventData, eventId);
     await _userRepository.addRegisteredEvent(uid!, eventId);
+  }
+
+  List<String> setSearchParameters(String s) {
+    List<String> searchOptions = [];
+    String temp = "";
+    for (int i = 0; i < s.length; i++) {
+      temp = temp + s[i];
+      searchOptions.add(temp.toLowerCase());
+      searchOptions.add(temp.toUpperCase());
+      searchOptions.add(temp);
+    }
+    return searchOptions;
+  }
+
+  DateTime getEventDateTime(String date, String time) {
+    final result = DateFormat("EEEE, MMM d, yyyy HH:mm").parse('$date $time');
+    return result;
   }
 }

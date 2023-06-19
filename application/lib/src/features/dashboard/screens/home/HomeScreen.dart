@@ -55,12 +55,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
+
               //  Your Upcoming Events
               FutureBuilder(
                   future: eventController.getUserRegisteredEvents(),
                   builder: ((context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
-                      if (snapshot.data != null) {
+                      if (snapshot.data != null && snapshot.data!.isNotEmpty) {
                         return SizedBox(
                           width: width,
                           height: 300,
@@ -76,10 +77,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     return HorizontalScrollEventsWidget(
                                         eventImage:
                                             snapshot.data![index].eventImage,
-                                        eventName:
-                                            snapshot.data![index].eventName,
-                                        eventLoncation:
-                                            snapshot.data![index].eventLocation,
+                                        eventName: snapshot
+                                            .data![index].eventName.last,
+                                        eventLoncation: snapshot
+                                            .data![index].eventLocation.last,
                                         eventDate:
                                             snapshot.data![index].eventDate,
                                         eventTime:
