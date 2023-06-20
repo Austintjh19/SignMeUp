@@ -93,4 +93,10 @@ class EventRepository extends GetxController {
     }
     return "";
   }
+
+  Future<void> addParticipant(String uid, String eventID) async {
+    await _db.collection('EventsInfo').doc(eventID).update({
+      'Participants': FieldValue.arrayUnion([uid])
+    });
+  }
 }

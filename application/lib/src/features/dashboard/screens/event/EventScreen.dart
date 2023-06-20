@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapplication/src/common_widgets/FullWidthTextButton.dart';
 import 'package:myapplication/src/constants/colors.dart';
+import 'package:myapplication/src/features/dashboard/controllers/CurrentUserController.dart';
 import 'package:myapplication/src/features/dashboard/controllers/OtherUsersController.dart';
 import 'package:myapplication/src/features/dashboard/screens/event/widgets/DetailsWidget.dart';
 import 'package:myapplication/src/features/dashboard/screens/event/widgets/ParticipantsWidget.dart';
+import 'package:myapplication/src/features/dashboard/screens/event/widgets/RegisterButton.dart';
 
 import '../../../../constants/image_strings.dart';
 import '../../../../models/EventModel.dart';
@@ -26,6 +28,7 @@ class _EventScreenState extends State<EventScreen> {
   Widget build(BuildContext context) {
     final eventController = Get.put(GeneralEventController());
     final otherUsersController = Get.put(OtherUsersController());
+    final currentUserController = Get.put(CurrentUserController());
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -235,27 +238,35 @@ class _EventScreenState extends State<EventScreen> {
 
                   const SizedBox(height: 30),
 
-                  // Sign Up / UnSign Up
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 0),
-                      minimumSize: const Size.fromHeight(30),
-                      shadowColor: primaryColor700,
-                      elevation: 20,
-                      backgroundColor: primaryColor600,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100)),
-                    ),
-                    child: const Text(
-                      'Sign Up',
-                      style: TextStyle(
-                          fontFamily: 'Raleway',
-                          fontSize: 16,
-                          color: textColor100),
-                    ),
-                  ),
+                  // Register / Registered
+
+                  FutureBuilder(
+                      future: currentUserController
+                          .getIsEventRegistered(widget.event.id),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          if (snapshot.hasData) {
+                            bool isRegistered = snapshot.data as bool;
+                            return isRegistered
+                                ? RegisterButton(
+                                    buttonColor: primaryColor600,
+                                    buttonText: 'Registered',
+                                    function: () {})
+                                : RegisterButton(
+                                    buttonColor: primaryColor300,
+                                    buttonText: "Register",
+                                    function: () {
+                                      currentUserController
+                                          .addRegisteredEvent(widget.event.id);
+                                      eventController
+                                          .addParticipant(widget.event.id);
+                                      setState(() {});
+                                    });
+                          }
+                        }
+                        return const LinearProgressIndicator();
+                      }),
+
                   const SizedBox(height: 30),
                 ],
               ),

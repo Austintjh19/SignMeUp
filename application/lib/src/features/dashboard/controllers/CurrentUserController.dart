@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
 import 'package:myapplication/src/repository/user_repository/UserRepository.dart';
 
@@ -46,5 +49,23 @@ class CurrentUserController extends GetxController {
       return registeredEventsCollection;
     }
     return null;
+  }
+
+  Future<bool> getIsEventRegistered(String eventID) async {
+    final uid = _authRepository.firebaseUser.value?.uid;
+    List? registedEvents = await _userRepository.getRegisteredEvents(uid!);
+    if (registedEvents != null) {
+      for (final events in registedEvents) {
+        if (events == eventID) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  Future<void> addRegisteredEvent(String eventID) async {
+    final uid = _authRepository.firebaseUser.value?.uid;
+    await _userRepository.addRegisteredEvent(uid!, eventID);
   }
 }

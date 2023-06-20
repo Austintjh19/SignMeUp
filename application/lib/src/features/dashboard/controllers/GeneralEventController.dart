@@ -30,4 +30,9 @@ class GeneralEventController extends GetxController {
   Future<List<EventModel>?> getAllEvents() async {
     return await _eventRepository.getAllEvents();
   }
+
+  Future<void> addParticipant(String eventID) async {
+    final uid = _authRepository.firebaseUser.value?.uid;
+    await _eventRepository.addParticipant(uid!, eventID);
+  }
 }
