@@ -251,7 +251,14 @@ class _EventScreenState extends State<EventScreen> {
                                 ? RegisterButton(
                                     buttonColor: primaryColor600,
                                     buttonText: 'Registered',
-                                    function: () {})
+                                    function: () {
+                                      currentUserController
+                                          .removeRegisteredEvent(
+                                              widget.event.id);
+                                      eventController
+                                          .removeParticipant(widget.event.id);
+                                      setState(() {});
+                                    })
                                 : RegisterButton(
                                     buttonColor: primaryColor300,
                                     buttonText: "Register",

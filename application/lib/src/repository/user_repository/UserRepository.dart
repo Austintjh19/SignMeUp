@@ -83,6 +83,12 @@ class UserRepository extends GetxController {
     });
   }
 
+  Future<void> removeRegisteredEvent(String uid, String eventID) async {
+    await _db.collection('UsersSignUpInfo').doc(uid).update({
+      "Registered Events": FieldValue.arrayRemove([eventID])
+    });
+  }
+
   Future<List?> getRegisteredEvents(String uid) async {
     final snapshot = await _db
         .collection('UsersSignUpInfo')

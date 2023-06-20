@@ -99,4 +99,10 @@ class EventRepository extends GetxController {
       'Participants': FieldValue.arrayUnion([uid])
     });
   }
+
+  Future<void> removeParticipant(String uid, String eventID) async {
+    await _db.collection('EventsInfo').doc(eventID).update({
+      'Participants': FieldValue.arrayRemove([uid])
+    });
+  }
 }

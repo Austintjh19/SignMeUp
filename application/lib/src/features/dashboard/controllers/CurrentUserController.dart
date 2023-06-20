@@ -68,4 +68,9 @@ class CurrentUserController extends GetxController {
     final uid = _authRepository.firebaseUser.value?.uid;
     await _userRepository.addRegisteredEvent(uid!, eventID);
   }
+
+  Future<void> removeRegisteredEvent(String eventID) async {
+    final uid = _authRepository.firebaseUser.value?.uid;
+    await _userRepository.removeRegisteredEvent(uid!, eventID);
+  }
 }

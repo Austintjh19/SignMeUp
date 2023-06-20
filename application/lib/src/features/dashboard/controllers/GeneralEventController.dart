@@ -35,4 +35,9 @@ class GeneralEventController extends GetxController {
     final uid = _authRepository.firebaseUser.value?.uid;
     await _eventRepository.addParticipant(uid!, eventID);
   }
+
+  Future<void> removeParticipant(String eventID) async {
+    final uid = _authRepository.firebaseUser.value?.uid;
+    await _eventRepository.removeParticipant(uid!, eventID);
+  }
 }
