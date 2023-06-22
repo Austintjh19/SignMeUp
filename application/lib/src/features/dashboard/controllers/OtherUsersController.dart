@@ -8,13 +8,9 @@ class OtherUsersController extends GetxController {
   final _userRepository = Get.put(UserRepository());
 
   getUserData(String uid) {
-    if (uid != null) {
+    if (uid != '' && uid != null) {
       return _userRepository.getUserData(uid);
     } else {
-      Get.snackbar("Error", "Unable to retrive User Data",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.redAccent.withOpacity(0.1),
-          colorText: Colors.red);
       return null;
     }
   }

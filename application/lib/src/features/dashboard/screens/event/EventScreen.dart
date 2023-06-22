@@ -121,8 +121,10 @@ class _EventScreenState extends State<EventScreen> {
 
                   // Event Organizer
                   FutureBuilder(
-                      future: otherUsersController
-                          .getUserData(widget.event.participants.first),
+                      future: otherUsersController.getUserData(
+                          widget.event.participants.isEmpty
+                              ? ''
+                              : widget.event.participants.first),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
                           if (snapshot.hasData) {
