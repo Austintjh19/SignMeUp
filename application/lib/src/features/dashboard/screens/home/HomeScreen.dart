@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapplication/src/constants/colors.dart';
 import 'package:myapplication/src/features/dashboard/controllers/CurrentUserController.dart';
-import 'package:myapplication/src/features/dashboard/controllers/GeneralEventController.dart';
 import 'package:myapplication/src/features/dashboard/screens/home/widgets/DefaultEventWidget.dart';
 import 'package:myapplication/src/features/dashboard/screens/home/widgets/ExploreAndCreateWidget.dart';
 import 'package:myapplication/src/common_widgets/HorizontalScrollEventsWidget.dart';

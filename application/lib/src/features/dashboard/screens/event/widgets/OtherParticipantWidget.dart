@@ -13,8 +13,6 @@ class OtherParticipantWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final otherUsersController = Get.put(OtherUsersController());
-    double width = MediaQuery.of(context).size.width;
-
     return Column(
       children: [
         Row(
