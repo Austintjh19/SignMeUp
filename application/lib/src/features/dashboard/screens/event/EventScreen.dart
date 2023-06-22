@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapplication/src/common_widgets/FullWidthTextButton.dart';
 import 'package:myapplication/src/constants/colors.dart';
 import 'package:myapplication/src/features/dashboard/controllers/CurrentUserController.dart';
 import 'package:myapplication/src/features/dashboard/controllers/OtherUsersController.dart';
