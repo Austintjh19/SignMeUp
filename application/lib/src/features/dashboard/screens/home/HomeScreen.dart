@@ -22,7 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final eventController = Get.put(GeneralEventController());
     final currentUserController = Get.put(CurrentUserController());
     double width = MediaQuery.of(context).size.width;
 

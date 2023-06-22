@@ -1,8 +1,5 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
 import 'package:myapplication/src/repository/user_repository/UserRepository.dart';
 
