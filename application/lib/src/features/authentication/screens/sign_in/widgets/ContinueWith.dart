@@ -48,7 +48,9 @@ class ContinueWith extends StatelessWidget {
 
         // Continue with Facebook
         ElevatedButton.icon(
-          onPressed: () {},
+          onPressed: () {
+            AuthenticationRepository.instance.signInWithFacebook();
+          },
           icon: Image.asset(
             facebookLogo,
             height: 30,
