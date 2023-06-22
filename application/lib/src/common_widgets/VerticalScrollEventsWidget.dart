@@ -65,9 +65,15 @@ class VerticalScrollEventsWidget extends StatelessWidget {
                               );
                       }
                     }
-                    return const CircleAvatar(
-                      radius: 35,
-                      backgroundImage: ExactAssetImage(defaultProfileImage),
+                    return Container(
+                      width: width * 0.9,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: const DecorationImage(
+                            image: ExactAssetImage(defaultEventImage),
+                            fit: BoxFit.fill),
+                      ),
                     );
                   }),
 

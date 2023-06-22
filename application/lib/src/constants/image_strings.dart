@@ -23,6 +23,8 @@ const String defaultEventImage =
 const String backgroundImage = 'assets/images/CreateEvent/backgroundImage.jpg';
 
 // Home Screen
-const String exploreNow = 'assets/images/Home/exploreNow1.png';
+const String exploreNow = 'assets/images/Home/exploreNow.png';
 const String createEvent = 'assets/images/Home/createEvent.png';
 const String noUpcomingEvents = 'assets/images/Home/noUpcomingEvents.jpg';
+const String personalize = 'assets/images/Home/personalize.png';
+const String connect = 'assets/images/Home/connect.png';

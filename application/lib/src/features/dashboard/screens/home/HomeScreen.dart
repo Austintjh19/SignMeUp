@@ -29,18 +29,18 @@ class _HomeScreenState extends State<HomeScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
-                decoration: const BoxDecoration(color: primaryColor100),
-                // Explore and Create Button
-                child: const Column(
-                  children: [
-                    // Explore and Create Widget
-                    ExploreAndCreateWidget(),
+              // Explore and Create Button
+              Column(
+                children: [
+                  // Explore and Create Widget
+                  const ExploreAndCreateWidget(),
 
-                    SizedBox(height: 30),
-                    // Your Upcoming Events
-                    Align(
+                  // Your Upcoming Events
+
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                    decoration: const BoxDecoration(color: primaryColor100),
+                    child: const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "Your Upcoming Events ...",
@@ -52,9 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Divider(),
-                  ],
-                ),
+                  ),
+                  Divider(),
+                ],
               ),
 
               //  Your Upcoming Events
