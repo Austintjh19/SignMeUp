@@ -172,7 +172,7 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  Future<UserCredential?> signInWithGoogle() async {
+  Future<void> signInWithGoogle() async {
     CircularProgressWidget.getCircularProgressIndicator();
     try {
       final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
