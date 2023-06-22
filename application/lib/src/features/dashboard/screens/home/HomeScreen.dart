@@ -38,22 +38,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   // Your Upcoming Events
 
                   Container(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                    padding: const EdgeInsets.fromLTRB(20, 15, 20, 5),
                     decoration: const BoxDecoration(color: primaryColor100),
-                    child: const Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Your Upcoming Events ...",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: textColor500,
-                            fontFamily: 'Raleway',
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold),
-                      ),
+                    child: const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Your Upcoming Events ...",
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: textColor500,
+                              fontFamily: 'Raleway',
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Divider(),
+                      ],
                     ),
                   ),
-                  Divider(),
                 ],
               ),
 

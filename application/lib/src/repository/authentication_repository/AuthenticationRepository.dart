@@ -184,7 +184,7 @@ class AuthenticationRepository extends GetxController {
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
       if (userCredential.additionalUserInfo!.isNewUser) {
-        final user = UserModel([],
+        final user = UserModel([], [],
             uid: userCredential.user!.uid,
             username: gUser.email.substring(0, gUser.email.indexOf('@')),
             name: gUser.email.substring(0, gUser.email.indexOf('@')),
@@ -213,7 +213,7 @@ class AuthenticationRepository extends GetxController {
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithCredential(fAuth);
       if (userCredential.additionalUserInfo!.isNewUser) {
-        final user = UserModel([],
+        final user = UserModel([], [],
             uid: userCredential.user!.uid,
             username: '',
             name: '',

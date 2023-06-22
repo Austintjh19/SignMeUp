@@ -48,6 +48,17 @@ class CurrentUserController extends GetxController {
     return null;
   }
 
+  Future<List<EventModel>?> getBookmarkedEvents() async {
+    final uid = _authRepository.firebaseUser.value?.uid;
+    List? bookmarkedEvents = await _userRepository.getBookmarkedEvents(uid!);
+    if (bookmarkedEvents != null) {
+      List<EventModel> bookmarkedEventsCollection =
+          await _eventRepository.getUserRegisteredEvents(bookmarkedEvents);
+      return bookmarkedEventsCollection;
+    }
+    return null;
+  }
+
   Future<bool> getIsEventRegistered(String eventID) async {
     final uid = _authRepository.firebaseUser.value?.uid;
     List? registedEvents = await _userRepository.getRegisteredEvents(uid!);
@@ -61,13 +72,36 @@ class CurrentUserController extends GetxController {
     return false;
   }
 
+  Future<bool> getIsEventBookmarked(String eventID) async {
+    final uid = _authRepository.firebaseUser.value?.uid;
+    List? bookmarkedEvents = await _userRepository.getBookmarkedEvents(uid!);
+    if (bookmarkedEvents != null) {
+      for (final events in bookmarkedEvents) {
+        if (events == eventID) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   Future<void> addRegisteredEvent(String eventID) async {
     final uid = _authRepository.firebaseUser.value?.uid;
     await _userRepository.addRegisteredEvent(uid!, eventID);
   }
 
+  Future<void> addBookmarkedEvent(String eventID) async {
+    final uid = _authRepository.firebaseUser.value?.uid;
+    await _userRepository.addBookmarkedEvent(uid!, eventID);
+  }
+
   Future<void> removeRegisteredEvent(String eventID) async {
     final uid = _authRepository.firebaseUser.value?.uid;
     await _userRepository.removeRegisteredEvent(uid!, eventID);
+  }
+
+  Future<void> removeBookmarkedEvent(String eventID) async {
+    final uid = _authRepository.firebaseUser.value?.uid;
+    await _userRepository.removeBookmarkedEvent(uid!, eventID);
   }
 }

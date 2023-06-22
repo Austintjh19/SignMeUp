@@ -105,51 +105,103 @@ class _EventScreenState extends State<EventScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  //Event Name & Location
-                  Text(
-                    "${widget.event.eventName.last} @ ${widget.event.eventLocation.last}",
-                    textAlign: TextAlign.start,
-                    style: const TextStyle(
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.normal,
-                        fontSize: 18,
-                        color: textColor600),
+                  Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          //Event Name & Location
+                          Text(
+                            "${widget.event.eventName.last} @ ${widget.event.eventLocation.last}",
+                            textAlign: TextAlign.start,
+                            style: const TextStyle(
+                                fontFamily: 'Raleway',
+                                fontWeight: FontWeight.normal,
+                                fontSize: 18,
+                                color: textColor600),
+                          ),
+
+                          const SizedBox(height: 5),
+
+                          // Event Organizer
+                          FutureBuilder(
+                              future: otherUsersController.getUserData(
+                                  widget.event.participants.isEmpty
+                                      ? ''
+                                      : widget.event.participants.first),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  if (snapshot.hasData) {
+                                    UserModel organizerDetails =
+                                        snapshot.data as UserModel;
+                                    return Text(
+                                      "Organizer: ${organizerDetails.name}",
+                                      textAlign: TextAlign.start,
+                                      style: const TextStyle(
+                                          fontFamily: 'Raleway',
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 14,
+                                          color: textColor400),
+                                    );
+                                  }
+                                }
+                                return const Text(
+                                  "Organizer: Unknown",
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontFamily: 'Raleway',
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 14,
+                                      color: textColor400),
+                                );
+                              }),
+                        ],
+                      ),
+
+                      const Spacer(),
+
+                      // Save Button
+                      FutureBuilder(
+                          future: currentUserController
+                              .getIsEventBookmarked(widget.event.id),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              if (snapshot.hasData) {
+                                bool isBookmared = snapshot.data as bool;
+                                return isBookmared
+                                    ? GestureDetector(
+                                        onTap: () {
+                                          print(widget.event.id);
+                                          currentUserController
+                                              .removeBookmarkedEvent(
+                                                  widget.event.id);
+                                          setState(() {});
+                                        },
+                                        child: const Icon(
+                                          Icons.bookmark,
+                                          size: 25,
+                                          color: primaryColor300,
+                                        ))
+                                    : GestureDetector(
+                                        onTap: () {
+                                          currentUserController
+                                              .addBookmarkedEvent(
+                                                  widget.event.id);
+                                          setState(() {});
+                                        },
+                                        child: const Icon(
+                                          Icons.bookmark_outline,
+                                          size: 25,
+                                          color: textColor600,
+                                        ));
+                              }
+                            }
+                            return const CircularProgressIndicator();
+                          }),
+                    ],
                   ),
-
-                  const SizedBox(height: 5),
-
-                  // Event Organizer
-                  FutureBuilder(
-                      future: otherUsersController.getUserData(
-                          widget.event.participants.isEmpty
-                              ? ''
-                              : widget.event.participants.first),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          if (snapshot.hasData) {
-                            UserModel organizerDetails =
-                                snapshot.data as UserModel;
-                            return Text(
-                              "Organizer: ${organizerDetails.name}",
-                              textAlign: TextAlign.start,
-                              style: const TextStyle(
-                                  fontFamily: 'Raleway',
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 14,
-                                  color: textColor400),
-                            );
-                          }
-                        }
-                        return const Text(
-                          "Organizer: Unknown",
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              fontFamily: 'Raleway',
-                              fontWeight: FontWeight.normal,
-                              fontSize: 14,
-                              color: textColor400),
-                        );
-                      }),
 
                   const SizedBox(height: 30),
 

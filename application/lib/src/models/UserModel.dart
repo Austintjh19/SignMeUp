@@ -9,8 +9,9 @@ class UserModel {
   final String description;
   final String uid;
   final List? registeredEvents;
+  final List? bookmarkedEvents;
 
-  UserModel(this.registeredEvents,
+  UserModel(this.registeredEvents, this.bookmarkedEvents,
       {required this.uid,
       required this.username,
       required this.name,
@@ -34,7 +35,8 @@ class UserModel {
   factory UserModel.fromSnapShot(
       DocumentSnapshot<Map<String, dynamic>> document) {
     final userData = document.data()!;
-    return UserModel(userData["Registered Events"],
+    return UserModel(
+        userData["Registered Events"], userData["Bookmarked Events"],
         uid: userData["UID"],
         username: userData["Username"],
         name: userData["Name"],

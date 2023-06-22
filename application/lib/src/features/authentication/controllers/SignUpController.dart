@@ -24,7 +24,7 @@ class SignUpController extends GetxController {
         .createUserViaEmailAndPassword(
             email.text.trim(), newPassword.text.trim());
 
-    final user = UserModel([],
+    final user = UserModel([], [],
         uid: cred.user!.uid,
         username: username.text.trim(),
         name: name.text.trim(),

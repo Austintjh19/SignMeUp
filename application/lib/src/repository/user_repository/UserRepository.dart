@@ -46,7 +46,7 @@ class UserRepository extends GetxController {
           snapshot.docs.map((e) => UserModel.fromSnapShot(e)).single;
       return userData;
     }
-    return UserModel([],
+    return UserModel([], [],
         uid: '',
         username: 'Unknown',
         name: '',
@@ -94,9 +94,21 @@ class UserRepository extends GetxController {
     });
   }
 
+  Future<void> addBookmarkedEvent(String uid, String eventID) async {
+    await _db.collection('UsersSignUpInfo').doc(uid).update({
+      "Bookmarked Events": FieldValue.arrayUnion([eventID])
+    });
+  }
+
   Future<void> removeRegisteredEvent(String uid, String eventID) async {
     await _db.collection('UsersSignUpInfo').doc(uid).update({
       "Registered Events": FieldValue.arrayRemove([eventID])
+    });
+  }
+
+  Future<void> removeBookmarkedEvent(String uid, String eventID) async {
+    await _db.collection('UsersSignUpInfo').doc(uid).update({
+      "Bookmarked Events": FieldValue.arrayRemove([eventID])
     });
   }
 
@@ -107,5 +119,14 @@ class UserRepository extends GetxController {
         .get();
     final userData = snapshot.docs.map((e) => UserModel.fromSnapShot(e)).single;
     return userData.registeredEvents;
+  }
+
+  Future<List?> getBookmarkedEvents(String uid) async {
+    final snapshot = await _db
+        .collection('UsersSignUpInfo')
+        .where("UID", isEqualTo: uid)
+        .get();
+    final userData = snapshot.docs.map((e) => UserModel.fromSnapShot(e)).single;
+    return userData.bookmarkedEvents;
   }
 }
