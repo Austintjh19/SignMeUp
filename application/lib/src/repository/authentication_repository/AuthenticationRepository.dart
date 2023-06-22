@@ -8,13 +8,16 @@ import 'package:myapplication/src/features/dashboard/Dashboard.dart';
 import 'package:myapplication/src/repository/authentication_repository/exceptions/SignUpExceptions.dart';
 
 import '../../common_widgets/CircularProgressWidget.dart';
+import '../../models/UserModel.dart';
+import '../user_repository/UserRepository.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
+  final userRepository = Get.put(UserRepository());
 
   final _auth = FirebaseAuth.instance;
   late final Rx<User?> firebaseUser;
-  var verificationID = ''.obs;
+  String verificationID = '';
   bool verifyViaEmailOTP = true;
 
   EmailOTP myEmailAuth = EmailOTP();
@@ -34,17 +37,17 @@ class AuthenticationRepository extends GetxController {
           ));
   }
 
-  Future<void> phoneAuthentication(String phoneNo) async {
+  Future<String> phoneAuthentication(String phoneNo) async {
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneNo,
       verificationCompleted: (credential) async {
         await _auth.signInWithCredential(credential);
       },
       codeSent: (verificationId, resendToken) {
-        verificationID.value = verificationID as String;
+        verificationID = verificationID;
       },
       codeAutoRetrievalTimeout: ((verificationId) {
-        verificationID.value = verificationID as String;
+        verificationID = verificationID;
       }),
       verificationFailed: (e) {
         if (e.code == 'invalid-phone-number') {
@@ -60,6 +63,7 @@ class AuthenticationRepository extends GetxController {
         }
       },
     );
+    return verificationID;
   }
 
   Future<void> emailAuthentication(String email) async {
@@ -77,7 +81,7 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  Future<bool> verifyOTP(String otp) async {
+  Future<bool> verifyOTP(String otp, String phoneVerificationID) async {
     if (verifyViaEmailOTP == true) {
       try {
         bool res = await myEmailAuth.verifyOTP(otp: otp);
@@ -92,7 +96,7 @@ class AuthenticationRepository extends GetxController {
       try {
         var credentials = await _auth.signInWithCredential(
             PhoneAuthProvider.credential(
-                verificationId: this.verificationID.value, smsCode: otp));
+                verificationId: phoneVerificationID, smsCode: otp));
         return credentials.user != null ? true : false;
       } on FirebaseAuthException catch (e) {
         final ex = SignUpExceptions.code(e.code);
@@ -172,10 +176,23 @@ class AuthenticationRepository extends GetxController {
     CircularProgressWidget.getCircularProgressIndicator();
     try {
       final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
+
       final GoogleSignInAuthentication gAuth = await gUser!.authentication;
       final credential = GoogleAuthProvider.credential(
           accessToken: gAuth.accessToken, idToken: gAuth.idToken);
-      return await FirebaseAuth.instance.signInWithCredential(credential);
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      if (userCredential.additionalUserInfo!.isNewUser) {
+        final user = UserModel([],
+            uid: userCredential.user!.uid,
+            username: gUser.email.substring(0, gUser.email.indexOf('@')),
+            name: gUser.email.substring(0, gUser.email.indexOf('@')),
+            email: gUser.email,
+            password: '',
+            profileImage: '',
+            description: '');
+        await userRepository.storeUserDetails(user, userCredential);
+      }
     } on FirebaseAuthException catch (e) {
       CircularProgressWidget.popCircularProgressIndicator();
       Get.snackbar("Error", e.toString(),

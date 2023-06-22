@@ -12,8 +12,8 @@ class OTPController extends GetxController {
 
   final userRepository = Get.put(AuthenticationRepository());
 
-  void phoneNumAuthentication() {
-    AuthenticationRepository.instance
+  Future<String> phoneNumAuthentication() {
+    return AuthenticationRepository.instance
         .phoneAuthentication(phoneCode + phoneNum.text.trim());
   }
 
@@ -21,8 +21,9 @@ class OTPController extends GetxController {
     AuthenticationRepository.instance.emailAuthentication(email.text.trim());
   }
 
-  void verifyOTP(String otp) async {
-    var isVerified = await AuthenticationRepository.instance.verifyOTP(otp);
+  void verifyOTP(String otp, String phoneVerificationID) async {
+    var isVerified = await AuthenticationRepository.instance
+        .verifyOTP(otp, phoneVerificationID);
     isVerified ? Get.offAll(const SignUpScreen()) : Get.back();
   }
 }

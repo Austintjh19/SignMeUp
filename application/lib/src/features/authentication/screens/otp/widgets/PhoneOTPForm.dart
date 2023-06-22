@@ -87,12 +87,14 @@ class _OTPWidgets extends State<PhoneOTPForm> {
             description: 'Next',
             buttonColor: const Color.fromRGBO(128, 150, 255, 1),
             textColor: Colors.white,
-            function: () {
+            function: () async {
               if (_formKey.currentState!.validate()) {
                 controller.phoneCode = "+${country.phoneCode}";
                 AuthenticationRepository.instance.verifyViaEmailOTP = false;
-                OTPController.instance.phoneNumAuthentication();
-                Get.to(() => const OTPScreen());
+                String phoneNumVerficationID =
+                    await OTPController.instance.phoneNumAuthentication();
+                Get.to(() =>
+                    OTPScreen(phoneNumVerificationID: phoneNumVerficationID));
               }
             },
           ),

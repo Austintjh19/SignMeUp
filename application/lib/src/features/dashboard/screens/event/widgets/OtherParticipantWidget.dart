@@ -13,6 +13,7 @@ class OtherParticipantWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final otherUsersController = Get.put(OtherUsersController());
+    double width = MediaQuery.of(context).size.width;
 
     return Column(
       children: [
@@ -55,26 +56,26 @@ class OtherParticipantWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            userData.username,
-                            textAlign: TextAlign.start,
-                            style: const TextStyle(
-                                fontFamily: 'Raleway',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                                color: textColor600),
-                          ),
+                          Text(userData.username,
+                              textAlign: TextAlign.start,
+                              style: const TextStyle(
+                                  fontFamily: 'Raleway',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                  color: textColor600),
+                              softWrap: false,
+                              overflow: TextOverflow.ellipsis),
                           const SizedBox(height: 5),
-                          Text(
-                            userData.description,
-                            textAlign: TextAlign.start,
-                            style: const TextStyle(
-                                fontFamily: 'Raleway',
-                                fontWeight: FontWeight.normal,
-                                fontSize: 12,
-                                height: 1.5,
-                                color: textColor600),
-                          ),
+                          Text(userData.description,
+                              textAlign: TextAlign.start,
+                              style: const TextStyle(
+                                  fontFamily: 'Raleway',
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 12,
+                                  height: 1.5,
+                                  color: textColor600),
+                              softWrap: false,
+                              overflow: TextOverflow.ellipsis),
                         ],
                       );
                     }

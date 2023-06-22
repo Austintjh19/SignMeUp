@@ -12,7 +12,8 @@ import '../../../../common_widgets/FullWidthTextButton.dart';
 import '../../../../constants/colors.dart';
 
 class OTPScreen extends StatelessWidget {
-  const OTPScreen({super.key});
+  final String phoneNumVerificationID;
+  const OTPScreen({super.key, required this.phoneNumVerificationID});
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +100,8 @@ class OTPScreen extends StatelessWidget {
                         buttonColor: const Color.fromRGBO(128, 150, 255, 1),
                         textColor: Colors.white,
                         function: () {
-                          OTPController.instance.verifyOTP(otp);
+                          OTPController.instance
+                              .verifyOTP(otp, phoneNumVerificationID);
                         },
                       ),
                     ],
