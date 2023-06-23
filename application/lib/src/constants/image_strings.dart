@@ -18,6 +18,8 @@ const String forgotPasswordImage =
 
 // Create Event Screen
 const String createEventImage = 'assets/images/CreateEvent/createEvent.png';
+const String createScreenImage =
+    'assets/images/CreateEvent/createScreenImage.png';
 const String defaultEventImage =
     'assets/images/CreateEvent/defaultEventImage.png';
 const String backgroundImage = 'assets/images/CreateEvent/backgroundImage.jpg';

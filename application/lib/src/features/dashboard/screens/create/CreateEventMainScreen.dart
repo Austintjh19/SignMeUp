@@ -24,30 +24,52 @@ class CreateEventMainScreen extends StatelessWidget {
           height: height * 0.7,
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
+            gradient: container6Color,
             borderRadius: BorderRadius.circular(20),
-            color: primaryColor500.withOpacity(0.05),
-            image: const DecorationImage(
-                image: AssetImage(backgroundImage), fit: BoxFit.cover),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Create Event Image
-              Image.asset(
-                createEventImage,
-                width: width * 0.5,
+              Image(image: AssetImage(createScreenImage)),
+
+              const SizedBox(height: 20.0),
+
+              const Flexible(
+                child: Text(
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontFamily: 'Raleway',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: textColor100),
+                ),
               ),
 
               const SizedBox(height: 20.0),
+
               // Create Event Button
-              FullWidthTextButton(
-                  function: () {
-                    Get.to(const CreateEventScreen());
-                  },
-                  description: 'Create Event',
-                  buttonColor: primaryColor300,
-                  textColor: textColor100),
+              ElevatedButton(
+                onPressed: () {
+                  Get.to(const CreateEventScreen());
+                },
+                style: ElevatedButton.styleFrom(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 0),
+                  minimumSize: const Size.fromHeight(20),
+                  shadowColor: primaryColor700,
+                  elevation: 10,
+                  backgroundColor: const Color.fromRGBO(250, 172, 168, 0.8),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100)),
+                ),
+                child: const Text(
+                  'Create Event',
+                  style: TextStyle(
+                      fontFamily: 'Raleway', fontSize: 16, color: textColor100),
+                ),
+              ),
             ],
           ),
         ),
