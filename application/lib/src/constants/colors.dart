@@ -58,8 +58,8 @@ const container2Color = LinearGradient(
     begin: Alignment.bottomRight,
     end: Alignment.topLeft,
     colors: [
-      Color.fromRGBO(239, 51, 177, 0.8),
-      Color.fromRGBO(246, 230, 188, 0.8)
+      Color.fromRGBO(219, 101, 140, 0.8),
+      Color.fromRGBO(247, 187, 151, 0.8)
     ]);
 
 const container3Color = LinearGradient(
@@ -84,4 +84,12 @@ const container5Color = LinearGradient(
     colors: [
       Color.fromRGBO(252, 182, 159, 0.8),
       Color.fromRGBO(255, 236, 210, 0.8)
+    ]);
+
+const container6Color = LinearGradient(
+    begin: Alignment.bottomRight,
+    end: Alignment.topLeft,
+    colors: [
+      Color.fromRGBO(221, 214, 243, 0.8),
+      Color.fromRGBO(250, 172, 168, 0.8)
     ]);

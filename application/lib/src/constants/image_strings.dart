@@ -28,3 +28,4 @@ const String createEvent = 'assets/images/Home/createEvent.png';
 const String noUpcomingEvents = 'assets/images/Home/noUpcomingEvents.jpg';
 const String personalize = 'assets/images/Home/personalize.png';
 const String connect = 'assets/images/Home/connect.png';
+const String noEventsBookmarked = 'assets/images/Home/noEventsBookmarked.png';

@@ -5,8 +5,8 @@ import '../../../../../constants/colors.dart';
 import '../../../../../constants/image_strings.dart';
 import '../../../Dashboard.dart';
 
-class DefaultNoEventWidget extends StatelessWidget {
-  const DefaultNoEventWidget({super.key});
+class NoBookmarkedEventWidget extends StatelessWidget {
+  const NoBookmarkedEventWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,20 +19,20 @@ class DefaultNoEventWidget extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             image: const DecorationImage(
-                image: AssetImage(noUpcomingEvents), fit: BoxFit.cover)),
+                image: AssetImage(noEventsBookmarked), fit: BoxFit.cover)),
         child: Container(
           width: width * 0.9,
           height: 275,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            gradient: container4Color,
+            gradient: container6Color,
           ),
           padding: const EdgeInsets.all(30),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                "No Upcoming Events",
+                "No Events Bookmarked",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontFamily: 'Raleway',
@@ -44,7 +44,7 @@ class DefaultNoEventWidget extends StatelessWidget {
               SizedBox(height: 20),
               const Flexible(
                 child: Text(
-                  "You have not registered for any events. Head to the explore page to register for interested events",
+                  "You have not bookmarked any events. Head to the explore page to save interested events",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontFamily: 'Raleway',
@@ -67,12 +67,12 @@ class DefaultNoEventWidget extends StatelessWidget {
                     ));
                   },
                   child: const Text(
-                    "See What's New",
+                    "Start Exploring",
                     style: TextStyle(
                         fontFamily: 'Raleway',
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
-                        color: Color.fromRGBO(127, 127, 213, 0.8)),
+                        color: Color.fromRGBO(250, 172, 168, 0.8)),
                   ))
             ],
           ),
