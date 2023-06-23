@@ -12,12 +12,12 @@ class NoBookmarkedEventWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
 
-    return Material(
-      elevation: 5,
-      borderRadius: BorderRadius.circular(10),
+    return Container(
+      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
+            boxShadow: defaultBoxShadow,
             image: const DecorationImage(
                 image: AssetImage(noEventsBookmarked), fit: BoxFit.cover)),
         child: Container(

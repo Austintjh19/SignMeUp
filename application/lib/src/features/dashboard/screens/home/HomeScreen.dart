@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:myapplication/src/constants/colors.dart';
+import 'package:myapplication/src/features/dashboard/Dashboard.dart';
 import 'package:myapplication/src/features/dashboard/controllers/CurrentUserController.dart';
 import 'package:myapplication/src/features/dashboard/screens/home/widgets/NoBookmarkedEventWidget.dart';
 import 'package:myapplication/src/features/dashboard/screens/home/widgets/NoRegistredEventWidget.dart';
@@ -16,8 +18,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  void signUserOut() {
-    FirebaseAuth.instance.signOut();
+  Future<void> _refreshScreen() async {
+    await Future.delayed(const Duration(seconds: 1));
+    Get.offAll(Dashboard(initialPageIndex: 0));
+    return Future.delayed(const Duration(seconds: 0));
   }
 
   @override
@@ -27,8 +31,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
         backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          child: Column(
+        body: LiquidPullToRefresh(
+          onRefresh: _refreshScreen,
+          color: primaryColor100,
+          backgroundColor: primaryColor300,
+          animSpeedFactor: 2,
+          showChildOpacityTransition: false,
+          height: 200,
+          child: ListView(
             children: [
               // Explore and Create Button
 
@@ -85,7 +95,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       return const NoRegistredEventWidget();
                     }
                     // Loading Events
-                    return const CircularProgressIndicator();
+                    return SizedBox(
+                      width: width * 0.9,
+                      height: 200,
+                      child: const LinearProgressIndicator(),
+                    );
                   })),
 
               const SizedBox(height: 20),
@@ -139,7 +153,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       return const NoBookmarkedEventWidget();
                     }
                     // Loading Events
-                    return const CircularProgressIndicator();
+                    return SizedBox(
+                      width: width * 0.9,
+                      height: 200,
+                      child: const CircularProgressIndicator(),
+                    );
                   })),
 
               const SizedBox(height: 20)
