@@ -21,7 +21,7 @@ class CreateEventMainScreen extends StatelessWidget {
         padding: EdgeInsets.all(30),
         alignment: const Alignment(0, 0),
         child: Container(
-          height: height * 0.7,
+          height: 600,
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             gradient: container6Color,

@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return SizedBox(
                       width: width * 0.9,
                       height: 200,
-                      child: const LinearProgressIndicator(),
+                      child: const Center(child: CircularProgressIndicator()),
                     );
                   })),
 
@@ -156,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return SizedBox(
                       width: width * 0.9,
                       height: 200,
-                      child: const CircularProgressIndicator(),
+                      child: const Center(child: CircularProgressIndicator()),
                     );
                   })),
 
