@@ -123,7 +123,10 @@ class _SearchScreenState extends State<SearchScreen> {
                             return Container();
                           }
                           // Loading Events
-                          return const CircularProgressIndicator();
+                          return const SizedBox(
+                            height: 200,
+                            child: Center(child: CircularProgressIndicator()),
+                          );
                         }))
                   ],
                 ),
