@@ -12,9 +12,10 @@ class GeneralEventController extends GetxController {
 
   final stringQuery = TextEditingController(text: '');
 
-  Future<List<EventModel>?> searchEvents() async {
+  Future<List<EventModel>?> searchEvents(
+      String filterBy, bool isDescending) async {
     if (stringQuery.text == '') {
-      return getAllEvents();
+      return getAllFilteredEvents(filterBy, isDescending);
     }
     return _eventRepository.searchEvent(stringQuery.text.trim());
   }
@@ -23,8 +24,9 @@ class GeneralEventController extends GetxController {
     return _eventRepository.getEventImage(imagePath);
   }
 
-  Future<List<EventModel>?> getAllEvents() async {
-    return await _eventRepository.getAllEvents();
+  Future<List<EventModel>?> getAllFilteredEvents(
+      String filterBy, bool isDescending) async {
+    return await _eventRepository.getAllFilteredEvents(filterBy, isDescending);
   }
 
   Future<void> addParticipant(String eventID) async {

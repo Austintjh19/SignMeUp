@@ -42,7 +42,7 @@ class CurrentUserController extends GetxController {
     List? registedEvents = await _userRepository.getRegisteredEvents(uid!);
     if (registedEvents != null) {
       List<EventModel> registeredEventsCollection =
-          await _eventRepository.getUserRegisteredEvents(registedEvents);
+          await _eventRepository.getSelectedEvents(registedEvents);
       return registeredEventsCollection;
     }
     return null;
@@ -53,7 +53,7 @@ class CurrentUserController extends GetxController {
     List? bookmarkedEvents = await _userRepository.getBookmarkedEvents(uid!);
     if (bookmarkedEvents != null) {
       List<EventModel> bookmarkedEventsCollection =
-          await _eventRepository.getUserRegisteredEvents(bookmarkedEvents);
+          await _eventRepository.getSelectedEvents(bookmarkedEvents);
       return bookmarkedEventsCollection;
     }
     return null;

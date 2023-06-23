@@ -18,7 +18,7 @@ class AuthenticationRepository extends GetxController {
 
   final _auth = FirebaseAuth.instance;
   late final Rx<User?> firebaseUser;
-  String verificationID = '';
+  static String verificationID = '';
   bool verifyViaEmailOTP = true;
 
   EmailOTP myEmailAuth = EmailOTP();
@@ -39,6 +39,7 @@ class AuthenticationRepository extends GetxController {
   }
 
   Future<String> phoneAuthentication(String phoneNo) async {
+    CircularProgressWidget.getCircularProgressIndicator();
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneNo,
       verificationCompleted: (credential) async {
@@ -64,10 +65,12 @@ class AuthenticationRepository extends GetxController {
         }
       },
     );
+    CircularProgressWidget.popCircularProgressIndicator();
     return verificationID;
   }
 
   Future<void> emailAuthentication(String email) async {
+    CircularProgressWidget.getCircularProgressIndicator();
     myEmailAuth.setConfig(
         appEmail: "SignMeUp@gmail.com",
         appName: "Email OTP",
@@ -77,15 +80,18 @@ class AuthenticationRepository extends GetxController {
     bool res = await myEmailAuth.sendOTP();
     if (res) {
       print("sent");
+      CircularProgressWidget.popCircularProgressIndicator();
     } else {
       print("not sent");
     }
   }
 
   Future<bool> verifyOTP(String otp, String phoneVerificationID) async {
+    CircularProgressWidget.getCircularProgressIndicator();
     if (verifyViaEmailOTP == true) {
       try {
         bool res = await myEmailAuth.verifyOTP(otp: otp);
+        CircularProgressWidget.popCircularProgressIndicator();
         return res;
       } catch (e) {
         Get.snackbar("Error", e.toString(),
@@ -95,18 +101,18 @@ class AuthenticationRepository extends GetxController {
       }
     } else {
       try {
+        CircularProgressWidget.getCircularProgressIndicator();
         var credentials = await _auth.signInWithCredential(
             PhoneAuthProvider.credential(
-                verificationId: phoneVerificationID, smsCode: otp));
+                verificationId: verificationID, smsCode: otp));
+        CircularProgressWidget.popCircularProgressIndicator();
         return credentials.user != null ? true : false;
       } on FirebaseAuthException catch (e) {
-        final ex = SignUpExceptions.code(e.code);
-        print(e.toString());
         Get.snackbar("Error", e.toString(),
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.redAccent.withOpacity(0.1),
             colorText: Colors.red);
-        throw ex;
+        throw e;
       }
     }
     return false;
@@ -156,9 +162,9 @@ class AuthenticationRepository extends GetxController {
 
   Future<void> resetPasswordViaEmail(String email) async {
     CircularProgressWidget.getCircularProgressIndicator();
-
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      CircularProgressWidget.popCircularProgressIndicator();
       Get.snackbar("Success",
           "Password reset link sent. Check registered email for notification. If not present, check spam folder.",
           snackPosition: SnackPosition.BOTTOM,
