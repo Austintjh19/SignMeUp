@@ -10,7 +10,7 @@ final filterStateProvider = StateProvider<Map<String, String>>((ref) {
   };
 });
 
-class FilterSearchController extends GetxController {
+final class FilterSearchController extends GetxController {
   static FilterSearchController get instance => Get.find();
 
   getPopUp(BuildContext context) {
@@ -61,7 +61,7 @@ class FilterSearchController extends GetxController {
                                       color: textColor600)),
                               items: const [
                                 DropdownMenuItem(
-                                    value: 'Ascending',
+                                    value: 'Descending',
                                     child: Text('Ascending',
                                         style: TextStyle(
                                             fontFamily: 'Raleway',
@@ -69,7 +69,7 @@ class FilterSearchController extends GetxController {
                                             fontSize: 15,
                                             color: textColor600))),
                                 DropdownMenuItem(
-                                    value: 'Descending',
+                                    value: 'Ascending',
                                     child: Text('Descending',
                                         style: TextStyle(
                                             fontFamily: 'Raleway',
@@ -113,7 +113,7 @@ class FilterSearchController extends GetxController {
                                       color: textColor600)),
                               items: const [
                                 DropdownMenuItem(
-                                    value: 'Ascending',
+                                    value: 'Descending',
                                     child: Text('Ascending',
                                         style: TextStyle(
                                             fontFamily: 'Raleway',
@@ -121,7 +121,7 @@ class FilterSearchController extends GetxController {
                                             fontSize: 15,
                                             color: textColor600))),
                                 DropdownMenuItem(
-                                    value: 'Descending',
+                                    value: 'Ascending',
                                     child: Text('Descending',
                                         style: TextStyle(
                                             fontFamily: 'Raleway',

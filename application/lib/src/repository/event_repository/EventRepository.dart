@@ -68,11 +68,13 @@ class EventRepository extends GetxController {
     return eventsCollection;
   }
 
-  Future<List<EventModel>> searchEvent(String query) async {
+  Future<List<EventModel>> searchEvent(
+      String query, String filterBy, bool isDescending) async {
     List<EventModel> eventsCollection = [];
     QuerySnapshot nameQuerySnapshot = await _db
         .collection('EventsInfo')
         .where('Event Name', arrayContains: query)
+        .orderBy(filterBy, descending: isDescending)
         .get();
     nameQuerySnapshot.docs.forEach((element) {
       eventsCollection.add(EventModel.fromSnapShot(
@@ -81,6 +83,7 @@ class EventRepository extends GetxController {
     QuerySnapshot locationQuerySnapshot = await _db
         .collection('EventsInfo')
         .where('Event Location', arrayContains: query)
+        .orderBy(filterBy, descending: isDescending)
         .get();
     locationQuerySnapshot.docs.forEach((element) {
       eventsCollection.add(EventModel.fromSnapShot(

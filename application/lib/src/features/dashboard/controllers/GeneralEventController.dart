@@ -12,12 +12,13 @@ class GeneralEventController extends GetxController {
 
   final stringQuery = TextEditingController(text: '');
 
-  Future<List<EventModel>?> searchEvents(
-      String filterBy, bool isDescending) async {
+  Future<List<EventModel>?> searchEvents(String filterBy, String order) async {
     if (stringQuery.text == '') {
-      return getAllFilteredEvents(filterBy, isDescending);
+      return getAllFilteredEvents(
+          filterBy, order == 'Descending' ? false : true);
     }
-    return _eventRepository.searchEvent(stringQuery.text.trim());
+    return _eventRepository.searchEvent(stringQuery.text.trim(), filterBy,
+        order == 'Descending' ? false : true);
   }
 
   getEventImage(String imagePath) {
