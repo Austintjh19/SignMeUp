@@ -6,6 +6,7 @@ import 'package:myapplication/src/features/dashboard/controllers/GeneralEventCon
 import 'package:myapplication/src/common_widgets/VerticalScrollEventsWidget.dart';
 
 import '../../Dashboard.dart';
+import '../../controllers/FilterSearchController.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -16,6 +17,8 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final eventController = Get.put(GeneralEventController());
+  final filterSearchController = Get.put(FilterSearchController());
+
   bool _isDescending = true;
   String _filterBy = 'Event Date';
 
@@ -75,7 +78,6 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                         const Spacer(),
                         DropdownButton(
-                            value: _isDescending,
                             items: const [
                               DropdownMenuItem(
                                   value: false,
@@ -298,7 +300,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   size: 20,
                                 ),
                                 onPressed: () {
-                                  _filterPopUp(context);
+                                  filterSearchController.getPopUp(context);
                                 },
                               ),
                             ),
