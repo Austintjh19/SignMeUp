@@ -57,9 +57,11 @@ class _MailOTPFormState extends State<MailOTPForm> {
             if (_formKey.currentState!.validate()) {
               AuthenticationRepository.instance.verifyViaEmailOTP = true;
               OTPController.instance.emailAuthentication();
-              Get.to(() => const OTPScreen(
-                    phoneNumVerificationID: '',
-                  ));
+              Get.to(
+                  () => const OTPScreen(
+                        phoneNumVerificationID: '',
+                      ),
+                  transition: Transition.leftToRight);
             }
           },
         ),

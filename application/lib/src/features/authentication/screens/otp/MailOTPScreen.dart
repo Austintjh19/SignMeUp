@@ -1,10 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:myapplication/src/constants/image_strings.dart';
 import 'package:myapplication/src/features/authentication/screens/otp/widgets/MailOTPForm.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../../constants/text_strings.dart';
+import '../sign_in/SignInScreen.dart';
 
 class MailOTPScreen extends StatelessWidget {
   const MailOTPScreen({super.key});
@@ -21,7 +23,7 @@ class MailOTPScreen extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              Get.to(const SignInScreen(), transition: Transition.rightToLeft);
             },
             icon: const Icon(Icons.arrow_back_outlined,
                 color: Colors.black, size: 25)),

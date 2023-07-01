@@ -174,9 +174,8 @@ class _UpdatProfileFormState extends State<UpdatProfileForm> {
                                 if (_formKey.currentState!.validate()) {
                                   await updateProfileController
                                       .updateProfile(userData.uid);
-                                  Get.offAll(Dashboard(
-                                    initialPageIndex: -1,
-                                  ));
+                                  Get.offAll(Dashboard(initialPageIndex: -1),
+                                      transition: Transition.leftToRight);
                                 }
                               }
                             },

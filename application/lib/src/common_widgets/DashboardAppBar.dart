@@ -84,7 +84,8 @@ class DashboardAppBar extends StatelessWidget {
                       // Settings
                       ElevatedButton(
                         onPressed: () {
-                          Get.to(() => const SettingsScreen());
+                          Get.to(() => const SettingsScreen(),
+                              transition: Transition.rightToLeft);
                         },
                         style: ElevatedButton.styleFrom(
                           shape: const CircleBorder(),

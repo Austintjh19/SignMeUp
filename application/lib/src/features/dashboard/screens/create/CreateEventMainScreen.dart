@@ -52,7 +52,8 @@ class CreateEventMainScreen extends StatelessWidget {
               // Create Event Button
               ElevatedButton(
                 onPressed: () {
-                  Get.to(const CreateEventScreen());
+                  Get.to(const CreateEventScreen(),
+                      transition: Transition.rightToLeft);
                 },
                 style: ElevatedButton.styleFrom(
                   padding:

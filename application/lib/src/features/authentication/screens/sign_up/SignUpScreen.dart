@@ -31,7 +31,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           leading: IconButton(
               onPressed: () {
                 onForm1
-                    ? Get.to(const SignInScreen())
+                    ? Get.to(const SignInScreen(),
+                        transition: Transition.leftToRight)
                     : setState(() => onForm1 = true);
               },
               icon: const Icon(Icons.arrow_back_outlined,

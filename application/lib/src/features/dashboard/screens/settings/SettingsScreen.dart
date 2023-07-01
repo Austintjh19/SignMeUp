@@ -25,9 +25,11 @@ class SettingsScreen extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
             onPressed: () {
-              Get.offAll(Dashboard(
-                initialPageIndex: -1,
-              ));
+              Get.offAll(
+                  Dashboard(
+                    initialPageIndex: -1,
+                  ),
+                  transition: Transition.leftToRight);
             },
             icon: const Icon(Icons.arrow_back_outlined,
                 color: Colors.black, size: 25)),
@@ -110,7 +112,8 @@ class SettingsScreen extends StatelessWidget {
                 buttonColor: const Color.fromRGBO(119, 143, 253, 1),
                 textColor: Colors.white,
                 function: () {
-                  Get.to(const UpdateProfileScreen());
+                  Get.to(const UpdateProfileScreen(),
+                      transition: Transition.rightToLeft);
                 }),
 
             const SizedBox(height: 10),

@@ -25,7 +25,8 @@ class OTPScreen extends StatelessWidget {
           elevation: 0,
           leading: IconButton(
               onPressed: () {
-                Get.to(const SignInScreen());
+                Get.to(const SignInScreen(),
+                    transition: Transition.rightToLeft);
               },
               icon: const Icon(Icons.arrow_back_outlined,
                   color: Colors.black, size: 25)),

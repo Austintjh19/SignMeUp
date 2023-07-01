@@ -11,7 +11,8 @@ class ForgotPasswordButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         TextButton(
-            onPressed: () => Get.to(const ForgotPasswordScreen()),
+            onPressed: () => Get.to(const ForgotPasswordScreen(),
+                transition: Transition.rightToLeft),
             child: const Text(
               'Forgot Password ?',
               style: TextStyle(

@@ -93,8 +93,10 @@ class _OTPWidgets extends State<PhoneOTPForm> {
                 AuthenticationRepository.instance.verifyViaEmailOTP = false;
                 String phoneNumVerficationID =
                     await OTPController.instance.phoneNumAuthentication();
-                Get.to(() =>
-                    OTPScreen(phoneNumVerificationID: phoneNumVerficationID));
+                Get.to(
+                    () => OTPScreen(
+                        phoneNumVerificationID: phoneNumVerficationID),
+                    transition: Transition.leftToRight);
               }
             },
           ),
