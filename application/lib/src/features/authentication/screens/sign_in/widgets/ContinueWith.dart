@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:myapplication/src/constants/colors.dart';
 import 'package:myapplication/src/constants/image_strings.dart';
 import 'package:myapplication/src/constants/text_strings.dart';
@@ -49,7 +50,12 @@ class ContinueWith extends StatelessWidget {
         // Continue with Facebook
         ElevatedButton.icon(
           onPressed: () {
-            AuthenticationRepository.instance.signInWithFacebook();
+            Get.snackbar(
+                "Unavailable", "Feature is currently under modification",
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Colors.redAccent.withOpacity(0.1),
+                colorText: Colors.red);
+            // AuthenticationRepository.instance.signInWithFacebook();
           },
           icon: Image.asset(
             facebookLogo,

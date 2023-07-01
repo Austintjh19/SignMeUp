@@ -109,7 +109,12 @@ class SignUpButton extends StatelessWidget {
 
                       // Phone Button
                       GestureDetector(
-                        onTap: () => Get.to(const PhoneOTPScreen()),
+                        onTap: () => Get.snackbar("Unavailable",
+                            "Feature is currently under modification",
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: Colors.redAccent.withOpacity(0.1),
+                            colorText: Colors.red),
+                        // onTap: () => Get.to(const PhoneOTPScreen()),
                         child: Container(
                           padding: const EdgeInsets.all(20),
                           decoration: BoxDecoration(
@@ -124,7 +129,7 @@ class SignUpButton extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                // Email
+                                // Phone
                                 AutoSizeText(
                                   'Phone',
                                   style: TextStyle(
@@ -137,7 +142,7 @@ class SignUpButton extends StatelessWidget {
 
                                 SizedBox(height: 3),
 
-                                // Select Email
+                                // Select Phone
                                 AutoSizeText(
                                   selectOTPThone,
                                   style: TextStyle(
