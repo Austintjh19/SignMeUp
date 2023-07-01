@@ -23,7 +23,7 @@ class PhoneOTPScreen extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
             onPressed: () {
-              Get.to(const SignInScreen(), transition: Transition.rightToLeft);
+              Get.to(const SignInScreen());
             },
             icon: const Icon(Icons.arrow_back_outlined,
                 color: Colors.black, size: 25)),

@@ -326,8 +326,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
               ElevatedButton(
                 onPressed: () {
                   createEventController.createEvent();
-                  Get.offAll(Dashboard(initialPageIndex: -1),
-                      transition: Transition.leftToRight);
+                  Get.back();
                 },
                 style: ElevatedButton.styleFrom(
                   padding:

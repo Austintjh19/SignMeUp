@@ -24,8 +24,6 @@ class OTPController extends GetxController {
   void verifyOTP(String otp, String phoneVerificationID) async {
     var isVerified = await AuthenticationRepository.instance
         .verifyOTP(otp, phoneVerificationID);
-    isVerified
-        ? Get.offAll(const SignUpScreen(), transition: Transition.leftToRight)
-        : Get.back();
+    isVerified ? Get.offAll(const SignUpScreen()) : Get.back();
   }
 }

@@ -17,8 +17,7 @@ class UpdateProfileScreen extends StatelessWidget {
           elevation: 0,
           leading: IconButton(
               onPressed: () {
-                Get.to(() => const SettingsScreen(),
-                    transition: Transition.leftToRight);
+                Get.back();
               },
               icon: const Icon(Icons.arrow_back_outlined,
                   color: Colors.black, size: 25)),

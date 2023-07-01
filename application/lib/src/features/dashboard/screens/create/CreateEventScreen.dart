@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:myapplication/src/features/dashboard/screens/create/widgets/CreateEventForm.dart';
 
 import '../../../../constants/colors.dart';
@@ -15,7 +16,7 @@ class CreateEventScreen extends StatelessWidget {
           elevation: 0,
           leading: IconButton(
               onPressed: () {
-                Navigator.pop(context);
+                Get.back();
               },
               icon: const Icon(Icons.arrow_back_outlined,
                   color: Colors.black, size: 25)),
