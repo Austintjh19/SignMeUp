@@ -43,7 +43,7 @@ class EventRepository extends GetxController {
     QuerySnapshot querySnapshot = await _db
         .collection('EventsInfo')
         .where("ID", whereIn: registeredEvents)
-        .orderBy('Event Date', descending: true)
+        .orderBy('EventDateTime', descending: false)
         .get();
 
     querySnapshot.docs.forEach((element) {
@@ -52,7 +52,6 @@ class EventRepository extends GetxController {
     });
     return registeredEventsCollection;
   }
-  //   QuerySnapshot querySnapshot=await _collectionReference.doc(id).collection('reviews').orderBy('date', descending: true).get();
 
   Future<List<EventModel>> getAllFilteredEvents(
       String filterBy, bool isDescending) async {
@@ -112,4 +111,20 @@ class EventRepository extends GetxController {
       'Participants': FieldValue.arrayRemove([uid])
     });
   }
+
+  Future<void> updateEventsCollection() async {
+    List<EventModel> outdatedEvents = [];
+    QuerySnapshot snapshot = await _db
+        .collection('EventsInfo')
+        .where('EventDateTime',
+            isLessThan:
+                DateTime.now().subtract(const Duration(days: 1)).toUtc())
+        .get();
+    snapshot.docs.forEach((element) {
+      outdatedEvents.add(EventModel.fromSnapShot(
+          element as DocumentSnapshot<Map<String, dynamic>>));
+    });
+  }
+
+  Future<void> removeEvents(String EventID) async {}
 }
