@@ -126,5 +126,7 @@ class EventRepository extends GetxController {
     });
   }
 
-  Future<void> removeEvents(String EventID) async {}
+  Future<void> removeEvents(String eventID) async {
+    _db.collection('EventsInfo').doc(eventID).delete();
+  }
 }

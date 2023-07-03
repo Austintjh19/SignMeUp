@@ -258,13 +258,14 @@ class AuthenticationRepository extends GetxController {
                 uid, userData.registeredEvents?[index]);
           }
         }
-        _userRepository.deleteUserDoc(uid);
         value.user?.delete().then((res) {
+          _userRepository.deleteUserDoc(uid);
+          Get.offAll(const SignInScreen());
           Get.snackbar("Success",
               '"Your User Account and all its related details have been deleted from our system.',
               snackPosition: SnackPosition.BOTTOM,
-              backgroundColor: Colors.redAccent.withOpacity(0.1),
-              colorText: Colors.red);
+              backgroundColor: Colors.green.withOpacity(0.1),
+              colorText: Colors.green);
         });
       });
     } on FirebaseAuthException catch (e) {

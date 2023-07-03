@@ -28,6 +28,5 @@ class SettingsController extends GetxController {
     _authenticationRepository.deleteUserAccount(
         (await currentUserController.getUserData() as UserModel).email,
         password.text.trim());
-    Get.offAll(const SignInScreen());
   }
 }
