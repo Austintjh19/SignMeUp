@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,13 +11,18 @@ import 'package:myapplication/src/repository/authentication_repository/exception
 
 import '../../common_widgets/CircularProgressWidget.dart';
 import '../../models/UserModel.dart';
+import '../event_repository/EventRepository.dart';
 import '../user_repository/UserRepository.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
-  final userRepository = Get.put(UserRepository());
+
+  final _userRepository = Get.put(UserRepository());
+  final _eventRepository = Get.put(EventRepository());
 
   final _auth = FirebaseAuth.instance;
+  final _db = FirebaseFirestore.instance;
+
   late final Rx<User?> firebaseUser;
   static String verificationID = '';
   bool verifyViaEmailOTP = true;
@@ -190,7 +196,7 @@ class AuthenticationRepository extends GetxController {
             password: '',
             profileImage: '',
             description: '');
-        await userRepository.storeUserDetails(user, userCredential);
+        await _userRepository.storeUserDetails(user, userCredential);
       }
     } on FirebaseAuthException catch (e) {
       CircularProgressWidget.popCircularProgressIndicator();
@@ -219,7 +225,7 @@ class AuthenticationRepository extends GetxController {
             password: '',
             profileImage: '',
             description: '');
-        await userRepository.storeUserDetails(user, userCredential);
+        await _userRepository.storeUserDetails(user, userCredential);
       }
     } on FirebaseAuthException catch (e) {
       CircularProgressWidget.popCircularProgressIndicator();
@@ -227,11 +233,44 @@ class AuthenticationRepository extends GetxController {
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent.withOpacity(0.1),
           colorText: Colors.red);
-      rethrow;
     }
   }
 
   Future<void> signOutUser() async {
     await _auth.signOut();
+  }
+
+  Future<void> deleteUserAccount(String email, String password) async {
+    try {
+      AuthCredential credential =
+          EmailAuthProvider.credential(email: email, password: password);
+
+      await _auth.currentUser
+          ?.reauthenticateWithCredential(credential)
+          .then((value) async {
+        final uid = firebaseUser.value?.uid;
+        UserModel userData = await _userRepository.getUserData(uid!);
+        if (userData.registeredEvents != null) {
+          for (var index = 0;
+              index < userData.registeredEvents!.length;
+              index++) {
+            _eventRepository.removeParticipant(
+                uid, userData.registeredEvents?[index]);
+          }
+        }
+        value.user?.delete().then((res) {
+          Get.snackbar("Success",
+              '"Your User Account and all its related details have been deleted from our system.',
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.redAccent.withOpacity(0.1),
+              colorText: Colors.red);
+        });
+      });
+    } on FirebaseAuthException catch (e) {
+      Get.snackbar("Error", e.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent.withOpacity(0.1),
+          colorText: Colors.red);
+    }
   }
 }
