@@ -4,16 +4,11 @@ import 'package:myapplication/src/constants/colors.dart';
 import 'package:myapplication/src/constants/image_strings.dart';
 import 'package:myapplication/src/features/dashboard/screens/create/CreateEventScreen.dart';
 
-import '../../../../common_widgets/FullWidthTextButton.dart';
-
 class CreateEventMainScreen extends StatelessWidget {
   const CreateEventMainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(

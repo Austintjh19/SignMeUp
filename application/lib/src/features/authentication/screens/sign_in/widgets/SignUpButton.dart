@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapplication/src/constants/text_strings.dart';
 import 'package:myapplication/src/features/authentication/screens/otp/MailOTPScreen.dart';
-import 'package:myapplication/src/features/authentication/screens/otp/PhoneOTPScreen.dart';
 
 import '../../../../../constants/colors.dart';
 

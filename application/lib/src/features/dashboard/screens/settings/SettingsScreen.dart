@@ -5,11 +5,9 @@ import 'package:myapplication/src/common_widgets/FullWidthTextButton.dart';
 import 'package:myapplication/src/constants/colors.dart';
 import 'package:myapplication/src/features/dashboard/controllers/SettingsController.dart';
 import 'package:myapplication/src/models/UserModel.dart';
-import 'package:myapplication/src/features/dashboard/Dashboard.dart';
 import 'package:myapplication/src/features/dashboard/screens/update_profile/UpdateProfileScreen.dart';
 
 import '../../../../constants/image_strings.dart';
-import '../../../../repository/authentication_repository/AuthenticationRepository.dart';
 import '../../controllers/CurrentUserController.dart';
 
 class SettingsScreen extends StatelessWidget {
