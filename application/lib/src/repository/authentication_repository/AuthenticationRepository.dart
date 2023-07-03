@@ -258,6 +258,7 @@ class AuthenticationRepository extends GetxController {
                 uid, userData.registeredEvents?[index]);
           }
         }
+        _userRepository.deleteUserDoc(uid);
         value.user?.delete().then((res) {
           Get.snackbar("Success",
               '"Your User Account and all its related details have been deleted from our system.',

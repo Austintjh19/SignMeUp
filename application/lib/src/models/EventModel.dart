@@ -57,8 +57,6 @@ class EventModel {
         eventDescription: eventData['Event Description'],
         participants: eventData['Participants']);
   }
-
-  compareTo() {}
 }
 
 // var lst = ["element1" , "element2" , "element3"];

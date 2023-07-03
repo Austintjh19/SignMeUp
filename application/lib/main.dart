@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_in/SignInScreen.dart';
 import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
+import 'package:myapplication/src/repository/event_repository/EventRepository.dart';
 import 'firebase_options.dart';
 
 // flutter build apk --build-name=1.0 --build-number=1
@@ -20,6 +21,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _eventRepository = Get.put(EventRepository());
+
     return const GetMaterialApp(
       defaultTransition: Transition.noTransition,
       debugShowCheckedModeBanner: false,

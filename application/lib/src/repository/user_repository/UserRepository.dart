@@ -129,4 +129,8 @@ class UserRepository extends GetxController {
     final userData = snapshot.docs.map((e) => UserModel.fromSnapShot(e)).single;
     return userData.bookmarkedEvents;
   }
+
+  Future<void> deleteUserDoc(String uid) async {
+    await _db.collection('UsersSignUpInfo').doc(uid).delete();
+  }
 }

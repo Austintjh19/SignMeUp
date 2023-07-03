@@ -6,7 +6,7 @@ import '../../../constants/colors.dart';
 
 final filterStateProvider = StateProvider<Map<String, String>>((ref) {
   return {
-    'Event Date': 'Descending',
+    'EventDateTime': 'Descending',
   };
 });
 
@@ -153,8 +153,8 @@ final class FilterSearchController extends GetxController {
                           ),
                           const Spacer(),
                           DropdownButton(
-                              value: filterCriteria.containsKey('Event Date')
-                                  ? filterCriteria['Event Date']
+                              value: filterCriteria.containsKey('EventDateTime')
+                                  ? filterCriteria['EventDateTime']
                                   : null,
                               hint: const Text('NA',
                                   style: TextStyle(
@@ -164,7 +164,7 @@ final class FilterSearchController extends GetxController {
                                       color: textColor600)),
                               items: const [
                                 DropdownMenuItem(
-                                    value: 'Ascending',
+                                    value: 'Descending',
                                     child: Text('Ascending',
                                         style: TextStyle(
                                             fontFamily: 'Raleway',
@@ -172,7 +172,7 @@ final class FilterSearchController extends GetxController {
                                             fontSize: 15,
                                             color: textColor600))),
                                 DropdownMenuItem(
-                                    value: 'Descending',
+                                    value: 'Ascending',
                                     child: Text('Descending',
                                         style: TextStyle(
                                             fontFamily: 'Raleway',
@@ -182,7 +182,7 @@ final class FilterSearchController extends GetxController {
                               ],
                               onChanged: (val) {
                                 ref.read(filterStateProvider.state).state = {
-                                  'Event Date': val!
+                                  'EventDateTime': val!
                                 };
                               })
                         ],
