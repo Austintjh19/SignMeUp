@@ -1,4 +1,4 @@
-//modeling Event 
+//modeling Event
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
@@ -57,18 +57,19 @@ class EventModel {
         eventDescription: eventData['Event Description'],
         participants: eventData['Participants']);
   }
-}
 
+  compareTo() {}
+}
 
 // var lst = ["element1" , "element2" , "element3"];
 // lst.last // -> element3
 
 // setSearchParameters(String name) {
-        // List<String> searchOptions = [];
-        // String temp = "";
-        // for (int i = 0; i < name.length; i++) {
-        //   temp = temp + name[i];
-        //   searchOptions.add(temp);
-        // }
-        // return searchOptions;
+// List<String> searchOptions = [];
+// String temp = "";
+// for (int i = 0; i < name.length; i++) {
+//   temp = temp + name[i];
+//   searchOptions.add(temp);
+// }
+// return searchOptions;
 //   }

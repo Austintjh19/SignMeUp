@@ -73,8 +73,8 @@ class EventRepository extends GetxController {
     List<EventModel> eventsCollection = [];
     QuerySnapshot nameQuerySnapshot = await _db
         .collection('EventsInfo')
-        .where('Event Name', arrayContains: query)
         .orderBy(filterBy, descending: isDescending)
+        .where('Event Name', arrayContains: query)
         .get();
     nameQuerySnapshot.docs.forEach((element) {
       eventsCollection.add(EventModel.fromSnapShot(
@@ -82,8 +82,8 @@ class EventRepository extends GetxController {
     });
     QuerySnapshot locationQuerySnapshot = await _db
         .collection('EventsInfo')
-        .where('Event Location', arrayContains: query)
         .orderBy(filterBy, descending: isDescending)
+        .where('Event Location', arrayContains: query)
         .get();
     locationQuerySnapshot.docs.forEach((element) {
       eventsCollection.add(EventModel.fromSnapShot(
