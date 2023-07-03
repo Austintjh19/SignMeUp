@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapplication/src/features/authentication/screens/sign_in/SignInScreen.dart';
 import 'package:myapplication/src/models/UserModel.dart';
 import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
 

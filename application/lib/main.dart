@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _eventRepository = Get.put(EventRepository());
+    _eventRepository.updateEventsCollection();
 
     return const GetMaterialApp(
       defaultTransition: Transition.noTransition,

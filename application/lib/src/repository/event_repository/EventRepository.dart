@@ -124,6 +124,9 @@ class EventRepository extends GetxController {
       outdatedEvents.add(EventModel.fromSnapShot(
           element as DocumentSnapshot<Map<String, dynamic>>));
     });
+    for (final event in outdatedEvents) {
+      removeEvents(event.id);
+    }
   }
 
   Future<void> removeEvents(String eventID) async {
