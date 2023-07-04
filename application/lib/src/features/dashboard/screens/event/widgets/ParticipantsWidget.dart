@@ -83,7 +83,6 @@ class ParticipantsWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               boxShadow: defaultBoxShadow),
           child: ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               itemCount: event.participants.length,
