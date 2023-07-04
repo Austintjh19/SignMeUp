@@ -13,9 +13,9 @@ class DashboardAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(CurrentUserController());
+    final currentUserContoller = Get.put(CurrentUserController());
     return FutureBuilder(
-        future: controller.getUserData(),
+        future: currentUserContoller.getUserData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
@@ -30,7 +30,7 @@ class DashboardAppBar extends StatelessWidget {
 
                       // Profile Image
                       FutureBuilder(
-                          future: controller.getProfileImage(),
+                          future: currentUserContoller.getProfileImage(),
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.done) {
@@ -47,11 +47,7 @@ class DashboardAppBar extends StatelessWidget {
                                       );
                               }
                             }
-                            return const CircleAvatar(
-                              radius: 35,
-                              backgroundImage:
-                                  ExactAssetImage(defaultProfileImage),
-                            );
+                            return Container();
                           }),
 
                       const SizedBox(width: 15),

@@ -204,9 +204,10 @@ final class FilterSearchController extends GetxController {
                           ),
                           const Spacer(),
                           DropdownButton(
-                              value: filterCriteria.containsKey('Participants')
-                                  ? filterCriteria['Participants']
-                                  : null,
+                              value:
+                                  filterCriteria.containsKey('Num Participants')
+                                      ? filterCriteria['Num Participants']
+                                      : null,
                               hint: const Text('NA',
                                   style: TextStyle(
                                       fontFamily: 'Raleway',
@@ -215,7 +216,7 @@ final class FilterSearchController extends GetxController {
                                       color: textColor600)),
                               items: const [
                                 DropdownMenuItem(
-                                    value: 'Ascending',
+                                    value: 'Descending',
                                     child: Text('Ascending',
                                         style: TextStyle(
                                             fontFamily: 'Raleway',
@@ -223,7 +224,7 @@ final class FilterSearchController extends GetxController {
                                             fontSize: 15,
                                             color: textColor600))),
                                 DropdownMenuItem(
-                                    value: 'Descending',
+                                    value: 'Ascending',
                                     child: Text('Descending',
                                         style: TextStyle(
                                             fontFamily: 'Raleway',
@@ -233,7 +234,7 @@ final class FilterSearchController extends GetxController {
                               ],
                               onChanged: (val) {
                                 ref.read(filterStateProvider.state).state = {
-                                  'Participants': val!
+                                  'Num Participants': val!
                                 };
                               })
                         ],

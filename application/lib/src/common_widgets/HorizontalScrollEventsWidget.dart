@@ -15,6 +15,7 @@ class HorizontalScrollEventsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final eventsController = Get.put(GeneralEventController());
     double width = MediaQuery.of(context).size.width;
+
     return Row(
       children: [
         const SizedBox(width: 10),
@@ -63,16 +64,7 @@ class HorizontalScrollEventsWidget extends StatelessWidget {
                               );
                       }
                     }
-                    return Container(
-                      width: width * 0.9,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: const DecorationImage(
-                            image: ExactAssetImage(defaultEventImage),
-                            fit: BoxFit.fill),
-                      ),
-                    );
+                    return const LinearProgressIndicator();
                   }),
 
               const SizedBox(height: 10),
@@ -88,6 +80,8 @@ class HorizontalScrollEventsWidget extends StatelessWidget {
                     color: textColor600),
               ),
               const SizedBox(height: 5),
+
+              //Participants & Event Date Time
               Row(
                 children: [
                   // Participants
@@ -95,7 +89,7 @@ class HorizontalScrollEventsWidget extends StatelessWidget {
                   const SizedBox(width: 5),
 
                   Text(
-                    "Participants: ${event.participants.length.toString()}/${event.participantsLimit}",
+                    "Participants: ${event.numParticipants.toString()}/${event.participantsLimit}",
                     textAlign: TextAlign.start,
                     style: const TextStyle(
                         fontFamily: 'Raleway',
@@ -105,6 +99,8 @@ class HorizontalScrollEventsWidget extends StatelessWidget {
                   ),
 
                   const Spacer(),
+
+                  // Event Date & Time
                   Text(
                     "${event.eventDate} @ ${event.eventTime}",
                     textAlign: TextAlign.start,
