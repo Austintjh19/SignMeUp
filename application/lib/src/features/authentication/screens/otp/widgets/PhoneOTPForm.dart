@@ -18,7 +18,7 @@ class PhoneOTPForm extends StatefulWidget {
 
 class _OTPWidgets extends State<PhoneOTPForm> {
   final _formKey = GlobalKey<FormState>();
-  final controller = Get.put(OTPController());
+  final otpController = Get.put(OTPController());
   final validationController = Get.put(ValidationController());
   Country country = CountryParser.parseCountryCode('SG');
 
@@ -39,7 +39,7 @@ class _OTPWidgets extends State<PhoneOTPForm> {
             ),
             keyboardType: TextInputType.phone,
             textAlign: TextAlign.left,
-            controller: controller.phoneNum,
+            controller: otpController.phoneNum,
             decoration: InputDecoration(
               labelText: 'Enter Phone Number',
               labelStyle: const TextStyle(
@@ -89,7 +89,7 @@ class _OTPWidgets extends State<PhoneOTPForm> {
             textColor: Colors.white,
             function: () async {
               if (_formKey.currentState!.validate()) {
-                controller.phoneCode = "+${country.phoneCode}";
+                otpController.phoneCode = "+${country.phoneCode}";
                 AuthenticationRepository.instance.verifyViaEmailOTP = false;
                 String phoneNumVerficationID =
                     await OTPController.instance.phoneNumAuthentication();

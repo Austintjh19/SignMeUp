@@ -17,7 +17,7 @@ class MailOTPForm extends StatefulWidget {
 
 class _MailOTPFormState extends State<MailOTPForm> {
   final _formKey = GlobalKey<FormState>();
-  final controller = Get.put(OTPController());
+  final otpController = Get.put(OTPController());
   final validationController = Get.put(ValidationController());
 
   @override
@@ -28,7 +28,7 @@ class _MailOTPFormState extends State<MailOTPForm> {
         // Enter Email
         TextFormField(
           textAlign: TextAlign.left,
-          controller: controller.email,
+          controller: otpController.email,
           decoration: InputDecoration(
               labelText: 'Enter Email',
               labelStyle: const TextStyle(

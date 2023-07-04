@@ -13,7 +13,6 @@ class PhoneOTPScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Change controller
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(

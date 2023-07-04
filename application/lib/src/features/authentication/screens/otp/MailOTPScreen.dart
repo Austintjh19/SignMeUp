@@ -13,7 +13,6 @@ class MailOTPScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Change controller
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -43,6 +42,7 @@ class MailOTPScreen extends StatelessWidget {
                         otpImage,
                         width: width * 0.75,
                       ),
+
                       const SizedBox(height: 20.0),
 
                       // Enter Email
