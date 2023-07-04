@@ -44,13 +44,13 @@ class GeneralEventController extends GetxController {
     await _eventRepository.removeParticipant(uid!, eventID);
   }
 
-  Future<void> updateNumParticipant(String eventID, List participants) async {
-    await _eventRepository.updateNumParticipant(eventID, participants.length);
+  Future<void> updateNumParticipant(String eventID, int numParticipants) async {
+    await _eventRepository.updateNumParticipant(eventID, numParticipants);
   }
 
   Future<void> updateIsFull(
-      String eventID, List participants, int participantsLimit) async {
+      String eventID, int numParticipants, int participantsLimit) async {
     await _eventRepository.updateIsFull(
-        eventID, participants.length == participantsLimit ? true : false);
+        eventID, numParticipants >= participantsLimit ? true : false);
   }
 }

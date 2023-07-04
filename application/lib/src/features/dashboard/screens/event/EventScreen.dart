@@ -298,48 +298,70 @@ class _EventScreenState extends State<EventScreen> {
                                       ConnectionState.done) {
                                     if (snapshot.hasData) {
                                       bool isRegistered = snapshot.data as bool;
-                                      return !isRegistered && !eventData.isFull
-                                          ? RegisterButton(
-                                              buttonColor: primaryColor300,
-                                              buttonText: "Register",
-                                              function: () {
-                                                currentUserController
-                                                    .addRegisteredEvent(
-                                                        eventData.id);
-                                                eventController.addParticipant(
+                                      if (isRegistered) {
+                                        return RegisterButton(
+                                            buttonColor: primaryColor600,
+                                            buttonText: 'Registered',
+                                            function: () {
+                                              currentUserController
+                                                  .removeRegisteredEvent(
+                                                      eventData.id);
+                                              eventController.removeParticipant(
+                                                  eventData.id);
+                                              eventController
+                                                  .updateNumParticipant(
+                                                      eventData.id,
+                                                      eventData.participants
+                                                              .length -
+                                                          1);
+                                              eventController.updateIsFull(
+                                                  eventData.id,
+                                                  eventData
+                                                          .participants.length -
+                                                      1,
+                                                  int.parse(eventData
+                                                      .participantsLimit));
+                                              setState(() {});
+                                            });
+                                      } else if (eventData.isFull) {
+                                        return RegisterButton(
+                                            buttonColor: primaryColor600,
+                                            buttonText: "Event Full",
+                                            function: () {
+                                              Get.snackbar(
+                                                  "Can't Perform Action",
+                                                  'Event is full, you can bookmark event in case there are any available spots later on.',
+                                                  snackPosition:
+                                                      SnackPosition.BOTTOM,
+                                                  backgroundColor: Colors
+                                                      .redAccent
+                                                      .withOpacity(0.1),
+                                                  colorText: Colors.red);
+                                            });
+                                      }
+                                      return RegisterButton(
+                                          buttonColor: primaryColor300,
+                                          buttonText: "Register",
+                                          function: () {
+                                            currentUserController
+                                                .addRegisteredEvent(
                                                     eventData.id);
-                                                eventController
-                                                    .updateNumParticipant(
-                                                        eventData.id,
-                                                        eventData.participants);
-                                                eventController.updateIsFull(
+                                            eventController
+                                                .addParticipant(eventData.id);
+                                            eventController
+                                                .updateNumParticipant(
                                                     eventData.id,
-                                                    eventData.participants,
-                                                    int.parse(eventData
-                                                        .participantsLimit));
-                                                setState(() {});
-                                              })
-                                          : RegisterButton(
-                                              buttonColor: primaryColor600,
-                                              buttonText: 'Registered',
-                                              function: () {
-                                                currentUserController
-                                                    .removeRegisteredEvent(
-                                                        eventData.id);
-                                                eventController
-                                                    .removeParticipant(
-                                                        eventData.id);
-                                                eventController
-                                                    .updateNumParticipant(
-                                                        eventData.id,
-                                                        eventData.participants);
-                                                eventController.updateIsFull(
-                                                    eventData.id,
-                                                    eventData.participants,
-                                                    int.parse(eventData
-                                                        .participantsLimit));
-                                                setState(() {});
-                                              });
+                                                    eventData.participants
+                                                            .length +
+                                                        1);
+                                            eventController.updateIsFull(
+                                                eventData.id,
+                                                eventData.participants.length +
+                                                    1,
+                                                int.parse(eventData
+                                                    .participantsLimit));
+                                            setState(() {});
+                                          });
                                     }
                                   }
                                   return Container();

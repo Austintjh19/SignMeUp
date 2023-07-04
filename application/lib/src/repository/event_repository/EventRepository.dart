@@ -77,7 +77,6 @@ class EventRepository extends GetxController {
     return eventsCollection;
   }
 
-  //
   Future<List<EventModel>> searchEvent(
       String query, String filterBy, bool isDescending) async {
     List<EventModel> eventsCollection = [];
