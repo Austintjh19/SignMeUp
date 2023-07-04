@@ -9,6 +9,16 @@ class EventRepository extends GetxController {
 
   final _db = FirebaseFirestore.instance;
 
+  Future<EventModel> getEventData(String eventID) async {
+    final snapshot = await _db
+        .collection('EventsInfo')
+        .where("ID", isEqualTo: eventID)
+        .get();
+    final eventData =
+        snapshot.docs.map((e) => EventModel.fromSnapShot(e)).single;
+    return eventData;
+  }
+
   Future<String?> createEvent(EventModel event, String eventID) async {
     try {
       await _db
@@ -110,6 +120,20 @@ class EventRepository extends GetxController {
     await _db.collection('EventsInfo').doc(eventID).update({
       'Participants': FieldValue.arrayRemove([uid])
     });
+  }
+
+  Future<void> updateNumParticipant(String eventID, int numParticipants) async {
+    await _db
+        .collection('EventsInfo')
+        .doc(eventID)
+        .update({'Num Participants': numParticipants});
+  }
+
+  Future<void> updateIsFull(String eventID, bool isFull) async {
+    await _db
+        .collection('EventsInfo')
+        .doc(eventID)
+        .update({'Is Full?': isFull});
   }
 
   Future<void> updateEventsCollection() async {

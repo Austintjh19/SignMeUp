@@ -21,6 +21,10 @@ class GeneralEventController extends GetxController {
         order == 'Descending' ? false : true);
   }
 
+  Future<EventModel> getEventData(String eventID) async {
+    return await _eventRepository.getEventData(eventID);
+  }
+
   getEventImage(String imagePath) {
     return _eventRepository.getEventImage(imagePath);
   }
@@ -38,5 +42,15 @@ class GeneralEventController extends GetxController {
   Future<void> removeParticipant(String eventID) async {
     final uid = _authRepository.firebaseUser.value?.uid;
     await _eventRepository.removeParticipant(uid!, eventID);
+  }
+
+  Future<void> updateNumParticipant(String eventID, List participants) async {
+    await _eventRepository.updateNumParticipant(eventID, participants.length);
+  }
+
+  Future<void> updateIsFull(
+      String eventID, List participants, int participantsLimit) async {
+    await _eventRepository.updateIsFull(
+        eventID, participants.length == participantsLimit ? true : false);
   }
 }

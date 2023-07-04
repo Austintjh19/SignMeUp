@@ -41,19 +41,8 @@ class UserRepository extends GetxController {
         .collection('UsersSignUpInfo')
         .where("UID", isEqualTo: uid)
         .get();
-    if (snapshot != null) {
-      final userData =
-          snapshot.docs.map((e) => UserModel.fromSnapShot(e)).single;
-      return userData;
-    }
-    return UserModel([], [],
-        uid: '',
-        username: 'Unknown',
-        name: '',
-        email: '',
-        password: '',
-        profileImage: '',
-        description: '');
+    final userData = snapshot.docs.map((e) => UserModel.fromSnapShot(e)).single;
+    return userData;
   }
 
   Future<String> getProfileImage(String uid) async {

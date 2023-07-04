@@ -27,6 +27,7 @@ class CreateEventController extends GetxController {
 
     final eventData = EventModel(
         id: eventId,
+        eventOrganizer: uid!,
         eventImage: eventImage.text.trim(),
         eventName: setSearchParameters(eventName.text.trim()),
         eventLocation: setSearchParameters(eventLocation.text.trim()),
@@ -36,9 +37,11 @@ class CreateEventController extends GetxController {
             getEventDateTime(eventDate.text.trim(), eventTime.text.trim()),
         participantsLimit: participantsLimit.text.trim(),
         eventDescription: eventDescription.text.trim(),
-        participants: [uid]);
+        participants: [uid],
+        numParticipants: 1,
+        isFull: participantsLimit.text.trim() == '1' ? true : false);
     await _eventRepository.createEvent(eventData, eventId);
-    await _userRepository.addRegisteredEvent(uid!, eventId);
+    await _userRepository.addRegisteredEvent(uid, eventId);
   }
 
   List<String> setSearchParameters(String s) {

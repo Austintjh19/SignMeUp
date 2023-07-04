@@ -13,8 +13,8 @@ import '../../../../models/UserModel.dart';
 import '../../controllers/GeneralEventController.dart';
 
 class EventScreen extends StatefulWidget {
-  final EventModel event;
-  const EventScreen({super.key, required this.event});
+  final String eventID;
+  const EventScreen({super.key, required this.eventID});
 
   @override
   State<EventScreen> createState() => _EventScreenState();
@@ -50,289 +50,311 @@ class _EventScreenState extends State<EventScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-
-            // Activity Image
-            FutureBuilder(
-                future: eventController.getEventImage(widget.event.eventImage),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.hasData) {
-                      String imageUrl = snapshot.data as String;
-                      return imageUrl != ""
-                          ? Container(
-                              width: width,
-                              height: 200,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                    image: NetworkImage(imageUrl),
-                                    fit: BoxFit.cover),
-                              ),
-                            )
-                          : Container(
-                              width: width,
-                              height: 200,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                image: const DecorationImage(
-                                    image: ExactAssetImage(defaultEventImage),
-                                    fit: BoxFit.fill),
-                              ),
-                            );
-                    }
-                  }
-                  return Container(
-                    width: width,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: const DecorationImage(
-                          image: ExactAssetImage(defaultEventImage),
-                          fit: BoxFit.fill),
-                    ),
-                  );
-                }),
-
-            const SizedBox(height: 10),
-
-            // Event Name, Event Location and Event Organizer
-            Container(
-              width: width,
-              padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+        child: FutureBuilder(
+            future: eventController.getEventData(widget.eventID),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasData) {
+                  EventModel eventData = snapshot.data as EventModel;
+                  return Column(
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          //Event Name & Location
-                          Text(
-                            "${widget.event.eventName.last} @ ${widget.event.eventLocation.last}",
-                            textAlign: TextAlign.start,
-                            style: const TextStyle(
-                                fontFamily: 'Raleway',
-                                fontWeight: FontWeight.normal,
-                                fontSize: 18,
-                                color: textColor600),
-                          ),
+                      const SizedBox(height: 20),
 
-                          const SizedBox(height: 5),
-
-                          // Event Organizer
-                          FutureBuilder(
-                              future: otherUsersController.getUserData(
-                                  widget.event.participants.isEmpty
-                                      ? ''
-                                      : widget.event.participants.first),
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.done) {
-                                  if (snapshot.hasData) {
-                                    UserModel organizerDetails =
-                                        snapshot.data as UserModel;
-                                    return Text(
-                                      "Organizer: ${organizerDetails.name}",
-                                      textAlign: TextAlign.start,
-                                      style: const TextStyle(
-                                          fontFamily: 'Raleway',
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 14,
-                                          color: textColor400),
-                                    );
-                                  }
-                                }
-                                return const Text(
-                                  "Organizer: Unknown",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontFamily: 'Raleway',
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 14,
-                                      color: textColor400),
-                                );
-                              }),
-                        ],
-                      ),
-
-                      const Spacer(),
-
-                      // Save Button
+                      // Activity Image
                       FutureBuilder(
-                          future: currentUserController
-                              .getIsEventBookmarked(widget.event.id),
+                          future: eventController
+                              .getEventImage(eventData.eventImage),
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.done) {
                               if (snapshot.hasData) {
-                                bool isBookmared = snapshot.data as bool;
-                                return isBookmared
-                                    ? GestureDetector(
-                                        onTap: () {
-                                          print(widget.event.id);
-                                          currentUserController
-                                              .removeBookmarkedEvent(
-                                                  widget.event.id);
-                                          setState(() {});
-                                        },
-                                        child: const Icon(
-                                          Icons.bookmark,
-                                          size: 25,
-                                          color: primaryColor300,
-                                        ))
-                                    : GestureDetector(
-                                        onTap: () {
-                                          currentUserController
-                                              .addBookmarkedEvent(
-                                                  widget.event.id);
-                                          setState(() {});
-                                        },
-                                        child: const Icon(
-                                          Icons.bookmark_outline,
-                                          size: 25,
-                                          color: textColor600,
-                                        ));
+                                String imageUrl = snapshot.data as String;
+                                return imageUrl != ""
+                                    ? Container(
+                                        width: width,
+                                        height: 200,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          image: DecorationImage(
+                                              image: NetworkImage(imageUrl),
+                                              fit: BoxFit.cover),
+                                        ),
+                                      )
+                                    : Container(
+                                        width: width,
+                                        height: 200,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          image: const DecorationImage(
+                                              image: ExactAssetImage(
+                                                  defaultEventImage),
+                                              fit: BoxFit.fill),
+                                        ),
+                                      );
                               }
                             }
                             return const CircularProgressIndicator();
                           }),
+
+                      const SizedBox(height: 10),
+
+                      // // Event Name, Event Location and Event Organizer
+                      Container(
+                        width: width,
+                        padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    //Event Name & Location
+                                    Text(
+                                      "${eventData.eventName.last} @ ${eventData.eventLocation.last}",
+                                      textAlign: TextAlign.start,
+                                      style: const TextStyle(
+                                          fontFamily: 'Raleway',
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 18,
+                                          color: textColor600),
+                                    ),
+
+                                    const SizedBox(height: 5),
+
+                                    // Event Organizer
+                                    FutureBuilder(
+                                        future:
+                                            otherUsersController.getUserData(
+                                                eventData.eventOrganizer),
+                                        builder: (context, snapshot) {
+                                          if (snapshot.connectionState ==
+                                              ConnectionState.done) {
+                                            if (snapshot.hasData) {
+                                              UserModel organizerDetails =
+                                                  snapshot.data as UserModel;
+                                              return Text(
+                                                "Organizer: ${organizerDetails.name}",
+                                                textAlign: TextAlign.start,
+                                                style: const TextStyle(
+                                                    fontFamily: 'Raleway',
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontSize: 14,
+                                                    color: textColor400),
+                                              );
+                                            }
+                                          }
+                                          return Text('');
+                                        }),
+                                  ],
+                                ),
+
+                                const Spacer(),
+
+                                // Save Button
+                                FutureBuilder(
+                                    future: currentUserController
+                                        .getIsEventBookmarked(eventData.id),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        if (snapshot.hasData) {
+                                          bool isBookmared =
+                                              snapshot.data as bool;
+                                          return isBookmared
+                                              ? GestureDetector(
+                                                  onTap: () {
+                                                    currentUserController
+                                                        .removeBookmarkedEvent(
+                                                            eventData.id);
+                                                    setState(() {});
+                                                  },
+                                                  child: const Icon(
+                                                    Icons.bookmark,
+                                                    size: 25,
+                                                    color: primaryColor300,
+                                                  ))
+                                              : GestureDetector(
+                                                  onTap: () {
+                                                    currentUserController
+                                                        .addBookmarkedEvent(
+                                                            eventData.id);
+                                                    setState(() {});
+                                                  },
+                                                  child: const Icon(
+                                                    Icons.bookmark_outline,
+                                                    size: 25,
+                                                    color: textColor600,
+                                                  ));
+                                        }
+                                      }
+                                      return Container();
+                                    }),
+                              ],
+                            ),
+
+                            const SizedBox(height: 30),
+
+                            // Details And Participants Button
+                            Container(
+                              padding: const EdgeInsets.all(0),
+                              decoration: BoxDecoration(
+                                  color: primaryColor100,
+                                  borderRadius: BorderRadius.circular(100),
+                                  boxShadow: defaultBoxShadow),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  // Details
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          onDetailsPage = true;
+                                        });
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.all(10),
+                                        decoration: onDetailsPage
+                                            ? BoxDecoration(
+                                                color: primaryColor100,
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                boxShadow: defaultBoxShadow)
+                                            : const BoxDecoration(
+                                                color: Colors.transparent),
+                                        child: Text(
+                                          "Details",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontFamily: 'Raleway',
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 14,
+                                              color: onDetailsPage
+                                                  ? textColor600
+                                                  : textColor300),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+                                  // Participants
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          onDetailsPage = false;
+                                        });
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.all(10),
+                                        decoration: !onDetailsPage
+                                            ? BoxDecoration(
+                                                color: primaryColor100,
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                boxShadow: defaultBoxShadow)
+                                            : const BoxDecoration(
+                                                color: Colors.transparent),
+                                        child: Text(
+                                          "Participants",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontFamily: 'Raleway',
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 14,
+                                              color: !onDetailsPage
+                                                  ? textColor600
+                                                  : textColor300),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            const SizedBox(height: 30),
+
+                            // Body of Event Screen
+                            onDetailsPage
+                                ? DetailsWidget(event: eventData)
+                                : ParticipantsWidget(event: eventData),
+
+                            const SizedBox(height: 30),
+
+                            // Register / Registered
+
+                            FutureBuilder(
+                                future: currentUserController
+                                    .getIsEventRegistered(eventData.id),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    if (snapshot.hasData) {
+                                      bool isRegistered = snapshot.data as bool;
+                                      return !isRegistered && !eventData.isFull
+                                          ? RegisterButton(
+                                              buttonColor: primaryColor300,
+                                              buttonText: "Register",
+                                              function: () {
+                                                currentUserController
+                                                    .addRegisteredEvent(
+                                                        eventData.id);
+                                                eventController.addParticipant(
+                                                    eventData.id);
+                                                eventController
+                                                    .updateNumParticipant(
+                                                        eventData.id,
+                                                        eventData.participants);
+                                                eventController.updateIsFull(
+                                                    eventData.id,
+                                                    eventData.participants,
+                                                    int.parse(eventData
+                                                        .participantsLimit));
+                                                setState(() {});
+                                              })
+                                          : RegisterButton(
+                                              buttonColor: primaryColor600,
+                                              buttonText: 'Registered',
+                                              function: () {
+                                                currentUserController
+                                                    .removeRegisteredEvent(
+                                                        eventData.id);
+                                                eventController
+                                                    .removeParticipant(
+                                                        eventData.id);
+                                                eventController
+                                                    .updateNumParticipant(
+                                                        eventData.id,
+                                                        eventData.participants);
+                                                eventController.updateIsFull(
+                                                    eventData.id,
+                                                    eventData.participants,
+                                                    int.parse(eventData
+                                                        .participantsLimit));
+                                                setState(() {});
+                                              });
+                                    }
+                                  }
+                                  return Container();
+                                }),
+
+                            const SizedBox(height: 30),
+                          ],
+                        ),
+                      ),
                     ],
-                  ),
-
-                  const SizedBox(height: 30),
-
-                  // Details And Participants Button
-                  Container(
-                    padding: const EdgeInsets.all(0),
-                    decoration: BoxDecoration(
-                        color: primaryColor100,
-                        borderRadius: BorderRadius.circular(100),
-                        boxShadow: defaultBoxShadow),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        // Details
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                onDetailsPage = true;
-                              });
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: onDetailsPage
-                                  ? BoxDecoration(
-                                      color: primaryColor100,
-                                      borderRadius: BorderRadius.circular(100),
-                                      boxShadow: defaultBoxShadow)
-                                  : const BoxDecoration(
-                                      color: Colors.transparent),
-                              child: Text(
-                                "Details",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontFamily: 'Raleway',
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 14,
-                                    color: onDetailsPage
-                                        ? textColor600
-                                        : textColor300),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        // Participants
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                onDetailsPage = false;
-                              });
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: !onDetailsPage
-                                  ? BoxDecoration(
-                                      color: primaryColor100,
-                                      borderRadius: BorderRadius.circular(100),
-                                      boxShadow: defaultBoxShadow)
-                                  : const BoxDecoration(
-                                      color: Colors.transparent),
-                              child: Text(
-                                "Participants",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontFamily: 'Raleway',
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 14,
-                                    color: !onDetailsPage
-                                        ? textColor600
-                                        : textColor300),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 30),
-
-                  // Body of Event Screen
-                  onDetailsPage
-                      ? DetailsWidget(event: widget.event)
-                      : ParticipantsWidget(event: widget.event),
-
-                  const SizedBox(height: 30),
-
-                  // Register / Registered
-
-                  FutureBuilder(
-                      future: currentUserController
-                          .getIsEventRegistered(widget.event.id),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          if (snapshot.hasData) {
-                            bool isRegistered = snapshot.data as bool;
-                            return isRegistered
-                                ? RegisterButton(
-                                    buttonColor: primaryColor600,
-                                    buttonText: 'Registered',
-                                    function: () {
-                                      currentUserController
-                                          .removeRegisteredEvent(
-                                              widget.event.id);
-                                      eventController
-                                          .removeParticipant(widget.event.id);
-                                      setState(() {});
-                                    })
-                                : RegisterButton(
-                                    buttonColor: primaryColor300,
-                                    buttonText: "Register",
-                                    function: () {
-                                      currentUserController
-                                          .addRegisteredEvent(widget.event.id);
-                                      eventController
-                                          .addParticipant(widget.event.id);
-                                      setState(() {});
-                                    });
-                          }
-                        }
-                        return const LinearProgressIndicator();
-                      }),
-
-                  const SizedBox(height: 30),
-                ],
-              ),
-            ),
-          ],
-        ),
+                  );
+                }
+              }
+              return const CircularProgressIndicator();
+            }),
       ),
     );
   }

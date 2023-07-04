@@ -20,7 +20,7 @@ class HorizontalScrollEventsWidget extends StatelessWidget {
         const SizedBox(width: 10),
         GestureDetector(
           onTap: () {
-            Get.to(EventScreen(event: event),
+            Get.to(EventScreen(eventID: event.id),
                 transition: Transition.rightToLeft);
           },
           child: Container(
