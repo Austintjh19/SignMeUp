@@ -17,11 +17,12 @@ class SignUpController extends GetxController {
   final profilePic = TextEditingController(text: "");
   final description = TextEditingController();
 
-  final userRepository = Get.put(UserRepository());
+  final _userRepository = Get.put(UserRepository());
+  final _authenticationRepository = Get.put(AuthenticationRepository());
 
   Future<void> registerUser() async {
-    UserCredential cred = await AuthenticationRepository.instance
-        .createUserViaEmailAndPassword(
+    UserCredential cred =
+        await _authenticationRepository.createUserViaEmailAndPassword(
             email.text.trim(), newPassword.text.trim());
 
     final user = UserModel([], [],
@@ -33,6 +34,6 @@ class SignUpController extends GetxController {
         profileImage: profilePic.text.trim(),
         description: description.text.trim());
 
-    await userRepository.storeUserDetails(user, cred);
+    await _userRepository.storeUserDetails(user, cred);
   }
 }

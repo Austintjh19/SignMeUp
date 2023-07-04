@@ -10,20 +10,20 @@ class OTPController extends GetxController {
   final phoneNum = TextEditingController();
   String phoneCode = '+65';
 
-  final userRepository = Get.put(AuthenticationRepository());
+  final _authenticationRepository = Get.put(AuthenticationRepository());
 
   Future<String> phoneNumAuthentication() {
-    return AuthenticationRepository.instance
+    return _authenticationRepository
         .phoneAuthentication(phoneCode + phoneNum.text.trim());
   }
 
   void emailAuthentication() {
-    AuthenticationRepository.instance.emailAuthentication(email.text.trim());
+    _authenticationRepository.emailAuthentication(email.text.trim());
   }
 
   void verifyOTP(String otp, String phoneVerificationID) async {
-    var isVerified = await AuthenticationRepository.instance
-        .verifyOTP(otp, phoneVerificationID);
+    var isVerified =
+        await _authenticationRepository.verifyOTP(otp, phoneVerificationID);
     isVerified ? Get.offAll(const SignUpScreen()) : Get.back();
   }
 }

@@ -8,10 +8,11 @@ class SignInController extends GetxController {
   final email = TextEditingController();
   final password = TextEditingController();
 
+  final _authenticationRepository = Get.put(AuthenticationRepository());
   final userRepository = Get.put(AuthenticationRepository());
 
   Future<void> signInUserViaEmailAndPassword() async {
-    await AuthenticationRepository.instance
-        .signInUserViaEmailAndPassword(email.text.trim(), password.text.trim());
+    await _authenticationRepository.signInUserViaEmailAndPassword(
+        email.text.trim(), password.text.trim());
   }
 }

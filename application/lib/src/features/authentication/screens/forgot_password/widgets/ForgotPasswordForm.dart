@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapplication/src/common_widgets/StandardIconTextForm.dart';
 import 'package:myapplication/src/constants/colors.dart';
 
 import '../../../../../common_widgets/FullWidthTextButton.dart';
@@ -27,11 +26,26 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
       key: _formKey,
       child: Column(children: [
         // Enter Email
-        StandardIconTextForm(
-            controller: controller.email,
-            labelText: 'Enter Email',
-            icon: const Icon(Icons.key),
-            validator: validationController.validateEmail),
+
+        TextFormField(
+          textAlign: TextAlign.left,
+          controller: controller.email,
+          decoration: InputDecoration(
+              labelText: 'Enter Email',
+              labelStyle: const TextStyle(
+                color: textColor500,
+                fontFamily: 'Raleway',
+                fontSize: 14,
+              ),
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(color: primaryColor500)),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(color: primaryColor200)),
+              prefixIcon: const Icon(Icons.key)),
+          validator: validationController.validateEmail,
+        ),
 
         const SizedBox(height: 25),
 
