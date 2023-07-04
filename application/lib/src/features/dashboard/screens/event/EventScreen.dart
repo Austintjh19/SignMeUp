@@ -169,7 +169,7 @@ class _EventScreenState extends State<EventScreen> {
                                               ? GestureDetector(
                                                   onTap: () {
                                                     currentUserController
-                                                        .removeBookmarkedEvent(
+                                                        .removeFromBookmarkedEvents(
                                                             eventData.id);
                                                     setState(() {});
                                                   },
@@ -181,7 +181,7 @@ class _EventScreenState extends State<EventScreen> {
                                               : GestureDetector(
                                                   onTap: () {
                                                     currentUserController
-                                                        .addBookmarkedEvent(
+                                                        .addToBookmarkedEvents(
                                                             eventData.id);
                                                     setState(() {});
                                                   },
@@ -304,7 +304,7 @@ class _EventScreenState extends State<EventScreen> {
                                             buttonText: 'Registered',
                                             function: () {
                                               currentUserController
-                                                  .removeRegisteredEvent(
+                                                  .removeFromRegisteredEvents(
                                                       eventData.id);
                                               eventController.removeParticipant(
                                                   eventData.id);
@@ -344,7 +344,7 @@ class _EventScreenState extends State<EventScreen> {
                                           buttonText: "Register",
                                           function: () {
                                             currentUserController
-                                                .addRegisteredEvent(
+                                                .addToRegisteredEvents(
                                                     eventData.id);
                                             eventController
                                                 .addParticipant(eventData.id);

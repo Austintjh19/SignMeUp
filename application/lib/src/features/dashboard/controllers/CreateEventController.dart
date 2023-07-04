@@ -22,7 +22,7 @@ class CreateEventController extends GetxController {
   final eventImage = TextEditingController(text: "");
 
   Future<void> createEvent() async {
-    final uid = _authRepository.firebaseUser.value?.uid;
+    final uid = await _authRepository.getCurrentUserUID();
     final String eventId = DateTime.now().toIso8601String();
 
     final eventData = EventModel(

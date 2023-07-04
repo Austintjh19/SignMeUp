@@ -44,6 +44,10 @@ class AuthenticationRepository extends GetxController {
           ));
   }
 
+  Future<String?> getCurrentUserUID() async {
+    return firebaseUser.value?.uid;
+  }
+
   Future<String> phoneAuthentication(String phoneNo) async {
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneNo,

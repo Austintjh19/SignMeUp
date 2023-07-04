@@ -13,8 +13,8 @@ class CurrentUserController extends GetxController {
   final _userRepository = Get.put(UserRepository());
   final _eventRepository = Get.put(EventRepository());
 
-  getUserData() {
-    final uid = _authRepository.firebaseUser.value?.uid;
+  getUserData() async {
+    final uid = await _authRepository.getCurrentUserUID();
     if (uid != null) {
       return _userRepository.getUserData(uid);
     } else {
@@ -25,8 +25,8 @@ class CurrentUserController extends GetxController {
     }
   }
 
-  getProfileImage() {
-    final uid = _authRepository.firebaseUser.value?.uid;
+  getProfileImage() async {
+    final uid = await _authRepository.getCurrentUserUID();
     if (uid != null) {
       return _userRepository.getProfileImage(uid);
     } else {
@@ -38,29 +38,29 @@ class CurrentUserController extends GetxController {
   }
 
   Future<List<EventModel>?> getUserRegisteredEvents() async {
-    final uid = _authRepository.firebaseUser.value?.uid;
+    final uid = await _authRepository.getCurrentUserUID();
     List? registedEvents = await _userRepository.getRegisteredEvents(uid!);
     if (registedEvents != null) {
-      List<EventModel> registeredEventsCollection =
+      List<EventModel> registeredEventsData =
           await _eventRepository.getSelectedEvents(registedEvents);
-      return registeredEventsCollection;
+      return registeredEventsData;
     }
     return null;
   }
 
   Future<List<EventModel>?> getBookmarkedEvents() async {
-    final uid = _authRepository.firebaseUser.value?.uid;
+    final uid = await _authRepository.getCurrentUserUID();
     List? bookmarkedEvents = await _userRepository.getBookmarkedEvents(uid!);
     if (bookmarkedEvents != null) {
-      List<EventModel> bookmarkedEventsCollection =
+      List<EventModel> bookmarkedEventsData =
           await _eventRepository.getSelectedEvents(bookmarkedEvents);
-      return bookmarkedEventsCollection;
+      return bookmarkedEventsData;
     }
     return null;
   }
 
   Future<bool> getIsEventRegistered(String eventID) async {
-    final uid = _authRepository.firebaseUser.value?.uid;
+    final uid = await _authRepository.getCurrentUserUID();
     List? registedEvents = await _userRepository.getRegisteredEvents(uid!);
     if (registedEvents != null) {
       for (final events in registedEvents) {
@@ -73,7 +73,7 @@ class CurrentUserController extends GetxController {
   }
 
   Future<bool> getIsEventBookmarked(String eventID) async {
-    final uid = _authRepository.firebaseUser.value?.uid;
+    final uid = await _authRepository.getCurrentUserUID();
     List? bookmarkedEvents = await _userRepository.getBookmarkedEvents(uid!);
     if (bookmarkedEvents != null) {
       for (final events in bookmarkedEvents) {
@@ -85,23 +85,23 @@ class CurrentUserController extends GetxController {
     return false;
   }
 
-  Future<void> addRegisteredEvent(String eventID) async {
-    final uid = _authRepository.firebaseUser.value?.uid;
+  Future<void> addToRegisteredEvents(String eventID) async {
+    final uid = await _authRepository.getCurrentUserUID();
     await _userRepository.addRegisteredEvent(uid!, eventID);
   }
 
-  Future<void> addBookmarkedEvent(String eventID) async {
-    final uid = _authRepository.firebaseUser.value?.uid;
+  Future<void> addToBookmarkedEvents(String eventID) async {
+    final uid = await _authRepository.getCurrentUserUID();
     await _userRepository.addBookmarkedEvent(uid!, eventID);
   }
 
-  Future<void> removeRegisteredEvent(String eventID) async {
-    final uid = _authRepository.firebaseUser.value?.uid;
+  Future<void> removeFromRegisteredEvents(String eventID) async {
+    final uid = await _authRepository.getCurrentUserUID();
     await _userRepository.removeRegisteredEvent(uid!, eventID);
   }
 
-  Future<void> removeBookmarkedEvent(String eventID) async {
-    final uid = _authRepository.firebaseUser.value?.uid;
+  Future<void> removeFromBookmarkedEvents(String eventID) async {
+    final uid = await _authRepository.getCurrentUserUID();
     await _userRepository.removeBookmarkedEvent(uid!, eventID);
   }
 }
