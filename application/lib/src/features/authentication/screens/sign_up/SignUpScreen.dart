@@ -44,28 +44,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // // Return Button
-                // Container(
-                //   padding: const EdgeInsetsDirectional.symmetric(
-                //       horizontal: 25, vertical: 25),
-                //   alignment: Alignment.centerLeft,
-                //   child: GestureDetector(
-                //     onTap: () {
-                //       onForm1
-                //           ? Get.to(const SignInScreen())
-                //           : setState(() => onForm1 = true);
-                //     },
-                //     child: Container(
-                //       height: 30,
-                //       padding: const EdgeInsets.all(0),
-                //       child: const Icon(
-                //         Icons.arrow_back,
-                //         size: 30,
-                //       ),
-                //     ),
-                //   ),
-                // ),
-
                 // Header 1
                 Container(
                   padding: const EdgeInsets.fromLTRB(50, 0, 50, 50),

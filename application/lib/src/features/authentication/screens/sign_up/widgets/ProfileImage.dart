@@ -33,32 +33,23 @@ class _ProfileImageState extends State<ProfileImage> {
     Reference ref =
         FirebaseStorage.instance.ref().child("/ProfilePictures/$identifier");
 
-    await ref.putFile(File(image!.path));
+    try {
+      await ref.putFile(File(image!.path));
 
-    ref.getDownloadURL().then((value) async {
-      setState(() {
-        imageUrl = value;
+      ref.getDownloadURL().then((value) async {
+        setState(() {
+          imageUrl = value;
+        });
       });
-    });
-
-    controller.profilePic.text = ref.fullPath;
+      controller.profilePic.text = ref.fullPath;
+    } catch (e) {
+      Get.snackbar("Error",
+          'No Image has been selected. Please try again if you wish to select your profile pic now.',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent.withOpacity(0.1),
+          colorText: Colors.red);
+    }
   }
-
-  // void selectProfileImage() async {
-  //   String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   ImagePicker imagePicker = ImagePicker();
-  //   XFile? file = await imagePicker.pickImage(source: ImageSource.gallery);
-  //   if (file == null) return;
-  //   Reference referenceRoot = FirebaseStorage.instance.ref();
-  //   Reference referenceDirImages = referenceRoot.child('ProfilePictures');
-  //   Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
-  //   try {
-  //     await referenceImageToUpload.putFile(File(file.path));
-  //     imageUrl = await referenceImageToUpload.getDownloadURL();
-  //   } catch (error) {
-  //     // Error Handling here
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {

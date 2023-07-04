@@ -5,7 +5,6 @@ import 'package:myapplication/src/constants/text_strings.dart';
 import 'package:myapplication/src/features/authentication/screens/otp/MailOTPScreen.dart';
 
 import '../../../../../constants/colors.dart';
-import '../../otp/PhoneOTPScreen.dart';
 
 class SignUpButton extends StatelessWidget {
   const SignUpButton({super.key});

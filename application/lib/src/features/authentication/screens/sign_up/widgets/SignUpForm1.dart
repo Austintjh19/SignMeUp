@@ -16,7 +16,7 @@ class SignUpForm1 extends StatefulWidget {
 class _SignUpForm1State extends State<SignUpForm1> {
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SignUpController());
+    final signUpController = Get.put(SignUpController());
     final validationController = Get.put(ValidationController());
 
     return Form(
@@ -25,7 +25,7 @@ class _SignUpForm1State extends State<SignUpForm1> {
         // Enter Name
         TextFormField(
           textAlign: TextAlign.left,
-          controller: controller.name,
+          controller: signUpController.name,
           decoration: InputDecoration(
               labelText: 'Enter Your Name',
               labelStyle: const TextStyle(
@@ -49,7 +49,7 @@ class _SignUpForm1State extends State<SignUpForm1> {
         // Enter Username
         TextFormField(
           textAlign: TextAlign.left,
-          controller: controller.username,
+          controller: signUpController.username,
           decoration: InputDecoration(
               labelText: 'Enter Username',
               labelStyle: const TextStyle(
@@ -73,7 +73,7 @@ class _SignUpForm1State extends State<SignUpForm1> {
         // Enter Email
         TextFormField(
           textAlign: TextAlign.left,
-          controller: controller.email,
+          controller: signUpController.email,
           decoration: InputDecoration(
               labelText: 'Enter Email',
               labelStyle: const TextStyle(
@@ -98,7 +98,7 @@ class _SignUpForm1State extends State<SignUpForm1> {
         TextFormField(
           obscureText: true,
           textAlign: TextAlign.left,
-          controller: controller.newPassword,
+          controller: signUpController.newPassword,
           decoration: InputDecoration(
               labelText: 'Enter Password',
               labelStyle: const TextStyle(
@@ -123,7 +123,7 @@ class _SignUpForm1State extends State<SignUpForm1> {
         TextFormField(
           obscureText: true,
           textAlign: TextAlign.left,
-          controller: controller.confirmPassword,
+          controller: signUpController.confirmPassword,
           decoration: InputDecoration(
               labelText: 'Confirm Password',
               labelStyle: const TextStyle(
@@ -140,8 +140,8 @@ class _SignUpForm1State extends State<SignUpForm1> {
                       color: Color.fromRGBO(162, 178, 252, 1))),
               prefixIcon: const Icon(Icons.fingerprint)),
           validator: (value) {
-            if (controller.newPassword.text.trim() !=
-                controller.confirmPassword.text.trim()) {
+            if (signUpController.newPassword.text.trim() !=
+                signUpController.confirmPassword.text.trim()) {
               return "Passwords do not match";
             } else {
               return null;

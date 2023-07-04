@@ -14,16 +14,16 @@ class SignUpForm2 extends StatefulWidget {
 class _SignUpForm2State extends State<SignUpForm2> {
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SignUpController());
+    final signUpController = Get.put(SignUpController());
 
     return Form(
         child: TextFormField(
       textAlign: TextAlign.left,
-      controller: controller.description,
+      controller: signUpController.description,
       minLines: 5,
       maxLines: 5,
       decoration: InputDecoration(
-        labelText: 'Description',
+        labelText: 'Enter your Bio',
         hintText:
             'Let people know more about you. Enter a short desciption of yourself.',
         labelStyle: const TextStyle(

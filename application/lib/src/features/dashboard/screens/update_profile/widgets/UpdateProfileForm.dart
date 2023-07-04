@@ -39,16 +39,33 @@ class _UpdatProfileFormState extends State<UpdatProfileForm> {
     Reference ref =
         FirebaseStorage.instance.ref().child("/ProfilePictures/$identifier");
 
-    await ref.putFile(File(image!.path));
+    try {
+      await ref.putFile(File(image!.path));
 
-    ref.getDownloadURL().then((value) async {
-      setState(() {
-        newImageUrl = value;
+      ref.getDownloadURL().then((value) async {
+        setState(() {
+          newImageUrl = value;
+        });
       });
-    });
+      updateProfileController.profilePicController.text = ref.fullPath;
+      updateProfileController.updateProfileImage(uid);
+    } catch (e) {
+      Get.snackbar("Error",
+          'No Image has been selected. Please try again if you wish to select/ change your profile pic.',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent.withOpacity(0.1),
+          colorText: Colors.red);
+    }
+    // await ref.putFile(File(image!.path));
 
-    updateProfileController.profilePicController.text = ref.fullPath;
-    updateProfileController.updateProfileImage(uid);
+    // ref.getDownloadURL().then((value) async {
+    //   setState(() {
+    //     newImageUrl = value;
+    //   });
+    // });
+
+    // updateProfileController.profilePicController.text = ref.fullPath;
+    // updateProfileController.updateProfileImage(uid);
   }
 
   @override
