@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapplication/src/common_widgets/DashboardAppBar.dart';
 import 'package:myapplication/src/constants/colors.dart';
-import 'package:myapplication/src/features/dashboard/screens/create/CreateEventMainScreen.dart';
+import 'package:myapplication/src/features/dashboard/screens/create/DashboardCreateScreen.dart';
 
 import 'package:myapplication/src/features/dashboard/screens/home/HomeScreen.dart';
 import 'package:myapplication/src/features/dashboard/screens/message/MessagingScreen.dart';
@@ -25,7 +25,7 @@ class _DashboardState extends State<Dashboard> {
     const HomeScreen(),
     const SearchScreen(),
     const MessagingScreen(),
-    const CreateEventMainScreen(),
+    const DashboardCreateScreen(),
   ];
 
   int currentPageIndex = 0;

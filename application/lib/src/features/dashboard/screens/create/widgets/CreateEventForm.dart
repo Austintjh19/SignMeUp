@@ -8,6 +8,7 @@ import 'package:myapplication/src/constants/colors.dart';
 import 'package:myapplication/src/constants/image_strings.dart';
 import 'package:myapplication/src/features/dashboard/controllers/CreateEventController.dart';
 import 'package:intl/intl.dart';
+import 'package:myapplication/src/features/dashboard/screens/create/widgets/SelectEventImageWidget.dart';
 
 import '../../../../../controllers/ValidationController.dart';
 import '../../../controllers/CurrentUserController.dart';
@@ -20,87 +21,21 @@ class CreateEventForm extends StatefulWidget {
 }
 
 class _CreateEventFormState extends State<CreateEventForm> {
-  final profileController = Get.put(CurrentUserController());
+  final currentUserController = Get.put(CurrentUserController());
   final createEventController = Get.put(CreateEventController());
   final validationController = Get.put(ValidationController());
-  final String identifier = DateTime.now().toIso8601String();
-
-  String imageUrl = "";
-
-  void selectEventImage() async {
-    final image = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-      maxHeight: 600,
-      maxWidth: 600,
-      imageQuality: 100,
-    );
-
-    Reference ref =
-        FirebaseStorage.instance.ref().child("/EventImages/$identifier");
-
-    await ref.putFile(File(image!.path));
-
-    ref.getDownloadURL().then((value) async {
-      setState(() {
-        imageUrl = value;
-      });
-    });
-
-    createEventController.eventImage.text = ref.fullPath;
-  }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Column(
       children: [
-        // Event Image
-        Stack(
-          children: [
-            imageUrl != ""
-                ? Container(
-                    width: width,
-                    height: 200,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                            image: NetworkImage(imageUrl), fit: BoxFit.cover)),
-                  )
-                : Container(
-                    width: width,
-                    height: 200,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: const DecorationImage(
-                            image: ExactAssetImage(defaultEventImage),
-                            fit: BoxFit.cover)),
-                  ),
-            Positioned(
-              bottom: 8,
-              right: 8,
-              child: Container(
-                width: 30,
-                height: 30,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: primaryColor500.withOpacity(0.8)),
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.edit_outlined,
-                    color: primaryColor100,
-                    size: 15,
-                  ),
-                  onPressed: () {
-                    selectEventImage();
-                  },
-                ),
-              ),
-            )
-          ],
-        ),
+        // Select Event Image --------------------------------------------------
+        const SelectEventImageWidget(),
 
         const SizedBox(height: 30),
-        // Form
+
+        // Form ================================================================
         Container(
           width: width,
           padding: const EdgeInsets.fromLTRB(15, 30, 15, 30),
@@ -111,7 +46,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Name of Event
+              // Name of Event -------------------------------------------------
               const Text(
                 "* Event Name",
                 textAlign: TextAlign.start,
@@ -140,7 +75,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
 
               const SizedBox(height: 20),
 
-              // Event Location
+              // Event Location ------------------------------------------------
               const Text(
                 "* Event Location",
                 textAlign: TextAlign.start,
@@ -169,7 +104,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
 
               const SizedBox(height: 20),
 
-              // Event Date
+              // Event Date ----------------------------------------------------
               const Text(
                 "* Select Event Date",
                 textAlign: TextAlign.start,
@@ -216,7 +151,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
 
               const SizedBox(height: 20),
 
-              // Event Time
+              // Event Time ----------------------------------------------------
               const Text(
                 "* Select Event Time",
                 textAlign: TextAlign.start,
@@ -259,7 +194,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
 
               const SizedBox(height: 20),
 
-              // Max Number of Participants
+              // Max Number of Participants ------------------------------------
               const Text(
                 "* Max Number of Participants",
                 textAlign: TextAlign.start,
@@ -289,7 +224,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
 
               const SizedBox(height: 20),
 
-              // Event Description
+              // Event Description ---------------------------------------------
               const Text(
                 "* Event Description",
                 textAlign: TextAlign.start,
@@ -321,7 +256,7 @@ class _CreateEventFormState extends State<CreateEventForm> {
 
               const SizedBox(height: 30),
 
-              // Create Event Button
+              // Create Event Button -------------------------------------------
               ElevatedButton(
                 onPressed: () {
                   createEventController.createEvent();

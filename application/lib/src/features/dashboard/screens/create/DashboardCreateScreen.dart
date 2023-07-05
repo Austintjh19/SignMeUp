@@ -4,8 +4,8 @@ import 'package:myapplication/src/constants/colors.dart';
 import 'package:myapplication/src/constants/image_strings.dart';
 import 'package:myapplication/src/features/dashboard/screens/create/CreateEventScreen.dart';
 
-class CreateEventMainScreen extends StatelessWidget {
-  const CreateEventMainScreen({super.key});
+class DashboardCreateScreen extends StatelessWidget {
+  const DashboardCreateScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class CreateEventMainScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
           child: Container(
-        padding: EdgeInsets.all(30),
+        padding: const EdgeInsets.all(30),
         alignment: const Alignment(0, 0),
         child: Container(
           height: 600,
@@ -26,7 +26,7 @@ class CreateEventMainScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image(image: AssetImage(createScreenImage)),
+              const Image(image: AssetImage(createScreenImage)),
 
               const SizedBox(height: 20.0),
 

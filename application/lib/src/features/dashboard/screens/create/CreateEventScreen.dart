@@ -32,7 +32,7 @@ class CreateEventScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(30),
-            child: CreateEventForm(),
+            child: const CreateEventForm(),
           ),
         ));
   }

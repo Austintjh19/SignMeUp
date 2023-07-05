@@ -14,7 +14,7 @@ class SignUpController extends GetxController {
   final email = TextEditingController();
   final newPassword = TextEditingController();
   final confirmPassword = TextEditingController();
-  final profilePic = TextEditingController(text: "");
+  final profileImage = TextEditingController(text: "");
   final description = TextEditingController();
 
   final _userRepository = Get.put(UserRepository());
@@ -31,7 +31,7 @@ class SignUpController extends GetxController {
         name: name.text.trim(),
         email: email.text.trim(),
         password: newPassword.text.trim(),
-        profileImage: profilePic.text.trim(),
+        profileImage: profileImage.text.trim(),
         description: description.text.trim());
 
     await _userRepository.storeUserDetails(user, cred);

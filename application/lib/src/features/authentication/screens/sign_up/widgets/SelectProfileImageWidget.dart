@@ -8,19 +8,21 @@ import 'package:myapplication/src/constants/image_strings.dart';
 
 import '../../../controllers/SignUpController.dart';
 
-class ProfileImage extends StatefulWidget {
-  const ProfileImage({
+class SelectProfileImageWidget extends StatefulWidget {
+  const SelectProfileImageWidget({
     super.key,
   });
 
   @override
-  State<ProfileImage> createState() => _ProfileImageState();
+  State<SelectProfileImageWidget> createState() =>
+      _SelectProfileImageWidgetState();
 }
 
-class _ProfileImageState extends State<ProfileImage> {
+class _SelectProfileImageWidgetState extends State<SelectProfileImageWidget> {
   String imageUrl = "";
+  final String profileImageID = DateTime.now().toIso8601String();
+
   final controller = Get.put(SignUpController());
-  final String identifier = DateTime.now().toIso8601String();
 
   void selectProfileImage() async {
     final image = await ImagePicker().pickImage(
@@ -30,8 +32,9 @@ class _ProfileImageState extends State<ProfileImage> {
       imageQuality: 100,
     );
 
-    Reference ref =
-        FirebaseStorage.instance.ref().child("/ProfilePictures/$identifier");
+    Reference ref = FirebaseStorage.instance
+        .ref()
+        .child("/ProfilePictures/$profileImageID");
 
     try {
       await ref.putFile(File(image!.path));
@@ -41,10 +44,10 @@ class _ProfileImageState extends State<ProfileImage> {
           imageUrl = value;
         });
       });
-      controller.profilePic.text = ref.fullPath;
+      controller.profileImage.text = ref.fullPath;
     } catch (e) {
       Get.snackbar("Error",
-          'No Image has been selected. Please try again if you wish to select your profile pic now.',
+          'No Image has been selected. Please try again if you wish to select your profile image now.',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent.withOpacity(0.1),
           colorText: Colors.red);

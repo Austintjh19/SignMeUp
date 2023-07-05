@@ -10,7 +10,7 @@ class UpdateProfileController extends GetxController {
 
   final name = TextEditingController();
   final username = TextEditingController();
-  final profilePic = TextEditingController(text: "");
+  final profileImage = TextEditingController(text: "");
   final description = TextEditingController();
 
   updateProfile(String uid) async {
@@ -19,6 +19,6 @@ class UpdateProfileController extends GetxController {
   }
 
   updateProfileImage(String uid) async {
-    await _userRepository.updateProfileImage(uid, profilePic.text.trim());
+    await _userRepository.updateProfileImage(uid, profileImage.text.trim());
   }
 }

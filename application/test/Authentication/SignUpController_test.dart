@@ -8,7 +8,9 @@ import 'package:myapplication/src/models/UserModel.dart';
 import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
 import 'package:myapplication/src/repository/user_repository/UserRepository.dart';
 
-class MockAuthenticationRepository extends GetxController with Mock implements AuthenticationRepository {}
+class MockAuthenticationRepository extends GetxController
+    with Mock
+    implements AuthenticationRepository {}
 
 class MockUserRepository extends Mock implements UserRepository {}
 
@@ -30,7 +32,9 @@ void main() {
       mockUserRepository = Get.find<MockUserRepository>();
     });
 
-    test('registerUser should create a user via email and password, and store user details', () async {
+    test(
+        'registerUser should create a user via email and password, and store user details',
+        () async {
       const name = 'haitao';
       const username = 'haitao';
       const email = 'johndoe@example.com';
@@ -39,22 +43,35 @@ void main() {
       const description = 'This is haitao';
 
       final mockCredential = MockUserCredential();
-      final mockUser = UserModel([],[], uid: '123', username: username, name: name, email: email, password: newPassword, profileImage: profilePic, description: description);
+      final mockUser = UserModel([], [],
+          uid: '123',
+          username: username,
+          name: name,
+          email: email,
+          password: newPassword,
+          profileImage: profilePic,
+          description: description);
 
-      when(mockAuthRepository.createUserViaEmailAndPassword('test@example.com', 'password')).thenAnswer((_) async => mockCredential);
-      when(mockUserRepository.storeUserDetails(mockUser,mockCredential)).thenAnswer((_) async {});
+      when(mockAuthRepository.createUserViaEmailAndPassword(
+              'test@example.com', 'password'))
+          .thenAnswer((_) async => mockCredential);
+      when(mockUserRepository.storeUserDetails(mockUser, mockCredential))
+          .thenAnswer((_) async {});
 
       signUpController.name.text = name;
       signUpController.username.text = username;
       signUpController.email.text = email;
       signUpController.newPassword.text = newPassword;
-      signUpController.profilePic.text = profilePic;
+      signUpController.profileImage.text = profilePic;
       signUpController.description.text = description;
 
       await signUpController.registerUser();
 
-      verify(mockAuthRepository.createUserViaEmailAndPassword(email, newPassword)).called(1);
-      verify(mockUserRepository.storeUserDetails(mockUser, mockCredential)).called(1);
+      verify(mockAuthRepository.createUserViaEmailAndPassword(
+              email, newPassword))
+          .called(1);
+      verify(mockUserRepository.storeUserDetails(mockUser, mockCredential))
+          .called(1);
     });
   });
 }

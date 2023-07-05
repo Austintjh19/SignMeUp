@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:myapplication/src/constants/image_strings.dart';
-import 'package:myapplication/src/features/authentication/screens/sign_up/widgets/ProfileImage.dart';
+import 'package:myapplication/src/features/authentication/screens/sign_up/widgets/SelectProfileImageWidget.dart';
 import 'package:myapplication/src/features/authentication/controllers/SignUpController.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_in/SignInScreen.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_up/widgets/SignUpForm1.dart';
@@ -83,7 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       image: ExactAssetImage(tempSignUpImage),
                                       fit: BoxFit.fitHeight)),
                             )
-                          : const ProfileImage(),
+                          : const SelectProfileImageWidget(),
 
                       const SizedBox(height: 30),
 

@@ -47,7 +47,7 @@ class _UpdatProfileFormState extends State<UpdatProfileForm> {
           newImageUrl = value;
         });
       });
-      updateProfileController.profilePic.text = ref.fullPath;
+      updateProfileController.profileImage.text = ref.fullPath;
       updateProfileController.updateProfileImage(uid);
     } catch (e) {
       Get.snackbar("Error",
