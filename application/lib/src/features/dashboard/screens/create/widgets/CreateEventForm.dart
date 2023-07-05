@@ -1,11 +1,6 @@
-import 'dart:io';
-
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:myapplication/src/constants/colors.dart';
-import 'package:myapplication/src/constants/image_strings.dart';
 import 'package:myapplication/src/features/dashboard/controllers/CreateEventController.dart';
 import 'package:intl/intl.dart';
 import 'package:myapplication/src/features/dashboard/screens/create/widgets/SelectEventImageWidget.dart';
