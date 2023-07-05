@@ -6,12 +6,12 @@ import '../../../repository/user_repository/UserRepository.dart';
 class UpdateProfileController extends GetxController {
   static UpdateProfileController get instance => Get.find();
 
+  final _userRepository = Get.put(UserRepository());
+
   final name = TextEditingController();
   final username = TextEditingController();
-  final profilePicController = TextEditingController(text: "");
+  final profilePic = TextEditingController(text: "");
   final description = TextEditingController();
-
-  final _userRepository = Get.put(UserRepository());
 
   updateProfile(String uid) async {
     await _userRepository.updateProfile(
@@ -19,7 +19,6 @@ class UpdateProfileController extends GetxController {
   }
 
   updateProfileImage(String uid) async {
-    await _userRepository.updateProfileImage(
-        uid, profilePicController.text.trim());
+    await _userRepository.updateProfileImage(uid, profilePic.text.trim());
   }
 }
