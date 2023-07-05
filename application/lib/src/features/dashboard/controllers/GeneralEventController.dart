@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapplication/src/models/EventModel.dart';
 import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
@@ -10,17 +9,6 @@ class GeneralEventController extends GetxController {
   final _authRepository = Get.put(AuthenticationRepository());
   final _eventRepository = Get.put(EventRepository());
 
-  final stringQuery = TextEditingController(text: '');
-
-  Future<List<EventModel>?> searchEvents(String filterBy, String order) async {
-    if (stringQuery.text == '') {
-      return getAllFilteredEvents(
-          filterBy, order == 'Descending' ? false : true);
-    }
-    return _eventRepository.searchEvent(stringQuery.text.trim(), filterBy,
-        order == 'Descending' ? false : true);
-  }
-
   Future<EventModel> getEventData(String eventID) async {
     return await _eventRepository.getEventData(eventID);
   }
@@ -29,18 +17,13 @@ class GeneralEventController extends GetxController {
     return _eventRepository.getEventImage(imagePath);
   }
 
-  Future<List<EventModel>?> getAllFilteredEvents(
-      String filterBy, bool isDescending) async {
-    return await _eventRepository.getAllFilteredEvents(filterBy, isDescending);
-  }
-
   Future<void> addParticipant(String eventID) async {
-    final uid = _authRepository.firebaseUser.value?.uid;
+    final uid = await _authRepository.getCurrentUserUID();
     await _eventRepository.addParticipant(uid!, eventID);
   }
 
   Future<void> removeParticipant(String eventID) async {
-    final uid = _authRepository.firebaseUser.value?.uid;
+    final uid = await _authRepository.getCurrentUserUID();
     await _eventRepository.removeParticipant(uid!, eventID);
   }
 

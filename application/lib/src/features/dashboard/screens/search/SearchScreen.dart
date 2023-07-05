@@ -7,7 +7,7 @@ import 'package:myapplication/src/features/dashboard/controllers/GeneralEventCon
 import 'package:myapplication/src/common_widgets/VerticalScrollEventsWidget.dart';
 
 import '../../Dashboard.dart';
-import '../../controllers/FilterSearchController.dart';
+import '../../controllers/SearchEventController.dart';
 
 class SearchScreen extends ConsumerStatefulWidget {
   const SearchScreen({super.key});
@@ -18,7 +18,7 @@ class SearchScreen extends ConsumerStatefulWidget {
 
 class _SearchScreenState extends ConsumerState<SearchScreen> {
   final eventController = Get.put(GeneralEventController());
-  final filterSearchController = Get.put(FilterSearchController());
+  final searchEventController = Get.put(SearchEventController());
 
   Future<void> _refreshScreen() async {
     await Future.delayed(const Duration(seconds: 1));
@@ -54,11 +54,14 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                           boxShadow: defaultBoxShadow,
                           color: primaryColor100),
                       child: TextFormField(
-                        controller: eventController.stringQuery,
+                        controller: searchEventController.stringQuery,
                         onChanged: (query) {
-                          eventController.searchEvents(
-                              ref.watch(filterStateProvider).keys.first,
-                              ref.watch(filterStateProvider).values.first);
+                          searchEventController.searchEventsFiltredBy(
+                              ref.watch(searchFilterStateProvider).keys.first,
+                              ref
+                                  .watch(searchFilterStateProvider)
+                                  .values
+                                  .first);
                           setState(() {});
                         },
                         maxLines: 1,
@@ -98,7 +101,8 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                                   size: 20,
                                 ),
                                 onPressed: () {
-                                  filterSearchController.getPopUp(context);
+                                  searchEventController
+                                      .getSearchFilterPopUp(context);
                                 },
                               ),
                             ),
@@ -110,9 +114,9 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
                     // Event List
                     FutureBuilder(
-                        future: eventController.searchEvents(
-                            ref.watch(filterStateProvider).keys.first,
-                            ref.watch(filterStateProvider).values.first),
+                        future: searchEventController.searchEventsFiltredBy(
+                            ref.watch(searchFilterStateProvider).keys.first,
+                            ref.watch(searchFilterStateProvider).values.first),
                         builder: ((context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.done) {

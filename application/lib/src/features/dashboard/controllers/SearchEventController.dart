@@ -3,22 +3,29 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
 import '../../../constants/colors.dart';
+import '../../../models/EventModel.dart';
+import '../../../repository/event_repository/EventRepository.dart';
 
-final filterStateProvider = StateProvider<Map<String, String>>((ref) {
+final searchFilterStateProvider = StateProvider<Map<String, String>>((ref) {
   return {
     'EventDateTime': 'Descending',
   };
 });
 
-final class FilterSearchController extends GetxController {
-  static FilterSearchController get instance => Get.find();
+final class SearchEventController extends GetxController {
+  static SearchEventController get instance => Get.find();
 
-  getPopUp(BuildContext context) {
+  final _eventRepository = Get.put(EventRepository());
+
+  final stringQuery = TextEditingController(text: '');
+
+  getSearchFilterPopUp(BuildContext context) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return Consumer(builder: ((context, ref, child) {
-            Map<String, String> filterCriteria = ref.watch(filterStateProvider);
+            Map<String, String> filterCriteria =
+                ref.watch(searchFilterStateProvider);
             return AlertDialog(
               backgroundColor: primaryColor100.withOpacity(0.9),
               title: const Text(
@@ -78,9 +85,9 @@ final class FilterSearchController extends GetxController {
                                             color: textColor600))),
                               ],
                               onChanged: (val) {
-                                ref.read(filterStateProvider.state).state = {
-                                  'Event Name': val!
-                                };
+                                ref
+                                    .read(searchFilterStateProvider.state)
+                                    .state = {'Event Name': val!};
                               })
                         ],
                       ),
@@ -130,9 +137,9 @@ final class FilterSearchController extends GetxController {
                                             color: textColor600))),
                               ],
                               onChanged: (val) {
-                                ref.read(filterStateProvider.state).state = {
-                                  'Event Location': val!
-                                };
+                                ref
+                                    .read(searchFilterStateProvider.state)
+                                    .state = {'Event Location': val!};
                               })
                         ],
                       ),
@@ -181,9 +188,9 @@ final class FilterSearchController extends GetxController {
                                             color: textColor600))),
                               ],
                               onChanged: (val) {
-                                ref.read(filterStateProvider.state).state = {
-                                  'EventDateTime': val!
-                                };
+                                ref
+                                    .read(searchFilterStateProvider.state)
+                                    .state = {'EventDateTime': val!};
                               })
                         ],
                       ),
@@ -233,9 +240,9 @@ final class FilterSearchController extends GetxController {
                                             color: textColor600))),
                               ],
                               onChanged: (val) {
-                                ref.read(filterStateProvider.state).state = {
-                                  'Num Participants': val!
-                                };
+                                ref
+                                    .read(searchFilterStateProvider.state)
+                                    .state = {'Num Participants': val!};
                               })
                         ],
                       ),
@@ -244,5 +251,16 @@ final class FilterSearchController extends GetxController {
             );
           }));
         });
+  }
+
+  Future<List<EventModel>?> searchEventsFiltredBy(
+      String filterBy, String order) async {
+    if (stringQuery.text == '') {
+      return await _eventRepository.getAllFilteredEvents(
+          filterBy, order == 'Descending' ? false : true);
+    } else {
+      return await _eventRepository.searchEvent(stringQuery.text.trim(),
+          filterBy, order == 'Descending' ? false : true);
+    }
   }
 }
