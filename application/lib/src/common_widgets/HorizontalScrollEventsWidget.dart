@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapplication/src/features/dashboard/controllers/GeneralEventController.dart';
-import 'package:myapplication/src/features/dashboard/screens/event/EventScreen.dart';
+import 'package:myapplication/src/features/dashboard/screens/event/EventDetailsScreen.dart';
 
 import '../constants/colors.dart';
 import '../constants/image_strings.dart';
@@ -21,7 +21,7 @@ class HorizontalScrollEventsWidget extends StatelessWidget {
         const SizedBox(width: 10),
         GestureDetector(
           onTap: () {
-            Get.to(EventScreen(eventID: event.id),
+            Get.to(EventDetailsScreen(eventID: event.id),
                 transition: Transition.rightToLeft);
           },
           child: Container(

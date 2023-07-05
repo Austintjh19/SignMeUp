@@ -4,7 +4,7 @@ import 'package:myapplication/src/features/dashboard/controllers/GeneralEventCon
 
 import '../constants/colors.dart';
 import '../constants/image_strings.dart';
-import '../features/dashboard/screens/event/EventScreen.dart';
+import '../features/dashboard/screens/event/EventDetailsScreen.dart';
 import '../models/EventModel.dart';
 
 class VerticalScrollEventsWidget extends StatelessWidget {
@@ -22,7 +22,7 @@ class VerticalScrollEventsWidget extends StatelessWidget {
         const SizedBox(height: 10),
         GestureDetector(
           onTap: () {
-            Get.to(EventScreen(eventID: event.id),
+            Get.to(EventDetailsScreen(eventID: event.id),
                 transition: Transition.rightToLeft);
           },
           child: Container(

@@ -6,9 +6,9 @@ import '../../../../../constants/colors.dart';
 import '../../../../../constants/image_strings.dart';
 import '../../../../../models/UserModel.dart';
 
-class OtherParticipantWidget extends StatelessWidget {
+class EventParticipantListWidget extends StatelessWidget {
   final String uid;
-  const OtherParticipantWidget({super.key, required this.uid});
+  const EventParticipantListWidget({super.key, required this.uid});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class OtherParticipantWidget extends StatelessWidget {
       children: [
         Row(
           children: [
-            // Profile Image
+            // Profile Image ---------------------------------------------------
             FutureBuilder(
               future: otherUsersController.getUserProfileImage(uid),
               builder: ((context, snapshot) {
@@ -34,16 +34,13 @@ class OtherParticipantWidget extends StatelessWidget {
                           );
                   }
                 }
-                return const CircleAvatar(
-                  radius: 25,
-                  backgroundImage: ExactAssetImage(defaultProfileImage),
-                );
+                return Container();
               }),
             ),
 
             const SizedBox(width: 40),
-            // Username and Description
 
+            // Username and Description ----------------------------------------
             FutureBuilder(
                 future: otherUsersController.getUserData(uid),
                 builder: (context, snapshot) {

@@ -1,20 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myapplication/src/constants/colors.dart';
-import 'package:myapplication/src/features/dashboard/screens/event/widgets/OtherParticipantWidget.dart';
+import 'package:myapplication/src/features/dashboard/screens/event/widgets/EventParticipantListWidget.dart';
 
 import '../../../../../models/EventModel.dart';
 
-class ParticipantsWidget extends StatelessWidget {
+class EventParticipantsWidget extends StatelessWidget {
   final EventModel event;
-  const ParticipantsWidget({super.key, required this.event});
+  const EventParticipantsWidget({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Column(
       children: [
-        // Participants Data
+        // Num Participants Data ===============================================
         Container(
           width: width,
           height: 100,
@@ -27,7 +27,7 @@ class ParticipantsWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Icon
+              // Icon ----------------------------------------------------------
               Expanded(
                 child: Icon(
                   CupertinoIcons.person_2,
@@ -40,7 +40,7 @@ class ParticipantsWidget extends StatelessWidget {
                 thickness: 2.0,
               ),
 
-              // Participants Text
+              // Participants Text ---------------------------------------------
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -74,6 +74,7 @@ class ParticipantsWidget extends StatelessWidget {
 
         const SizedBox(height: 20),
 
+        // Paticipant List =====================================================
         Container(
           width: width,
           height: 300,
@@ -87,7 +88,8 @@ class ParticipantsWidget extends StatelessWidget {
               scrollDirection: Axis.vertical,
               itemCount: event.participants.length,
               itemBuilder: (context, index) {
-                return OtherParticipantWidget(uid: event.participants[index]);
+                return EventParticipantListWidget(
+                    uid: event.participants[index]);
               }),
         )
       ],

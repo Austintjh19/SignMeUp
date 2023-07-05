@@ -4,16 +4,16 @@ import 'package:myapplication/src/constants/colors.dart';
 
 import '../../../../../models/EventModel.dart';
 
-class DetailsWidget extends StatelessWidget {
+class EventDetailsWidget extends StatelessWidget {
   final EventModel event;
-  const DetailsWidget({super.key, required this.event});
+  const EventDetailsWidget({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Column(
       children: [
-        // Date Time & Location
+        // Date Time & Location ================================================
         Container(
           width: width,
           padding: const EdgeInsets.all(20),
@@ -23,7 +23,7 @@ class DetailsWidget extends StatelessWidget {
               boxShadow: defaultBoxShadow),
           child: Column(
             children: [
-              // Date and Time of Event
+              // Date and Time of Event ----------------------------------------
               Row(
                 children: [
                   Icon(
@@ -46,7 +46,7 @@ class DetailsWidget extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // Location
+              // Location ------------------------------------------------------
               Row(
                 children: [
                   Icon(
@@ -72,7 +72,7 @@ class DetailsWidget extends StatelessWidget {
 
         const SizedBox(height: 20),
 
-        // Description
+        // Description =========================================================
 
         const SizedBox(height: 20),
         Text(
