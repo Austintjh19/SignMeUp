@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:myapplication/src/common_widgets/UnorderedListText.dart';
 import 'package:myapplication/src/constants/colors.dart';
 import 'package:myapplication/src/features/dashboard/controllers/GeneralEventController.dart';
 import 'package:myapplication/src/common_widgets/VerticalScrollEventsWidget.dart';
@@ -17,13 +18,17 @@ class SearchScreen extends ConsumerStatefulWidget {
 }
 
 class _SearchScreenState extends ConsumerState<SearchScreen> {
-  final eventController = Get.put(GeneralEventController());
+  final generalEventController = Get.put(GeneralEventController());
   final searchEventController = Get.put(SearchEventController());
 
   Future<void> _refreshScreen() async {
     await Future.delayed(const Duration(seconds: 1));
     Get.offAll(Dashboard(initialPageIndex: 1));
     return Future.delayed(const Duration(seconds: 0));
+  }
+
+  void _searchQuery() {
+    setState(() {});
   }
 
   @override
@@ -47,7 +52,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                     BoxDecoration(borderRadius: BorderRadius.circular(10)),
                 child: Column(
                   children: [
-                    // Events Search Bar
+                    // Events Search Bar =======================================
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
@@ -62,7 +67,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                                   .watch(searchFilterStateProvider)
                                   .values
                                   .first);
-                          setState(() {});
+                          _searchQuery();
                         },
                         maxLines: 1,
                         style: const TextStyle(
@@ -112,7 +117,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
                     const SizedBox(height: 20),
 
-                    // Event List
+                    // Event List ==============================================
                     FutureBuilder(
                         future: searchEventController.searchEventsFiltredBy(
                             ref.watch(searchFilterStateProvider).keys.first,
@@ -120,7 +125,8 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                         builder: ((context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.done) {
-                            if (snapshot.data != null) {
+                            if (snapshot.data != null &&
+                                snapshot.data!.isNotEmpty) {
                               return ListView.builder(
                                   physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
@@ -132,10 +138,31 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                                     );
                                   });
                             }
-                            // No Matching Events
-                            return Container();
+                            // No Matching Events ------------------------------
+                            return Container(
+                              padding: const EdgeInsets.fromLTRB(5, 30, 10, 5),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Your search - ${searchEventController.stringQuery.text} - did not match any documetns.',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(height: 20),
+                                  const Text('Suggections:'),
+                                  const SizedBox(height: 15),
+                                  const UnorderedListText([
+                                    'Make sure that all words are spelled correctly.',
+                                    'Try different keywords or Try more general keywords.',
+                                    'Try fewer keywords.'
+                                  ])
+                                ],
+                              ),
+                            );
                           }
-                          // Loading Events
+                          // Loading Events ------------------------------------
                           return const SizedBox(
                             height: 200,
                             child: Center(child: CircularProgressIndicator()),
