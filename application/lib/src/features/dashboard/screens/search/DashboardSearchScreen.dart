@@ -10,14 +10,14 @@ import 'package:myapplication/src/common_widgets/VerticalScrollEventsWidget.dart
 import '../../Dashboard.dart';
 import '../../controllers/SearchEventController.dart';
 
-class SearchScreen extends ConsumerStatefulWidget {
-  const SearchScreen({super.key});
+class DashboardSearchScreen extends ConsumerStatefulWidget {
+  const DashboardSearchScreen({super.key});
 
   @override
-  ConsumerState<SearchScreen> createState() => _SearchScreenState();
+  ConsumerState<DashboardSearchScreen> createState() => _SearchScreenState();
 }
 
-class _SearchScreenState extends ConsumerState<SearchScreen> {
+class _SearchScreenState extends ConsumerState<DashboardSearchScreen> {
   final generalEventController = Get.put(GeneralEventController());
   final searchEventController = Get.put(SearchEventController());
 

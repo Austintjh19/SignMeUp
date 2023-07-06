@@ -6,7 +6,7 @@ import 'package:myapplication/src/features/dashboard/screens/create/DashboardCre
 
 import 'package:myapplication/src/features/dashboard/screens/home/DashboardHomeScreen.dart';
 import 'package:myapplication/src/features/dashboard/screens/message/MessagingScreen.dart';
-import 'package:myapplication/src/features/dashboard/screens/search/SearchScreen.dart';
+import 'package:myapplication/src/features/dashboard/screens/search/DashboardSearchScreen.dart';
 
 // ignore: must_be_immutable
 class Dashboard extends StatefulWidget {
@@ -23,7 +23,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   List screens = [
     const DashboardHomeScreen(),
-    const SearchScreen(),
+    const DashboardSearchScreen(),
     const MessagingScreen(),
     const DashboardCreateScreen(),
   ];

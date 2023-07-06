@@ -1,13 +1,9 @@
-import 'dart:io';
-
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:myapplication/src/features/dashboard/Dashboard.dart';
+import 'package:myapplication/src/features/dashboard/screens/update_profile/widgets/UpdateProfileImageWidget.dart';
 import 'package:myapplication/src/features/dashboard/screens/update_profile/widgets/UpdateProfileTextField.dart';
 
-import '../../../../../constants/image_strings.dart';
 import '../../../../../controllers/ValidationController.dart';
 import '../../../../../models/UserModel.dart';
 import '../../../controllers/CurrentUserController.dart';
@@ -21,61 +17,19 @@ class UpdatProfileForm extends StatefulWidget {
 }
 
 class _UpdatProfileFormState extends State<UpdatProfileForm> {
-  final profileController = Get.put(CurrentUserController());
+  final currentUserController = Get.put(CurrentUserController());
   final updateProfileController = Get.put(UpdateProfileController());
   final validationController = Get.put(ValidationController());
-  final String identifier = DateTime.now().toIso8601String();
   bool formEnabled = false;
-  String newImageUrl = "";
-
-  void updateProfileImage(String uid) async {
-    final image = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-      maxHeight: 600,
-      maxWidth: 600,
-      imageQuality: 100,
-    );
-
-    Reference ref =
-        FirebaseStorage.instance.ref().child("/ProfilePictures/$identifier");
-
-    try {
-      await ref.putFile(File(image!.path));
-
-      ref.getDownloadURL().then((value) async {
-        setState(() {
-          newImageUrl = value;
-        });
-      });
-      updateProfileController.profileImage.text = ref.fullPath;
-      updateProfileController.updateProfileImage(uid);
-    } catch (e) {
-      Get.snackbar("Error",
-          'No Image has been selected. Please try again if you wish to select/ change your profile pic.',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.redAccent.withOpacity(0.1),
-          colorText: Colors.red);
-    }
-    // await ref.putFile(File(image!.path));
-
-    // ref.getDownloadURL().then((value) async {
-    //   setState(() {
-    //     newImageUrl = value;
-    //   });
-    // });
-
-    // updateProfileController.profilePicController.text = ref.fullPath;
-    // updateProfileController.updateProfileImage(uid);
-  }
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
     return SingleChildScrollView(
       child: Form(
-        key: _formKey,
+        key: formKey,
         child: FutureBuilder(
-            future: profileController.getUserData(),
+            future: currentUserController.getUserData(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
@@ -88,66 +42,12 @@ class _UpdatProfileFormState extends State<UpdatProfileForm> {
                     padding: const EdgeInsets.all(30),
                     child: Column(
                       children: [
-                        // Profile Image
-                        Stack(
-                          children: [
-                            FutureBuilder(
-                                future: profileController.getProfileImage(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.done) {
-                                    if (snapshot.hasData) {
-                                      String imageUrl = snapshot.data as String;
-                                      return newImageUrl == ""
-                                          ? imageUrl != ""
-                                              ? CircleAvatar(
-                                                  radius: 90,
-                                                  backgroundImage:
-                                                      NetworkImage(imageUrl))
-                                              : const CircleAvatar(
-                                                  radius: 90,
-                                                  backgroundImage:
-                                                      ExactAssetImage(
-                                                          defaultProfileImage),
-                                                )
-                                          : CircleAvatar(
-                                              radius: 90,
-                                              backgroundImage:
-                                                  NetworkImage(newImageUrl));
-                                    }
-                                  }
-                                  return const CircleAvatar(
-                                    radius: 90,
-                                    backgroundImage:
-                                        ExactAssetImage(defaultProfileImage),
-                                  );
-                                }),
-                            Positioned(
-                              top: 0,
-                              right: 0,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    color:
-                                        const Color.fromRGBO(119, 143, 253, 1)),
-                                child: IconButton(
-                                  icon: const Icon(
-                                    Icons.camera_alt_outlined,
-                                    color: Colors.white,
-                                    size: 20,
-                                  ),
-                                  onPressed: () {
-                                    updateProfileImage(userData.uid);
-                                  },
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
+                        // Profile Image ---------------------------------------
+                        UpdateProfileImageWidget(userData: userData),
 
                         const SizedBox(height: 20),
 
-                        // Edit/ Save Button
+                        // Edit/ Save Button -----------------------------------
                         Container(
                           alignment: Alignment.centerRight,
                           child: TextButton.icon(
@@ -188,7 +88,7 @@ class _UpdatProfileFormState extends State<UpdatProfileForm> {
                                   formEnabled = true;
                                 });
                               } else {
-                                if (_formKey.currentState!.validate()) {
+                                if (formKey.currentState!.validate()) {
                                   await updateProfileController
                                       .updateProfile(userData.uid);
                                   Get.offAll(Dashboard(initialPageIndex: -1),
@@ -201,7 +101,7 @@ class _UpdatProfileFormState extends State<UpdatProfileForm> {
 
                         const SizedBox(height: 20),
 
-                        // Name
+                        // Name ------------------------------------------------
                         UpdateProfileTextField(
                           controller: updateProfileController.name,
                           formEnabled: formEnabled,
@@ -215,7 +115,7 @@ class _UpdatProfileFormState extends State<UpdatProfileForm> {
 
                         const SizedBox(height: 20),
 
-                        // Username
+                        // Username --------------------------------------------
                         UpdateProfileTextField(
                           controller: updateProfileController.username,
                           formEnabled: formEnabled,
@@ -229,7 +129,7 @@ class _UpdatProfileFormState extends State<UpdatProfileForm> {
 
                         const SizedBox(height: 20),
 
-                        // Description
+                        // Description -----------------------------------------
                         TextFormField(
                           keyboardType: TextInputType.multiline,
                           minLines: 5,
