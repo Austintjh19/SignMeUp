@@ -34,6 +34,6 @@ class SignUpController extends GetxController {
         profileImage: profileImage.text.trim(),
         description: description.text.trim());
 
-    await _userRepository.storeUserDetails(user, cred);
+    await _userRepository.storeUserProfile(user, cred);
   }
 }

@@ -14,7 +14,7 @@ class UpdateProfileController extends GetxController {
   final description = TextEditingController();
 
   updateProfile(String uid) async {
-    await _userRepository.updateProfile(
+    await _userRepository.updateUserProfile(
         uid, name.text.trim(), username.text.trim(), description.text.trim());
   }
 

@@ -42,7 +42,7 @@ class CurrentUserController extends GetxController {
     List? registedEvents = await _userRepository.getRegisteredEvents(uid!);
     if (registedEvents != null) {
       List<EventModel> registeredEventsData =
-          await _eventRepository.getSelectedEvents(registedEvents);
+          await _eventRepository.getEventsFromList(registedEvents);
       return registeredEventsData;
     }
     return null;
@@ -53,7 +53,7 @@ class CurrentUserController extends GetxController {
     List? bookmarkedEvents = await _userRepository.getBookmarkedEvents(uid!);
     if (bookmarkedEvents != null) {
       List<EventModel> bookmarkedEventsData =
-          await _eventRepository.getSelectedEvents(bookmarkedEvents);
+          await _eventRepository.getEventsFromList(bookmarkedEvents);
       return bookmarkedEventsData;
     }
     return null;
@@ -87,21 +87,21 @@ class CurrentUserController extends GetxController {
 
   Future<void> addToRegisteredEvents(String eventID) async {
     final uid = await _authRepository.getCurrentUserUID();
-    await _userRepository.addRegisteredEvent(uid!, eventID);
+    await _userRepository.addToRegisteredEvents(uid!, eventID);
   }
 
   Future<void> addToBookmarkedEvents(String eventID) async {
     final uid = await _authRepository.getCurrentUserUID();
-    await _userRepository.addBookmarkedEvent(uid!, eventID);
+    await _userRepository.addToBookmarkedEvents(uid!, eventID);
   }
 
   Future<void> removeFromRegisteredEvents(String eventID) async {
     final uid = await _authRepository.getCurrentUserUID();
-    await _userRepository.removeRegisteredEvent(uid!, eventID);
+    await _userRepository.removeFromRegisteredEvents(uid!, eventID);
   }
 
   Future<void> removeFromBookmarkedEvents(String eventID) async {
     final uid = await _authRepository.getCurrentUserUID();
-    await _userRepository.removeBookmarkedEvent(uid!, eventID);
+    await _userRepository.removeFromBookmarkedEvents(uid!, eventID);
   }
 }

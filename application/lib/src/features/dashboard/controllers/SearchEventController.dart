@@ -253,14 +253,16 @@ final class SearchEventController extends GetxController {
         });
   }
 
-  Future<List<EventModel>?> searchEventsFiltredBy(
+  Future<List<EventModel>?> searchEventsFilteredBy(
       String filterBy, String order) async {
     if (stringQuery.text == '') {
-      return await _eventRepository.getAllFilteredEvents(
+      return await _eventRepository.getAllEventsFilteredBy(
           filterBy, order == 'Descending' ? false : true);
     } else {
-      return await _eventRepository.searchEvent(stringQuery.text.trim(),
-          filterBy, order == 'Descending' ? false : true);
+      return await _eventRepository.searchEventsFilteredBy(
+          stringQuery.text.trim(),
+          filterBy,
+          order == 'Descending' ? false : true);
     }
   }
 }

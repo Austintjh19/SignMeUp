@@ -55,7 +55,7 @@ void main() {
       when(mockAuthRepository.createUserViaEmailAndPassword(
               'test@example.com', 'password'))
           .thenAnswer((_) async => mockCredential);
-      when(mockUserRepository.storeUserDetails(mockUser, mockCredential))
+      when(mockUserRepository.storeUserProfile(mockUser, mockCredential))
           .thenAnswer((_) async {});
 
       signUpController.name.text = name;
@@ -70,7 +70,7 @@ void main() {
       verify(mockAuthRepository.createUserViaEmailAndPassword(
               email, newPassword))
           .called(1);
-      verify(mockUserRepository.storeUserDetails(mockUser, mockCredential))
+      verify(mockUserRepository.storeUserProfile(mockUser, mockCredential))
           .called(1);
     });
   });

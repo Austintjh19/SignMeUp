@@ -11,7 +11,7 @@ class UserRepository extends GetxController {
 
   final _db = FirebaseFirestore.instance;
 
-  Future<void> storeUserDetails(UserModel user, UserCredential cred) async {
+  Future<void> storeUserProfile(UserModel user, UserCredential cred) async {
     try {
       await _db
           .collection('UsersSignUpInfo')
@@ -56,7 +56,7 @@ class UserRepository extends GetxController {
     return "";
   }
 
-  Future<void> updateProfile(
+  Future<void> updateUserProfile(
       String uid, String name, String username, String description) async {
     await _db.collection('UsersSignUpInfo').doc(uid).update(
         {'Name': name, 'Username': username, 'Description': description});
@@ -77,25 +77,25 @@ class UserRepository extends GetxController {
         colorText: Colors.green);
   }
 
-  Future<void> addRegisteredEvent(String uid, String eventID) async {
+  Future<void> addToRegisteredEvents(String uid, String eventID) async {
     await _db.collection('UsersSignUpInfo').doc(uid).update({
       "Registered Events": FieldValue.arrayUnion([eventID])
     });
   }
 
-  Future<void> addBookmarkedEvent(String uid, String eventID) async {
+  Future<void> addToBookmarkedEvents(String uid, String eventID) async {
     await _db.collection('UsersSignUpInfo').doc(uid).update({
       "Bookmarked Events": FieldValue.arrayUnion([eventID])
     });
   }
 
-  Future<void> removeRegisteredEvent(String uid, String eventID) async {
+  Future<void> removeFromRegisteredEvents(String uid, String eventID) async {
     await _db.collection('UsersSignUpInfo').doc(uid).update({
       "Registered Events": FieldValue.arrayRemove([eventID])
     });
   }
 
-  Future<void> removeBookmarkedEvent(String uid, String eventID) async {
+  Future<void> removeFromBookmarkedEvents(String uid, String eventID) async {
     await _db.collection('UsersSignUpInfo').doc(uid).update({
       "Bookmarked Events": FieldValue.arrayRemove([eventID])
     });
@@ -119,7 +119,7 @@ class UserRepository extends GetxController {
     return userData.bookmarkedEvents;
   }
 
-  Future<void> deleteUserDoc(String uid) async {
+  Future<void> deleteUserProfile(String uid) async {
     await _db.collection('UsersSignUpInfo').doc(uid).delete();
   }
 }

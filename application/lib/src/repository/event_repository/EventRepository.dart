@@ -43,9 +43,10 @@ class EventRepository extends GetxController {
           backgroundColor: Colors.redAccent.withOpacity(0.1),
           colorText: Colors.red);
     }
+    return null;
   }
 
-  Future<List<EventModel>> getSelectedEvents(List registeredEvents) async {
+  Future<List<EventModel>> getEventsFromList(List registeredEvents) async {
     List<EventModel> registeredEventsCollection = [];
     if (registeredEvents.isEmpty) {
       return registeredEventsCollection;
@@ -63,7 +64,7 @@ class EventRepository extends GetxController {
     return registeredEventsCollection;
   }
 
-  Future<List<EventModel>> getAllFilteredEvents(
+  Future<List<EventModel>> getAllEventsFilteredBy(
       String filterBy, bool isDescending) async {
     QuerySnapshot querySnapshot = await _db
         .collection('EventsInfo')
@@ -77,7 +78,7 @@ class EventRepository extends GetxController {
     return eventsCollection;
   }
 
-  Future<List<EventModel>> searchEvent(
+  Future<List<EventModel>> searchEventsFilteredBy(
       String query, String filterBy, bool isDescending) async {
     List<EventModel> eventsCollection = [];
     QuerySnapshot nameQuerySnapshot = await _db

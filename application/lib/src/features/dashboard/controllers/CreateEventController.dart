@@ -41,7 +41,7 @@ class CreateEventController extends GetxController {
         numParticipants: 1,
         isFull: participantsLimit.text.trim() == '1' ? true : false);
     await _eventRepository.createEvent(eventData, eventId);
-    await _userRepository.addRegisteredEvent(uid, eventId);
+    await _userRepository.addToRegisteredEvents(uid, eventId);
   }
 
   List<String> setSearchParameters(String s) {

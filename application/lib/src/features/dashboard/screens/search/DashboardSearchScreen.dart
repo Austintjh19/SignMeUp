@@ -61,7 +61,7 @@ class _SearchScreenState extends ConsumerState<DashboardSearchScreen> {
                       child: TextFormField(
                         controller: searchEventController.stringQuery,
                         onChanged: (query) {
-                          searchEventController.searchEventsFiltredBy(
+                          searchEventController.searchEventsFilteredBy(
                               ref.watch(searchFilterStateProvider).keys.first,
                               ref
                                   .watch(searchFilterStateProvider)
@@ -119,7 +119,7 @@ class _SearchScreenState extends ConsumerState<DashboardSearchScreen> {
 
                     // Event List ==============================================
                     FutureBuilder(
-                        future: searchEventController.searchEventsFiltredBy(
+                        future: searchEventController.searchEventsFilteredBy(
                             ref.watch(searchFilterStateProvider).keys.first,
                             ref.watch(searchFilterStateProvider).values.first),
                         builder: ((context, snapshot) {

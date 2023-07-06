@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,6 @@ class AuthenticationRepository extends GetxController {
   final _eventRepository = Get.put(EventRepository());
 
   final _auth = FirebaseAuth.instance;
-  final _db = FirebaseFirestore.instance;
 
   late final Rx<User?> firebaseUser;
   static String verificationID = '';
@@ -200,7 +198,7 @@ class AuthenticationRepository extends GetxController {
             password: '',
             profileImage: '',
             description: '');
-        await _userRepository.storeUserDetails(user, userCredential);
+        await _userRepository.storeUserProfile(user, userCredential);
       }
     } on FirebaseAuthException catch (e) {
       CircularProgressWidget.popCircularProgressIndicator();
@@ -229,7 +227,7 @@ class AuthenticationRepository extends GetxController {
             password: '',
             profileImage: '',
             description: '');
-        await _userRepository.storeUserDetails(user, userCredential);
+        await _userRepository.storeUserProfile(user, userCredential);
       }
     } on FirebaseAuthException catch (e) {
       CircularProgressWidget.popCircularProgressIndicator();
@@ -263,7 +261,7 @@ class AuthenticationRepository extends GetxController {
           }
         }
         value.user?.delete().then((res) {
-          _userRepository.deleteUserDoc(uid);
+          _userRepository.deleteUserProfile(uid);
           Get.offAll(const SignInScreen());
           Get.snackbar("Success",
               '"Your User Account and all its related details have been deleted from our system.',
