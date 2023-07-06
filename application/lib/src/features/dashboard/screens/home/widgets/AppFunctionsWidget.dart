@@ -6,8 +6,8 @@ import '../../../../../constants/colors.dart';
 import '../../../../../constants/image_strings.dart';
 import '../../../Dashboard.dart';
 
-class ExploreAndCreateWidget extends StatelessWidget {
-  const ExploreAndCreateWidget({super.key});
+class AppFunctionsWidget extends StatelessWidget {
+  const AppFunctionsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class ExploreAndCreateWidget extends StatelessWidget {
         children: [
           const SizedBox(width: 20),
 
-          // Explore
+          // Explore ===========================================================
           GestureDetector(
             onTap: () {
               Get.offAll(Dashboard(
@@ -87,7 +87,7 @@ class ExploreAndCreateWidget extends StatelessWidget {
 
           const SizedBox(width: 20),
 
-          // Create
+          // Create ============================================================
           GestureDetector(
             onTap: () {
               Get.offAll(Dashboard(
@@ -151,7 +151,7 @@ class ExploreAndCreateWidget extends StatelessWidget {
 
           const SizedBox(width: 20),
 
-          // Personalize
+          // Personalize =======================================================
           GestureDetector(
             onTap: () {
               Get.to(const SettingsScreen());
@@ -213,7 +213,7 @@ class ExploreAndCreateWidget extends StatelessWidget {
 
           const SizedBox(width: 20),
 
-          // Connect
+          // Connect ===========================================================
           GestureDetector(
             onTap: () {
               Get.offAll(Dashboard(

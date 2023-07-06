@@ -41,7 +41,7 @@ class NoRegistredEventWidget extends StatelessWidget {
                     color: textColor100),
                 maxLines: 2,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               const Flexible(
                 child: Text(
                   "You have not registered for any events. Head to the explore page to register for interested events",
@@ -54,7 +54,7 @@ class NoRegistredEventWidget extends StatelessWidget {
                   maxLines: 2,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       elevation: 2,

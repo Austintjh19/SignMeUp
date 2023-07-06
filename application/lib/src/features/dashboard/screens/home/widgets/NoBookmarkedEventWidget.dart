@@ -41,7 +41,7 @@ class NoBookmarkedEventWidget extends StatelessWidget {
                     color: textColor100),
                 maxLines: 2,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               const Flexible(
                 child: Text(
                   "You have not bookmarked any events. Head to the explore page to save interested events",
@@ -54,7 +54,7 @@ class NoBookmarkedEventWidget extends StatelessWidget {
                   maxLines: 2,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       elevation: 2,
