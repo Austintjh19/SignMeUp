@@ -16,7 +16,7 @@ void main() {
 
   group('ForgotPasswordController', () {
     late ForgotPasswordController forgotPasswordController;
-    setUp(() async {
+    setUp(() {
       forgotPasswordController = ForgotPasswordController();
     });
 

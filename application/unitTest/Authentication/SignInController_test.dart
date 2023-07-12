@@ -1,11 +1,12 @@
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:mockito/mockito.dart';
 import 'package:myapplication/src/features/authentication/controllers/SignInController.dart';
 import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
 
-class MockAuthenticationRepository extends GetxController with Mock implements AuthenticationRepository {}
+class MockAuthenticationRepository extends GetxController
+    with Mock
+    implements AuthenticationRepository {}
 
 void main() {
   setUp(() {
@@ -23,7 +24,9 @@ void main() {
       mockRepository = Get.find<MockAuthenticationRepository>();
     });
 
-    test('signInUserViaEmailAndPassword should call signInUserViaEmailAndPassword method of AuthenticationRepository', () async {
+    test(
+        'signInUserViaEmailAndPassword should call signInUserViaEmailAndPassword method of AuthenticationRepository',
+        () async {
       const email = 'test@example.com';
       const password = 'password';
 
@@ -32,7 +35,8 @@ void main() {
 
       await signInController.signInUserViaEmailAndPassword();
 
-      verify(mockRepository.signInUserViaEmailAndPassword(email, password)).called(1);
+      verify(mockRepository.signInUserViaEmailAndPassword(email, password))
+          .called(1);
     });
   });
 }

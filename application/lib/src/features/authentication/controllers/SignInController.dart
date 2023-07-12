@@ -11,8 +11,9 @@ class SignInController extends GetxController {
   final _authenticationRepository = Get.put(AuthenticationRepository());
   final userRepository = Get.put(AuthenticationRepository());
 
-  Future<void> signInUserViaEmailAndPassword() async {
+  Future<bool> signInUserViaEmailAndPassword() async {
     await _authenticationRepository.signInUserViaEmailAndPassword(
         email.text.trim(), password.text.trim());
+    return true;
   }
 }
