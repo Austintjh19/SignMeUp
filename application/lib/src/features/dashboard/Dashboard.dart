@@ -24,7 +24,7 @@ class _DashboardState extends State<Dashboard> {
   List screens = [
     const DashboardHomeScreen(),
     const DashboardSearchScreen(),
-    const MessagingScreen(),
+    MessagingScreen.route(),
     const DashboardCreateScreen(),
   ];
 

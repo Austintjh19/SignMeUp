@@ -34,6 +34,7 @@ class ChatCubit extends Cubit<ChatState> {
             await BlocProvider.of<UserProfilesCubit>(context).getProfile(user);
             Map<String, dynamic> userinfo = await BlocProvider.of<
                 UserProfilesCubit>(context).getUserInfo(user);
+            print('user profiled loaded after entering chat '+user);
             String username = userinfo['username'];
             _chat_members.add(username);
             //print(_chat_members);

@@ -6,6 +6,7 @@ import 'package:myapplication/src/models/profile.dart';
 import 'package:myapplication/src/models/message.dart';
 import 'package:myapplication/src/models/room.dart';
 import 'package:myapplication/src/utils/constants.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'rooms_state.dart';
 
@@ -29,6 +30,16 @@ class RoomCubit extends Cubit<RoomState> {
   Future<void> initializeRooms(BuildContext context) async {
     if (_haveCalledGetRooms) {
       return;
+    }
+    try {
+      await supabase.auth.signInWithPassword(
+        email: 'haitaowang076@gmail.com',
+        password:'123456'
+      );
+    } on AuthException catch (error) {
+      context.showErrorSnackBar(message: error.message);
+    } catch (_) {
+      context.showErrorSnackBar(message: unexpectedErrorMessage);
     }
     _haveCalledGetRooms = true;
 
