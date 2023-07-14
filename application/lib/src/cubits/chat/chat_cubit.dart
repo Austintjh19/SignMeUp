@@ -2,12 +2,17 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:meta/meta.dart';
 import 'package:myapplication/src/models/message.dart';
 import 'package:myapplication/src/utils/constants.dart';
 import 'package:myapplication/src/cubits/profiles/profiles_cubit.dart';
 import 'package:myapplication/src/models/profile.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:myapplication/src/repository/user_repository/UserRepository.dart';
+
+import '../../repository/authentication_repository/AuthenticationRepository.dart';
 
 part 'chat_state.dart';
 
@@ -43,10 +48,13 @@ class ChatCubit extends Cubit<ChatState> {
         }
         );
   }
-  void setMessagesListener(String roomId, BuildContext context) {
+  Future<void> setMessagesListener(String roomId, BuildContext context) async {
     _roomId = roomId;
-    _myUserId = supabase.auth.currentUser!.id;
-
+   // _myUserId = supabase.auth.currentUser!.id;
+    final firebase_auth = Get.put(AuthenticationRepository());
+    String? firebase_uid = await firebase_auth.getCurrentUserUID();
+    _myUserId = await supabase.rpc(
+        'convert_to_uuid', params: {'input_value': firebase_uid});
     _messagesSubscription = supabase
         .from('messages')
         .stream(primaryKey: ['id'])

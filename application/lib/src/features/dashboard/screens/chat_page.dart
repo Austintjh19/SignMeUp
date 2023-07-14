@@ -16,7 +16,7 @@ class ChatPage extends StatelessWidget {
   static Route<void> route(String roomId) {
     return MaterialPageRoute(
       builder: (context) => BlocProvider<ChatCubit>(
-        create: (context) => ChatCubit()..setMessagesListener(roomId,context)..setMembersListener(roomId, context),
+        create: (context) => ChatCubit()..setMembersListener(roomId, context)..setMessagesListener(roomId,context),
         child: const ChatPage(),
       ),
     );
