@@ -6,6 +6,7 @@ import 'package:myapplication/src/repository/authentication_repository/Authentic
 import 'package:myapplication/src/repository/event_repository/EventRepository.dart';
 import 'package:myapplication/src/repository/user_repository/UserRepository.dart';
 
+import '../../../models/UserModel.dart';
 import '../../../utils/constants.dart';
 
 class CreateEventController extends GetxController {
@@ -49,11 +50,13 @@ class CreateEventController extends GetxController {
       ///hashing event id into supabase uuid format
       String chat_uuid = await supabase.rpc(
           'convert_to_uuid', params: {'input_value': eventId});
-
       ///setting up chat room associated with the event upon creation
+      String organiser_uuid = await supabase.rpc(
+          'convert_to_uuid', params: {'input_value': uid});
+      print('organiser_uuid : ' + organiser_uuid);
       await supabase.rpc('create_event_room', params: {
         'input_value': chat_uuid,
-        'event_organizer': uid,
+        'event_organizer': organiser_uuid,
         'event_name': eventName.text
       });
     } catch (_){

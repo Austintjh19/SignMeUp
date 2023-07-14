@@ -47,8 +47,6 @@ class ChatCubit extends Cubit<ChatState> {
     _roomId = roomId;
     _myUserId = supabase.auth.currentUser!.id;
 
-    //setMembersListener(roomId, context);
-
     _messagesSubscription = supabase
         .from('messages')
         .stream(primaryKey: ['id'])

@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:myapplication/src/cubits/profiles/profiles_cubit.dart';
 import 'package:myapplication/src/models/profile.dart';
 import 'package:myapplication/src/models/message.dart';
@@ -17,13 +19,10 @@ class RoomCubit extends Cubit<RoomState> {
   RoomCubit() : super(RoomsLoading());
 
   final Map<String, StreamSubscription<Message?>> _messageSubscriptions = {};
-
   late final String _myUserId;
 
   /// List of new users of the app for the user to start talking to
   late final List<Profile> _newUsers;
-
-
 
   /// List of rooms
   List<Room> _rooms = [];
@@ -35,43 +34,50 @@ class RoomCubit extends Cubit<RoomState> {
       return;
     }
     //_myUserId = supabase.auth.currentUser!.id;
+    _haveCalledGetRooms = true;
+
     try {
-      String? firebase_uid = await AuthenticationRepository().getCurrentUserUID();
-      _myUserId = await supabase.rpc(
-          'convert_to_uuid', params: {'input_value': firebase_uid});
-      UserModel? cur_user = await UserRepository.instance.getUserData(firebase_uid!);
+      print("before calling getCurrentUserID()");
+      final firebase_auth = Get.put(AuthenticationRepository());
+      String? firebase_uid = await firebase_auth.getCurrentUserUID();
+      print(firebase_uid);
+      //UserModel? cur_user = await UserRepository.instance.getUserData(firebase_uid!);
+      final cur_user = await Get.put(UserRepository()).getUserData(firebase_uid!);
+     // String firebase_uid = cur_user.uid;
       String email = cur_user.email;
       String password = cur_user.password;
       String username = cur_user.username;
+      _myUserId = await supabase.rpc(
+          'convert_to_uuid', params: {'input_value': firebase_uid});
       ///this remote procedure call will check if the firebase user is already logged in supabase
       ///profiles table, if not create a new users in auth.users and
       ///public.profiles(this is triggered action from inserting into auth.users and return false)
-      bool user_exist = await supabase.rpc('user_exist', params: {'uid': _myUserId});
+      bool user_exist = await supabase.rpc('check_uuid_exists', params: {'uid': _myUserId});
+
+      print('does user exist? $user_exist');
       if(user_exist) {
+        print('the email is $email');
+        print('the password is $password');
         await supabase.auth.signInWithPassword(
-            email: email,
-            password: password,
-        );
-      }else{
-        await supabase.auth.signUp(
           email: email,
           password: password,
-          data: {'username': username},
-          //emailRedirectTo: 'io.supabase.chat://login',
         );
+        print('user logged in ');
+      }else{
+
+        await supabase.rpc('migrate_user', params: {'uid': _myUserId, 'email': email,'password':password,'meta_data':{'username': username}});
         await supabase.auth.signInWithPassword(
-            email: email,
-            password: password,
+          email: email,
+          password: password,
         );
+        print('user logged in ');
       }
     } on AuthException catch (error) {
       context.showErrorSnackBar(message: error.message);
-    } catch (_) {
+    } catch (err) {
       context.showErrorSnackBar(message: unexpectedErrorMessage);
+      print(err);
     }
-    _haveCalledGetRooms = true;
-
-
 
     late final List data;
 
