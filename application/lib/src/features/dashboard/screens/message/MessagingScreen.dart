@@ -35,10 +35,8 @@ class MessagingScreen extends StatelessWidget {
             final rooms = state.rooms;
             return Builder(
               builder: (context) {
-                //final userProfile_state = context.watch<UserProfilesCubit>().state;
                 final groupProfile_state = context.watch<GroupProfilesCubit>().state;
                 if ( groupProfile_state is GroupProfilesLoaded ) {
-                  //final userProfiles = userProfile_state.profiles;
                   final groupProfiles = groupProfile_state.profiles;
                   return Column(
                     children: [

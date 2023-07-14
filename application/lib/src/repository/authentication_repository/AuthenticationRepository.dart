@@ -10,6 +10,7 @@ import 'package:myapplication/src/repository/authentication_repository/exception
 
 import '../../common_widgets/CircularProgressWidget.dart';
 import '../../models/UserModel.dart';
+import '../../utils/constants.dart';
 import '../event_repository/EventRepository.dart';
 import '../user_repository/UserRepository.dart';
 
@@ -45,7 +46,6 @@ class AuthenticationRepository extends GetxController {
   Future<String?> getCurrentUserUID() async {
     return firebaseUser.value?.uid;
   }
-
   Future<String> phoneAuthentication(String phoneNo) async {
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneNo,
@@ -123,6 +123,7 @@ class AuthenticationRepository extends GetxController {
     CircularProgressWidget.getCircularProgressIndicator();
 
     try {
+
       UserCredential credential = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       CircularProgressWidget.popCircularProgressIndicator();

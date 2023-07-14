@@ -6,6 +6,8 @@ import 'package:myapplication/src/repository/authentication_repository/Authentic
 import 'package:myapplication/src/repository/event_repository/EventRepository.dart';
 import 'package:myapplication/src/repository/user_repository/UserRepository.dart';
 
+import '../../../utils/constants.dart';
+
 class CreateEventController extends GetxController {
   static CreateEventController get instance => Get.find();
 
@@ -42,6 +44,21 @@ class CreateEventController extends GetxController {
         isFull: participantsLimit.text.trim() == '1' ? true : false);
     await _eventRepository.createEvent(eventData, eventId);
     await _userRepository.addToRegisteredEvents(uid, eventId);
+
+    try {
+      ///hashing event id into supabase uuid format
+      String chat_uuid = await supabase.rpc(
+          'convert_to_uuid', params: {'input_value': eventId});
+
+      ///setting up chat room associated with the event upon creation
+      await supabase.rpc('create_event_room', params: {
+        'input_value': chat_uuid,
+        'event_organizer': uid,
+        'event_name': eventName.text
+      });
+    } catch (_){
+      print('supabase event associated chat room initialisation failed !');
+    }
   }
 
   List<String> setSearchParameters(String s) {

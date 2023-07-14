@@ -7,7 +7,10 @@ import 'package:myapplication/src/models/message.dart';
 import 'package:myapplication/src/models/room.dart';
 import 'package:myapplication/src/utils/constants.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
+import 'package:myapplication/src/repository/user_repository/UserRepository.dart';
 
+import '../../models/UserModel.dart';
 part 'rooms_state.dart';
 
 class RoomCubit extends Cubit<RoomState> {
@@ -31,11 +34,36 @@ class RoomCubit extends Cubit<RoomState> {
     if (_haveCalledGetRooms) {
       return;
     }
+    //_myUserId = supabase.auth.currentUser!.id;
     try {
-      await supabase.auth.signInWithPassword(
-        email: 'haitaowang076@gmail.com',
-        password:'123456'
-      );
+      String? firebase_uid = await AuthenticationRepository().getCurrentUserUID();
+      _myUserId = await supabase.rpc(
+          'convert_to_uuid', params: {'input_value': firebase_uid});
+      UserModel? cur_user = await UserRepository.instance.getUserData(firebase_uid!);
+      String email = cur_user.email;
+      String password = cur_user.password;
+      String username = cur_user.username;
+      ///this remote procedure call will check if the firebase user is already logged in supabase
+      ///profiles table, if not create a new users in auth.users and
+      ///public.profiles(this is triggered action from inserting into auth.users and return false)
+      bool user_exist = await supabase.rpc('user_exist', params: {'uid': _myUserId});
+      if(user_exist) {
+        await supabase.auth.signInWithPassword(
+            email: email,
+            password: password,
+        );
+      }else{
+        await supabase.auth.signUp(
+          email: email,
+          password: password,
+          data: {'username': username},
+          //emailRedirectTo: 'io.supabase.chat://login',
+        );
+        await supabase.auth.signInWithPassword(
+            email: email,
+            password: password,
+        );
+      }
     } on AuthException catch (error) {
       context.showErrorSnackBar(message: error.message);
     } catch (_) {
@@ -43,7 +71,7 @@ class RoomCubit extends Cubit<RoomState> {
     }
     _haveCalledGetRooms = true;
 
-    _myUserId = supabase.auth.currentUser!.id;
+
 
     late final List data;
 
