@@ -51,16 +51,26 @@ class EventRepository extends GetxController {
     if (registeredEvents.isEmpty) {
       return registeredEventsCollection;
     }
-    QuerySnapshot querySnapshot = await _db
-        .collection('EventsInfo')
-        .where("ID", whereIn: registeredEvents)
-        .orderBy('EventDateTime', descending: false)
-        .get();
 
-    querySnapshot.docs.forEach((element) {
-      registeredEventsCollection.add(EventModel.fromSnapShot(
-          element as DocumentSnapshot<Map<String, dynamic>>));
-    });
+    List<List<dynamic>> chunks = [];
+    for (int i = 0; i < registeredEvents.length; i += 10) {
+      chunks.add(registeredEvents.sublist(i,
+          i + 10 > registeredEvents.length ? registeredEvents.length : i + 10));
+    }
+
+    for (List<dynamic> chunk in chunks) {
+      QuerySnapshot querySnapshot = await _db
+          .collection('EventsInfo')
+          .where("ID", whereIn: chunk)
+          .orderBy('EventDateTime', descending: false)
+          .get();
+
+      querySnapshot.docs.forEach((element) {
+        registeredEventsCollection.add(EventModel.fromSnapShot(
+            element as DocumentSnapshot<Map<String, dynamic>>));
+      });
+    }
+
     return registeredEventsCollection;
   }
 
