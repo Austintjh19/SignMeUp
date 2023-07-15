@@ -58,19 +58,19 @@ class RoomCubit extends Cubit<RoomState> {
       if(user_exist) {
         print('the email is $email');
         print('the password is $password');
-        await supabase.auth.signInWithPassword(
+        /*await supabase.auth.signInWithPassword(
           email: email,
           password: password,
         );
-        print('user logged in ');
+        print('user logged in ');*/
       }else{
 
         await supabase.rpc('migrate_user', params: {'uid': _myUserId, 'email': email,'password':password,'meta_data':{'username': username}});
-        await supabase.auth.signInWithPassword(
+        /*await supabase.auth.signInWithPassword(
           email: email,
           password: password,
         );
-        print('user logged in ');
+        print('user logged in ');*/
       }
     } on AuthException catch (error) {
       context.showErrorSnackBar(message: error.message);
@@ -169,7 +169,7 @@ class RoomCubit extends Cubit<RoomState> {
   /// Creates or returns an existing roomID that contains both participants
   Future<String> createRoom(String otherUserId,String otherUserName) async {
     final data = await supabase
-        .rpc('create_new_room', params: {'other_user_id': otherUserId, 'other_user_name': otherUserName});
+        .rpc('create_new_room', params: {'other_user_id': otherUserId, 'other_user_name': otherUserName, 'cur_user_id': _myUserId});
     emit(RoomsLoaded(rooms: _rooms, newUsers: _newUsers));
     return data as String;
   }
