@@ -186,6 +186,7 @@ class RoomCubit extends Cubit<RoomState> {
   }
   /// allow user to join an existing chat room
   Future<void> joinRoom(String userId, String roomId) async {
+    print('join room called');
     await supabase.rpc('join_room', params: {'joining_user': userId, 'existing_room': roomId});
     emit(RoomsLoaded(rooms: _rooms, newUsers: _newUsers));
     print('join room executed');

@@ -178,6 +178,7 @@ class _EventDetailsOrParticipantsWidgetState
                             int.parse(widget.eventData.participantsLimit));
                         final room_id = await supabase.rpc(
                             'convert_to_uuid', params: {'input_value': widget.eventData.id});
+                        print('firebase event id when trying to join the room: ${widget.eventData.id}');
                         print('room_id: $room_id');
                         BlocProvider.of<RoomCubit>(context).joinRoom(uuid, room_id);
                         setState(() {});

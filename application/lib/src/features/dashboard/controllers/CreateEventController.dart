@@ -48,14 +48,15 @@ class CreateEventController extends GetxController {
 
     try {
       ///hashing event id into supabase uuid format
-      String chat_uuid = await supabase.rpc(
+     /* String chat_uuid = await supabase.rpc(
           'convert_to_uuid', params: {'input_value': eventId});
+      print('firebase event id upon creation : $eventId');*/
       ///setting up chat room associated with the event upon creation
       String organiser_uuid = await supabase.rpc(
           'convert_to_uuid', params: {'input_value': uid});
       print('organiser_uuid : ' + organiser_uuid);
       await supabase.rpc('create_event_room', params: {
-        'input_value': chat_uuid,
+        'input_value': eventId,
         'event_organizer': organiser_uuid,
         'event_name': eventName.text
       });
