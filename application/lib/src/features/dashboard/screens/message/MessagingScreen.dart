@@ -30,88 +30,90 @@ class MessagingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    return Container(
-      width: screenWidth,
-      height: screenHeight,
-      child: Scaffold(
-        body: BlocBuilder<RoomCubit, RoomState>(
-          builder: (context, state) {
-            if (state is RoomsLoading) {
-              print('roomsloading state is encountered');
-              return preloader;
-            } else if (state is RoomsLoaded) {
-              print('roomsloaded state is encountered');
-              final newUsers = state.newUsers;
-              final rooms = state.rooms;
-              return Builder(
-                builder: (context) {
-                  final groupProfile_state = context.watch<GroupProfilesCubit>().state;
-                  if ( groupProfile_state is GroupProfilesLoaded ) {
-                    print('groupprofilesloaded is predicated to be true');
-                    final groupProfiles = groupProfile_state.profiles;
-                    return Column(
-                      children: [
-                        _SearchBar(),
-                        _NewUsers(newUsers: newUsers),
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: rooms.length,
-                            itemBuilder: (context, index) {
-                              final room = rooms[index];
-                              final group_profile = groupProfiles[room.id];
+    return SingleChildScrollView(
+      child: Container(
+        width: screenWidth,
+        height: screenHeight,
+        child: Scaffold(
+          body: BlocBuilder<RoomCubit, RoomState>(
+            builder: (context, state) {
+              if (state is RoomsLoading) {
+                print('roomsloading state is encountered');
+                return preloader;
+              } else if (state is RoomsLoaded) {
+                print('roomsloaded state is encountered');
+                final newUsers = state.newUsers;
+                final rooms = state.rooms;
+                return Builder(
+                  builder: (context) {
+                    final groupProfile_state = context.watch<GroupProfilesCubit>().state;
+                    if ( groupProfile_state is GroupProfilesLoaded ) {
+                      print('groupprofilesloaded is predicated to be true');
+                      final groupProfiles = groupProfile_state.profiles;
+                      return Column(
+                        children: [
+                          _SearchBar(),
+                          _NewUsers(newUsers: newUsers),
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: rooms.length,
+                              itemBuilder: (context, index) {
+                                final room = rooms[index];
+                                final group_profile = groupProfiles[room.id];
 
-                              return ListTile(
-                                onTap: () => Navigator.of(context)
-                                    .push(ChatPage.route(room.id)),
-                                leading: CircleAvatar(
-                                  child: group_profile == null
-                                      ? preloader
-                                      : Text(group_profile.roomName.substring(0, 2)),
-                                ),
-                                title: Text(group_profile == null
-                                    ? 'Loading...'
-                                    : group_profile.roomName),
-                                subtitle: room.lastMessage != null
-                                    ? Text(
-                                        room.lastMessage!.content,
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      )
-                                    : const Text('Room created'),
-                                trailing: Text(format(
-                                    room.lastMessage?.createdAt ?? room.createdAt,
-                                    locale: 'en_short')),
-                              );
-                            },
+                                return ListTile(
+                                  onTap: () => Navigator.of(context)
+                                      .push(ChatPage.route(room.id)),
+                                  leading: CircleAvatar(
+                                    child: group_profile == null
+                                        ? preloader
+                                        : Text(group_profile.roomName.substring(0, 2)),
+                                  ),
+                                  title: Text(group_profile == null
+                                      ? 'Loading...'
+                                      : group_profile.roomName),
+                                  subtitle: room.lastMessage != null
+                                      ? Text(
+                                          room.lastMessage!.content,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        )
+                                      : const Text('Room created'),
+                                  trailing: Text(format(
+                                      room.lastMessage?.createdAt ?? room.createdAt,
+                                      locale: 'en_short')),
+                                );
+                              },
+                            ),
                           ),
-                        ),
-                      ],
-                    );
-                  } else {
-                    return preloader;
-                  }
-                },
-              );
-            } else if (state is RoomsEmpty) {
-              print('roomsempty state processed');
-              final newUsers = state.newUsers;
-              return Column(
-                children: [
-                  _SearchBar(),
-                  _NewUsers(newUsers: newUsers),
-                  const Expanded(
-                    child: Center(
-                        child: Text('Start a chat by tapping on available \n'
-                            'users in your friend list'),
+                        ],
+                      );
+                    } else {
+                      return preloader;
+                    }
+                  },
+                );
+              } else if (state is RoomsEmpty) {
+                print('roomsempty state processed');
+                final newUsers = state.newUsers;
+                return Column(
+                  children: [
+                    _SearchBar(),
+                    _NewUsers(newUsers: newUsers),
+                    const Expanded(
+                      child: Center(
+                          child: Text('Start a chat by tapping on available \n'
+                              'users in your friend list'),
+                      ),
                     ),
-                  ),
-                ],
-              );
-            } else if (state is RoomsError) {
-              return Center(child: Text(state.message));
-            }
-            throw UnimplementedError();
-          },
+                  ],
+                );
+              } else if (state is RoomsError) {
+                return Center(child: Text(state.message));
+              }
+              throw UnimplementedError();
+            },
+          ),
         ),
       ),
     );
@@ -156,8 +158,11 @@ class _NewUsers extends StatelessWidget {
                         future: firebase_avatar_future,
                         builder: (context,snapshot) {
                           if(snapshot.hasData) {
-                            return Image.network(snapshot
-                                .data as String);
+                            return CircleAvatar(
+                                radius: 30,
+                                child: Image.network(snapshot
+                                    .data as String)
+                            );
                           }else {
                             return CircularProgressIndicator();
                           }
