@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 import '../../../../../constants/colors.dart';
+import '../../../../../cubits/rooms/rooms_cubit.dart';
 import '../../../../../models/EventModel.dart';
+import '../../../../../utils/constants.dart';
 import '../../../controllers/CurrentUserController.dart';
 import '../../../controllers/GeneralEventController.dart';
 import 'EventDetailsWidget.dart';
@@ -130,7 +133,7 @@ class _EventDetailsOrParticipantsWidgetState
                     return RegisterButton(
                         buttonColor: primaryColor600,
                         buttonText: 'Registered',
-                        function: () {
+                        function: (uuid) {
                           currentUserController
                               .removeFromRegisteredEvents(widget.eventData.id);
                           generalEventController
@@ -142,6 +145,7 @@ class _EventDetailsOrParticipantsWidgetState
                               widget.eventData.id,
                               widget.eventData.participants.length - 1,
                               int.parse(widget.eventData.participantsLimit));
+                          /// leave chat api call
                           setState(() {});
                         });
                   } else if (widget.eventData.isFull) {
@@ -160,7 +164,7 @@ class _EventDetailsOrParticipantsWidgetState
                   return RegisterButton(
                       buttonColor: primaryColor300,
                       buttonText: "Register",
-                      function: () {
+                      function: (uuid) async {
                         currentUserController
                             .addToRegisteredEvents(widget.eventData.id);
                         generalEventController
@@ -172,6 +176,10 @@ class _EventDetailsOrParticipantsWidgetState
                             widget.eventData.id,
                             widget.eventData.participants.length + 1,
                             int.parse(widget.eventData.participantsLimit));
+                        final room_id = await supabase.rpc(
+                            'convert_to_uuid', params: {'input_value': widget.eventData.id});
+                        print('room_id: $room_id');
+                        BlocProvider.of<RoomCubit>(context).joinRoom(uuid, room_id);
                         setState(() {});
                       });
                 }

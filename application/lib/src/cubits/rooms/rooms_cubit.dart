@@ -65,7 +65,7 @@ class RoomCubit extends Cubit<RoomState> {
         print('user logged in ');*/
       }else{
 
-        await supabase.rpc('migrate_user', params: {'uid': _myUserId, 'email': email,'password':password,'meta_data':{'username': username}});
+        await supabase.rpc('migrate_user', params: {'uid': _myUserId, 'email': email,'password':password,'meta_data':{'username': username, 'firebase_user_id':firebase_uid}});
         /*await supabase.auth.signInWithPassword(
           email: email,
           password: password,
@@ -102,25 +102,36 @@ class RoomCubit extends Cubit<RoomState> {
         emit(RoomsEmpty(newUsers: _newUsers));
         return;
       }
-
+      print('my user id: ' + _myUserId);
       _rooms = rooms
           .map(Room.fromRoom)
           .where((room) => room.members.contains(_myUserId) )
           .toList();
+
+      //print('rooms' + _rooms.toString());
+      for (final user in _newUsers){
+        BlocProvider.of<UserProfilesCubit>(context).getProfile(user.id);
+      }
+      if(_rooms.isEmpty){
+        emit(RoomsEmpty(newUsers: _newUsers));
+        print('rooms empty emited');
+      }
       for (final room in _rooms) {
         _getNewestMessage(context: context, roomId: room.id);
         // temporary measure such that the first user in the room is stubbed as chat icon
         //BlocProvider.of<ProfilesCubit>(context).getProfile(room.members[0]);
+        print('rooms' + _rooms.toString());
         BlocProvider.of<GroupProfilesCubit>(context).getProfile(room.id);
+        print(room.toString() + 'get profile called');
       }
-      for (final user in _newUsers){
-        BlocProvider.of<UserProfilesCubit>(context).getProfile(user.id);
+      if(_rooms.isNotEmpty) {
+        emit(RoomsLoaded(
+          newUsers: _newUsers,
+          rooms: _rooms,
+        ));
+        print('roomsloaded state emited');
       }
 
-      emit(RoomsLoaded(
-        newUsers: _newUsers,
-        rooms: _rooms,
-      ));
     }, onError: (error) {
       emit(RoomsError('Error loading rooms'));
     });
@@ -175,8 +186,9 @@ class RoomCubit extends Cubit<RoomState> {
   }
   /// allow user to join an existing chat room
   Future<void> joinRoom(String userId, String roomId) async {
-    await supabase.rpc('join_room', params: {'joining_user': userId, 'room_id': roomId});
+    await supabase.rpc('join_room', params: {'joining_user': userId, 'existing_room': roomId});
     emit(RoomsLoaded(rooms: _rooms, newUsers: _newUsers));
+    print('join room executed');
   }
 
   @override

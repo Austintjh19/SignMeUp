@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myapplication/src/components/user_avatar.dart';
@@ -51,7 +53,21 @@ class ChatPage extends StatelessWidget {
                     itemCount: messages.length,
                     itemBuilder: (context, index) {
                       final message = messages[index];
-                      return _ChatBubble(message: message);
+                      final Future<String> firebase_id_future = get_user_firebase_id(message);
+                      //print('firebase_id_future: $firebase_id_future');
+                      return FutureBuilder(
+                        future: firebase_id_future,
+                        builder: (context,snapshot) {
+
+                            if(snapshot.hasData) {
+                              return _ChatBubble(message: message,
+                                  firebase_user_id: snapshot.data!);
+                            }else {
+                              return CircularProgressIndicator();
+                            }
+                        },
+                      );
+
                     },
                   ),
                 ),
@@ -78,6 +94,14 @@ class ChatPage extends StatelessWidget {
     );
   }
 
+  Future<String> get_user_firebase_id(Message message) async {
+    print('get_user_firebase_id called');
+    final data = await supabase.from('profiles').select('firebase_user_id').match({'id': message.profileId}).single();
+    //data.then(print('data fetched: ${data.toString()}'));
+    //final firebase_user_id = data.then((value) => value['firebase_user_id']);
+    //print('firebase_user_id is $firebase_user_id');
+    return await data['firebase_user_id'];
+  }
 
 }
 
@@ -154,18 +178,19 @@ class _MessageBarState extends State<_MessageBar> {
 }
 
 class _ChatBubble extends StatelessWidget {
-  const _ChatBubble({
+   const _ChatBubble({
     Key? key,
     required this.message,
+     required this.firebase_user_id,
   }) : super(key: key);
 
   final Message message;
-
+  final String firebase_user_id;
   @override
   Widget build(BuildContext context) {
     print(message.profileId);
     List<Widget> chatContents = [
-      if (!message.isMine) UserAvatar(userId: message.profileId),
+      if (!message.isMine) UserAvatar(userId: message.profileId,  firebase_user_id: firebase_user_id,),
 
       const SizedBox(width: 12),
       Flexible(

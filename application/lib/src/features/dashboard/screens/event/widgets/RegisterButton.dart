@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../../../../constants/colors.dart';
+import '../../../../../repository/authentication_repository/AuthenticationRepository.dart';
+import '../../../../../utils/constants.dart';
 
 class RegisterButton extends StatelessWidget {
   final Color buttonColor;
@@ -12,11 +16,16 @@ class RegisterButton extends StatelessWidget {
       required this.buttonText,
       required this.function});
 
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        function();
+      onPressed: () async {
+        final firebase_auth = Get.put(AuthenticationRepository());
+        String? firebase_uid = await firebase_auth.getCurrentUserUID();
+        final uuid = await supabase.rpc(
+            'convert_to_uuid', params: {'input_value': firebase_uid});
+        function(uuid);
       },
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 0),

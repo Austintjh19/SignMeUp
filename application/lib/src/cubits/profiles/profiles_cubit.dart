@@ -23,6 +23,7 @@ class UserProfilesCubit extends Cubit<ProfilesState> {
       return;
     }
 
+
     final data =
         await supabase.from('profiles').select().match({'id': userId}).single();
 
@@ -42,6 +43,7 @@ class GroupProfilesCubit extends Cubit<ProfilesState> {
   final Map<String, Room?> _group_profiles = {};
 
   Future<void> getProfile(String roomId) async {
+    print('room getProfile called');
     if (_group_profiles[roomId] != null) {
       return;
     }
@@ -55,5 +57,6 @@ class GroupProfilesCubit extends Cubit<ProfilesState> {
     _group_profiles[roomId] = Room.fromRoom(data);
 
     emit(GroupProfilesLoaded(profiles: _group_profiles));
+    print('groupprofileloaded state emited ');
   }
 }

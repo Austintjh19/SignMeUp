@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart' ;
 import 'package:firebase_core/firebase_core.dart';
+import 'package:myapplication/src/cubits/rooms/rooms_cubit.dart';
 import 'package:myapplication/src/features/authentication/screens/sign_in/SignInScreen.dart';
 import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
 import 'package:myapplication/src/repository/event_repository/EventRepository.dart';
@@ -42,6 +43,8 @@ class MyApp extends StatelessWidget {
             create: (context) => UserProfilesCubit()),
         bloc.BlocProvider<GroupProfilesCubit>(
             create: (context) => GroupProfilesCubit()),
+        bloc.BlocProvider<RoomCubit>(
+            create: (context) => RoomCubit()..initializeRooms(context)),
       ],
       child: const GetMaterialApp(
         defaultTransition: Transition.noTransition,
