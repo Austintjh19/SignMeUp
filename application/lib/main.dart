@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final _eventRepository = Get.put(EventRepository());
     _eventRepository.updateEventsCollection();
-
     return bloc.MultiBlocProvider(
       providers: [
         bloc.BlocProvider<UserProfilesCubit>(

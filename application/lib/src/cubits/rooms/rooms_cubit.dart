@@ -11,8 +11,6 @@ import 'package:myapplication/src/utils/constants.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:myapplication/src/repository/authentication_repository/AuthenticationRepository.dart';
 import 'package:myapplication/src/repository/user_repository/UserRepository.dart';
-
-import '../../models/UserModel.dart';
 part 'rooms_state.dart';
 
 class RoomCubit extends Cubit<RoomState> {
@@ -54,23 +52,9 @@ class RoomCubit extends Cubit<RoomState> {
       ///public.profiles(this is triggered action from inserting into auth.users and return false)
       bool user_exist = await supabase.rpc('check_uuid_exists', params: {'uid': _myUserId});
 
-      print('does user exist? $user_exist');
       if(user_exist) {
-        print('the email is $email');
-        print('the password is $password');
-        /*await supabase.auth.signInWithPassword(
-          email: email,
-          password: password,
-        );
-        print('user logged in ');*/
       }else{
-
         await supabase.rpc('migrate_user', params: {'uid': _myUserId, 'email': email,'password':password,'meta_data':{'username': username, 'firebase_user_id':firebase_uid}});
-        /*await supabase.auth.signInWithPassword(
-          email: email,
-          password: password,
-        );
-        print('user logged in ');*/
       }
     } on AuthException catch (error) {
       context.showErrorSnackBar(message: error.message);
@@ -102,13 +86,11 @@ class RoomCubit extends Cubit<RoomState> {
         emit(RoomsEmpty(newUsers: _newUsers));
         return;
       }
-      print('my user id: ' + _myUserId);
       _rooms = rooms
           .map(Room.fromRoom)
           .where((room) => room.members.contains(_myUserId) )
           .toList();
 
-      //print('rooms' + _rooms.toString());
       for (final user in _newUsers){
         BlocProvider.of<UserProfilesCubit>(context).getProfile(user.id);
       }
@@ -186,10 +168,8 @@ class RoomCubit extends Cubit<RoomState> {
   }
   /// allow user to join an existing chat room
   Future<void> joinRoom(String userId, String roomId) async {
-    print('join room called');
     await supabase.rpc('join_room', params: {'joining_user': userId, 'existing_room': roomId});
-    emit(RoomsLoaded(rooms: _rooms, newUsers: _newUsers));
-    print('join room executed');
+    //emit(RoomsLoaded(rooms: _rooms, newUsers: _newUsers));
   }
 
   @override
