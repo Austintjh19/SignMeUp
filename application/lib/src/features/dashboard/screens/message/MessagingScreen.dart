@@ -63,7 +63,7 @@ class MessagingScreen extends StatelessWidget {
 
                                 return ListTile(
                                   onTap: () => Navigator.of(context)
-                                      .push(ChatPage.route(room.id)),
+                                      .push(ChatPage.route(room.id,room.roomName)),
                                   leading: CircleAvatar(
                                     child: group_profile == null
                                         ? preloader
@@ -144,7 +144,7 @@ class _NewUsers extends StatelessWidget {
                     try {
                       final roomId = await BlocProvider.of<RoomCubit>(context)
                           .createRoom(user.id, user.username);
-                      Navigator.of(context).push(ChatPage.route(roomId));
+                      Navigator.of(context).push(ChatPage.route(roomId,user.username));
                     } catch (err) {
                       context.showErrorSnackBar(
                           message: 'Failed creating a new room');
@@ -158,10 +158,13 @@ class _NewUsers extends StatelessWidget {
                         future: firebase_avatar_future,
                         builder: (context,snapshot) {
                           if(snapshot.hasData) {
-                            return CircleAvatar(
-                                radius: 30,
-                                backgroundImage: NetworkImage(snapshot
-                                    .data as String)
+                            return Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0,),
+                              child: CircleAvatar(
+                                  radius: 25,
+                                  backgroundImage: NetworkImage(snapshot
+                                      .data as String)
+                              ),
                             );
                           }else {
                             return CircularProgressIndicator();

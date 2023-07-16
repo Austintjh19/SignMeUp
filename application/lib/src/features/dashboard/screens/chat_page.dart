@@ -13,13 +13,15 @@ import 'package:timeago/timeago.dart';
 ///
 /// Displays chat bubbles as a ListView and TextField to enter new chat.
 class ChatPage extends StatelessWidget {
-  const ChatPage({Key? key}) : super(key: key);
+  final String roomName;
 
-  static Route<void> route(String roomId) {
+  const ChatPage({required this.roomName, Key? key}) : super(key: key);
+
+  static Route<void> route(String roomId, String roomName) {
     return MaterialPageRoute(
       builder: (context) => BlocProvider<ChatCubit>(
         create: (context) => ChatCubit()..setMembersListener(roomId, context)..setMessagesListener(roomId,context),
-        child: const ChatPage(),
+        child:  ChatPage(roomName: roomName),
       ),
     );
   }
@@ -28,7 +30,7 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Chat')),
+      appBar: AppBar(title: Text(roomName)),
       body: BlocConsumer<ChatCubit, ChatState>(
         listener: (context, state) {
           if (state is ChatError) {
