@@ -43,8 +43,6 @@ class MyApp extends StatelessWidget {
             create: (context) => UserProfilesCubit()),
         bloc.BlocProvider<GroupProfilesCubit>(
             create: (context) => GroupProfilesCubit()),
-        bloc.BlocProvider<RoomCubit>(
-            create: (context) => RoomCubit()..initializeRooms(context)),
       ],
       child: const GetMaterialApp(
         defaultTransition: Transition.noTransition,
