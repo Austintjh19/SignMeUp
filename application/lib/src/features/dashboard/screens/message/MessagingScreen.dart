@@ -160,7 +160,7 @@ class _NewUsers extends StatelessWidget {
                           if(snapshot.hasData) {
                             return CircleAvatar(
                                 radius: 30,
-                                child: Image.network(snapshot
+                                backgroundImage: NetworkImage(snapshot
                                     .data as String)
                             );
                           }else {

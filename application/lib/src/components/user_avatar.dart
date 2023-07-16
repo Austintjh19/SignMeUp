@@ -35,7 +35,7 @@ class UserAvatar extends StatelessWidget {
               print('snapshot.data:' + (snapshot.data as String));
               final ret = CircleAvatar(
                   radius: 30,
-                  child: Image.network(snapshot
+                  backgroundImage: NetworkImage(snapshot
                       .data as String) /*Text(user.username.substring(0, 2)) */
               );
               _user_profile_cache[userId] = ret;
