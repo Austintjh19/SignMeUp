@@ -5,6 +5,7 @@ import 'package:myapplication/src/constants/text_strings.dart';
 import 'package:myapplication/src/features/authentication/screens/otp/MailOTPScreen.dart';
 
 import '../../../../../constants/colors.dart';
+import '../../otp/PhoneOTPScreen.dart';
 
 class SignUpButton extends StatelessWidget {
   const SignUpButton({super.key});
@@ -109,13 +110,13 @@ class SignUpButton extends StatelessWidget {
 
                       // Phone Button
                       GestureDetector(
-                        onTap: () => Get.snackbar("Unavailable",
-                            "Feature is currently under modification",
-                            snackPosition: SnackPosition.BOTTOM,
-                            backgroundColor: Colors.redAccent.withOpacity(0.1),
-                            colorText: Colors.red),
-                        // onTap: () => Get.to(const PhoneOTPScreen(),
-                        // transition: Transition.leftToRight),
+                        // onTap: () => Get.snackbar("Unavailable",
+                        //     "Feature is currently under modification",
+                        //     snackPosition: SnackPosition.BOTTOM,
+                        //     backgroundColor: Colors.redAccent.withOpacity(0.1),
+                        //     colorText: Colors.red),
+                        onTap: () => Get.to(const PhoneOTPScreen(),
+                            transition: Transition.leftToRight),
                         child: Container(
                           padding: const EdgeInsets.all(20),
                           decoration: BoxDecoration(

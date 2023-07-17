@@ -50,12 +50,12 @@ class ContinueWith extends StatelessWidget {
         // Continue with Facebook
         ElevatedButton.icon(
           onPressed: () {
-            Get.snackbar(
-                "Unavailable", "Feature is currently under modification",
-                snackPosition: SnackPosition.BOTTOM,
-                backgroundColor: Colors.redAccent.withOpacity(0.1),
-                colorText: Colors.red);
-            // AuthenticationRepository.instance.signInWithFacebook();
+            // Get.snackbar(
+            //     "Unavailable", "Feature is currently under modification",
+            //     snackPosition: SnackPosition.BOTTOM,
+            //     backgroundColor: Colors.redAccent.withOpacity(0.1),
+            //     colorText: Colors.red);
+            AuthenticationRepository.instance.signInWithFacebook();
           },
           icon: Image.asset(
             facebookLogo,

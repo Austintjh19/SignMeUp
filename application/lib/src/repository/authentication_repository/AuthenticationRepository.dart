@@ -92,6 +92,7 @@ class AuthenticationRepository extends GetxController {
   }
 
   Future<bool> verifyOTP(String otp, String phoneVerificationID) async {
+    print(otp);
     if (verifyViaEmailOTP == true) {
       try {
         bool res = await myEmailAuth.verifyOTP(otp: otp);
