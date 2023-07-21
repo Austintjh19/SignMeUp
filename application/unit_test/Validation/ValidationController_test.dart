@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:myapplication/src/controllers/ValidationController.dart';
 
 void main() {
-  group('Test ValidationController', () {
+  group('Test Controllers', () {
     late ValidationController validationController;
 
     setUpAll(() {

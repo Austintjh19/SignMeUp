@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myapplication/src/components/user_avatar.dart';
 import 'package:myapplication/src/cubits/chat/chat_cubit.dart';
-import 'package:myapplication/src/cubits/profiles/profiles_cubit.dart';
 import 'package:myapplication/src/models/message.dart';
 import 'package:myapplication/src/utils/constants.dart';
 import 'package:timeago/timeago.dart';
+
+import '../../../constants/colors.dart';
 
 /// Page to chat with someone.
 ///
@@ -20,17 +21,36 @@ class ChatPage extends StatelessWidget {
   static Route<void> route(String roomId, String roomName) {
     return MaterialPageRoute(
       builder: (context) => BlocProvider<ChatCubit>(
-        create: (context) => ChatCubit()..setMembersListener(roomId, context)..setMessagesListener(roomId,context),
-        child:  ChatPage(roomName: roomName),
+        create: (context) => ChatCubit()
+          ..setMembersListener(roomId, context)
+          ..setMessagesListener(roomId, context),
+        child: ChatPage(roomName: roomName),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: AppBar(title: Text(roomName)),
+      appBar: AppBar(
+        toolbarHeight: 50,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back_outlined,
+                color: Colors.black, size: 25)),
+        centerTitle: true,
+        title: Text(
+          roomName,
+          style: const TextStyle(
+              fontFamily: 'Raleway',
+              fontWeight: FontWeight.bold,
+              color: textColor600),
+        ),
+      ),
       body: BlocConsumer<ChatCubit, ChatState>(
         listener: (context, state) {
           if (state is ChatError) {
@@ -55,21 +75,21 @@ class ChatPage extends StatelessWidget {
                     itemCount: messages.length,
                     itemBuilder: (context, index) {
                       final message = messages[index];
-                      final Future<String> firebase_id_future = get_user_firebase_id(message);
+                      final Future<String> firebase_id_future =
+                          get_user_firebase_id(message);
                       //print('firebase_id_future: $firebase_id_future');
                       return FutureBuilder(
                         future: firebase_id_future,
-                        builder: (context,snapshot) {
-
-                            if(snapshot.hasData) {
-                              return _ChatBubble(message: message,
-                                  firebase_user_id: snapshot.data!);
-                            }else {
-                              return CircularProgressIndicator();
-                            }
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return _ChatBubble(
+                                message: message,
+                                firebase_user_id: snapshot.data!);
+                          } else {
+                            return CircularProgressIndicator();
+                          }
                         },
                       );
-
                     },
                   ),
                 ),
@@ -98,13 +118,15 @@ class ChatPage extends StatelessWidget {
 
   Future<String> get_user_firebase_id(Message message) async {
     print('get_user_firebase_id called');
-    final data = await supabase.from('profiles').select('firebase_user_id').match({'id': message.profileId}).single();
+    final data = await supabase
+        .from('profiles')
+        .select('firebase_user_id')
+        .match({'id': message.profileId}).single();
     //data.then(print('data fetched: ${data.toString()}'));
     //final firebase_user_id = data.then((value) => value['firebase_user_id']);
     //print('firebase_user_id is $firebase_user_id');
     return await data['firebase_user_id'];
   }
-
 }
 
 /// Set of widget that contains TextField and Button to submit message
@@ -180,10 +202,10 @@ class _MessageBarState extends State<_MessageBar> {
 }
 
 class _ChatBubble extends StatelessWidget {
-   const _ChatBubble({
+  const _ChatBubble({
     Key? key,
     required this.message,
-     required this.firebase_user_id,
+    required this.firebase_user_id,
   }) : super(key: key);
 
   final Message message;
@@ -192,8 +214,11 @@ class _ChatBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     print(message.profileId);
     List<Widget> chatContents = [
-      if (!message.isMine) UserAvatar(userId: message.profileId,  firebase_user_id: firebase_user_id,),
-
+      if (!message.isMine)
+        UserAvatar(
+          userId: message.profileId,
+          firebase_user_id: firebase_user_id,
+        ),
       const SizedBox(width: 12),
       Flexible(
         child: Container(
@@ -204,7 +229,7 @@ class _ChatBubble extends StatelessWidget {
           decoration: BoxDecoration(
             color: message.isMine
                 ? Colors.grey[300]
-                : Theme.of(context).primaryColor,
+                : primaryColor200.withOpacity(0.3),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Text(message.content),

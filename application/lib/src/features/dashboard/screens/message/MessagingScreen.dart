@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:myapplication/src/components/user_avatar.dart';
 import 'package:myapplication/src/cubits/profiles/profiles_cubit.dart';
 
 import 'package:myapplication/src/cubits/rooms/rooms_cubit.dart';
 import 'package:myapplication/src/models/profile.dart';
 import 'package:myapplication/src/features/dashboard/screens/chat_page.dart';
-//import 'package:myapplication/src/features/dashboard/screens/register_page.dart';
 import 'package:myapplication/src/utils/constants.dart';
 import 'package:timeago/timeago.dart';
 
+import '../../../../constants/colors.dart';
+import '../../../../constants/image_strings.dart';
+import '../../../../models/UserModel.dart';
 import '../../controllers/OtherUsersController.dart';
 
 /// Displays the list of chat threads
@@ -46,8 +46,9 @@ class MessagingScreen extends StatelessWidget {
                 final rooms = state.rooms;
                 return Builder(
                   builder: (context) {
-                    final groupProfile_state = context.watch<GroupProfilesCubit>().state;
-                    if ( groupProfile_state is GroupProfilesLoaded ) {
+                    final groupProfile_state =
+                        context.watch<GroupProfilesCubit>().state;
+                    if (groupProfile_state is GroupProfilesLoaded) {
                       print('groupprofilesloaded is predicated to be true');
                       final groupProfiles = groupProfile_state.profiles;
                       return Column(
@@ -55,35 +56,57 @@ class MessagingScreen extends StatelessWidget {
                           _SearchBar(),
                           _NewUsers(newUsers: newUsers),
                           Expanded(
-                            child: ListView.builder(
-                              itemCount: rooms.length,
-                              itemBuilder: (context, index) {
-                                final room = rooms[index];
-                                final group_profile = groupProfiles[room.id];
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(25, 0, 25, 20),
+                              child: Container(
+                                height: 100,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    boxShadow: defaultBoxShadow,
+                                    color: primaryColor100),
+                                width: screenWidth,
+                                padding: const EdgeInsets.all(15),
+                                child: ListView.builder(
+                                  itemCount: rooms.length,
+                                  itemBuilder: (context, index) {
+                                    final room = rooms[index];
+                                    final group_profile =
+                                        groupProfiles[room.id];
 
-                                return ListTile(
-                                  onTap: () => Navigator.of(context)
-                                      .push(ChatPage.route(room.id,room.roomName)),
-                                  leading: CircleAvatar(
-                                    child: group_profile == null
-                                        ? preloader
-                                        : Text(group_profile.roomName.substring(0, 2)),
-                                  ),
-                                  title: Text(group_profile == null
-                                      ? 'Loading...'
-                                      : group_profile.roomName),
-                                  subtitle: room.lastMessage != null
-                                      ? Text(
-                                          room.lastMessage!.content,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                        )
-                                      : const Text('Room created'),
-                                  trailing: Text(format(
-                                      room.lastMessage?.createdAt ?? room.createdAt,
-                                      locale: 'en_short')),
-                                );
-                              },
+                                    return Column(
+                                      children: [
+                                        ListTile(
+                                          onTap: () => Navigator.of(context)
+                                              .push(ChatPage.route(
+                                                  room.id, room.roomName)),
+                                          leading: CircleAvatar(
+                                            child: group_profile == null
+                                                ? preloader
+                                                : Text(group_profile.roomName
+                                                    .substring(0, 2)),
+                                          ),
+                                          title: Text(group_profile == null
+                                              ? 'Loading...'
+                                              : group_profile.roomName),
+                                          subtitle: room.lastMessage != null
+                                              ? Text(
+                                                  room.lastMessage!.content,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                )
+                                              : const Text('Room created'),
+                                          trailing: Text(format(
+                                              room.lastMessage?.createdAt ??
+                                                  room.createdAt,
+                                              locale: 'en_short')),
+                                        ),
+                                        Divider(),
+                                      ],
+                                    );
+                                  },
+                                ),
+                              ),
                             ),
                           ),
                         ],
@@ -102,8 +125,8 @@ class MessagingScreen extends StatelessWidget {
                     _NewUsers(newUsers: newUsers),
                     const Expanded(
                       child: Center(
-                          child: Text('Start a chat by tapping on available \n'
-                              'users in your friend list'),
+                        child: Text('Start a chat by tapping on available \n'
+                            'users in your friend list'),
                       ),
                     ),
                   ],
@@ -120,10 +143,7 @@ class MessagingScreen extends StatelessWidget {
   }
 }
 
-_filter_groups(String input) {
-
-}
-
+// Frequently interacted with Users ============================================
 class _NewUsers extends StatelessWidget {
   const _NewUsers({
     Key? key,
@@ -134,95 +154,186 @@ class _NewUsers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: newUsers
-            .map<Widget>((user) => InkWell(
-                  onTap: () async {
-                    try {
-                      final roomId = await BlocProvider.of<RoomCubit>(context)
-                          .createRoom(user.id, user.username);
-                      Navigator.of(context).push(ChatPage.route(roomId,user.username));
-                    } catch (err) {
-                      context.showErrorSnackBar(
-                          message: 'Failed creating a new room');
-                      print(err);
-                    }
-                  },
-                  child: Builder(
-                    builder: (context) {
-                      final Future<String> firebase_avatar_future = get_user_firebase_avatar(user.id);
-                      return FutureBuilder(
-                        future: firebase_avatar_future,
-                        builder: (context,snapshot) {
-                          if(snapshot.hasData) {
-                            return Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0,),
-                              child: CircleAvatar(
-                                  radius: 25,
-                                  backgroundImage: NetworkImage(snapshot
-                                      .data as String)
-                              ),
-                            );
-                          }else {
-                            return CircularProgressIndicator();
-                          }
-                        },
-      );
-                    }
-                  )
+    final otherUsersController = Get.put(OtherUsersController());
 
-          /*Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      width: 60,
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            child: Text(user.username.substring(0, 2)),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            user.username,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),*/
-                ))
-            .toList(),
-      ),
-    );
-  }
-}
-class _SearchBar extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(Icons.search, size: 30),
-      title: TextField(
-        onChanged: (input) => _filter_groups(input),
-        decoration: const InputDecoration(
-          hintText: 'search chat groups',
-          focusedBorder: UnderlineInputBorder(),
-          border: InputBorder.none,
+    double width = MediaQuery.of(context).size.width;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(25, 0, 25, 20),
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: defaultBoxShadow,
+            color: primaryColor100),
+        width: width,
+        padding: const EdgeInsets.all(15),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: newUsers
+                .map<Widget>((user) => InkWell(onTap: () async {
+                      try {
+                        final roomId = await BlocProvider.of<RoomCubit>(context)
+                            .createRoom(user.id, user.username);
+                        Navigator.of(context)
+                            .push(ChatPage.route(roomId, user.username));
+                      } catch (err) {
+                        context.showErrorSnackBar(
+                            message: 'Failed creating a new room');
+                      }
+                    }, child: Builder(builder: (context) {
+                      final Future<String> firebase_avatar_future =
+                          getUserProfileImage(user.id);
+                      return FutureBuilder(
+                          future: firebase_avatar_future,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Column(
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                      10,
+                                      0,
+                                      10,
+                                      0,
+                                    ),
+                                    child: CircleAvatar(
+                                        radius: 25,
+                                        backgroundImage: NetworkImage(
+                                            snapshot.data as String)),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  FutureBuilder(
+                                      future: getUserData(user.id),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.done) {
+                                          if (snapshot.hasData) {
+                                            UserModel userData =
+                                                snapshot.data as UserModel;
+                                            return Text(userData.username,
+                                                textAlign: TextAlign.start,
+                                                style: const TextStyle(
+                                                    fontFamily: 'Raleway',
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontSize: 10,
+                                                    color: textColor600),
+                                                softWrap: false,
+                                                overflow:
+                                                    TextOverflow.ellipsis);
+                                          }
+                                        }
+                                        return const Text('loading ...',
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(
+                                                fontFamily: 'Raleway',
+                                                fontWeight: FontWeight.normal,
+                                                fontSize: 10,
+                                                color: textColor600),
+                                            softWrap: false,
+                                            overflow: TextOverflow.ellipsis);
+                                      })
+                                ],
+                              );
+                            }
+                            return const Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                  10,
+                                  0,
+                                  10,
+                                  0,
+                                ),
+                                child: CircleAvatar(
+                                  radius: 25,
+                                  backgroundImage:
+                                      ExactAssetImage(defaultProfileImage),
+                                ));
+                          });
+                    })))
+                .toList(),
+          ),
         ),
       ),
     );
   }
-
 }
-Future<String> get_user_firebase_avatar(String id) async {
+
+// Message Search Bar ==========================================================
+class _SearchBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(25, 25, 25, 20),
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            boxShadow: defaultBoxShadow,
+            color: primaryColor100),
+        child: TextFormField(
+          controller: TextEditingController(),
+          onChanged: (query) {
+            _filter_groups(query);
+          },
+          maxLines: 1,
+          style: const TextStyle(
+              fontFamily: 'Raleway',
+              fontWeight: FontWeight.normal,
+              fontSize: 15,
+              color: textColor600),
+          decoration: InputDecoration(
+              contentPadding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: const BorderSide(color: Colors.transparent)),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: const BorderSide(color: Colors.transparent)),
+              fillColor: primaryColor100,
+              filled: true,
+              prefixIcon: const Padding(
+                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                child: Icon(
+                  Icons.search_outlined,
+                  color: primaryColor600,
+                  size: 20,
+                ),
+              ),
+              hintText: 'Search People/ Groups ... ',
+              focusColor: primaryColor600),
+        ),
+      ),
+    );
+  }
+}
+
+_filter_groups(String input) {}
+
+Future<String> getUserProfileImage(String id) async {
   print('get_user_firebase_id called');
-  final data = await supabase.from('profiles').select('firebase_user_id').match({'id': id}).single();
+  final data = await supabase
+      .from('profiles')
+      .select('firebase_user_id')
+      .match({'id': id}).single();
   //data.then(print('data fetched: ${data.toString()}'));
   //final firebase_user_id = data.then((value) => value['firebase_user_id']);
   //print('firebase_user_id is $firebase_user_id');
   final firebase_id = await data['firebase_user_id'];
   final user_controller = Get.put(OtherUsersController());
   return await user_controller.getUserProfileImage(firebase_id);
+}
+
+Future<UserModel> getUserData(String id) async {
+  print('get_user_firebase_id called');
+  final data = await supabase
+      .from('profiles')
+      .select('firebase_user_id')
+      .match({'id': id}).single();
+  //data.then(print('data fetched: ${data.toString()}'));
+  //final firebase_user_id = data.then((value) => value['firebase_user_id']);
+  //print('firebase_user_id is $firebase_user_id');
+  final firebase_id = await data['firebase_user_id'];
+  final user_controller = Get.put(OtherUsersController());
+  return await user_controller.getUserData(firebase_id);
 }
