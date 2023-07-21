@@ -125,8 +125,7 @@ class MessagingScreen extends StatelessWidget {
                     _NewUsers(newUsers: newUsers),
                     const Expanded(
                       child: Center(
-                        child: Text('Start a chat by tapping on available \n'
-                            'users in your friend list'),
+                        child: Text('No Texting History'),
                       ),
                     ),
                   ],
