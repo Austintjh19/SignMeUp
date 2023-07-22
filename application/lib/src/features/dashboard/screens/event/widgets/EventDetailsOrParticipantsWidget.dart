@@ -133,7 +133,7 @@ class _EventDetailsOrParticipantsWidgetState
                     return RegisterButton(
                         buttonColor: primaryColor600,
                         buttonText: 'Registered',
-                        function: (uuid) {
+                        function: (uuid) async {
                           currentUserController
                               .removeFromRegisteredEvents(widget.eventData.id);
                           generalEventController
@@ -145,6 +145,9 @@ class _EventDetailsOrParticipantsWidgetState
                               widget.eventData.id,
                               widget.eventData.participants.length - 1,
                               int.parse(widget.eventData.participantsLimit));
+                          final room_id = await supabase.rpc(
+                              'convert_to_uuid', params: {'input_value': widget.eventData.id});
+                          await supabase.rpc('leave_room', params: {'leaving_user': uuid , 'room_id': room_id});
                           /// leave chat api call
                           setState(() {});
                         });
@@ -152,7 +155,7 @@ class _EventDetailsOrParticipantsWidgetState
                     return RegisterButton(
                         buttonColor: primaryColor600,
                         buttonText: "Event Full",
-                        function: () {
+                        function: (_) {
                           Get.snackbar("Can't Perform Action",
                               'Event is full, you can bookmark event in case there are any available spots later on.',
                               snackPosition: SnackPosition.BOTTOM,
