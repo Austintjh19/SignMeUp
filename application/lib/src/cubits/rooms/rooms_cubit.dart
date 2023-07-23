@@ -57,9 +57,9 @@ class RoomCubit extends Cubit<RoomState> {
         await supabase.rpc('migrate_user', params: {'uid': _myUserId, 'email': email,'password':password,'meta_data':{'username': username, 'firebase_user_id':firebase_uid}});
       }
     } on AuthException catch (error) {
-      context.showErrorSnackBar(message: error.message);
+      //context.showErrorSnackBar(message: error.message);
     } catch (err) {
-      context.showErrorSnackBar(message: unexpectedErrorMessage);
+      //context.showErrorSnackBar(message: unexpectedErrorMessage);
       print(err);
     }
 
@@ -72,6 +72,7 @@ class RoomCubit extends Cubit<RoomState> {
           .not('id', 'eq', _myUserId)
           .order('created_at')
           .limit(12);
+      print('data:$data myUserId: $_myUserId');
     } catch (_) {
       emit(RoomsError('Error loading new users'));
     }
@@ -84,6 +85,7 @@ class RoomCubit extends Cubit<RoomState> {
     ).listen((rooms) async {
       if (rooms.isEmpty) {
         emit(RoomsEmpty(newUsers: _newUsers));
+        print(_newUsers);
         return;
       }
       _rooms = rooms
