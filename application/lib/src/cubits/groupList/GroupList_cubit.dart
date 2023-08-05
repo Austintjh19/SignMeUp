@@ -25,7 +25,9 @@ class GroupListCubit extends ReturnListCubit {
       final raw_result = await supabase.from('rooms')
           .select()
           .not('name','eq', cur_user.username)
-          .ilike('name','%$input%');
+          .eq('is_private', false)
+          .ilike('name','%$input%')
+          .limit(20);
       final rows = List<Map<String, dynamic>>.from(raw_result);
       _search_result = rows.map(Room.fromRoom).toList();
       _search_result.forEach((ele) {

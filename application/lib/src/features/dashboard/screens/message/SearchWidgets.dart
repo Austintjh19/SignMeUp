@@ -6,18 +6,23 @@ import '../../../../models/room.dart';
 abstract class SearchTile extends StatelessWidget {
 }
 class UserTile extends SearchTile {
-  UserTile({required Profile? users});
+  late final Profile? user;
+  UserTile({required Profile? user}){
+    this.user = user;
+  }
 
   @override
   Widget build(BuildContext context){
-    return Placeholder(child: Text('usertile placeholder'),);
+    return Placeholder(child: Text('${user?.username}'),);
   }
 }
 class GroupTile extends SearchTile {
-  GroupTile({required Room? groups});
-
+  late final Room? group;
+  GroupTile({required Room? group}){
+    this.group = group;
+  }
   @override
   Widget build(BuildContext context){
-    return Placeholder(child: Text('grouptile placeholder'),);
+    return Placeholder(child: Text('${group?.roomName}'),);
   }
 }

@@ -51,7 +51,7 @@ class ReturnListCubit extends Cubit<ReturnListState>{
           print('group_list: $group_list');
           final user_list = await BlocProvider.of<UserListCubit>(context).fetchUsers(input);
           print('user_list: $user_list');
-          return group_list + user_list;
+          return List<Searchable?>.from(group_list)..addAll(user_list);
         }
       }else{
         if(group_search == true){

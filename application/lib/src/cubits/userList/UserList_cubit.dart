@@ -22,7 +22,8 @@ class UserListCubit extends ReturnListCubit{
      final raw_result = await supabase.from('profiles')
         .select()
         .not('username','eq', cur_user.username)
-        .ilike('username','%$input%');
+        .ilike('username','%$input%')
+        .limit(20);
      print('reached here');
       final rows = List<Map<String, dynamic>>.from(raw_result);
       _search_result = rows.map(Profile.fromMap).toList();
