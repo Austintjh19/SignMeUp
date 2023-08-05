@@ -1,4 +1,6 @@
-class Profile {
+import 'Searchable.dart';
+
+class Profile extends Searchable{
   Profile({
     required this.id,
     required this.username,

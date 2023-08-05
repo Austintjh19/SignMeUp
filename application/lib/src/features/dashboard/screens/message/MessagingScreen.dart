@@ -1,29 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:myapplication/src/cubits/groupList/GroupList_cubit.dart';
 import 'package:myapplication/src/cubits/profiles/profiles_cubit.dart';
 
 import 'package:myapplication/src/cubits/rooms/rooms_cubit.dart';
+import 'package:myapplication/src/cubits/userList/UserList_cubit.dart';
 import 'package:myapplication/src/models/profile.dart';
-import 'package:myapplication/src/features/dashboard/screens/chat_page.dart';
+import 'package:myapplication/src/features/dashboard/screens/message/chat_page.dart';
 import 'package:myapplication/src/utils/constants.dart';
 import 'package:timeago/timeago.dart';
+import 'package:myapplication/src/features/dashboard/screens/message/SearchWidgets.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../../constants/image_strings.dart';
+import '../../../../cubits/returnList/ReturnList_cubit.dart';
 import '../../../../models/UserModel.dart';
+import '../../../../models/room.dart';
 import '../../controllers/OtherUsersController.dart';
+
 
 /// Displays the list of chat threads
 class MessagingScreen extends StatelessWidget {
   const MessagingScreen({Key? key}) : super(key: key);
 
   static Widget route() {
-    /*return BlocProvider<RoomCubit>(
-      create: (context) => RoomCubit()..initializeRooms(context),
-      child: const MessagingScreen(),
-    );*/
     return const MessagingScreen();
+    //return const MessagingScreen();
   }
 
   @override
@@ -258,6 +261,49 @@ class _NewUsers extends StatelessWidget {
     );
   }
 }
+class _SearchListView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context){
+    return Placeholder();
+  }
+}
+/* void _showOverlay(BuildContext context, {required List<SearchTile?> search_result}) async {
+  OverlayState? overlayState = Overlay.of(context);
+  OverlayEntry overlayEntry;
+  overlayEntry = OverlayEntry(builder: (context) {
+    return Positioned(
+      left: MediaQuery.of(context).size.width * 0.1,
+      top: MediaQuery.of(context).size.height * 0.80,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Material(
+          child: Container(
+            alignment: Alignment.center,
+            color: Colors.grey.shade200,
+            padding:
+            EdgeInsets.all(MediaQuery.of(context).size.height * 0.02),
+            width: MediaQuery.of(context).size.width * 0.8,
+            height: MediaQuery.of(context).size.height * 0.06,
+            child: Container(
+              child: ListView(
+                children: search_result!,
+              ),
+            )
+          ),
+        ),
+      ),
+    );
+  });
+  overlayState!.insert(overlayEntry);
+}
+*/
+
+class _SearchFilterPanel extends StatelessWidget {
+  @override
+  Widget build(BuildContext context){
+    return Placeholder();
+  }
+}
 
 // Message Search Bar ==========================================================
 class _SearchBar extends StatelessWidget {
@@ -270,45 +316,80 @@ class _SearchBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
             boxShadow: defaultBoxShadow,
             color: primaryColor100),
-        child: TextFormField(
-          controller: TextEditingController(),
-          onChanged: (query) {
-            _filter_groups(query);
-          },
-          maxLines: 1,
-          style: const TextStyle(
-              fontFamily: 'Raleway',
-              fontWeight: FontWeight.normal,
-              fontSize: 15,
-              color: textColor600),
-          decoration: InputDecoration(
-              contentPadding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-              focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: const BorderSide(color: Colors.transparent)),
-              enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: const BorderSide(color: Colors.transparent)),
-              fillColor: primaryColor100,
-              filled: true,
-              prefixIcon: const Padding(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: Icon(
-                  Icons.search_outlined,
-                  color: primaryColor600,
-                  size: 20,
-                ),
-              ),
-              hintText: 'Search People/ Groups ... ',
-              focusColor: primaryColor600),
+        child: MultiBlocProvider(
+          providers: [BlocProvider(create: (BuildContext context) => GroupListCubit()),
+                      BlocProvider(create: (BuildContext context) => UserListCubit()),],
+          child: BlocProvider<ReturnListCubit>(
+            create: (BuildContext context) => ReturnListCubit()..initialiseReturnList(),
+            child: Builder(
+              builder: (context) {
+                return TextFormField(
+                  controller: TextEditingController(),
+                  onChanged: (query) async{
+
+                    final raw_result = await BlocProvider.of<ReturnListCubit>(context).fetchData(query,context);
+                    print('text field changed');
+                    //final raw_result = await BlocProvider.of<ReturnListCubit>(context).user_search;
+                    final search_result = _ProcessRawResult(raw_result);
+                    //_showOverlay(context, search_result: search_result);
+                  },
+                  maxLines: 1,
+                  style: const TextStyle(
+                      fontFamily: 'Raleway',
+                      fontWeight: FontWeight.normal,
+                      fontSize: 15,
+                      color: textColor600),
+                  decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: const BorderSide(color: Colors.transparent)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: const BorderSide(color: Colors.transparent)),
+                      fillColor: primaryColor100,
+                      filled: true,
+                      prefixIcon: const Padding(
+                        padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                        child: Icon(
+                          Icons.search_outlined,
+                          color: primaryColor600,
+                          size: 20,
+                        ),
+                      ),
+                      hintText: 'Search People/ Groups ... ',
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                        child: IconButton(
+                          icon: const Icon(
+                            Icons.menu_outlined,
+                            color: primaryColor600,
+                            size: 20,
+                          ),
+                          onPressed: () {},
+                        ),
+                      ),
+                      focusColor: primaryColor600),
+                );
+              }
+            ),
+          ),
         ),
       ),
     );
   }
 }
 
-_filter_groups(String input) {}
-
+List<SearchTile>? _ProcessRawResult(List<dynamic> raw_result) {
+  if(raw_result == null ){
+    return null;
+  }
+  if (raw_result is List<Profile?>) {
+    return raw_result.map((ele) => UserTile(users: ele)).toList();
+  }else if(raw_result is List<Room?>){
+    return raw_result.map((ele) => GroupTile(groups: ele)).toList();
+  }
+}
 Future<String> getUserProfileImage(String id) async {
   print('get_user_firebase_id called');
   final data = await supabase

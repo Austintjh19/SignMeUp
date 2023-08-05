@@ -8,7 +8,7 @@ import 'package:myapplication/src/models/message.dart';
 import 'package:myapplication/src/utils/constants.dart';
 import 'package:timeago/timeago.dart';
 
-import '../../../constants/colors.dart';
+import '../../../../constants/colors.dart';
 
 /// Page to chat with someone.
 ///

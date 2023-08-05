@@ -1,10 +1,12 @@
-part of 'groupList_cubit.dart';
-@immutable
-abstract class GroupListState {}
+part of 'GroupList_cubit.dart';
+abstract class GroupListState extends ReturnListState{}
 
 class InitialGroupListState extends GroupListState{}
 
 class GroupListFetching extends GroupListState{
+
+}
+class GroupListEmpty extends GroupListState{
 
 }
 class GroupListLoaded extends GroupListState{

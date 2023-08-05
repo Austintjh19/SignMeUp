@@ -1,6 +1,8 @@
 import 'package:myapplication/src/models/message.dart';
 
-class Room {
+import 'Searchable.dart';
+
+class Room extends Searchable{
   Room({
     required this.id,
     required this.createdAt,

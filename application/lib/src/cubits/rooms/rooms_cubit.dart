@@ -38,7 +38,6 @@ class RoomCubit extends Cubit<RoomState> {
       print("before calling getCurrentUserID()");
       final firebase_auth = Get.put(AuthenticationRepository());
       String? firebase_uid = await firebase_auth.getCurrentUserUID();
-      print(firebase_uid);
       //UserModel? cur_user = await UserRepository.instance.getUserData(firebase_uid!);
       final cur_user = await Get.put(UserRepository()).getUserData(firebase_uid!);
      // String firebase_uid = cur_user.uid;
