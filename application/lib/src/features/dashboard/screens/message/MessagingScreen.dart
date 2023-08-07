@@ -21,7 +21,6 @@ import '../../../../models/UserModel.dart';
 import '../../../../models/room.dart';
 import '../../controllers/OtherUsersController.dart';
 
-
 /// Displays the list of chat threads
 class MessagingScreen extends StatelessWidget {
   const MessagingScreen({Key? key}) : super(key: key);
@@ -67,7 +66,8 @@ class MessagingScreen extends StatelessWidget {
                             _NewUsers(newUsers: newUsers),
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.fromLTRB(25, 0, 25, 20),
+                                padding:
+                                    const EdgeInsets.fromLTRB(25, 0, 25, 20),
                                 child: Container(
                                   height: 100,
                                   decoration: BoxDecoration(
@@ -269,16 +269,17 @@ class _NewUsers extends StatelessWidget {
     );
   }
 }
+
 class _SearchListView extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Placeholder();
   }
 }
 
 class _SearchFilterPanel extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Placeholder();
   }
 }
@@ -299,22 +300,22 @@ class _SearchBarState extends State<_SearchBar> {
   static bool showOverlayCalled = false;
   var raw_result = null;
   var search_result = List<SearchTile>.empty();
-  @override 
-  void initState(){
+  @override
+  void initState() {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       _showOverlay(context, search_result: search_result);
     });
     focusNode.addListener(() {
-      if(focusNode.hasFocus){
+      if (focusNode.hasFocus) {
         _showOverlay(context, search_result: search_result);
-      }else{
+      } else {
         print('hideOverlay called');
         hideOverlay();
       }
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -325,102 +326,108 @@ class _SearchBarState extends State<_SearchBar> {
             boxShadow: defaultBoxShadow,
             color: primaryColor100),
         child: MultiBlocProvider(
-          providers: [BlocProvider(create: (BuildContext context) => GroupListCubit()),
-                      BlocProvider(create: (BuildContext context) => UserListCubit()),],
+          providers: [
+            BlocProvider(create: (BuildContext context) => GroupListCubit()),
+            BlocProvider(create: (BuildContext context) => UserListCubit()),
+          ],
           child: BlocProvider<ReturnListCubit>(
-            create: (BuildContext context) => ReturnListCubit()..initialiseReturnList(),
-            child: Builder(
-              builder: (context) {
-                return CompositedTransformTarget(
-                  link: layerlink,
-                  child: TextFormField(
-                    focusNode: focusNode,
-                    key: SBKey,
-                    controller: searchBarController,
-                    onChanged: (query) async{
-                      raw_result = await BlocProvider.of<ReturnListCubit>(context).fetchData(query,context);
-                      print('raw_result: $raw_result');
-                      search_result = _ProcessRawResult(raw_result);
-                      print('search_result inside onchanged: $search_result');
-                      if(!context.mounted) return;
-                      _showOverlay(context, search_result: search_result);
-                    },
-                    maxLines: 1,
-                    style: const TextStyle(
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.normal,
-                        fontSize: 15,
-                        color: textColor600),
-                    decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: const BorderSide(color: Colors.transparent)),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: const BorderSide(color: Colors.transparent)),
-                        fillColor: primaryColor100,
-                        filled: true,
-                        prefixIcon: const Padding(
-                          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                          child: Icon(
-                            Icons.search_outlined,
+            create: (BuildContext context) =>
+                ReturnListCubit()..initialiseReturnList(),
+            child: Builder(builder: (context) {
+              return CompositedTransformTarget(
+                link: layerlink,
+                child: TextFormField(
+                  focusNode: focusNode,
+                  key: SBKey,
+                  controller: searchBarController,
+                  onChanged: (query) async {
+                    raw_result = await BlocProvider.of<ReturnListCubit>(context)
+                        .fetchData(query, context);
+                    print('raw_result: $raw_result');
+                    search_result = _ProcessRawResult(raw_result);
+                    print('search_result inside onchanged: $search_result');
+                    if (!context.mounted) return;
+                    _showOverlay(context, search_result: search_result);
+                  },
+                  maxLines: 1,
+                  style: const TextStyle(
+                      fontFamily: 'Raleway',
+                      fontWeight: FontWeight.normal,
+                      fontSize: 15,
+                      color: textColor600),
+                  decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent)),
+                      fillColor: primaryColor100,
+                      filled: true,
+                      prefixIcon: const Padding(
+                        padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                        child: Icon(
+                          Icons.search_outlined,
+                          color: primaryColor600,
+                          size: 20,
+                        ),
+                      ),
+                      hintText: 'Search People/ Groups ... ',
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                        child: IconButton(
+                          icon: const Icon(
+                            Icons.menu_outlined,
                             color: primaryColor600,
                             size: 20,
                           ),
+                          onPressed: () {},
                         ),
-                        hintText: 'Search People/ Groups ... ',
-                        suffixIcon: Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.menu_outlined,
-                              color: primaryColor600,
-                              size: 20,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
-                        focusColor: primaryColor600),
-                  ),
-                );
-              }
-            ),
+                      ),
+                      focusColor: primaryColor600),
+                ),
+              );
+            }),
           ),
         ),
       ),
     );
   }
 
-  static void _showOverlay(BuildContext context, {required List<SearchTile> search_result}) async {
-    if( showOverlayCalled == true) return;
+  static void _showOverlay(BuildContext context,
+      {required List<SearchTile> search_result}) async {
+    if (showOverlayCalled == true) return;
     showOverlayCalled = !showOverlayCalled;
     overlayState = Overlay.of(context);
-    final RenderBox renderBox = SBKey.currentContext?.findRenderObject() as RenderBox;
+    final RenderBox renderBox =
+        SBKey.currentContext?.findRenderObject() as RenderBox;
     final Size size = renderBox.size;
     final Offset offset = renderBox.localToGlobal(Offset.zero);
     print('search result: $search_result');
     overlayEntry = OverlayEntry(builder: (context) {
       return Positioned(
         width: size.width,
-        left: offset.dx ,
+        left: offset.dx,
         top: offset.dy + size.height,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: CompositedTransformFollower(
             link: layerlink,
             showWhenUnlinked: false,
-            offset: Offset(0,size.height),
+            offset: Offset(0, size.height),
             child: Container(
-                alignment: Alignment.center,
-                color: Colors.grey.shade200,
-                padding:
-                EdgeInsets.all(MediaQuery.of(context).size.height * 0.02),
-                width: MediaQuery.of(context).size.width * 0.8,
-                height: MediaQuery.of(context).size.height * 0.4,
-                child: ListView(
-                  children: search_result,
-                ),
+              alignment: Alignment.center,
+              color: Colors.grey.shade200,
+              padding:
+                  EdgeInsets.all(MediaQuery.of(context).size.height * 0.02),
+              width: MediaQuery.of(context).size.width * 0.8,
+              height: MediaQuery.of(context).size.height * 0.4,
+              child: ListView(
+                children: search_result,
+              ),
             ),
           ),
         ),
@@ -429,9 +436,9 @@ class _SearchBarState extends State<_SearchBar> {
     overlayState!.insert(overlayEntry!);
     print('overlaystate: $overlayState');
     print('overlayentry: $overlayEntry');
-
   }
-  static void hideOverlay(){
+
+  static void hideOverlay() {
     overlayEntry?.remove();
     overlayEntry = null;
     showOverlayCalled = false;
@@ -440,11 +447,11 @@ class _SearchBarState extends State<_SearchBar> {
 
 List<SearchTile> _ProcessRawResult(List<dynamic> raw_result) {
   List<SearchTile> ret_list;
-  if(raw_result == null || raw_result.isEmpty ){
+  if (raw_result == null || raw_result.isEmpty) {
     return List.empty();
   } else {
     return raw_result.map((ele) {
-      return ele is Profile? UserTile(user:ele) : GroupTile(group: ele);
+      return ele is Profile ? UserTile(user: ele) : GroupTile(group: ele);
     }).toList();
   }
   /*else if (raw_result is List<Profile?>) {
@@ -454,6 +461,7 @@ List<SearchTile> _ProcessRawResult(List<dynamic> raw_result) {
   }
   return List.empty();*/
 }
+
 Future<String> getUserProfileImage(String id) async {
   final data = await supabase
       .from('profiles')
