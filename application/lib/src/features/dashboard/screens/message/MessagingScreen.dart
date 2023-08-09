@@ -418,33 +418,38 @@ class _SearchBarState extends State<_SearchBar> {
               showWhenUnlinked: false,
               offset: Offset(0,size.height),
               child: Material(
-                child: Container(
-                    alignment: Alignment.center,
-                    color: Colors.grey.shade200,
-                    padding:
-                    EdgeInsets.all(MediaQuery.of(context).size.height * 0.02),
-                     width: MediaQuery.of(context).size.width * 0.8,
-                    height: MediaQuery.of(context).size.height * 0.5,
-                    child: BlocBuilder<ReturnListCubit,ReturnListState>(
-                      builder: (context,state) {
-                        //final sr = context.watch<ReturnListCubit>().state;
-                        print('builderstate: $state');
-                        if(state is ReturnListLoaded) {
-                          print('loaded state processed');
-                          print(search_result);
-                          return ListView(
-                            children: search_result,
-                          );
-                        }else if ( state is ReturnListEmpty){
-                          return Text('no search result found');
-                        }else if (state is ReturnListFetching){
-                          return preloader;
-                        }else if ( state is ReturnListError){
-                          return Text(state.err_msg);
+                child: TapRegion(
+                  onTapOutside: (_){
+                    hideOverlay();
+                  },
+                  child: Container(
+                      alignment: Alignment.center,
+                      color: Colors.grey.shade200,
+                      padding:
+                      EdgeInsets.all(MediaQuery.of(context).size.height * 0.02),
+                       width: MediaQuery.of(context).size.width * 0.8,
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      child: BlocBuilder<ReturnListCubit,ReturnListState>(
+                        builder: (context,state) {
+                          //final sr = context.watch<ReturnListCubit>().state;
+                          print('builderstate: $state');
+                          if(state is ReturnListLoaded) {
+                            print('loaded state processed');
+                            print(search_result);
+                            return ListView(
+                              children: search_result,
+                            );
+                          }else if ( state is ReturnListEmpty){
+                            return Text('no search result found');
+                          }else if (state is ReturnListFetching){
+                            return preloader;
+                          }else if ( state is ReturnListError){
+                            return Text(state.err_msg);
+                          }
+                            return Text('no input');
                         }
-                          return Text('no input');
-                      }
-                    ),
+                      ),
+                  ),
                 ),
               ),
             ),

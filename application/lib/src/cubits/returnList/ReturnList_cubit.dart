@@ -54,7 +54,11 @@ class ReturnListCubit extends Cubit<ReturnListState>{
           final user_list = await BlocProvider.of<UserListCubit>(context).fetchUsers(input);
           print('user_list: $user_list');
           final ret = List<Searchable?>.from(group_list)..addAll(user_list);
-          emit(ReturnListLoaded(ret));
+          if(ret.isNotEmpty) {
+            emit(ReturnListLoaded(ret));
+          }else if (ret.isEmpty){
+            emit(ReturnListEmpty());
+          }
           return ret;
         }
       }else{
