@@ -14,12 +14,13 @@ class UserAvatar extends StatelessWidget {
     Key? key,
     required this.userId,
     required this.firebase_user_id,
+    required this.radius,
   }) : super(key: key);
 
   final String firebase_user_id;
   final String userId;
   static Map<String, Widget> _user_profile_cache = {};
-
+  double radius;
   @override
   Widget build(BuildContext context) {
     final user_controller = Get.put(OtherUsersController());
@@ -34,7 +35,7 @@ class UserAvatar extends StatelessWidget {
             if (snapshot.hasData) {
               print('snapshot.data:' + (snapshot.data as String));
               final ret = CircleAvatar(
-                  radius: 30,
+                  radius: radius,
                   backgroundImage: NetworkImage(snapshot
                       .data as String) /*Text(user.username.substring(0, 2)) */
               );

@@ -19,6 +19,7 @@ class ChatPage extends StatelessWidget {
   const ChatPage({required this.roomName, Key? key}) : super(key: key);
 
   static Route<void> route(String roomId, String roomName) {
+
     return MaterialPageRoute(
       builder: (context) => BlocProvider<ChatCubit>(
         create: (context) => ChatCubit()
@@ -218,6 +219,7 @@ class _ChatBubble extends StatelessWidget {
         UserAvatar(
           userId: message.profileId,
           firebase_user_id: firebase_user_id,
+          radius: 30,
         ),
       const SizedBox(width: 12),
       Flexible(

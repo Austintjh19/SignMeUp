@@ -23,9 +23,9 @@ class ReturnListCubit extends Cubit<ReturnListState>{
   late final String? supabase_uuid;
   late final String? _firebase_uid;
   late String Username;
+
  ReturnListCubit() : super(InitialReturnListState());
   initialiseReturnList() async {
-
     final firebase_auth = Get.put(AuthenticationRepository());
      _firebase_uid = await firebase_auth.getCurrentUserUID();
     final cur_user = await Get.put(UserRepository()).getUserData(_firebase_uid!);
@@ -45,25 +45,33 @@ class ReturnListCubit extends Cubit<ReturnListState>{
       print('input: $input');
       if(user_search == true ){
         if(group_search == false){
-          return await BlocProvider.of<UserListCubit>(context).fetchUsers(input);
+          final ret =  await BlocProvider.of<UserListCubit>(context).fetchUsers(input);
+          emit(ReturnListLoaded(ret));
+          return ret;
         }else {
           final group_list = await BlocProvider.of<GroupListCubit>(context).fetchGroup(input);
           print('group_list: $group_list');
           final user_list = await BlocProvider.of<UserListCubit>(context).fetchUsers(input);
           print('user_list: $user_list');
-          return List<Searchable?>.from(group_list)..addAll(user_list);
+          final ret = List<Searchable?>.from(group_list)..addAll(user_list);
+          emit(ReturnListLoaded(ret));
+          return ret;
         }
       }else{
         if(group_search == true){
-          return await BlocProvider.of<GroupListCubit>(context).fetchGroup(input);
+          final ret = await BlocProvider.of<GroupListCubit>(context).fetchGroup(input);
+          emit(ReturnListLoaded(ret));
+          return ret;
         }else{
           print('please select your searching type :)');
         }
       }
+      print('at the end of the try block');
     }catch(err){
+      print('error caught');
       emit(ReturnListError(err.toString()));
     }
-    emit(ReturnListLoaded(_search_result));
+    print('should not reach heree');
     return _search_result;
   }
 }

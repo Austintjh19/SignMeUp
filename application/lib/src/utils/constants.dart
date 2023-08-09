@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -17,6 +19,7 @@ const formPadding = EdgeInsets.symmetric(vertical: 20, horizontal: 16);
 /// Error message to display the user when unexpected error occurs.
 const unexpectedErrorMessage = 'Unexpected error occured.';
 
+final execution_queue = Queue();
 /// Basic theme to change the look and feel of the app
 final appTheme = ThemeData.light().copyWith(
   primaryColorDark: const Color.fromRGBO(128, 150, 255, 1),

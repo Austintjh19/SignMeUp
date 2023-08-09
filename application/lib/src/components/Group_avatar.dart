@@ -21,6 +21,7 @@ class GroupAvatar extends StatelessWidget {
           return CircleAvatar(
             child:
             group == null ? preloader : Text(group.roomName.substring(0, 2)),
+            radius: 25,
           );
         } else {
           return const CircleAvatar(child: preloader);
