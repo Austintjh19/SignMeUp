@@ -33,6 +33,12 @@ class ReturnListCubit extends Cubit<ReturnListState>{
     supabase_uuid = await supabase.rpc(
         'convert_to_uuid', params: {'input_value': _firebase_uid});
   }
+  bool get_search_user_flag(){
+    return user_search;
+  }
+  bool get_search_group_flag(){
+    return group_search;
+  }
   void toggle_user(){
     user_search = !user_search;
   }

@@ -20,6 +20,7 @@ import '../../../../models/Searchable.dart';
 import '../../../../models/UserModel.dart';
 import '../../../../models/room.dart';
 import '../../controllers/OtherUsersController.dart';
+import 'CheckBoxWidget.dart';
 
 
 /// Displays the list of chat threads
@@ -320,69 +321,110 @@ class _SearchBarState extends State<_SearchBar> {
             builder: (context) {
               return CompositedTransformTarget(
                 link: layerlink,
-                child: TextFormField(
-                    autofocus: false,
-                    focusNode: focusNode,
-                    key: MessagingScreen.SBKey,
-                    controller: searchBarController,
-                    onTap: (){
-                      print('search_result inside ontap: $search_result');
-                      _showOverlay(/*search_result: search_result*/);
-                    },
-                    /*onTapOutside: (_){
-                      hideOverlay();
-                      _SearchBarState.focusNode.unfocus();
-                    },*/
-                    onChanged: (query) async{
-                      raw_result = await BlocProvider.of<ReturnListCubit>(context).fetchData(query,context);
-                      print('raw_result: $raw_result');
-                      search_result = _ProcessRawResult(raw_result);
-                      print('search_result inside onchanged: $search_result');
-                      //if(!context.mounted) return;
-                      //_showOverlay(search_result: search_result);
-                      /*WidgetsBinding.instance!.addPostFrameCallback((_) {
-                        _showOverlay( search_result: search_result);
-                        print('inside callback');
-                      });*/
-                    },
-                    maxLines: 1,
-                    style: const TextStyle(
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.normal,
-                        fontSize: 15,
-                        color: textColor600),
-                    decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: const BorderSide(color: Colors.transparent)),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: const BorderSide(color: Colors.transparent)),
-                        fillColor: primaryColor100,
-                        filled: true,
-                        prefixIcon: const Padding(
-                          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                          child: Icon(
-                            Icons.search_outlined,
-                            color: primaryColor600,
-                            size: 20,
-                          ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                          autofocus: false,
+                          focusNode: focusNode,
+                          key: MessagingScreen.SBKey,
+                          controller: searchBarController,
+                          onTap: (){
+                            print('search_result inside ontap: $search_result');
+                            _showOverlay(/*search_result: search_result*/);
+                          },
+                          /*onTapOutside: (_){
+                            hideOverlay();
+                            _SearchBarState.focusNode.unfocus();
+                          },*/
+                          onChanged: (query) async{
+                            raw_result = await BlocProvider.of<ReturnListCubit>(context).fetchData(query,context);
+                            print('raw_result: $raw_result');
+                            search_result = _ProcessRawResult(raw_result);
+                            print('search_result inside onchanged: $search_result');
+                            //if(!context.mounted) return;
+                            //_showOverlay(search_result: search_result);
+                            /*WidgetsBinding.instance!.addPostFrameCallback((_) {
+                              _showOverlay( search_result: search_result);
+                              print('inside callback');
+                            });*/
+                          },
+                          maxLines: 1,
+                          style: const TextStyle(
+                              fontFamily: 'Raleway',
+                              fontWeight: FontWeight.normal,
+                              fontSize: 15,
+                              color: textColor600),
+                          decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  borderSide: const BorderSide(color: Colors.transparent)),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  borderSide: const BorderSide(color: Colors.transparent)),
+                              fillColor: primaryColor100,
+                              filled: true,
+                              prefixIcon: const Padding(
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                child: Icon(
+                                  Icons.search_outlined,
+                                  color: primaryColor600,
+                                  size: 20,
+                                ),
+                              ),
+                              hintText: 'Search People/ Groups ... ',
+                              focusColor: primaryColor600),
                         ),
-                        hintText: 'Search People/ Groups ... ',
-                        suffixIcon: Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.menu_outlined,
-                              color: primaryColor600,
-                              size: 20,
-                            ),
-                            onPressed: () {},
-                          ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.filter_alt_outlined,
+                          color: primaryColor600,
+                          size: 20,
                         ),
-                        focusColor: primaryColor600),
-                  ),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context){
+                                return AlertDialog(
+                                  backgroundColor: primaryColor100.withOpacity(0.9),
+                                  title: const Text(
+                                    'Search Filter',
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        fontFamily: 'Raleway',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                        color: textColor600),
+                                  ),
+                                  content: BlocBuilder<ReturnListCubit,ReturnListState>(
+                                      builder: (context,state) {
+                                        bool user_search_flag = BlocProvider.of<ReturnListCubit>(context).get_search_user_flag();
+                                        bool group_search_flag = BlocProvider.of<ReturnListCubit>(context).get_search_group_flag();
+                                        return Container(
+                                          height: 100,
+                                          padding: const EdgeInsets.all(0),
+                                          child: Column(
+                                            children: [
+                                              CheckBoxWidget(group_search_flag,'by group:'),
+                                              SizedBox(height: 15,),
+                                              CheckBoxWidget(user_search_flag,'by user:'),
+                                            ],
+                                          ),
+                                        );
+                                      }
+                                  ),
+                                );
+                              }
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
 
 
 
@@ -413,6 +455,7 @@ class _SearchBarState extends State<_SearchBar> {
           top: offset.dy + size.height,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
+
             child: CompositedTransformFollower(
               link: layerlink,
               showWhenUnlinked: false,
@@ -423,8 +466,13 @@ class _SearchBarState extends State<_SearchBar> {
                     hideOverlay();
                   },
                   child: Container(
+
                       alignment: Alignment.center,
-                      color: Colors.grey.shade200,
+
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: defaultBoxShadow,
+                        color: primaryColor100),
                       padding:
                       EdgeInsets.all(MediaQuery.of(context).size.height * 0.02),
                        width: MediaQuery.of(context).size.width * 0.8,

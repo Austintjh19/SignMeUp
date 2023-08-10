@@ -50,7 +50,7 @@ class RoomCubit extends Cubit<RoomState> {
       ///profiles table, if not create a new users in auth.users and
       ///public.profiles(this is triggered action from inserting into auth.users and return false)
       bool user_exist = await supabase.rpc('check_uuid_exists', params: {'uid': _myUserId});
-
+      print('user_exist: $user_exist');
       if(user_exist) {
       }else{
         await supabase.rpc('migrate_user', params: {'uid': _myUserId, 'email': email,'password':password,'meta_data':{'username': username, 'firebase_user_id':firebase_uid}});
