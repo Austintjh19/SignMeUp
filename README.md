@@ -1,6 +1,6 @@
 # Orbital_5902
 
-**Full ReadMe is ReadME.pdf**
+**To view full ReadMe download ReadMe.pdf**
 
 Motivation:
 
